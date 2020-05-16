@@ -2,19 +2,19 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm } from 'store/auth';
 import styled from 'styled-components';
-import AuthForm from 'components/AuthForm.js';
+import AuthForm from '../../components/AuthForm.js/index.js';
 
 const Wrapper = styled.div``;
 
-const Login = () => {
+const Sign = () => {
   const dispatch = useDispatch();
-  const { form } = useSelector(({ auth }) => ({ form: auth.login }));
+  const { form } = useSelector(({ auth }) => ({ form: auth.sign }));
 
   const onChange = (e) => {
     const { value, name } = e.target;
     dispatch(
       changeForm({
-        form: 'login',
+        form: 'sign',
         key: name,
         value,
       }),
@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    dispatch(initForm('login'));
+    dispatch(initForm('sign'));
   }, [dispatch]);
 
   return (
@@ -41,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Sign;

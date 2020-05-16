@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Main from 'pages/main';
 import Login from 'pages/login';
+import Sign from 'pages/sign';
 import Header from 'components/header';
 
 function App() {
@@ -10,8 +11,9 @@ function App() {
     <div>
       <Header></Header>
       <Switch>
-        <Route path="/" component={Main} exact={true}></Route>
-        <Route path="/login" component={Login}></Route>
+        <Route path="/" component={Main} exact></Route>
+        <Route path="/login" component={Login} exact></Route>
+        <Route path="/sign" component={Sign} exact></Route>
         {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
         <Route
           render={({ location }) => (

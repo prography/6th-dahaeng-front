@@ -8,4 +8,4 @@ export const sign = ({ username, password }) => {
   client.post('', { username, password });
 };
 
-export const refresh = () => client.get('');
+export const getUser = () => client.get('');

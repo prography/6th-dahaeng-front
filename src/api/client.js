@@ -7,7 +7,7 @@ const client = axios.create();
 client.defaults.baseURL = '';
 
 //header
-client.defaults.headers.commom['Authorization'] = '';
+//client.defaults.headers.commom['Authorization'] = '';
 
 //intercepter
 axios.interceptors.response.use(

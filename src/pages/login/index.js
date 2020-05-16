@@ -6,7 +6,42 @@ import styled from 'styled-components';
 import AuthForm from 'components/AuthForm.js';
 import { withRouter } from 'react-router-dom';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.div`
+  font-size: 50px;
+  margin-top: 2rem;
+  text-align: center;
+`;
+
+const SubTitle = styled.div`
+  font-size: 20px;
+  margin-top: 2rem;
+  text-align: center;
+`;
+
+const Content = styled.div`
+  font-size: 10px;
+  margin-top: 1rem;
+  text-align: center;
+`;
+
+const LinkText = styled.div`
+  font-size: 8px;
+  margin-top: 1rem;
+  text-align: center;
+`;
+
+const Picture = styled.div`
+  background: blue;
+`;
+
+const SnsBox = styled.div``;
+
+const Sns = styled.div``;
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -14,7 +49,7 @@ const Login = ({ history }) => {
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    user: user && user.user,
   }));
 
   const onChange = (e) => {
@@ -61,6 +96,13 @@ const Login = ({ history }) => {
 
   return (
     <Wrapper>
+      <Title>Da:haeng</Title>
+      <SubTitle>나만의 행복 보관함, 다행</SubTitle>
+      <Content>
+        <div>나만의 소소한 행복을 찾아</div>
+        <div>보관하고, 또 다른 행복을 찾자</div>
+      </Content>
+      <LinkText>더 알아보러 가기</LinkText>
       <AuthForm
         type="login"
         form={form}

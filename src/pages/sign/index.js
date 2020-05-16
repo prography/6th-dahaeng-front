@@ -6,7 +6,22 @@ import styled from 'styled-components';
 import AuthForm from '../../components/AuthForm.js/index.js';
 import { withRouter } from 'react-router-dom';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.div`
+  font-size: 50px;
+  margin-top: 2rem;
+  text-align: center;
+`;
+
+const SubTitle = styled.div`
+  font-size: 20px;
+  margin-top: 2rem;
+  text-align: center;
+`;
 
 const Sign = ({ history }) => {
   const dispatch = useDispatch();
@@ -14,7 +29,7 @@ const Sign = ({ history }) => {
     form: auth.sign,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
+    user: user && user.user,
   }));
 
   const onChange = (e) => {
@@ -65,6 +80,8 @@ const Sign = ({ history }) => {
 
   return (
     <Wrapper>
+      <Title>Da:haeng</Title>
+      <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
       <AuthForm
         type="sign"
         form={form}

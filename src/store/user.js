@@ -10,11 +10,6 @@ export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const getUser = createAction(GETUSER);
 
-export const sign = createAction(SIGN, ({ username, password }) => ({
-  username,
-  password,
-}));
-
 const initialState = {
   user: null,
   getUserError: null,

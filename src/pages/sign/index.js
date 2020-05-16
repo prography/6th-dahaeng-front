@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
-import { getUser } from 'store/auth';
+import { getUser } from 'store/user';
 import styled from 'styled-components';
 import AuthForm from '../../components/AuthForm.js/index.js';
 import { withRouter } from 'react-router-dom';

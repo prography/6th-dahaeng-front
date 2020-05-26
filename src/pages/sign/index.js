@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeForm, initForm, login } from 'store/auth';
+import { changeForm, initForm, sign } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from 'components/AuthForm.js';
+import AuthForm from '../../components/AuthForm.js/index.js';
 import { withRouter } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -23,30 +23,10 @@ const SubTitle = styled.div`
   text-align: center;
 `;
 
-const Content = styled.div`
-  font-size: 10px;
-  margin-top: 1rem;
-  text-align: center;
-`;
-
-const LinkText = styled.div`
-  font-size: 8px;
-  margin-top: 1rem;
-  text-align: center;
-`;
-
-const Picture = styled.div`
-  background: blue;
-`;
-
-const SnsBox = styled.div``;
-
-const Sns = styled.div``;
-
-const Login = ({ history }) => {
+const Sign = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
-    form: auth.login,
+    form: auth.sign,
     auth: auth.auth,
     authError: auth.authError,
     user: user && user.user,
@@ -56,7 +36,7 @@ const Login = ({ history }) => {
     const { value, name } = e.target;
     dispatch(
       changeForm({
-        form: 'login',
+        form: 'sign',
         key: name,
         value,
       }),
@@ -66,22 +46,26 @@ const Login = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password } = form;
-    dispatch(login(username, password));
+    const { username, password, passwordConfirm } = form;
+    if (password !== passwordConfirm) {
+      return;
+    }
+    dispatch(sign({ username, password }));
   };
 
   useEffect(() => {
-    dispatch(initForm('login'));
+    dispatch(initForm('sign'));
   }, [dispatch]);
 
   useEffect(() => {
     if (authError) {
-      console.log('로그인 실패');
+      console.log('회원가입 실패');
       console.log(authError);
       return;
     }
     if (auth) {
-      console.log('로그인 성공');
+      console.log('회원가입 성공');
+      console.log(auth);
       dispatch(getUser());
     }
   }, [auth, authError, dispatch]);
@@ -97,14 +81,9 @@ const Login = ({ history }) => {
   return (
     <Wrapper>
       <Title>Da:haeng</Title>
-      <SubTitle>나만의 행복 보관함, 다행</SubTitle>
-      <Content>
-        <div>나만의 소소한 행복을 찾아</div>
-        <div>보관하고, 또 다른 행복을 찾자</div>
-      </Content>
-      <LinkText>더 알아보러 가기</LinkText>
+      <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
       <AuthForm
-        type="login"
+        type="sign"
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
@@ -113,4 +92,4 @@ const Login = ({ history }) => {
   );
 };
 
-export default withRouter(Login);
+export default withRouter(Sign);

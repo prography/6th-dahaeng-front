@@ -12,39 +12,53 @@ const InputBox = styled.div`
   flex: 3;
 `;
 const KeyText = styled.div`
-  font-size: 10px;
+  font-size: 14px;
+  color: #4d4d4d;
   margin: 0.2rem 0;
+  height: 1rem;
 `;
 const Input = styled.input`
   width: 100%;
-  font-size: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid #e9e9e9;
+  border-radius: 4px;
   padding: 0.5rem;
   outline: none;
   &:focus {
-    border: 1px solid orange;
+    border: 1px solid #ff9d73;
+  }
+  &::placeholder {
+    color: #bbbbbb;
   }
 `;
 
-const Button = styled.button`
+const ButtonBox = styled.div`
   flex: 1;
-  outline: none;
-  background: orange;
-  font-size: 12px;
-  color: white;
   margin-left: 3rem;
-  height: 5rem;
-  margin-top: 1.2rem;
+`;
+
+const Button = styled.button`
+  outline: none;
+  background: #ff9d73;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  height: 5.8rem;
+  width: 100%;
+  margin-top: 1.4rem;
 `;
 
 const Footer = styled.div`
   display: flex;
   margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E9E9E9;
 `;
 
 const FooterContent = styled.span`
-  font-size: 10px;
+  font-size: 14px;
+  color: #4d4d4d;
   text-decoration: none;
 `;
 
@@ -59,17 +73,17 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
     <Wrapper>
       <form onSubmit={onSubmit} style={{ width: '100%', display: 'flex' }}>
         <InputBox>
-          <KeyText>아이디</KeyText>
+          <KeyText>이메일</KeyText>
           <Input
             name="username"
-            placeholder="아이디"
+            placeholder="이메일을 입력해주세요"
             onChange={onChange}
             value={form.username}
           ></Input>
           <KeyText>비밀번호</KeyText>
           <Input
             name="password"
-            placeholder="비밀번호"
+            placeholder="비밀번호를 입력해주세요"
             type="password"
             onChange={onChange}
             value={form.password}
@@ -87,13 +101,23 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             </>
           )}
         </InputBox>
-        <Button>내 행복에 로그인</Button>
+        <ButtonBox>
+          <Button>
+            내 행복에
+            <br /> 로그인
+          </Button>
+        </ButtonBox>
       </form>
       {type === 'login' && (
         <Footer>
           <FooterContent>아이디/비밀번호찾기</FooterContent>
           <FooterContent>
-            <Link to="/sign">회원가입</Link>
+            <Link
+              to="/sign"
+              style={{ textDecoration: 'none', color: '4D4D4D' }}
+            >
+              회원가입
+            </Link>
           </FooterContent>
         </Footer>
       )}

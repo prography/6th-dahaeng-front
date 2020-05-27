@@ -12,31 +12,36 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 50px;
+  font-size: 32px;
   margin-top: 2rem;
   text-align: center;
 `;
 
 const SubTitle = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   margin-top: 2rem;
   text-align: center;
 `;
 
 const Content = styled.div`
-  font-size: 10px;
+  font-size: 18px;
   margin-top: 1rem;
   text-align: center;
 `;
 
 const LinkText = styled.div`
-  font-size: 8px;
+  font-size: 12px;
   margin-top: 1rem;
   text-align: center;
 `;
 
 const Picture = styled.div`
+  display: block;
+  margin: 0px auto;
+  margin-bottom: 1rem;
   background: blue;
+  width: 409px;
+  height: 125px;
 `;
 
 const SnsBox = styled.div``;
@@ -103,6 +108,7 @@ const Login = ({ history }) => {
         <div>보관하고, 또 다른 행복을 찾자</div>
       </Content>
       <LinkText>더 알아보러 가기</LinkText>
+      <Picture />
       <AuthForm
         type="login"
         form={form}

@@ -60,6 +60,7 @@ const FooterContent = styled.span`
   font-size: 14px;
   color: #4d4d4d;
   text-decoration: none;
+  margin-right: 1rem;
 `;
 
 const textMap = {

@@ -44,9 +44,37 @@ const Picture = styled.div`
   height: 125px;
 `;
 
-const SnsBox = styled.div``;
+const SnsBox = styled.div`
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px;
+  width: 30%;
+`;
 
-const Sns = styled.div``;
+const KakaoLogin = styled.button`
+  float: left;
+  outline: none;
+  height: 2.5rem;
+  background: #fbde6f;
+  font-size: 14px;
+  color: #453333;
+  border: none;
+  border-radius: 63px;
+  width: 45%;
+`;
+
+const NaverLogin = styled.button`
+  float: right;
+  outline: none;
+  height: 2.5rem;
+  background: #4ec867;
+  font-size: 14px;
+  color: #ffffff;
+  border: none;
+  border-radius: 63px;
+  width: 45%;
+`;
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
@@ -115,6 +143,10 @@ const Login = ({ history }) => {
         onChange={onChange}
         onSubmit={onSubmit}
       ></AuthForm>
+      <SnsBox>
+        <KakaoLogin>로그인</KakaoLogin>
+        <NaverLogin>로그인</NaverLogin>
+      </SnsBox>
     </Wrapper>
   );
 };

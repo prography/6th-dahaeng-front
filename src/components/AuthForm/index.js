@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 
 const InputBox = styled.div`
   flex: 3;
+  flex: 1;
 `;
 const KeyText = styled.div`
   font-size: 14px;
@@ -53,7 +54,7 @@ const Footer = styled.div`
   display: flex;
   margin-top: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #E9E9E9;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const FooterContent = styled.span`
@@ -63,16 +64,17 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
-const textMap = {
-  login: '로그인',
-  sign: '회원가입',
-};
-
 const AuthForm = ({ type, form, onChange, onSubmit }) => {
-  const text = textMap[type];
   return (
     <Wrapper>
-      <form onSubmit={onSubmit} style={{ width: '100%', display: 'flex' }}>
+      <form
+        onSubmit={onSubmit}
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: `${type === 'login' ? 'row' : 'column'}`,
+        }}
+      >
         <InputBox>
           <KeyText>이메일</KeyText>
           <Input

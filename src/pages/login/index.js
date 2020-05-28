@@ -100,7 +100,7 @@ const Login = ({ history }) => {
     e.preventDefault();
 
     const { username, password } = form;
-    dispatch(login(username, password));
+    dispatch(login({ username, password }));
   };
 
   useEffect(() => {

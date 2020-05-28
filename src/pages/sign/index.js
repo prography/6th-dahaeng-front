@@ -12,13 +12,14 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 50px;
+  font-size: 32px;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
 `;
 
 const SubTitle = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   margin-top: 2rem;
   text-align: center;
 `;

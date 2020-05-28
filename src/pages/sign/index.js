@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from '../../components/AuthForm.js/index.js';
+import AuthForm from '../../components/AuthForm/index.js';
 import { withRouter } from 'react-router-dom';
 
 const Wrapper = styled.div`

@@ -105,7 +105,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
           )}
         </InputBox>
         <ButtonBox>
-          <Button>
+          <Button onClick={onSubmit}>
             내 행복에
             <br /> 로그인
           </Button>

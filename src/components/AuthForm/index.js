@@ -78,10 +78,10 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
         <InputBox>
           <KeyText>이메일</KeyText>
           <Input
-            name="username"
+            name="email"
             placeholder="이메일을 입력해주세요"
             onChange={onChange}
-            value={form.username}
+            value={form.email}
           ></Input>
           {status === 'ok' ? null : <div>not ok</div>}
           <KeyText>비밀번호</KeyText>

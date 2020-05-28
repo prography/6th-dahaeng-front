@@ -51,20 +51,20 @@ const auth = handleActions(
       [form]: initialState[form],
     }),
 
-    [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: token }) => ({
       ...state,
       authError: null,
-      auth,
+      auth: token,
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,
       authError: error,
     }),
 
-    [SIGN_SUCCESS]: (state, { payload: auth }) => ({
+    [SIGN_SUCCESS]: (state, { payload: isSuccess }) => ({
       ...state,
       authError: null,
-      auth,
+      auth: isSuccess,
     }),
     [SIGN_FAIL]: (state, { payload: error }) => ({
       ...state,

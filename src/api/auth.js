@@ -1,11 +1,11 @@
 import client from './client';
 
-export const login = ({ username, password }) => {
-  client.post('', { username, password });
+export const login = ({ email, password }) => {
+  client.post('', { email: email, password: password });
 };
 
-export const sign = ({ username, password }) => {
-  client.post('', { username, password });
+export const sign = ({ email, password }) => {
+  client.post('', { profile: { email: email, password: password } });
 };
 
 export const getUser = () => client.get('');

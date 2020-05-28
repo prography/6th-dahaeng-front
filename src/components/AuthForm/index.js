@@ -64,7 +64,7 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
   return (
     <Wrapper>
       <form
@@ -83,6 +83,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             onChange={onChange}
             value={form.username}
           ></Input>
+          {status === 'ok' ? null : <div>not ok</div>}
           <KeyText>비밀번호</KeyText>
           <Input
             name="password"

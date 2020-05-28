@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Responsive from '../common/Responsive';
-import { useDispatch, useSelector } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -13,14 +10,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import clsx from 'clsx';
 
-const HeaderBlock = styled.div`
-  position: fixed;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-`;
-
-//styled(Responsive) ?
 const Wrapper = styled.div`
   height: 4rem;
   display: flex;
@@ -34,10 +23,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Spacer = styled.div`
-  height: 4rem;
-`;
-
 const useStyles = makeStyles({
   list: {
     width: 250,
@@ -47,21 +32,19 @@ const useStyles = makeStyles({
   },
 });
 
-const Header = ({ history }) => {
-  const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.auth);
-
+const Slider = () => {
   const [open, setOpen] = useState(false);
   const anchor = 'left';
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     history.push('/login');
-  //   }
-  // }, []);
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
 
-  const toggleDrawer = (anchor, open) => (event) => {
     setOpen(open);
   };
 
@@ -105,17 +88,10 @@ const Header = ({ history }) => {
     </div>
   );
 
-  // useEffect(() => {}, [open]);
-
   return (
-    <>
-      <HeaderBlock>
-        <Wrapper>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <div className="title">Da:haeng</div>
-        </Wrapper>
-      </HeaderBlock>
+    <div>
       <React.Fragment key={anchor}>
+        <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
         <Drawer
           anchor={anchor}
           open={open}
@@ -124,9 +100,8 @@ const Header = ({ history }) => {
           {list(anchor)}
         </Drawer>
       </React.Fragment>
-      <Spacer></Spacer>
-    </>
+    </div>
   );
 };
 
-export default withRouter(Header);
+export default Slider;

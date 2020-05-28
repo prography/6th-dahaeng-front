@@ -10,6 +10,7 @@ const Wrapper = styled.div`
 
 const InputBox = styled.div`
   flex: 3;
+  flex: 1;
 `;
 const KeyText = styled.div`
   font-size: 14px;
@@ -76,7 +77,7 @@ const FooterContent = styled.span`
 
 const ErrorMessage = styled.div`
   font-size: 12px;
-  color: #FD5660;
+  color: #fd5660;
   margin: 0.2rem 0;
   margin-top: 1.4rem;
   height: 1rem;
@@ -87,10 +88,7 @@ const textMap = {
   sign: '회원가입',
 };
 
-
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
-  const text = textMap[type];
-
+const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
   return (
     <Wrapper>
       <form
@@ -109,6 +107,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             onChange={onChange}
             value={form.username}
           ></Input>
+          {status === 'ok' ? null : <div>not ok</div>}
           <KeyText>비밀번호</KeyText>
           <Input
             name="password"
@@ -133,7 +132,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
 
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
-          <KeyText style={{justifyContent: "flex-end"}}>
+          <KeyText style={{ justifyContent: 'flex-end' }}>
             <Checkbox id="agreeCheck" type="checkbox" />
             개인정보 수집 및 이용에 동의합니다.
           </KeyText>
@@ -141,7 +140,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
 
         <ButtonBox sign={type}>
           {type === 'login' ? (
-            <Button sign={type}>
+            <Button sign={type} onClick={onSubmit}>
               내 행복에
               <br /> 로그인
             </Button>

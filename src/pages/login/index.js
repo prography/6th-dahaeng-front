@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from 'components/AuthForm.js';
+import AuthForm from 'components/AuthForm';
 import { withRouter } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -99,7 +99,7 @@ const Login = ({ history }) => {
     e.preventDefault();
 
     const { username, password } = form;
-    dispatch(login(username, password));
+    dispatch(login({ username, password }));
   };
 
   useEffect(() => {

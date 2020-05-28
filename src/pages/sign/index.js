@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from '../../components/AuthForm.js/index.js';
+import AuthForm from '../../components/AuthForm/index.js';
 import { withRouter } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -33,8 +33,24 @@ const Sign = ({ history }) => {
     user: user && user.user,
   }));
 
+  const [email_status, setStatus] = useState('not ok');
+  const [status, setStatusSet] = useState({
+    email: false,
+    pw: false,
+    pwd_ok: false,
+  });
+
   const onChange = (e) => {
     const { value, name } = e.target;
+    var rule = /^[A-Za-z0-9]{6,12}$/;
+    if (rule.test(value)) {
+      setStatus('ok');
+      console.log('ok');
+    } else {
+      setStatus('not ok');
+      console.log('not ok');
+    }
+
     dispatch(
       changeForm({
         form: 'sign',
@@ -88,6 +104,7 @@ const Sign = ({ history }) => {
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
+        status={email_status}
       ></AuthForm>
     </Wrapper>
   );

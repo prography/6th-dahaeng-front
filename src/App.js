@@ -4,12 +4,12 @@ import './App.css';
 import Main from 'pages/main';
 import Login from 'pages/login';
 import Sign from 'pages/sign';
-import Header from 'components/header';
+// import Header from 'components/header';
 
 function App() {
   return (
     <div>
-      <Header></Header>
+      {/* <Header></Header> */}
       <Switch>
         <Route path="/" component={Main} exact></Route>
         <Route path="/login" component={Login} exact></Route>

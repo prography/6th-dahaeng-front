@@ -14,18 +14,18 @@ const Wrapper = styled.div`
 const Title = styled.div`
   font-size: 32px;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
 `;
 
 const SubTitle = styled.div`
   font-size: 24px;
-  margin-top: 2rem;
   text-align: center;
 `;
 
 const Content = styled.div`
   font-size: 18px;
-  margin-top: 1rem;
+  margin-top: rem;
   text-align: center;
 `;
 
@@ -38,7 +38,6 @@ const LinkText = styled.div`
 const Picture = styled.div`
   display: block;
   margin: 0px auto;
-  margin-bottom: 1rem;
   background: blue;
   width: 409px;
   height: 125px;

@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { createRequestAction } from './createAction';
+import { createRequestAction } from './createRequestAction';
 
 const REFRESH_SET_USER = 'REFRESH_SET_USER';
 export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(

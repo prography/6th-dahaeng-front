@@ -99,8 +99,8 @@ const Login = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password } = form;
-    dispatch(login({ username, password }));
+    const { email, password } = form;
+    dispatch(login({ email, password }));
   };
 
   useEffect(() => {

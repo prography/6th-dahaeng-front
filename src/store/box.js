@@ -8,36 +8,35 @@ export const [
   GET_QUESTION_FAIL,
 ] = createRequestAction('GET_QUESTION');
 export const [
-  SET_DIARY,
-  SET_DIARY_SUCCESS,
-  SET_DIARY_FAIL,
-] = createRequestAction('SET_DIARY');
+  SET_RECORD,
+  SET_RECORD_SUCCESS,
+  SET_RECORD_FAIL,
+] = createRequestAction('SET_RECORD');
 export const [
-  GET_DIARIES,
-  GET_DIARIES_SUCCESS,
-  GET_DIARIES_FAIL,
-] = createRequestAction('GET_DIARIES');
+  GET_RECORDS,
+  GET_RECORDS_SUCCESS,
+  GET_RECORDS_FAIL,
+] = createRequestAction('GET_RECORDS');
 
 export const getQuestion = createAction(GET_QUESTION);
-export const setDiary = createAction(SET_DIARY, ({ question, detail }) => ({
+export const setDiary = createAction(SET_RECORD, ({ question, detail }) => ({
   question,
   detail,
 }));
-export const getDiaries = createAction(GET_DIARIES, ({ user }) => ({
+export const getDiaries = createAction(GET_RECORDS, ({ user }) => ({
   user,
 }));
 
 const initialState = {
   question: '',
-  diary: {
+  record: {
     question: '',
     detail: '',
   },
-  diaries: [
+  records: [
     {
       question: '',
-      question_deatil: '',
-      diary_detail: '',
+      detail: '',
     },
   ],
 };
@@ -53,22 +52,22 @@ const auth = handleActions(
       question: error,
     }),
 
-    [SET_DIARY_SUCCESS]: (state, { payload: diary }) => ({
+    [SET_RECORD_SUCCESS]: (state, { payload: diary }) => ({
       ...state,
-      diary: diary,
+      record: diary,
     }),
-    [SET_DIARY_FAIL]: (state, { payload: error }) => ({
+    [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      diary: error,
+      record: error,
     }),
 
-    [GET_DIARIES_SUCCESS]: (state, { payload: diaries }) => ({
+    [GET_RECORDS_SUCCESS]: (state, { payload: diaries }) => ({
       ...state,
-      diaries: diaries,
+      records: diaries,
     }),
-    [GET_DIARIES_FAIL]: (state, { payload: error }) => ({
+    [GET_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      diaries: error,
+      records: error,
     }),
   },
   initialState,

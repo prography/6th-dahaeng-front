@@ -5,6 +5,7 @@ import { getUser } from 'store/user';
 import styled from 'styled-components';
 import AuthForm from '../../components/AuthForm/index.js';
 import { withRouter } from 'react-router-dom';
+import { isEmail, isLength, isAlphanumeric } from 'validator';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -33,23 +34,28 @@ const Sign = ({ history }) => {
     user: user && user.user,
   }));
 
-  const [email_status, setStatus] = useState('not ok');
-  const [status, setStatusSet] = useState({
+  const [status, setStatus] = useState({
     email: false,
-    pw: false,
+    pwd: false,
     pwd_ok: false,
   });
 
+  const validateEmail = (value) => {
+    if (!isEmail(value)) {
+      status.email = false;
+    }
+    status.email = true;
+  };
+
+  const validatePassword = (value) => {
+    if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
+      status.pwd = false;
+    }
+    status.pwd = true;
+  };
+
   const onChange = (e) => {
     const { value, name } = e.target;
-    var rule = /^[A-Za-z0-9]{6,12}$/;
-    if (rule.test(value)) {
-      setStatus('ok');
-      console.log('ok');
-    } else {
-      setStatus('not ok');
-      console.log('not ok');
-    }
 
     dispatch(
       changeForm({
@@ -58,6 +64,9 @@ const Sign = ({ history }) => {
         value,
       }),
     );
+
+    validateEmail(value);
+    validatePassword(value);
   };
 
   const onSubmit = (e) => {
@@ -104,7 +113,7 @@ const Sign = ({ history }) => {
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
-        status={email_status}
+        status={status}
       ></AuthForm>
     </Wrapper>
   );

@@ -10,14 +10,15 @@ const Wrapper = styled.div`
 
 const InputBox = styled.div`
   flex: 3;
-  flex: 1;
 `;
-const KeyText = styled.div`
+
+const KeyText = styled.span`
   font-size: 14px;
   color: #4d4d4d;
   margin: 0.2rem 0;
   margin-top: 1.4rem;
   height: 1rem;
+  float: left;
 `;
 const Input = styled.input`
   width: 100%;
@@ -87,28 +88,44 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
         }}
       >
         <InputBox>
-          <KeyText onfocusout="focusOut()">이메일</KeyText>
+          <KeyText>이메일</KeyText>
+          {status.email === true ? null : (
+            <ErrorMessage style={{ float: 'right' }}>
+              이메일 형식이 올바르지 않습니다.
+            </ErrorMessage>
+          )}
           <Input
             name="email"
             placeholder="이메일을 입력해주세요"
             onChange={onChange}
             value={form.email}
           ></Input>
-          {status === 'ok' ? null : <div>not ok</div>}
+
           <KeyText>비밀번호</KeyText>
+          {status.pwd === true ? null : (
+            <ErrorMessage style={{ float: 'right' }}>
+              비밀번호 형식이 올바르지 않습니다.
+            </ErrorMessage>
+          )}
           <Input
             name="password"
             placeholder="비밀번호를 입력해주세요"
             type="password"
             onChange={onChange}
             value={form.password}
-          ></Input>
+          ></Input>}
 
           {type === 'sign' && (
             <>
               <KeyText>비밀번호 확인</KeyText>
+              {status.pwd_ok === true ? null : (
+                <ErrorMessage style={{ float: 'right' }}>
+                  비밀번호와 일치하지 않습니다.
+                </ErrorMessage>
+              )}
               <Input
-                placeholder="비밀번호 확인"
+                name="passwordConfirm"
+                placeholder="비밀번호를 입력해주세요"
                 type="password"
                 onChange={onChange}
                 value={form.passwordConfirm}
@@ -126,7 +143,11 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
 
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
+<<<<<<< HEAD
           <KeyText style={{justifyContent: "flex-end"}}>
+=======
+          <KeyText>
+>>>>>>> sign css
             <Checkbox id="agreeCheck" type="checkbox" />
             개인정보 수집 및 이용에 동의합니다.
           </KeyText>

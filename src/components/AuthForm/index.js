@@ -113,7 +113,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
             type="password"
             onChange={onChange}
             value={form.password}
-          ></Input>}
+          ></Input>
 
           {type === 'sign' && (
             <>

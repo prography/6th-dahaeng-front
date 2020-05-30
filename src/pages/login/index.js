@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
@@ -95,6 +95,12 @@ const Login = ({ history }) => {
     );
   };
 
+  const [status, setStatus] = useState({
+    email: false,
+    pwd: false,
+    pwd_ok: false,
+  });
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -141,6 +147,7 @@ const Login = ({ history }) => {
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
+        status={status}
       ></AuthForm>
       <SnsBox>
         <KakaoLogin>로그인</KakaoLogin>

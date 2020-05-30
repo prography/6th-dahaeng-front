@@ -133,21 +133,14 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
             </>
           )}
         </InputBox>
-<<<<<<< HEAD:src/components/AuthForm/index.js
         <ButtonBox>
           <Button onClick={onSubmit}>
             내 행복에
             <br /> 로그인
           </Button>
-=======
-
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
-<<<<<<< HEAD
           <KeyText style={{justifyContent: "flex-end"}}>
-=======
-          <KeyText>
->>>>>>> sign css
             <Checkbox id="agreeCheck" type="checkbox" />
             개인정보 수집 및 이용에 동의합니다.
           </KeyText>

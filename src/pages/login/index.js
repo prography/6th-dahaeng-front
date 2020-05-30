@@ -48,7 +48,7 @@ const SnsBox = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 1px;
-  width: 30%;
+  width: 480px;
 `;
 
 const KakaoLogin = styled.button`

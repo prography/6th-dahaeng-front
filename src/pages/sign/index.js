@@ -58,7 +58,7 @@ const Sign = ({ history }) => {
   }
 
   // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
-  email.StatusEnum[validateEmail('my-email')]
+  // email.StatusEnum[validateEmail('my-email')]
 
   const validatePassword = (value) => {
     if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {

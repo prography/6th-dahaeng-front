@@ -41,11 +41,24 @@ const Sign = ({ history }) => {
   });
 
   const validateEmail = (value) => {
-    if (!isEmail(value)) {
-      status.email = false;
+    if (value === '') {
+      return 'empty'
     }
-    status.email = true;
+    if (!isEmail(value)) {
+      status.email = 'wrong';
+    }
+    status.email = 'valid';
+    // enum
   };
+
+  const emailStatusEnum = {
+    empty: '이메일은 필수 입력 사항입니다!',
+    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 :)',
+    valid: false
+  }
+
+  // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
+  email.StatusEnum[validateEmail('my-email')]
 
   const validatePassword = (value) => {
     if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
@@ -55,6 +68,37 @@ const Sign = ({ history }) => {
   };
 
   const onChange = (e) => {
+    const { value, name } = e.target;
+
+    dispatch(
+      changeForm({
+        form: 'sign',
+        key: name,
+        value,
+      }),
+    );
+
+    validateEmail(value);
+    validatePassword(value);
+  };
+  const onEmailChange = (e) => {
+    const { value, name } = e.target;
+
+    dispatch(
+      changeForm({
+        form: 'sign',
+        key: name,
+        value,
+      }),
+    );
+
+    validateEmail(value);
+    validatePassword(value);
+  };
+  const onPwConfirmChange = (e) => {
+
+  }
+  const onPwChange = (e) => {
     const { value, name } = e.target;
 
     dispatch(

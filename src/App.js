@@ -9,7 +9,7 @@ import Slider from 'components/Slider';
 
 function App() {
   return (
-    <div>
+    <>
       {/* <Header></Header> */}
       <Switch>
         <Route path="/" component={Main} exact></Route>
@@ -23,7 +23,7 @@ function App() {
           )}
         ></Route>
       </Switch>
-    </div>
+    </>
   );
 }
 

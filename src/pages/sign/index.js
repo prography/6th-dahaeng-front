@@ -35,14 +35,26 @@ const Sign = ({ history }) => {
   }));
 
   const [status, setStatus] = useState({
-    email: "empty",
-    pwd: "empty",
-    pwd_ok: "empty",
+    email: 'empty',
+    pwd: 'empty',
+    pwd_ok: 'empty',
   });
+
+  const emailStatusEnum = {
+    empty: '이메일은 필수 입력 사항입니다!',
+    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 :)',
+    valid: false,
+  };
+
+  const pwStatusEnum = {
+    empty: '비밀번호는 필수 입력 사항입니다!',
+    wrong: '비밀번호를 똑바로 입력했는지 한번 확인 해 주세요 :)',
+    valid: false,
+  };
 
   const validateEmail = (value) => {
     if (value === '') {
-      return 'empty'
+      return 'empty';
     }
     if (!isEmail(value)) {
       status.email = 'wrong';
@@ -51,36 +63,34 @@ const Sign = ({ history }) => {
     // enum
   };
 
-  const emailStatusEnum = {
-    empty: '이메일은 필수 입력 사항입니다!',
-    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 :)',
-    valid: false
-  }
-
   // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
-  email.StatusEnum[validateEmail('my-email')]
+  // email.StatusEnum[validateEmail('my-email')];
 
   const validatePassword = (value) => {
-    if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
-      status.pwd = false;
+    if (value === '') {
+      return 'empty';
     }
-    status.pwd = true;
+    if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
+      return 'wrong';
+    }
+    return 'valid';
   };
 
-  const onChange = (e) => {
-    const { value, name } = e.target;
+  // const onChange = (e) => {
+  //   const { value, name } = e.target;
 
-    dispatch(
-      changeForm({
-        form: 'sign',
-        key: name,
-        value,
-      }),
-    );
+  //   dispatch(
+  //     changeForm({
+  //       form: 'sign',
+  //       key: name,
+  //       value,
+  //     }),
+  //   );
 
-    validateEmail(value);
-    validatePassword(value);
-  };
+  //   validateEmail(value);
+  //   validatePassword(value);
+  // };
+
   const onEmailChange = (e) => {
     const { value, name } = e.target;
 
@@ -92,12 +102,12 @@ const Sign = ({ history }) => {
       }),
     );
 
-    validateEmail(value);
-    validatePassword(value);
+    return setStatus({
+      ...status,
+      email: emailStatusEnum[validateEmail(value)],
+    });
   };
-  const onPwConfirmChange = (e) => {
 
-  }
   const onPwChange = (e) => {
     const { value, name } = e.target;
 
@@ -109,8 +119,7 @@ const Sign = ({ history }) => {
       }),
     );
 
-    validateEmail(value);
-    validatePassword(value);
+    return pwStatusEnum[validatePassword(value)];
   };
 
   const onSubmit = (e) => {
@@ -155,7 +164,8 @@ const Sign = ({ history }) => {
       <AuthForm
         type="sign"
         form={form}
-        onChange={onChange}
+        onEmailChange={onEmailChange}
+        onPwChange={onPwChange}
         onSubmit={onSubmit}
         status={status}
       ></AuthForm>

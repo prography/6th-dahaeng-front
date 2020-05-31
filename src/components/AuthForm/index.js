@@ -90,7 +90,14 @@ const textMap = {
   sign: '회원가입',
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
+const AuthForm = ({
+  type,
+  form,
+  onEmailChange,
+  onPwChange,
+  onSubmit,
+  status,
+}) => {
   return (
     <Wrapper>
       <form
@@ -103,46 +110,36 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
       >
         <InputBox>
           <KeyText>이메일</KeyText>
-          {status.email === true ? null : (
-            <ErrorMessage style={{ float: 'right' }}>
-              이메일 형식이 올바르지 않습니다.
-            </ErrorMessage>
+          {status.email === 'empty' ? null : (
+            <ErrorMessage>{status.email}</ErrorMessage>
           )}
           <Input
             name="username"
             placeholder="이메일을 입력해주세요"
-            onChange={onChange}
+            onChange={onEmailChange}
             value={form.username}
           ></Input>
 
           <KeyText>비밀번호</KeyText>
-          {status.pwd === true ? null : (
-            <ErrorMessage style={{ float: 'right' }}>
-              비밀번호 형식이 올바르지 않습니다.
-            </ErrorMessage>
+          {status.pwd === 'empty' ? null : (
+            <ErrorMessage>{status.pw}</ErrorMessage>
           )}
           <Input
             name="password"
             placeholder="비밀번호를 입력해주세요"
             type="password"
-            onChange={onChange}
+            onChange={onPwChange}
             value={form.password}
           ></Input>
 
           {type === 'sign' && (
             <>
               <KeyText>비밀번호 확인</KeyText>
-              {status.pwd_ok === true ? null : (
-                <ErrorMessage style={{ float: 'right' }}>
-                  비밀번호와 일치하지 않습니다.
-                </ErrorMessage>
-              )}
               <Input
                 name="passwordConfirm"
                 placeholder="비밀번호를 입력해주세요"
                 type="password"
-                onChange={onChange}
-                value={form.passwordConfirm}
+                // value={form.passwordConfirm}
               ></Input>
             </>
           )}

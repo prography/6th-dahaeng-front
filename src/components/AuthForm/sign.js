@@ -104,18 +104,6 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
-<<<<<<< HEAD
-const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
-=======
-const ErrorMessage = styled.span`
-  flex: 1;
-  font-size: 12px;
-  color: #fd5660;
-  margin: 0.2rem 0;
-  margin-top: 1.4rem;
-  height: 1rem;
-`;
-
 const textMap = {
   login: '로그인',
   sign: '회원가입',
@@ -131,7 +119,6 @@ const AuthForm = ({
   onSubmit,
   status,
 }) => {
->>>>>>> Update sign error message
   return (
     <Wrapper>
       <form
@@ -144,46 +131,6 @@ const AuthForm = ({
       >
         <InputWrapper>
         <InputBox>
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <LabelWrapper>
-            <KeyText>이메일</KeyText>
-            {status.email === true ? null : (
-              <ErrorMessage>
-                이메일 형식이 올바르지 않습니다.
-              </ErrorMessage>
-            )}
-          </LabelWrapper>
-=======
-          <KeyText>이메일</KeyText>
-          {status.email === 'empty' ? null : (
-            <ErrorMessage>{status.email}</ErrorMessage>
-          )}
->>>>>>> Update sign error message
-          <Input
-            name="email"
-            placeholder="이메일을 입력해주세요"
-<<<<<<< HEAD
-            onChange={onChange}
-            value={form.email}
-=======
-            onChange={onEmailChange}
-            value={form.username}
->>>>>>> Update sign error message
-          ></Input>
-          <LabelWrapper>
-          <KeyText>비밀번호</KeyText>
-<<<<<<< HEAD
-          {status.pwd === true ? null : (
-            <ErrorMessage>
-              비밀번호 형식이 올바르지 않습니다.
-            </ErrorMessage>
-=======
-          {status.pwd === 'empty' ? null : (
-            <ErrorMessage>{status.pw}</ErrorMessage>
->>>>>>> Update sign error message
-          )}
-=======
           <LabelWrapper>
             <KeyText>이메일</KeyText>
             {status.email === 'empty' ? null : (
@@ -218,7 +165,6 @@ const AuthForm = ({
             {status.pwd === 'empty' ? null : (
               <ErrorMessage>{status.pwd}</ErrorMessage>
             )}
->>>>>>> update login and sign
           </LabelWrapper>
           {type === 'login' && (
             <>
@@ -245,27 +191,12 @@ const AuthForm = ({
 
           {type === 'sign' && (
             <>
-<<<<<<< HEAD
-<<<<<<< HEAD
-            <LabelWrapper>
-            <KeyText>비밀번호 확인</KeyText>
-              {status.pwd_ok === true ? null : (
-                <ErrorMessage>
-                  비밀번호와 일치하지 않습니다.
-                </ErrorMessage>
-              )}
-            </LabelWrapper>
-=======
-              <KeyText>비밀번호 확인</KeyText>
->>>>>>> Update sign error message
-=======
               <LabelWrapper>
                 <KeyText>비밀번호 확인</KeyText>
                 {status.pwd_ok === 'empty' ? null : (
                   <ErrorMessage>{status.pwd_ok}</ErrorMessage>
                 )}
               </LabelWrapper>
->>>>>>> update login and sign
               <Input
                 name="passwordConfirm"
                 placeholder="비밀번호 확인할게요"
@@ -276,42 +207,23 @@ const AuthForm = ({
             </>
           )}
         </InputBox>
-        <ButtonBox>
-          <Button onClick={onSubmit}>
-            내 행복에
-            <br /> 로그인
-          </Button>
+
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
-<<<<<<< HEAD
-<<<<<<< HEAD
-          <KeyText style={{justifyContent: "flex-end"}}>
-            <Checkbox id="agreeCheck" type="checkbox" />
-            개인정보 수집 및 이용에 동의합니다.
-          </KeyText>
-=======
-          <LabelWrapper>
-=======
           <CheckboxWrapper>
->>>>>>> Implement sign page components
             <KeyText>
               <Checkbox id="agreeCheck" type="checkbox" />
               <label for="agreeCheck">
                 개인정보 수집 및 이용에 동의합니다.
               </label>
             </KeyText>
-<<<<<<< HEAD
-          </LabelWrapper>
->>>>>>> update login and sign
-=======
           </CheckboxWrapper>
->>>>>>> Implement sign page components
         )}
       </InputWrapper>
 
         <ButtonBox sign={type}>
           {type === 'login' ? (
-            <Button sign={type}>
+            <Button sign={type} onClick={onSubmit}>
               내 행복에
               <br /> 로그인
             </Button>

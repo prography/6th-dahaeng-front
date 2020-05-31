@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
+import SignResponsive from '../../components/common/SignResponsive';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,13 +24,9 @@ const SubTitle = styled.div`
   font-size: 24px;
   margin-top: 2rem;
   text-align: center;
-<<<<<<< HEAD
-=======
-
   @media screen and (max-width: 480px) {
     font-size: 18px;
   }
->>>>>>> Devide Authform and resolve validation error
 `;
 
 const Sign = ({ history }) => {
@@ -182,7 +179,7 @@ const Sign = ({ history }) => {
   }, [history, user]);
 
   return (
-    <Wrapper>
+    <SignResponsive>
       <Title>Da:haeng</Title>
       <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
       <SignAuthForm

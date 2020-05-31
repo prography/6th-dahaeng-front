@@ -16,9 +16,9 @@ const ResponsiveBlock = styled.div`
   }
 `;
 
-const Responsive = ({ childern, ...rest }) => {
+const SignResponsive = ({ childern, ...rest }) => {
   //propr를 사용할 수 있도록 ...rest 를 사용하여 ResponsiveBlock에게 전달
   return <ResponsiveBlock {...rest}>{childern}</ResponsiveBlock>;
 };
 
-export default Responsive;
+export default SignResponsive;

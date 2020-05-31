@@ -62,9 +62,15 @@ const Input = styled.input`
 `;
 
 const ButtonBox = styled.div`
+<<<<<<< Updated upstream
   flex: 1;
   margin-left: 'none';
   width: '100%';
+=======
+  // flex: 1;
+  margin-left: '3rem';
+  width: '120px';
+>>>>>>> Stashed changes
 
   display: flex;
   flex-direction: column;
@@ -78,7 +84,11 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
+<<<<<<< Updated upstream
   height: '3rem';
+=======
+  height: '5.8rem';
+>>>>>>> Stashed changes
   width: 100%;
   margin-top: 1em;
 `;
@@ -90,10 +100,26 @@ const Checkbox = styled.input`
   }
 `;
 
+<<<<<<< Updated upstream
 const textMap = {
   login: '로그인',
   sign: '회원가입',
 };
+=======
+const Footer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e9e9e9;
+`;
+
+const FooterContent = styled.span`
+  font-size: 14px;
+  color: #4d4d4d;
+  text-decoration: none;
+  margin-right: 1rem;
+`;
+>>>>>>> Stashed changes
 
 const AuthForm = ({
   type,

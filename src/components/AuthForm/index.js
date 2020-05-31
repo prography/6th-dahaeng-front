@@ -7,6 +7,10 @@ const Wrapper = styled.div`
   border: 1px;
 `;
 
+const InputWrapper = styled.div`
+  padding: 30px 0;
+`;
+
 const InputBox = styled.div`
   flex: 3;
 `;
@@ -16,6 +20,15 @@ const LabelWrapper = styled.div`
   flex-wrap: wrap;
   padding-top: 12px;
   height: 36px;
+`;
+const CheckboxWrapper = styled.div`
+  padding-top: 12px;
+  height: 36px;
+  text-align: right;
+  
+  label {
+    cursor: pointer;
+  }
 `;
 
 const KeyText = styled.div`
@@ -128,6 +141,7 @@ const AuthForm = ({
           flexDirection: `${type === 'login' ? 'row' : 'column'}`,
         }}
       >
+        <InputWrapper>
         <InputBox>
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -269,19 +283,30 @@ const AuthForm = ({
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
 <<<<<<< HEAD
+<<<<<<< HEAD
           <KeyText style={{justifyContent: "flex-end"}}>
             <Checkbox id="agreeCheck" type="checkbox" />
             개인정보 수집 및 이용에 동의합니다.
           </KeyText>
 =======
           <LabelWrapper>
+=======
+          <CheckboxWrapper>
+>>>>>>> Implement sign page components
             <KeyText>
               <Checkbox id="agreeCheck" type="checkbox" />
-              개인정보 수집 및 이용에 동의합니다.
+              <label for="agreeCheck">
+                개인정보 수집 및 이용에 동의합니다.
+              </label>
             </KeyText>
+<<<<<<< HEAD
           </LabelWrapper>
 >>>>>>> update login and sign
+=======
+          </CheckboxWrapper>
+>>>>>>> Implement sign page components
         )}
+      </InputWrapper>
 
         <ButtonBox sign={type}>
           {type === 'login' ? (

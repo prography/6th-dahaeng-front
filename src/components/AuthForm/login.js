@@ -78,7 +78,7 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
-  height: ${(props) => (props.sign === 'sign' ? '3rem' : '5.8rem')};
+  height: '3rem';
   width: 100%;
   margin-top: 1em;
 `;
@@ -103,11 +103,6 @@ const FooterContent = styled.span`
   text-decoration: none;
   margin-right: 1rem;
 `;
-
-const textMap = {
-  login: '로그인',
-  sign: '회원가입',
-};
 
 const AuthForm = ({
   type,

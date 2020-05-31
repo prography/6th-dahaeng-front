@@ -92,7 +92,32 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
+<<<<<<< HEAD
 const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
+=======
+const ErrorMessage = styled.span`
+  flex: 1;
+  font-size: 12px;
+  color: #fd5660;
+  margin: 0.2rem 0;
+  margin-top: 1.4rem;
+  height: 1rem;
+`;
+
+const textMap = {
+  login: '로그인',
+  sign: '회원가입',
+};
+
+const AuthForm = ({
+  type,
+  form,
+  onEmailChange,
+  onPwChange,
+  onSubmit,
+  status,
+}) => {
+>>>>>>> Update sign error message
   return (
     <Wrapper>
       <form
@@ -104,6 +129,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
         }}
       >
         <InputBox>
+<<<<<<< HEAD
           <LabelWrapper>
             <KeyText>이메일</KeyText>
             {status.email === true ? null : (
@@ -112,30 +138,47 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
               </ErrorMessage>
             )}
           </LabelWrapper>
+=======
+          <KeyText>이메일</KeyText>
+          {status.email === 'empty' ? null : (
+            <ErrorMessage>{status.email}</ErrorMessage>
+          )}
+>>>>>>> Update sign error message
           <Input
             name="email"
             placeholder="이메일을 입력해주세요"
+<<<<<<< HEAD
             onChange={onChange}
             value={form.email}
+=======
+            onChange={onEmailChange}
+            value={form.username}
+>>>>>>> Update sign error message
           ></Input>
           <LabelWrapper>
           <KeyText>비밀번호</KeyText>
+<<<<<<< HEAD
           {status.pwd === true ? null : (
             <ErrorMessage>
               비밀번호 형식이 올바르지 않습니다.
             </ErrorMessage>
+=======
+          {status.pwd === 'empty' ? null : (
+            <ErrorMessage>{status.pw}</ErrorMessage>
+>>>>>>> Update sign error message
           )}
           </LabelWrapper>
           <Input
             name="password"
             placeholder="비밀번호를 입력해주세요"
             type="password"
-            onChange={onChange}
+            onChange={onPwChange}
             value={form.password}
           ></Input>
 
           {type === 'sign' && (
             <>
+<<<<<<< HEAD
             <LabelWrapper>
             <KeyText>비밀번호 확인</KeyText>
               {status.pwd_ok === true ? null : (
@@ -144,12 +187,14 @@ const AuthForm = ({ type, form, onChange, onSubmit, status }) => {
                 </ErrorMessage>
               )}
             </LabelWrapper>
+=======
+              <KeyText>비밀번호 확인</KeyText>
+>>>>>>> Update sign error message
               <Input
                 name="passwordConfirm"
                 placeholder="비밀번호를 입력해주세요"
                 type="password"
-                onChange={onChange}
-                value={form.passwordConfirm}
+                // value={form.passwordConfirm}
               ></Input>
             </>
           )}

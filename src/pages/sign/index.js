@@ -49,13 +49,13 @@ const Sign = ({ history }) => {
 
   const pwStatusEnum = {
     empty: '비밀번호는 필수 입력 사항입니다!',
-    wrong: '비밀번호는 숫자와 영어 8자 이상으로 만들어주세요 : )',
+    wrong: '숫자와 영어로 8자 이상 입력해주세요🤫',
     valid: false,
   };
 
   const pwConfirmStatusEnum = {
     empty: '비밀번호 확인은 필수 입력 사항입니다!',
-    wrong: '어라, 비밀번호와 다른 것 같아요',
+    wrong: '비밀번호가 일치하지 않아요!',
     valid: false,
   };
 

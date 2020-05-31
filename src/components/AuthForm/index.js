@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 const Wrapper = styled.div`
   margin: 0 auto;
   border: 1px;
-  width: 480px;
 `;
 
 const InputBox = styled.div`
@@ -29,7 +28,6 @@ const ErrorMessage = styled.div`
   flex: none;
   font-size: 12px;
   color: #fd5660;
-  padding-top: 2px;
 `;
 
 const Input = styled.input`

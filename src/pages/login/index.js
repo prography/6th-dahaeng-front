@@ -96,9 +96,9 @@ const Login = ({ history }) => {
   };
 
   const [status, setStatus] = useState({
-    email: false,
-    pwd: false,
-    pwd_ok: false,
+    email: 'empty',
+    pwd: 'empty',
+    pwd_ok: 'empty',
   });
 
   const onSubmit = (e) => {

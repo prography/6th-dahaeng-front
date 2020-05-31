@@ -17,7 +17,7 @@ const LabelWrapper = styled.div`
   flex-wrap: wrap;
   padding-top: 12px;
   height: 36px;
-`
+`;
 
 const KeyText = styled.div`
   font-size: 14px;
@@ -53,7 +53,7 @@ const ButtonBox = styled.div`
   flex: 1;
   margin-left: ${(props) => (props.sign === 'sign' ? 'none' : '3rem')};
   width: ${(props) => (props.sign === 'sign' ? '100%' : '120px')};
-  
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -112,8 +112,10 @@ const textMap = {
 const AuthForm = ({
   type,
   form,
+  onChange,
   onEmailChange,
   onPwChange,
+  onPwConfirmChange,
   onSubmit,
   status,
 }) => {
@@ -129,6 +131,7 @@ const AuthForm = ({
         }}
       >
         <InputBox>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <LabelWrapper>
             <KeyText>이메일</KeyText>
@@ -167,17 +170,69 @@ const AuthForm = ({
             <ErrorMessage>{status.pw}</ErrorMessage>
 >>>>>>> Update sign error message
           )}
+=======
+          <LabelWrapper>
+            <KeyText>이메일</KeyText>
+            {status.email === 'empty' ? null : (
+              <ErrorMessage>{status.email}</ErrorMessage>
+            )}
           </LabelWrapper>
-          <Input
-            name="password"
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            onChange={onPwChange}
-            value={form.password}
-          ></Input>
+
+          {/* 로그인창일 때와 회원가입창일 때 onChange 함수 차이 생김 */}
+          {type === 'login' && (
+            <>
+              <Input
+                name="username"
+                placeholder="이메일을 입력해주세요"
+                onChange={onChange}
+                value={form.username}
+              ></Input>
+            </>
+          )}
+          {type === 'sign' && (
+            <>
+              <Input
+                name="username"
+                placeholder="이메일을 입력해주세요"
+                onChange={onEmailChange}
+                value={form.username}
+              ></Input>
+            </>
+          )}
+
+          <LabelWrapper>
+            <KeyText>비밀번호</KeyText>
+            {status.pwd === 'empty' ? null : (
+              <ErrorMessage>{status.pwd}</ErrorMessage>
+            )}
+>>>>>>> update login and sign
+          </LabelWrapper>
+          {type === 'login' && (
+            <>
+              <Input
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                type="password"
+                onChange={onChange}
+                value={form.password}
+              ></Input>
+            </>
+          )}
+          {type === 'sign' && (
+            <>
+              <Input
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                type="password"
+                onChange={onPwChange}
+                value={form.password}
+              ></Input>
+            </>
+          )}
 
           {type === 'sign' && (
             <>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <LabelWrapper>
             <KeyText>비밀번호 확인</KeyText>
@@ -190,11 +245,20 @@ const AuthForm = ({
 =======
               <KeyText>비밀번호 확인</KeyText>
 >>>>>>> Update sign error message
+=======
+              <LabelWrapper>
+                <KeyText>비밀번호 확인</KeyText>
+                {status.pwd_ok === 'empty' ? null : (
+                  <ErrorMessage>{status.pwd_ok}</ErrorMessage>
+                )}
+              </LabelWrapper>
+>>>>>>> update login and sign
               <Input
                 name="passwordConfirm"
-                placeholder="비밀번호를 입력해주세요"
+                placeholder="비밀번호 확인할게요"
                 type="password"
-                // value={form.passwordConfirm}
+                onChange={onPwConfirmChange}
+                value={form.passwordConfirm}
               ></Input>
             </>
           )}
@@ -206,10 +270,19 @@ const AuthForm = ({
           </Button>
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
+<<<<<<< HEAD
           <KeyText style={{justifyContent: "flex-end"}}>
             <Checkbox id="agreeCheck" type="checkbox" />
             개인정보 수집 및 이용에 동의합니다.
           </KeyText>
+=======
+          <LabelWrapper>
+            <KeyText>
+              <Checkbox id="agreeCheck" type="checkbox" />
+              개인정보 수집 및 이용에 동의합니다.
+            </KeyText>
+          </LabelWrapper>
+>>>>>>> update login and sign
         )}
 
         <ButtonBox sign={type}>

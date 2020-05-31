@@ -40,34 +40,41 @@ const Sign = ({ history }) => {
     pwd_ok: 'empty',
   });
 
+  //상황별 에러 메시지
   const emailStatusEnum = {
     empty: '이메일은 필수 입력 사항입니다!',
-    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 :)',
+    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 : )',
     valid: false,
   };
 
   const pwStatusEnum = {
     empty: '비밀번호는 필수 입력 사항입니다!',
-    wrong: '비밀번호를 똑바로 입력했는지 한번 확인 해 주세요 :)',
+    wrong: '비밀번호는 숫자와 영어 8자 이상으로 만들어주세요 : )',
     valid: false,
   };
 
+  const pwConfirmStatusEnum = {
+    empty: '비밀번호 확인은 필수 입력 사항입니다!',
+    wrong: '어라, 비밀번호와 다른 것 같아요',
+    valid: false,
+  };
+
+  // 이메일, 비밀번호, 비밀번호 확인 유효성 검사
   const validateEmail = (value) => {
-    if (value === '') {
+    if (value.trim() === '') {
       return 'empty';
     }
     if (!isEmail(value)) {
-      status.email = 'wrong';
+      return 'wrong';
     }
-    status.email = 'valid';
+    return 'valid';
     // enum
   };
 
   // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
   // email.StatusEnum[validateEmail('my-email')]
-
   const validatePassword = (value) => {
-    if (value === '') {
+    if (value.trim() === '') {
       return 'empty';
     }
     if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
@@ -76,21 +83,20 @@ const Sign = ({ history }) => {
     return 'valid';
   };
 
-  // const onChange = (e) => {
-  //   const { value, name } = e.target;
+  const validatePwConfirm = (value) => {
+    const { password } = form;
 
-  //   dispatch(
-  //     changeForm({
-  //       form: 'sign',
-  //       key: name,
-  //       value,
-  //     }),
-  //   );
+    console.log(value);
+    if (value.trim() === '') {
+      return 'empty';
+    }
+    if (value !== password) {
+      return 'wrong';
+    }
+    return 'valid';
+  };
 
-  //   validateEmail(value);
-  //   validatePassword(value);
-  // };
-
+  //입력시 이벤트
   const onEmailChange = (e) => {
     const { value, name } = e.target;
 
@@ -119,15 +125,45 @@ const Sign = ({ history }) => {
       }),
     );
 
-    return pwStatusEnum[validatePassword(value)];
+    return setStatus({
+      ...status,
+      pwd: pwStatusEnum[validatePassword(value)],
+    });
   };
 
+  const onPwConfirmChange = (e) => {
+    const { value, name } = e.target;
+
+    dispatch(
+      changeForm({
+        form: 'sign',
+        key: name,
+        value,
+      }),
+    );
+
+    console.log(validatePwConfirm(value));
+    return setStatus({
+      ...status,
+      pwd_ok: pwConfirmStatusEnum[validatePwConfirm(value)],
+    });
+  };
+
+  //제출시 이벤트
   const onSubmit = (e) => {
     e.preventDefault();
 
     const { username, password, passwordConfirm } = form;
-    if (password !== passwordConfirm) {
-      return;
+
+    //입력창 모두 valid 아닐 때 alert
+    if (
+      !(
+        status.email === 'valid' &&
+        status.pwd === 'valid' &&
+        status.pwd_ok === 'valid'
+      )
+    ) {
+      alert('입력을 확인해주세요!');
     }
     dispatch(sign({ username, password }));
   };
@@ -166,6 +202,7 @@ const Sign = ({ history }) => {
         form={form}
         onEmailChange={onEmailChange}
         onPwChange={onPwChange}
+        onPwConfirmChange={onPwConfirmChange}
         onSubmit={onSubmit}
         status={status}
       ></AuthForm>

@@ -8,8 +8,9 @@ export const setRecord = ({ question, detail }) => {
   client.post('', { question: question, detail: detail });
 };
 
-// export const getRecords = ({ email, password }) => {
-//   client.post('', { profile: { email: email, password: password } });
-// };
+export const getRecords = ({ user }) => {
+  console.log('getRecords');
+  client.get('', { user: user });
+};
 
 export const getUser = () => client.get('');

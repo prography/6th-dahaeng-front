@@ -5,6 +5,8 @@ import Main from 'pages/main';
 import Login from 'pages/login';
 import Sign from 'pages/sign';
 import Slider from 'components/Slider';
+import Box from 'pages/box';
+
 // import Header from 'components/Header';
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
         <Route path="/login" component={Login} exact></Route>
         <Route path="/sign" component={Sign} exact></Route>
         <Route path="/slider" component={Slider} exact></Route>
+        <Route path="/box" component={Box} exact></Route>
         {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
         <Route
           render={({ location }) => (

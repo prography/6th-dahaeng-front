@@ -42,10 +42,17 @@ const initialState = {
   records: [
     {
       question: {
-        date: '',
-        text: '',
+        date: '0522',
+        text: 'text1',
       },
-      detail: '',
+      detail: 'detail1',
+    },
+    {
+      question: {
+        date: '0523',
+        text: 'text2',
+      },
+      detail: 'detail2',
     },
   ],
 };

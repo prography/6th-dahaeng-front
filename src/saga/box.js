@@ -35,8 +35,25 @@ function* setRecordSaga(action) {
     const res = yield call(boxApi.setRecord, action.payload); //api.login(action.payload)와 같다
 
     yield put({
-      type: SET_RECORD_SUCCESS,
+      type: GET_RECORDS_SUCCESS,
       payload: res.question,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_RECORDS_FAIL,
+      payload: e,
+    });
+  }
+}
+
+function* getRecordsSaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+    const res = yield call(boxApi.getRecords, action.payload); //api.login(action.payload)와 같다
+
+    yield put({
+      type: SET_RECORD_SUCCESS,
+      payload: res.records,
     });
   } catch (e) {
     yield put({
@@ -51,4 +68,5 @@ export function* boxSaga() {
   //takeLatest: 기존에 진행 중이던 작업이 있다면 취소 처리 후, 가장 마지막으로 실행된 작업만 수행
   yield takeLatest(GET_QUESTION, getQuestionSaga);
   yield takeLatest(SET_RECORD, setRecordSaga);
+  yield takeLatest(GET_RECORDS, getRecordsSaga);
 }

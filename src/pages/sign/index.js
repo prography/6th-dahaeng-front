@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from '../../components/AuthForm/index.js';
+import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 
@@ -23,6 +23,13 @@ const SubTitle = styled.div`
   font-size: 24px;
   margin-top: 2rem;
   text-align: center;
+<<<<<<< HEAD
+=======
+
+  @media screen and (max-width: 480px) {
+    font-size: 18px;
+  }
+>>>>>>> Devide Authform and resolve validation error
 `;
 
 const Sign = ({ history }) => {
@@ -39,25 +46,6 @@ const Sign = ({ history }) => {
     pwd: 'empty',
     pwd_ok: 'empty',
   });
-
-  //상황별 에러 메시지
-  const emailStatusEnum = {
-    empty: '이메일은 필수 입력 사항입니다!',
-    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 : )',
-    valid: false,
-  };
-
-  const pwStatusEnum = {
-    empty: '비밀번호는 필수 입력 사항입니다!',
-    wrong: '숫자와 영어로 8자 이상 입력해주세요🤫',
-    valid: false,
-  };
-
-  const pwConfirmStatusEnum = {
-    empty: '비밀번호 확인은 필수 입력 사항입니다!',
-    wrong: '비밀번호가 일치하지 않아요!',
-    valid: false,
-  };
 
   // 이메일, 비밀번호, 비밀번호 확인 유효성 검사
   const validateEmail = (value) => {
@@ -110,7 +98,7 @@ const Sign = ({ history }) => {
 
     return setStatus({
       ...status,
-      email: emailStatusEnum[validateEmail(value)],
+      email: validateEmail(value),
     });
   };
 
@@ -127,7 +115,7 @@ const Sign = ({ history }) => {
 
     return setStatus({
       ...status,
-      pwd: pwStatusEnum[validatePassword(value)],
+      pwd: validatePassword(value),
     });
   };
 
@@ -145,7 +133,7 @@ const Sign = ({ history }) => {
     console.log(validatePwConfirm(value));
     return setStatus({
       ...status,
-      pwd_ok: pwConfirmStatusEnum[validatePwConfirm(value)],
+      pwd_ok: validatePwConfirm(value),
     });
   };
 
@@ -197,7 +185,7 @@ const Sign = ({ history }) => {
     <Wrapper>
       <Title>Da:haeng</Title>
       <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
-      <AuthForm
+      <SignAuthForm
         type="sign"
         form={form}
         onEmailChange={onEmailChange}
@@ -205,8 +193,8 @@ const Sign = ({ history }) => {
         onPwConfirmChange={onPwConfirmChange}
         onSubmit={onSubmit}
         status={status}
-      ></AuthForm>
-    </Wrapper>
+      ></SignAuthForm>
+    </SignResponsive>
   );
 };
 

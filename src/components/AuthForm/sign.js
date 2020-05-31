@@ -59,18 +59,15 @@ const Input = styled.input`
   &::placeholder {
     color: #bbbbbb;
   }
+  &.error {
+    border: 1px solid #fd5660;
+  }
 `;
 
 const ButtonBox = styled.div`
-<<<<<<< Updated upstream
   flex: 1;
   margin-left: 'none';
   width: '100%';
-=======
-  // flex: 1;
-  margin-left: '3rem';
-  width: '120px';
->>>>>>> Stashed changes
 
   display: flex;
   flex-direction: column;
@@ -84,11 +81,7 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
-<<<<<<< Updated upstream
-  height: '3rem';
-=======
-  height: '5.8rem';
->>>>>>> Stashed changes
+  height: 3rem;
   width: 100%;
   margin-top: 1em;
 `;
@@ -100,28 +93,26 @@ const Checkbox = styled.input`
   }
 `;
 
-<<<<<<< Updated upstream
-const textMap = {
-  login: '로그인',
-  sign: '회원가입',
+//상황별 에러 메시지
+const emailStatusEnum = {
+  empty: '이메일은 필수 입력 사항입니다!',
+  wrong: '이메일을 확인 해 주세요 🤫',
+  valid: 'valid',
 };
-=======
-const Footer = styled.div`
-  display: flex;
-  margin-top: 1rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #e9e9e9;
-`;
 
-const FooterContent = styled.span`
-  font-size: 14px;
-  color: #4d4d4d;
-  text-decoration: none;
-  margin-right: 1rem;
-`;
->>>>>>> Stashed changes
+const pwStatusEnum = {
+  empty: '비밀번호는 필수 입력 사항입니다!',
+  wrong: '숫자와 영어로 8자 이상 입력해주세요🤫',
+  valid: 'valid',
+};
 
-const AuthForm = ({
+const pwConfirmStatusEnum = {
+  empty: '비밀번호 확인은 필수 입력 사항입니다!',
+  wrong: '비밀번호가 일치하지 않아요!',
+  valid: 'valid',
+};
+
+const SignAuthForm = ({
   type,
   form,
   onEmailChange,
@@ -144,8 +135,8 @@ const AuthForm = ({
           <InputBox>
             <LabelWrapper>
               <KeyText>이메일</KeyText>
-              {status.email === 'empty' ? null : (
-                <ErrorMessage>{status.email}</ErrorMessage>
+              {status.email !== 'wrong' ? null : (
+                <ErrorMessage>{emailStatusEnum[status.email]}</ErrorMessage>
               )}
             </LabelWrapper>
             <Input
@@ -153,12 +144,14 @@ const AuthForm = ({
               placeholder="이메일을 입력해주세요"
               onChange={onEmailChange}
               value={form.username}
+              className={status.email === 'wrong' ? 'error' : ''}
+              // boolean값으로 받아올 때 왜 안되는지 생각해보기
             ></Input>
 
             <LabelWrapper>
               <KeyText>비밀번호</KeyText>
-              {status.pwd === 'empty' ? null : (
-                <ErrorMessage>{status.pwd}</ErrorMessage>
+              {status.pwd !== 'wrong' ? null : (
+                <ErrorMessage>{pwStatusEnum[status.pwd]}</ErrorMessage>
               )}
             </LabelWrapper>
             <Input
@@ -167,12 +160,15 @@ const AuthForm = ({
               type="password"
               onChange={onPwChange}
               value={form.password}
+              className={status.pwd === 'wrong' ? 'error' : ''}
             ></Input>
 
             <LabelWrapper>
               <KeyText>비밀번호 확인</KeyText>
-              {status.pwd_ok === 'empty' ? null : (
-                <ErrorMessage>{status.pwd_ok}</ErrorMessage>
+              {status.pwd_ok !== 'wrong' ? null : (
+                <ErrorMessage>
+                  {pwConfirmStatusEnum[status.pwd_ok]}
+                </ErrorMessage>
               )}
             </LabelWrapper>
             <Input
@@ -181,6 +177,7 @@ const AuthForm = ({
               type="password"
               onChange={onPwConfirmChange}
               value={form.passwordConfirm}
+              className={status.pwd_ok === 'wrong' ? 'error' : ''}
             ></Input>
           </InputBox>
 
@@ -188,7 +185,7 @@ const AuthForm = ({
           <CheckboxWrapper>
             <KeyText>
               <Checkbox id="agreeCheck" type="checkbox" />
-              <label for="agreeCheck">
+              <label htmlFor="agreeCheck">
                 개인정보 수집 및 이용에 동의합니다.
               </label>
             </KeyText>
@@ -196,11 +193,11 @@ const AuthForm = ({
         </InputWrapper>
 
         <ButtonBox>
-          <Button sign={type}>회원가입</Button>
+          <Button>회원가입</Button>
         </ButtonBox>
       </form>
     </Wrapper>
   );
 };
 
-export default AuthForm;
+export default SignAuthForm;

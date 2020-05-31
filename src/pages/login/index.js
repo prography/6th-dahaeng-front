@@ -7,11 +7,6 @@ import AuthForm from 'components/AuthForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 const Title = styled.div`
   font-size: 32px;
   margin-top: 2rem;
@@ -40,8 +35,8 @@ const Picture = styled.div`
   display: block;
   margin: 0px auto;
   background: blue;
-  width: 409px;
-  height: 125px;
+  width: 400px;
+  height: 120px;
 `;
 
 const SnsBox = styled.div`
@@ -49,12 +44,10 @@ const SnsBox = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 1px;
-  width: 480px;
 `;
 
 const KakaoLogin = styled.button`
   float: left;
-  outline: none;
   height: 2.5rem;
   background: #fbde6f;
   font-size: 14px;
@@ -134,7 +127,7 @@ const Login = ({ history }) => {
   }, [history, user]);
 
   return (
-    <Wrapper>
+    <SignResponsive>
       <Title>Da:haeng</Title>
       <SubTitle>나만의 행복 보관함, 다행</SubTitle>
       <Content>
@@ -154,7 +147,7 @@ const Login = ({ history }) => {
         <KakaoLogin>로그인</KakaoLogin>
         <NaverLogin>로그인</NaverLogin>
       </SnsBox>
-    </Wrapper>
+    </SignResponsive>
   );
 };
 

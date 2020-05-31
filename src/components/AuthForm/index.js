@@ -17,7 +17,7 @@ const LabelWrapper = styled.div`
   flex-wrap: wrap;
   padding-top: 12px;
   height: 36px;
-`
+`;
 
 const KeyText = styled.div`
   font-size: 14px;
@@ -53,7 +53,7 @@ const ButtonBox = styled.div`
   flex: 1;
   margin-left: ${(props) => (props.sign === 'sign' ? 'none' : '3rem')};
   width: ${(props) => (props.sign === 'sign' ? '100%' : '120px')};
-  
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -100,8 +100,10 @@ const textMap = {
 const AuthForm = ({
   type,
   form,
+  onChange,
   onEmailChange,
   onPwChange,
+  onPwConfirmChange,
   onSubmit,
   status,
 }) => {
@@ -116,48 +118,78 @@ const AuthForm = ({
         }}
       >
         <InputBox>
+          <LabelWrapper>
+            <KeyText>이메일</KeyText>
+            {status.email === 'empty' ? null : (
+              <ErrorMessage>{status.email}</ErrorMessage>
+            )}
+          </LabelWrapper>
 
-          <KeyText>이메일</KeyText>
-          {status.email === 'empty' ? null : (
-            <ErrorMessage>{status.email}</ErrorMessage>
+          {/* 로그인창일 때와 회원가입창일 때 onChange 함수 차이 생김 */}
+          {type === 'login' && (
+            <>
+              <Input
+                name="username"
+                placeholder="이메일을 입력해주세요"
+                onChange={onChange}
+                value={form.username}
+              ></Input>
+            </>
           )}
+          {type === 'sign' && (
+            <>
+              <Input
+                name="username"
+                placeholder="이메일을 입력해주세요"
+                onChange={onEmailChange}
+                value={form.username}
+              ></Input>
+            </>
+          )}
+
           <LabelWrapper>
-          <KeyText>이메일</KeyText>
-          {status.email === 'empty' ? null : (
-            <ErrorMessage>{status.email}</ErrorMessage>
-          )}
+            <KeyText>비밀번호</KeyText>
+            {status.pwd === 'empty' ? null : (
+              <ErrorMessage>{status.pwd}</ErrorMessage>
+            )}
           </LabelWrapper>
-          <Input
-            name="username"
-            placeholder="이메일을 입력해주세요"
-            onChange={onEmailChange}
-            value={form.username}
-          ></Input>
-          <LabelWrapper>
-          <KeyText>비밀번호</KeyText>
-          {status.pwd === 'empty' ? null : (
-            <ErrorMessage>{status.pw}</ErrorMessage>
+          {type === 'login' && (
+            <>
+              <Input
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                type="password"
+                onChange={onChange}
+                value={form.password}
+              ></Input>
+            </>
           )}
-          </LabelWrapper>
-          <Input
-            name="password"
-            placeholder="비밀번호를 입력해주세요"
-            type="password"
-            onChange={onPwChange}
-            value={form.password}
-          ></Input>
+          {type === 'sign' && (
+            <>
+              <Input
+                name="password"
+                placeholder="비밀번호를 입력해주세요"
+                type="password"
+                onChange={onPwChange}
+                value={form.password}
+              ></Input>
+            </>
+          )}
 
           {type === 'sign' && (
             <>
-              <KeyText>비밀번호 확인</KeyText>
-            <LabelWrapper>
-            <KeyText>비밀번호 확인</KeyText>
-            </LabelWrapper>
+              <LabelWrapper>
+                <KeyText>비밀번호 확인</KeyText>
+                {status.pwd_ok === 'empty' ? null : (
+                  <ErrorMessage>{status.pwd_ok}</ErrorMessage>
+                )}
+              </LabelWrapper>
               <Input
                 name="passwordConfirm"
-                placeholder="비밀번호를 입력해주세요"
+                placeholder="비밀번호 확인할게요"
                 type="password"
-                // value={form.passwordConfirm}
+                onChange={onPwConfirmChange}
+                value={form.passwordConfirm}
               ></Input>
             </>
           )}
@@ -165,10 +197,12 @@ const AuthForm = ({
 
         {/* 체크박스를 만들어보자 */}
         {type === 'sign' && (
-          <KeyText>
-            <Checkbox id="agreeCheck" type="checkbox" />
-            개인정보 수집 및 이용에 동의합니다.
-          </KeyText>
+          <LabelWrapper>
+            <KeyText>
+              <Checkbox id="agreeCheck" type="checkbox" />
+              개인정보 수집 및 이용에 동의합니다.
+            </KeyText>
+          </LabelWrapper>
         )}
 
         <ButtonBox sign={type}>

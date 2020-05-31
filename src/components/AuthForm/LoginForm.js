@@ -8,7 +8,6 @@ const Wrapper = styled.div`
 `;
 
 const InputWrapper = styled.div`
-  padding: 30px 0;
   flex: 1;
 `;
 
@@ -21,15 +20,6 @@ const LabelWrapper = styled.div`
   flex-wrap: wrap;
   padding-top: 12px;
   height: 36px;
-`;
-const CheckboxWrapper = styled.div`
-  padding-top: 12px;
-  height: 36px;
-  text-align: right;
-  
-  label {
-    cursor: pointer;
-  }
 `;
 
 const KeyText = styled.div`
@@ -62,9 +52,9 @@ const Input = styled.input`
 `;
 
 const ButtonBox = styled.div`
-  // flex: 1;
-  margin-left: ${(props) => (props.sign === 'sign' ? 'none' : '3rem')};
-  width: ${(props) => (props.sign === 'sign' ? '100%' : '120px')};
+  margin-left: 1rem;
+  width: 120px;
+  flex: none;
 
   display: flex;
   flex-direction: column;
@@ -73,21 +63,13 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;
   border-radius: 4px;
-  height: '3rem';
+  height: 108px;
   width: 100%;
-  margin-top: 1em;
-`;
-
-const Checkbox = styled.input`
-  &:checked {
-    color: #ffffff;
-    background: #ff9d73;
-  }
 `;
 
 const Footer = styled.div`
@@ -104,13 +86,9 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
-const AuthForm = ({
-  type,
+const LoginForm = ({
   form,
   onChange,
-  onEmailChange,
-  onPwChange,
-  onPwConfirmChange,
   onSubmit,
   status,
 }) => {
@@ -121,7 +99,6 @@ const AuthForm = ({
         style={{
           width: '100%',
           display: 'flex',
-          flexDirection: `${type === 'login' ? 'row' : 'column'}`,
         }}
       >
         <InputWrapper>
@@ -132,9 +109,6 @@ const AuthForm = ({
               <ErrorMessage>{status.email}</ErrorMessage>
             )}
           </LabelWrapper>
-
-          {/* 로그인창일 때와 회원가입창일 때 onChange 함수 차이 생김 */}
-          {type === 'login' && (
             <>
               <Input
                 name="username"
@@ -143,25 +117,12 @@ const AuthForm = ({
                 value={form.username}
               ></Input>
             </>
-          )}
-          {type === 'sign' && (
-            <>
-              <Input
-                name="username"
-                placeholder="이메일을 입력해주세요"
-                onChange={onEmailChange}
-                value={form.username}
-              ></Input>
-            </>
-          )}
-
           <LabelWrapper>
             <KeyText>비밀번호</KeyText>
             {status.pwd === 'empty' ? null : (
               <ErrorMessage>{status.pwd}</ErrorMessage>
             )}
           </LabelWrapper>
-          {type === 'login' && (
             <>
               <Input
                 name="password"
@@ -171,64 +132,17 @@ const AuthForm = ({
                 value={form.password}
               ></Input>
             </>
-          )}
-          {type === 'sign' && (
-            <>
-              <Input
-                name="password"
-                placeholder="비밀번호를 입력해주세요"
-                type="password"
-                onChange={onPwChange}
-                value={form.password}
-              ></Input>
-            </>
-          )}
-
-          {type === 'sign' && (
-            <>
-              <LabelWrapper>
-                <KeyText>비밀번호 확인</KeyText>
-                {status.pwd_ok === 'empty' ? null : (
-                  <ErrorMessage>{status.pwd_ok}</ErrorMessage>
-                )}
-              </LabelWrapper>
-              <Input
-                name="passwordConfirm"
-                placeholder="비밀번호 확인할게요"
-                type="password"
-                onChange={onPwConfirmChange}
-                value={form.passwordConfirm}
-              ></Input>
-            </>
-          )}
         </InputBox>
-
-        {/* 체크박스를 만들어보자 */}
-        {type === 'sign' && (
-          <CheckboxWrapper>
-            <KeyText>
-              <Checkbox id="agreeCheck" type="checkbox" />
-              <label for="agreeCheck">
-                개인정보 수집 및 이용에 동의합니다.
-              </label>
-            </KeyText>
-          </CheckboxWrapper>
-        )}
       </InputWrapper>
 
-        <ButtonBox sign={type}>
-          {type === 'login' ? (
-            <Button sign={type} onClick={onSubmit}>
+        <ButtonBox>
+            <Button onClick={onSubmit}>
               내 행복에
               <br /> 로그인
             </Button>
-          ) : (
-            <Button sign={type}>회원가입</Button>
-          )}
         </ButtonBox>
       </form>
 
-      {type === 'login' && (
         <Footer>
           <FooterContent>아이디/비밀번호찾기</FooterContent>
           <FooterContent>
@@ -240,9 +154,8 @@ const AuthForm = ({
             </Link>
           </FooterContent>
         </Footer>
-      )}
     </Wrapper>
   );
 };
 
-export default AuthForm;
+export default LoginForm;

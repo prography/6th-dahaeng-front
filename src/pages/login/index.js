@@ -4,6 +4,7 @@ import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import AuthForm from 'components/AuthForm';
+import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 
@@ -136,13 +137,12 @@ const Login = ({ history }) => {
       </Content>
       <LinkText>더 알아보러 가기</LinkText>
       <Picture />
-      <AuthForm
-        type="login"
+      <LoginForm
         form={form}
         onChange={onChange}
         onSubmit={onSubmit}
         status={status}
-      ></AuthForm>
+      ></LoginForm>
       <SnsBox>
         <KakaoLogin>로그인</KakaoLogin>
         <NaverLogin>로그인</NaverLogin>

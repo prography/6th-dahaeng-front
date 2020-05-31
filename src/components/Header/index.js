@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Responsive from '../common/Responsive';
 import { useDispatch, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,6 +35,27 @@ const Wrapper = styled.div`
 
 const Spacer = styled.div`
   height: 4rem;
+`;
+const DrawerOpen = styled.button`
+  position: absolute;
+  left: 0px;
+  top: 40px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  z-index: 1;
+  background-color: var(--primary-color);
+`;
+
+const DrawerClose = styled.button`
+  position: absolute;
+  right: -20px;
+  top: 40px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  z-index: 999999;
+  background-color: var(--primary-color);
 `;
 
 const useStyles = makeStyles({
@@ -116,6 +136,9 @@ const Header = ({ history }) => {
           <div className="title">Da:haeng</div>
         </Wrapper>
       </HeaderBlock>
+      <DrawerOpen onClick={toggleDrawer(anchor, true)}>
+        =
+      </DrawerOpen>
       <React.Fragment key={anchor}>
         <Drawer
           anchor={anchor}
@@ -123,6 +146,9 @@ const Header = ({ history }) => {
           onClose={toggleDrawer(anchor, false)}
         >
           {list(anchor)}
+          <DrawerClose onClick={toggleDrawer(anchor, false)}>
+            =
+          </DrawerClose>
         </Drawer>
       </React.Fragment>
       <Spacer></Spacer>

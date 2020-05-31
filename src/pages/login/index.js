@@ -5,6 +5,7 @@ import { getUser } from 'store/user';
 import styled from 'styled-components';
 import AuthForm from 'components/AuthForm';
 import { withRouter } from 'react-router-dom';
+import SignResponsive from '../../components/common/SignResponsive';
 
 const Wrapper = styled.div`
   width: 100%;

@@ -6,23 +6,17 @@ import styled from 'styled-components';
 import AuthForm from '../../components/AuthForm/index.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const Title = styled.div`
-  font-size: 32px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
+import SignResponsive from '../../components/common/SignResponsive';
+import TitleText from '../../components/common/TitleText';
 
 const SubTitle = styled.div`
   font-size: 24px;
   margin-top: 2rem;
   text-align: center;
+  
+  @media screen and (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const Sign = ({ history }) => {
@@ -43,7 +37,7 @@ const Sign = ({ history }) => {
   //상황별 에러 메시지
   const emailStatusEnum = {
     empty: '이메일은 필수 입력 사항입니다!',
-    wrong: '이메일을 똑바로 입력했는지 한번 확인 해 주세요 : )',
+    wrong: '이메일을 확인 해 주세요 🤫',
     valid: false,
   };
 
@@ -192,8 +186,8 @@ const Sign = ({ history }) => {
   }, [history, user]);
 
   return (
-    <Wrapper>
-      <Title>Da:haeng</Title>
+    <SignResponsive>
+      <TitleText>Da:haeng</TitleText>
       <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
       <AuthForm
         type="sign"
@@ -204,7 +198,7 @@ const Sign = ({ history }) => {
         onSubmit={onSubmit}
         status={status}
       ></AuthForm>
-    </Wrapper>
+    </SignResponsive>
   );
 };
 

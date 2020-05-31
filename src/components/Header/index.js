@@ -66,43 +66,45 @@ const Header = ({ history }) => {
   };
 
   const list = (anchor) => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'left',
-      })}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-        {['Username 조랭', 'Project name [수정]', 'Happy coin [충전]'].map(
-          (text, index) => (
+    <Responsive>
+      <div
+        className={clsx(classes.list, {
+          [classes.fullList]: anchor === 'left',
+        })}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+      >
+        <List>
+          {['Username 조랭', 'Project name [수정]', 'Happy coin [충전]'].map(
+            (text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon></ListItemIcon>
+                <ListItemText primary={text}/>
+              </ListItem>
+            ),
+          )}
+        </List>
+        <Divider/>
+        <List>
+          {['출석부'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={text}/>
             </ListItem>
-          ),
-        )}
-      </List>
-      <Divider />
-      <List>
-        {['출석부'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['행복보관함', '조랭 shop', '소액 기부'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
+          ))}
+        </List>
+        <Divider/>
+        <List>
+          {['행복보관함', '조랭 shop', '소액 기부'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon></ListItemIcon>
+              <ListItemText primary={text}/>
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    </Responsive>
   );
 
   // useEffect(() => {}, [open]);

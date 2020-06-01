@@ -97,33 +97,33 @@ const Main = () => {
 
   return (
     <>
-      <Header></Header>
-      <Wrapper>
-        <QuestionBox>
-          <Date>{question.date}</Date>
-          <Question onClick={setModal}>{question.text}</Question>
-        </QuestionBox>
-        <Modal
-          openModal={openModal}
-          setModal={setModal}
-          title={
-            <ModalTitle>
-              <Date>{question.date}</Date>
-              <ModalQuestion>{question.text}</ModalQuestion>
-            </ModalTitle>
-          }
-          content={
-            <ModalContent>
-              <ModalCharacter></ModalCharacter>
-              <ModalInput value={inputText} onChange={onChange}></ModalInput>
-            </ModalContent>
-          }
-          button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
-          }
-        ></Modal>
-      </Wrapper>
-      <Room></Room>
+        <Header></Header>
+        <Wrapper>
+          <QuestionBox>
+            <Date>{question.date}</Date>
+            <Question onClick={setModal}>{question.text}</Question>
+          </QuestionBox>
+          <Modal
+            openModal={openModal}
+            setModal={setModal}
+            title={
+              <ModalTitle>
+                <Date>{question.date}</Date>
+                <ModalQuestion>{question.text}</ModalQuestion>
+              </ModalTitle>
+            }
+            content={
+              <ModalContent>
+                <ModalCharacter></ModalCharacter>
+                <ModalInput value={inputText} onChange={onChange}></ModalInput>
+              </ModalContent>
+            }
+            button={
+              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            }
+          ></Modal>
+        </Wrapper>
+        <Room></Room>
     </>
   );
 };

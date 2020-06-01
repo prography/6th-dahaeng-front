@@ -11,9 +11,10 @@ export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const getUser = createAction(GETUSER);
 
 const initialState = {
-  user: 'null',
+  user: null,
   getUserError: null,
 };
+
 
 const user = handleActions(
   {

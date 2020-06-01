@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Room from './Room';
-import Header from '../../components/Header';
+import Header from '../../components/header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';

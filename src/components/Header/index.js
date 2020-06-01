@@ -55,7 +55,7 @@ const Header = ({ history }) => {
   const [open, setOpen] = useState(false);
   const anchor = 'left';
   const classes = useStyles();
-  //
+
   // useEffect(() => {
   //   if (!token) {
   //     history.push('/login');

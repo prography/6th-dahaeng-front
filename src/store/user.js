@@ -15,6 +15,7 @@ const initialState = {
   getUserError: null,
 };
 
+
 const user = handleActions(
   {
     [REFRESH_SET_USER]: (state, { payload: user }) => ({

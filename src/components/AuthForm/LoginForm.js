@@ -86,12 +86,7 @@ const FooterContent = styled.span`
   margin-right: 1rem;
 `;
 
-const LoginForm = ({
-  form,
-  onChange,
-  onSubmit,
-  status,
-}) => {
+const LoginForm = ({ form, onChange, onSubmit, status }) => {
   return (
     <Wrapper>
       <form
@@ -102,13 +97,13 @@ const LoginForm = ({
         }}
       >
         <InputWrapper>
-        <InputBox>
-          <LabelWrapper>
-            <KeyText>이메일</KeyText>
-            {status.email === 'empty' ? null : (
-              <ErrorMessage>{status.email}</ErrorMessage>
-            )}
-          </LabelWrapper>
+          <InputBox>
+            <LabelWrapper>
+              <KeyText>이메일</KeyText>
+              {status.email === 'empty' ? null : (
+                <ErrorMessage>{status.email}</ErrorMessage>
+              )}
+            </LabelWrapper>
             <>
               <Input
                 name="username"
@@ -117,12 +112,12 @@ const LoginForm = ({
                 value={form.username}
               ></Input>
             </>
-          <LabelWrapper>
-            <KeyText>비밀번호</KeyText>
-            {status.pwd === 'empty' ? null : (
-              <ErrorMessage>{status.pwd}</ErrorMessage>
-            )}
-          </LabelWrapper>
+            <LabelWrapper>
+              <KeyText>비밀번호</KeyText>
+              {status.pwd === 'empty' ? null : (
+                <ErrorMessage>{status.pwd}</ErrorMessage>
+              )}
+            </LabelWrapper>
             <>
               <Input
                 name="password"
@@ -132,28 +127,25 @@ const LoginForm = ({
                 value={form.password}
               ></Input>
             </>
-        </InputBox>
-      </InputWrapper>
+          </InputBox>
+        </InputWrapper>
 
         <ButtonBox>
-            <Button onClick={onSubmit}>
-              내 행복에
-              <br /> 로그인
-            </Button>
+          <Button onClick={onSubmit}>
+            내 행복에
+            <br /> 로그인
+          </Button>
         </ButtonBox>
       </form>
 
-        <Footer>
-          <FooterContent>아이디/비밀번호찾기</FooterContent>
-          <FooterContent>
-            <Link
-              to="/sign"
-              style={{ textDecoration: 'none', color: '4D4D4D' }}
-            >
-              회원가입
-            </Link>
-          </FooterContent>
-        </Footer>
+      <Footer>
+        <FooterContent>아이디/비밀번호찾기</FooterContent>
+        <FooterContent>
+          <Link to="/sign" style={{ textDecoration: 'none', color: '4D4D4D' }}>
+            회원가입
+          </Link>
+        </FooterContent>
+      </Footer>
     </Wrapper>
   );
 };

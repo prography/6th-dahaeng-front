@@ -19,10 +19,11 @@ const Wrapper = styled.div`
 
 const SortingBar = styled.div`
   margin: 0 auto;
-  margin-top: 1rem;
+  margin-top: 4rem;
   width: 90%;
-  /* height: 3rem; */
+  height: 3rem;
 `;
+
 const SortingBox = styled.div`
   float: right;
   display: flex;
@@ -70,13 +71,34 @@ const Box = () => {
         <SortingBar>
           <SortingBox>
             <Search onClick={() => setSortingType('search')}>
-              <img src={search} style={{ width: '1rem', height: '1rem' }}></img>
+              <img
+                src={search}
+                style={{
+                  width: '1rem',
+                  height: '1rem',
+                  objectFit: 'scale-down',
+                }}
+              ></img>
             </Search>
             <Feed onClick={() => setSortingType('feed')}>
-              <img src={feed} style={{ width: '1rem', height: '1rem' }}></img>
+              <img
+                src={feed}
+                style={{
+                  width: '1rem',
+                  height: '1rem',
+                  objectFit: 'scale-down',
+                }}
+              ></img>
             </Feed>
             <Thread onClick={() => setSortingType('thread')}>
-              <img src={thread} style={{ width: '1rem', height: '1rem' }}></img>
+              <img
+                src={thread}
+                style={{
+                  width: '1rem',
+                  height: '1rem',
+                  objectFit: 'scale-down',
+                }}
+              ></img>
             </Thread>
           </SortingBox>
         </SortingBar>

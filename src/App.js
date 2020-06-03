@@ -5,6 +5,7 @@ import Main from 'pages/main';
 import Login from 'pages/login';
 import Sign from 'pages/sign';
 import SignComplete from 'pages/signComplete';
+import Create from 'pages/create';
 import Box from 'pages/box';
 
 // import Header from 'components/Header';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" component={Login} exact></Route>
         <Route path="/sign" component={Sign} exact></Route>
         <Route path="/signComplete" component={SignComplete} exact></Route>
+        <Route path="/create" component={Create} exact></Route>
         <Route path="/box" component={Box} exact></Route>
         {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
         <Route

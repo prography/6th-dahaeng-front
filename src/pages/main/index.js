@@ -57,6 +57,13 @@ const ModalCharacterImage = styled.img`
   height: 100%;
 `;
 
+const ModalCharacterDefaultImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  margin-left: 3rem;
+`;
+
 const InputLabel = styled.label`
   cursor: pointer;
   font-size: 14px;
@@ -128,6 +135,7 @@ const Main = () => {
 
   //사진 업로드 시도!
   //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
+  //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
   const [img, setImage] = useState(null);
   const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
 
@@ -138,6 +146,8 @@ const Main = () => {
       const base64 = reader.result;
       if (base64) {
         setImgBase64(base64.toString());
+      } else {
+        setImgBase64('/images/defaultJoraeng.png');
       }
     };
     if (e.target.files[0]) {
@@ -171,6 +181,10 @@ const Main = () => {
                 ) : (
                   <InputLabel htmlFor="upload">
                     행복사진을 <br /> 함께 기록해요!
+                    <ModalCharacterDefaultImage
+                      src="/images/defaultJoraeng.png"
+                      alt=""
+                    />
                   </InputLabel>
                 )}
                 <input

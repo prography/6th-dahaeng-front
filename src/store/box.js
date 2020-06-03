@@ -38,7 +38,7 @@ const initialState = {
       text: '오늘의 색은?',
     },
     detail: '노랑색',
-    img: null,
+    img: "/images/defaultJoraeng.png",
   },
   records: [
     {

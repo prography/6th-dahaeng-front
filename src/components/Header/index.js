@@ -25,18 +25,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const DrawerOpenBtn = styled.button`
-  position: absolute;
-  left: 0px;
-  top: 12px;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 0 55% 55% 0;
-  z-index: 1;
-  background-color: var(--primary-color);
-`;
-
 const Header = ({ history }) => {
   //
   // useEffect(() => {
@@ -44,12 +32,6 @@ const Header = ({ history }) => {
   //     history.push('/login');
   //   }
   // }, []);
-
-  // const toggleDrawer = (anchor, open) => (event) => {
-  //   setOpen(open);
-  // };
-
-  // useEffect(() => {}, [open]);
 
   return (
     <>

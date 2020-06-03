@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, setRecord, getRecords } from 'store/box';
+import Responsive from '../../components/common/Responsive';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -97,7 +98,8 @@ const Main = () => {
 
   return (
     <>
-        <Header></Header>
+      <Header></Header>
+      <Responsive>
         <Wrapper>
           <QuestionBox>
             <Date>{question.date}</Date>
@@ -124,6 +126,7 @@ const Main = () => {
           ></Modal>
         </Wrapper>
         <Room></Room>
+      </Responsive>
     </>
   );
 };

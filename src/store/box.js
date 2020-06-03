@@ -8,41 +8,56 @@ export const [
   GET_QUESTION_FAIL,
 ] = createRequestAction('GET_QUESTION');
 export const [
-  SET_DIARY,
-  SET_DIARY_SUCCESS,
-  SET_DIARY_FAIL,
-] = createRequestAction('SET_DIARY');
+  SET_RECORD,
+  SET_RECORD_SUCCESS,
+  SET_RECORD_FAIL,
+] = createRequestAction('SET_RECORD');
 export const [
-  GET_DIARIES,
-  GET_DIARIES_SUCCESS,
-  GET_DIARIES_FAIL,
-] = createRequestAction('GET_DIARIES');
+  GET_RECORDS,
+  GET_RECORDS_SUCCESS,
+  GET_RECORDS_FAIL,
+] = createRequestAction('GET_RECORDS');
 
 export const getQuestion = createAction(GET_QUESTION);
-export const setDiary = createAction(SET_DIARY, ({ question, detail }) => ({
+export const setRecord = createAction(SET_RECORD, ({ question, detail }) => ({
   question,
   detail,
 }));
-export const getDiaries = createAction(GET_DIARIES, ({ user }) => ({
+export const getRecords = createAction(GET_RECORDS, ({ user }) => ({
   user,
 }));
 
 const initialState = {
-  question: '',
-  diary: {
-    question: '',
-    detail: '',
+  question: {
+    date: '0516',
+    text: '오늘의 색은?',
   },
-  diaries: [
+  record: {
+    question: {
+      date: '0516',
+      text: '오늘의 색은?',
+    },
+    detail: '노랑색',
+  },
+  records: [
     {
-      question: '',
-      question_deatil: '',
-      diary_detail: '',
+      question: {
+        date: '0522',
+        text: 'text1',
+      },
+      detail: 'detail1',
+    },
+    {
+      question: {
+        date: '0523',
+        text: 'text2',
+      },
+      detail: 'detail2',
     },
   ],
 };
 
-const auth = handleActions(
+const box = handleActions(
   {
     [GET_QUESTION_SUCCESS]: (state, { payload: question }) => ({
       ...state,
@@ -53,25 +68,25 @@ const auth = handleActions(
       question: error,
     }),
 
-    [SET_DIARY_SUCCESS]: (state, { payload: diary }) => ({
+    [SET_RECORD_SUCCESS]: (state, { payload: record }) => ({
       ...state,
-      diary: diary,
+      record: record,
     }),
-    [SET_DIARY_FAIL]: (state, { payload: error }) => ({
+    [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      diary: error,
+      record: error,
     }),
 
-    [GET_DIARIES_SUCCESS]: (state, { payload: diaries }) => ({
+    [GET_RECORDS_SUCCESS]: (state, { payload: records }) => ({
       ...state,
-      diaries: diaries,
+      records: records,
     }),
-    [GET_DIARIES_FAIL]: (state, { payload: error }) => ({
+    [GET_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      diaries: error,
+      records: error,
     }),
   },
   initialState,
 );
 
-export default auth;
+export default box;

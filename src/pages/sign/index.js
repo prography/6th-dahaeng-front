@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from '../../components/AuthForm/index.js';
+import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
+import { isEmail, isLength, isAlphanumeric } from 'validator';
+import SignResponsive from '../../components/common/SignResponsive';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -12,15 +14,19 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 50px;
+  font-size: 32px;
   margin-top: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
 `;
 
 const SubTitle = styled.div`
-  font-size: 20px;
+  font-size: 24px;
   margin-top: 2rem;
   text-align: center;
+  @media screen and (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const Sign = ({ history }) => {
@@ -32,23 +38,52 @@ const Sign = ({ history }) => {
     user: user && user.user,
   }));
 
-  const [email_status, setStatus] = useState('not ok');
-  const [status, setStatusSet] = useState({
-    email: false,
-    pw: false,
-    pwd_ok: false,
+  const [status, setStatus] = useState({
+    email: 'empty',
+    pwd: 'empty',
+    pwd_ok: 'empty',
   });
 
-  const onChange = (e) => {
-    const { value, name } = e.target;
-    var rule = /^[A-Za-z0-9]{6,12}$/;
-    if (rule.test(value)) {
-      setStatus('ok');
-      console.log('ok');
-    } else {
-      setStatus('not ok');
-      console.log('not ok');
+  // 이메일, 비밀번호, 비밀번호 확인 유효성 검사
+  const validateEmail = (value) => {
+    if (value.trim() === '') {
+      return 'empty';
     }
+    if (!isEmail(value)) {
+      return 'wrong';
+    }
+    return 'valid';
+    // enum
+  };
+
+  // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
+  // email.StatusEnum[validateEmail('my-email')]
+  const validatePassword = (value) => {
+    if (value.trim() === '') {
+      return 'empty';
+    }
+    if (!isAlphanumeric(value) || !isLength(value, { min: 8 })) {
+      return 'wrong';
+    }
+    return 'valid';
+  };
+
+  const validatePwConfirm = (value) => {
+    const { password } = form;
+
+    console.log(value);
+    if (value.trim() === '') {
+      return 'empty';
+    }
+    if (value !== password) {
+      return 'wrong';
+    }
+    return 'valid';
+  };
+
+  //입력시 이벤트
+  const onEmailChange = (e) => {
+    const { value, name } = e.target;
 
     dispatch(
       changeForm({
@@ -57,14 +92,63 @@ const Sign = ({ history }) => {
         value,
       }),
     );
+
+    return setStatus({
+      ...status,
+      email: validateEmail(value),
+    });
   };
 
+  const onPwChange = (e) => {
+    const { value, name } = e.target;
+
+    dispatch(
+      changeForm({
+        form: 'sign',
+        key: name,
+        value,
+      }),
+    );
+
+    return setStatus({
+      ...status,
+      pwd: validatePassword(value),
+    });
+  };
+
+  const onPwConfirmChange = (e) => {
+    const { value, name } = e.target;
+
+    dispatch(
+      changeForm({
+        form: 'sign',
+        key: name,
+        value,
+      }),
+    );
+
+    console.log(validatePwConfirm(value));
+    return setStatus({
+      ...status,
+      pwd_ok: validatePwConfirm(value),
+    });
+  };
+
+  //제출시 이벤트
   const onSubmit = (e) => {
     e.preventDefault();
 
     const { username, password, passwordConfirm } = form;
-    if (password !== passwordConfirm) {
-      return;
+
+    //입력창 모두 valid 아닐 때 alert
+    if (
+      !(
+        status.email === 'valid' &&
+        status.pwd === 'valid' &&
+        status.pwd_ok === 'valid'
+      )
+    ) {
+      alert('입력을 확인해주세요!');
     }
     dispatch(sign({ username, password }));
   };
@@ -95,17 +179,19 @@ const Sign = ({ history }) => {
   }, [history, user]);
 
   return (
-    <Wrapper>
+    <SignResponsive>
       <Title>Da:haeng</Title>
       <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
-      <AuthForm
+      <SignAuthForm
         type="sign"
         form={form}
-        onChange={onChange}
+        onEmailChange={onEmailChange}
+        onPwChange={onPwChange}
+        onPwConfirmChange={onPwConfirmChange}
         onSubmit={onSubmit}
-        status={email_status}
-      ></AuthForm>
-    </Wrapper>
+        status={status}
+      ></SignAuthForm>
+    </SignResponsive>
   );
 };
 

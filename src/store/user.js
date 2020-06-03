@@ -11,7 +11,13 @@ export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const getUser = createAction(GETUSER);
 
 const initialState = {
-  user: null,
+  user: {
+    id: 111,
+    name: '다스',
+    title: 'Da:haeng',
+    coin: 0,
+    picture: '조랭',
+  },
   getUserError: null,
 };
 

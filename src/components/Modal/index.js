@@ -14,10 +14,9 @@ const Wrapper = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
+  width: 60%;
+  min-width: 300px;
   transform: translate(-50%, -50%);
-  width: 50%;
-  height: 50%;
-  border-radius: 10px;
   background-color: white;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
   padding: 2rem;
@@ -35,6 +34,7 @@ const CloseButton = styled.button`
   z-index: 10;
   border: none;
   outline: none;
+  background: none;
   cursor: pointer;
   /* padding: 1rem 1rem 0 0; */
 `;

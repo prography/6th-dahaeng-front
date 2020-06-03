@@ -38,6 +38,7 @@ const initialState = {
       text: '오늘의 색은?',
     },
     detail: '노랑색',
+    img: "/images/defaultJoraeng.png",
   },
   records: [
     {
@@ -46,6 +47,7 @@ const initialState = {
         text: 'text1',
       },
       detail: 'detail1',
+      img: null,
     },
     {
       question: {
@@ -53,6 +55,7 @@ const initialState = {
         text: 'text2',
       },
       detail: 'detail2',
+      img: null,
     },
     {
       question: {
@@ -60,6 +63,7 @@ const initialState = {
         text: 'text3',
       },
       detail: 'detail3',
+      img: null,
     },
   ],
 };

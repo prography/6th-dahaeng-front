@@ -15,26 +15,30 @@ const Wrapper = styled.div`
 const QuestionBox = styled.div`
   margin: auto auto;
   height: 50%;
-  width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 `;
 const Date = styled.div`
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  font-size: 18px;
 `;
 
 const Question = styled.div`
-  font-size: 1rem;
+  font-size: 24px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   cursor: pointer;
+
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
 `;
 
 const ModalTitle = styled.div``;
 
 const ModalQuestion = styled.div`
-  font-size: 0.8rem;
+  font-size: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  display: inline;
 `;
 
 const ModalContent = styled.div`
@@ -47,28 +51,66 @@ const ModalCharacter = styled.div`
   box-sizing: border-box;
   width: 10rem;
   height: 10rem;
-  border: 1px solid;
+  border: 1px solid #e9e9e9;
   margin: 5% auto;
+  overflow: hidden;
 `;
 
-const ModalInput = styled.input`
+const ModalCharacterImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
+
+const ModalCharacterDefaultImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  margin-left: 3rem;
+`;
+
+const InputLabel = styled.label`
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+  overflow: hidden;
+  color: #bbbbbb;
+  padding: 1rem;
+`;
+
+const ModalInput = styled.textarea`
   box-sizing: border-box;
-  width: 90%;
-  height: 5rem;
+  width: 100%;
   margin: 0 auto;
+  border: none;
   outline: none;
+  resize: none;
+
+  background-attachment: local;
+  background-image: linear-gradient(to right, white 10px, transparent 10px),
+    linear-gradient(to left, white 10px, transparent 10px),
+    repeating-linear-gradient(
+      white,
+      white 30px,
+      #e9e9e9 30px,
+      #e9e9e9 31px,
+      white 31px
+    );
+  line-height: 31px;
+  padding: 8px;
 `;
 
 const ModalButton = styled.button`
   box-sizing: border-box;
   float: right;
-  margin: 3rem;
+  margin-top: 1rem;
   border: none;
   color: white;
   height: 2rem;
   background: #faa084;
   border-radius: 4px;
   outline: none;
+
   cursor: pointer;
 `;
 
@@ -81,7 +123,7 @@ const Main = () => {
   const question = useSelector((state) => state.box.question);
 
   const [inputText, setInputText] = useState('');
-  const onChange = (e) => {
+  const onTextChange = (e) => {
     setInputText(e.target.value);
     console.log(inputText);
   };
@@ -92,39 +134,81 @@ const Main = () => {
   // }, [dispatch]);
 
   const completeRecord = () => {
-    dispatch(setRecord({ question: question, detail: inputText }));
+    dispatch(setRecord({ question: question, detail: inputText, img: img }));
     setModal();
+  };
+
+  //사진 업로드 시도!
+  //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
+  //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
+  const [img, setImage] = useState(null);
+  const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
+
+  const onImageChange = (e) => {
+    let reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      if (base64) {
+        setImgBase64(base64.toString());
+      } else {
+        setImgBase64('/images/defaultJoraeng.png');
+      }
+    };
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+      setImage(e.target.files[0]);
+    }
   };
 
   return (
     <>
       <Header></Header>
       <Responsive>
-        <Wrapper>
-          <QuestionBox>
-            <Date>{question.date}</Date>
-            <Question onClick={setModal}>{question.text}</Question>
-          </QuestionBox>
-          <Modal
-            openModal={openModal}
-            setModal={setModal}
-            title={
-              <ModalTitle>
-                <Date>{question.date}</Date>
-                <ModalQuestion>{question.text}</ModalQuestion>
-              </ModalTitle>
-            }
-            content={
-              <ModalContent>
-                <ModalCharacter></ModalCharacter>
-                <ModalInput value={inputText} onChange={onChange}></ModalInput>
-              </ModalContent>
-            }
-            button={
-              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
-            }
-          ></Modal>
-        </Wrapper>
+        <QuestionBox>
+          <Date>{question.date}</Date>
+          <Question onClick={setModal}>{question.text}</Question>
+        </QuestionBox>
+        <Modal
+          openModal={openModal}
+          setModal={setModal}
+          title={
+            <ModalTitle>
+              <Date>{question.date}</Date>
+              <ModalQuestion>{question.text}</ModalQuestion>
+            </ModalTitle>
+          }
+          content={
+            <ModalContent>
+              <ModalCharacter>
+                {img !== null ? (
+                  <ModalCharacterImage src={imgBase64} alt="" />
+                ) : (
+                  <InputLabel htmlFor="upload">
+                    행복사진을 <br /> 함께 기록해요!
+                    <ModalCharacterDefaultImage
+                      src="/images/defaultJoraeng.png"
+                      alt=""
+                    />
+                  </InputLabel>
+                )}
+                <input
+                  type="file"
+                  id="upload"
+                  style={{ display: 'none' }}
+                  onChange={onImageChange}
+                />
+              </ModalCharacter>
+              <ModalInput
+                value={inputText}
+                onChange={onTextChange}
+              ></ModalInput>
+            </ModalContent>
+          }
+          button={
+            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+          }
+        ></Modal>
         <Room></Room>
       </Responsive>
     </>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, setRecord, getRecords } from 'store/box';
+import Responsive from '../../components/common/Responsive';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -98,32 +99,34 @@ const Main = () => {
   return (
     <>
       <Header></Header>
-      <Wrapper>
-        <QuestionBox>
-          <Date>{question.date}</Date>
-          <Question onClick={setModal}>{question.text}</Question>
-        </QuestionBox>
-        <Modal
-          openModal={openModal}
-          setModal={setModal}
-          title={
-            <ModalTitle>
-              <Date>{question.date}</Date>
-              <ModalQuestion>{question.text}</ModalQuestion>
-            </ModalTitle>
-          }
-          content={
-            <ModalContent>
-              <ModalCharacter></ModalCharacter>
-              <ModalInput value={inputText} onChange={onChange}></ModalInput>
-            </ModalContent>
-          }
-          button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
-          }
-        ></Modal>
-      </Wrapper>
-      <Room></Room>
+      <Responsive>
+        <Wrapper>
+          <QuestionBox>
+            <Date>{question.date}</Date>
+            <Question onClick={setModal}>{question.text}</Question>
+          </QuestionBox>
+          <Modal
+            openModal={openModal}
+            setModal={setModal}
+            title={
+              <ModalTitle>
+                <Date>{question.date}</Date>
+                <ModalQuestion>{question.text}</ModalQuestion>
+              </ModalTitle>
+            }
+            content={
+              <ModalContent>
+                <ModalCharacter></ModalCharacter>
+                <ModalInput value={inputText} onChange={onChange}></ModalInput>
+              </ModalContent>
+            }
+            button={
+              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            }
+          ></Modal>
+        </Wrapper>
+        <Room></Room>
+      </Responsive>
     </>
   );
 };

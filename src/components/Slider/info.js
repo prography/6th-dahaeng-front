@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const UserTitleBox = styled.div`
   display: flex;
   flex-wrap: wrap;
+  color: #333333;
   margin: 1rem;
   height: 36px;
 `;
@@ -20,23 +21,28 @@ const UserInfoBtn = styled.button`
   flex: 1;
   border: none;
   background: none;
+  color: #bbbbbb;
   text-decoration: none;
-  text-align: left;
-  font-size: 14px;
+  text-align: center;
+  font-size: 12px;
   cursor: pointer;
+  margin-left: -8px;
+  margin-right: -15px;
 `;
-
+//전체 info(사진 + 유저정보) 감싸는 박스
 const UserInfoBox = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 1rem;
-  height: 6rem;
+  width: 100%;
+  min-width: 200px;
+  padding: 0.5rem;
+  height: 5rem;
 `;
 
 const UserPictureBox = styled.div`
   flex: none;
-  height: 5rem;
-  width: 5rem;
+  height: 4rem;
+  width: 4rem;
   margin-bottom: 1rem;
   border: solid;
   border-radius: 50%;
@@ -50,31 +56,32 @@ const Picture = styled.div`
   background-color: red;
   object-fit: cover;
 `;
-
+//전체 유저 정보 감싸는 박스
 const UserTextBox = styled.div`
-  flex: 2;
-  height: 5rem;
+  flex: 3;
+  height: 4rem;
   width: 100%;
 `;
-
+//유저 정보 한 줄 감쌈
 const UserTextWrapper = styled.div`
   height: 50%;
-  padding: 0.5rem;
   display: flex;
   flex-wrap: wrap;
-`;
-
-const UserInfoText = styled.div`
-  width: 100%;
-  font-size: 18px;
   padding: 0.5rem;
+`;
+//불러온 유저 정보 부분
+const UserInfoText = styled.div`
+  font-size: 16px;
   flex: 1;
 `;
-
+//유저 정보의 종류 나오는 부분
+//한 줄로 안 맞춰지는 문제 해결해야 해유,,
 const UserText = styled.div`
   font-size: 14px;
-  text-align: left;
+  text-align: right;
   flex: 1;
+  padding-right: 2px;
+  padding-top: 2px;
 `;
 
 const updateTitle = (e) => {};
@@ -96,7 +103,8 @@ const InfoBox = (state) => {
         <UserTextBox>
           <UserTextWrapper>
             <UserInfoText>{user.name}</UserInfoText>
-            <UserText>조랭</UserText>
+            <UserText>조랭 </UserText>
+            <UserInfoBtn onClick={updateTitle}>[수정]</UserInfoBtn>
           </UserTextWrapper>
 
           <UserTextWrapper>

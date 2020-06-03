@@ -5,16 +5,18 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
+import { ListItemIcon } from '@material-ui/core';
 
 const Spacer = styled.div`
-  height: 4rem;
+  height: 10rem;
 `;
 
 const DrawerOpenBtn = styled.button`
-  position: absolute;
+  position: fixed;
   left: 0px;
   top: 12px;
   width: 40px;
@@ -37,31 +39,26 @@ const DrawerOpenBtn = styled.button`
 //   background-color: var(--primary-color);
 // `;
 
-const DrawerBtnBox = styled.div`
-  flex: 1;
-  margin-right: 3px;
-`;
-
-const DrawerBtn = styled.div`
-  width: 100%;
-  height: 4px;
-  background-color: #ffffff;
-`;
-
 const DailyRecordBox = styled.div`
   background-color: rgb(255, 157, 115, 0.2);
-  padding: 30px 0;
+  padding: 10px 0;
   flex: 1;
   margin: 1em;
   height: 200px;
   border-radius: 4px;
 `;
-
+//그날 행복기록에 입력한 카테고리 조랭 출력
 const DailyRecord = styled.div`
   display: inline;
   width: 35px;
   height: 35px;
-  margin: 12px;
+  margin-left: 12px;
+`;
+
+const LogoutText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  color: #bbbbbb;
 `;
 
 const useStyles = makeStyles({
@@ -69,7 +66,7 @@ const useStyles = makeStyles({
     width: 250,
   },
   fullList: {
-    width: 300,
+    width: 'auto',
   },
 });
 
@@ -123,14 +120,32 @@ const Slider = ({ history }) => {
       </DailyRecordBox>
 
       <List>
-        <ListItem onClick={navigateBoxPage} style={{ cursor: 'pointer' }}>
-          <ListItemText primary={'행복보관함'} />
+        <ListItem
+          button
+          onClick={navigateBoxPage}
+          style={{ cursor: 'pointer' }}
+        >
+          <ListItemText inset={true}>
+            <div>행복보관함</div>
+          </ListItemText>
         </ListItem>
-        <ListItem onClick={navigateMarketPage} style={{ cursor: 'pointer' }}>
-          <ListItemText primary={'조랭마켓'} />
+        <ListItem
+          button
+          onClick={navigateMarketPage}
+          style={{ cursor: 'pointer' }}
+        >
+          <ListItemText inset={true}>
+            <div>조랭마켓</div>
+          </ListItemText>
         </ListItem>
-        <ListItem onClick={navigateDonationPage} style={{ cursor: 'pointer' }}>
-          <ListItemText primary={'소액기부'} />
+        <ListItem
+          button
+          onClick={navigateDonationPage}
+          style={{ cursor: 'pointer' }}
+        >
+          <ListItemText inset={true}>
+            <div>소액기부</div>
+          </ListItemText>
         </ListItem>
       </List>
     </div>
@@ -145,10 +160,10 @@ const Slider = ({ history }) => {
           {/* <DrawerCloseBtn onClick={toggleDrawer(anchor, false)}>
             test
           </DrawerCloseBtn> */}
-          <div>로그아웃</div>
+          <Spacer />
+          <LogoutText>로그아웃</LogoutText>
         </Drawer>
       </React.Fragment>
-      <Spacer />
     </>
   );
 };

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
 import Slider from '../Slider';
 
 const HeaderBlock = styled.div`
@@ -22,17 +22,23 @@ const Wrapper = styled.div`
     font-size: 1.125rem;
     font-weight: 800;
     letter-spacing: 2px;
+    cursor: pointer;
   }
 `;
 
 const Header = ({ history }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.auth);
+
+  const moveMain = () => {
+    history.push('/');
+  };
   //const user = useSelector((state) => state.user.user);
 
-  const [open, setOpen] = useState(false);
-  const anchor = 'left';
-  const classes = useStyles();
+  // const [open, setOpen] = useState(false);
+  // const anchor = 'left';
+  // const classes = useStyles();
+
   // useEffect(() => {
   //   if (!token) {
   //     history.push('/login');
@@ -43,7 +49,9 @@ const Header = ({ history }) => {
     <>
       <HeaderBlock>
         <Wrapper>
-          <div className="title">Da:haeng</div>
+          <div className="title" onClick={moveMain}>
+            Da:haeng
+          </div>
         </Wrapper>
       </HeaderBlock>
       <Slider history={history} />

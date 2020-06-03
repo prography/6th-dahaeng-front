@@ -140,7 +140,7 @@ const SignAuthForm = ({
               )}
             </LabelWrapper>
             <Input
-              name="username"
+              name="email"
               placeholder="이메일을 입력해주세요"
               onChange={onEmailChange}
               value={form.username}

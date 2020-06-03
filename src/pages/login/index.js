@@ -118,13 +118,13 @@ const Login = ({ history }) => {
     }
   }, [auth, authError, dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      console.log('getUser 성공');
-      console.log(user);
-      history.push('/');
-    }
-  }, [history, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log('getUser 성공');
+  //     console.log(user);
+  //     history.push('/');
+  //   }
+  // }, [history, user]);
 
   return (
     <SignResponsive>

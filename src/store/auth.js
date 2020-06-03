@@ -26,7 +26,7 @@ export const sign = createAction(SIGN, ({ email, password }) => ({
   password,
 }));
 
-const initialState = {
+export const initialState = {
   sign: {
     email: '',
     password: '',
@@ -36,8 +36,9 @@ const initialState = {
     email: '',
     password: '',
   },
-  auth: null,
+  auth: null, //login success -> token, sign success -> true
   authError: null,
+  isFirstLogin: null,
 };
 
 const auth = handleActions(
@@ -51,13 +52,16 @@ const auth = handleActions(
       [form]: initialState[form],
     }),
 
-    [LOGIN_SUCCESS]: (state, { payload: token }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: token,
+      auth: message.token,
+      isFirstLogin: message.isFirstLogin,
+      
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,
+      auth: 'invalid token',
       authError: error,
     }),
 
@@ -68,6 +72,7 @@ const auth = handleActions(
     }),
     [SIGN_FAIL]: (state, { payload: error }) => ({
       ...state,
+      auth: false,
       authError: error,
     }),
   },

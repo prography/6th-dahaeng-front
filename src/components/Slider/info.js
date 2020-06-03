@@ -84,7 +84,16 @@ const UserText = styled.div`
   padding-top: 2px;
 `;
 
-const updateTitle = (e) => {};
+//css 완료하고 시간 여유 있으면 수정 부분 해볼게요!
+const updateTitle = (e) => {
+  alert('조랭이가 열심히 준비 중입니다요');
+};
+const updateNickname = (e) => {
+  alert('조랭이가 열심히 준비 중입니다요');
+};
+const setCoinModal = (e) => {
+  alert('조랭이가 열심히 준비 중입니다요');
+};
 
 const InfoBox = (state) => {
   const user = useSelector((state) => state.user.user);
@@ -104,13 +113,13 @@ const InfoBox = (state) => {
           <UserTextWrapper>
             <UserInfoText>{user.name}</UserInfoText>
             <UserText>조랭 </UserText>
-            <UserInfoBtn onClick={updateTitle}>[수정]</UserInfoBtn>
+            <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn>
           </UserTextWrapper>
 
           <UserTextWrapper>
             <UserInfoText>{user.coin}</UserInfoText>
             <UserText>코인</UserText>
-            <UserInfoBtn>[충전]</UserInfoBtn>
+            <UserInfoBtn onClick={setCoinModal}>[충전]</UserInfoBtn>
           </UserTextWrapper>
         </UserTextBox>
       </UserInfoBox>

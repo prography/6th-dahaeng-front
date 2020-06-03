@@ -1,11 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeForm, initForm, sign } from 'store/auth';
-import { getUser } from 'store/user';
 import styled from 'styled-components';
-import SignAuthForm from '../../components/AuthForm/sign.js';
-import { withRouter, Link } from 'react-router-dom';
-import { isEmail, isLength, isAlphanumeric } from 'validator';
+import { Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 import defaultJorang from 'assets/defaultJorang.png';
 
@@ -37,7 +32,7 @@ const ButtonBox = styled.div`
   justify-content: flex-end;
 `;
 
-const LoginButton = styled.button`
+const CreateButton = styled.button`
   outline: none;
   background: #ff9d73;
   font-size: 14px;
@@ -49,7 +44,11 @@ const LoginButton = styled.button`
   margin-top: 1em;
 `;
 
-const signComplete = () => {
+const signComplete = ({ history }) => {
+  const createLink = () => {
+    history.push('/create');
+  };
+
   return (
     <SignResponsive>
       <Title>Da:haeng</Title>
@@ -61,9 +60,7 @@ const signComplete = () => {
         <img src={defaultJorang}></img>
       </ImageBox>
       <ButtonBox>
-        <Link to="/create">
-          <LoginButton>행복 기록하러 가기</LoginButton>
-        </Link>
+        <CreateButton onClick={createLink}>행복 기록하러 가기</CreateButton>
       </ButtonBox>
     </SignResponsive>
   );

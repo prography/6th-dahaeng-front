@@ -15,7 +15,6 @@ import createRequestSaga from './createSaga';
 function* loginSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
-
     const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
     console.log('response: ', res);
     if (res.response === 'success') {
@@ -23,6 +22,7 @@ function* loginSaga(action) {
         type: LOGIN_SUCCESS,
         payload: res.message,
       });
+      localStorage.setItem('accessToken', res.message.token);
     } else {
       yield put({
         type: LOGIN_FAIL,

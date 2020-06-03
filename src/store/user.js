@@ -6,15 +6,24 @@ const REFRESH_SET_USER = 'REFRESH_SET_USER';
 export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(
   'GETUSER',
 );
+export const [CREATE, CREATE_SUCCESS, CREATE_FAIL] = createRequestAction(
+  'CREATE',
+);
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const getUser = createAction(GETUSER);
 
+export const create = createAction(CREATE, ({ nickname, color }) => ({
+  nickname,
+  color,
+}));
+
 const initialState = {
   user: null,
   getUserError: null,
+  nickname: null,
+  color: null,
 };
-
 
 const user = handleActions(
   {
@@ -32,6 +41,17 @@ const user = handleActions(
       ...state,
       user: null,
       getUserError: error,
+    }),
+
+    [CREATE_SUCCESS]: (state, { payload: isSuccess }) => ({
+      ...state,
+      authError: null,
+      auth: isSuccess,
+    }),
+    [CREATE_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      auth: false,
+      authError: error,
     }),
   },
   initialState,

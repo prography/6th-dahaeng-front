@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
-import Header from 'components/header';
+import Header from 'components/Header';
 import search from 'assets/search.png';
 import feed from 'assets/feed.png';
 import thread from 'assets/thread.png';

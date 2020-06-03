@@ -54,6 +54,13 @@ const initialState = {
       },
       detail: 'detail2',
     },
+    {
+      question: {
+        date: '0524',
+        text: 'text3',
+      },
+      detail: 'detail3',
+    },
   ],
 };
 

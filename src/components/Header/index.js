@@ -26,7 +26,13 @@ const Wrapper = styled.div`
 `;
 
 const Header = ({ history }) => {
-  //
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.auth);
+  //const user = useSelector((state) => state.user.user);
+
+  const [open, setOpen] = useState(false);
+  const anchor = 'left';
+  const classes = useStyles();
   // useEffect(() => {
   //   if (!token) {
   //     history.push('/login');

@@ -15,9 +15,9 @@ import createRequestSaga from './createSaga';
 function* loginSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
-    console.log(action);
-    const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
 
+    const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
+    console.log('response: ', res);
     if (res.response === 'success') {
       yield put({
         type: LOGIN_SUCCESS,
@@ -42,12 +42,13 @@ function* loginSaga(action) {
 function* signSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
-    const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
 
+    const res = yield call(authApi.sign, action.payload); //api.login(action.payload)와 같다
+    console.log('response: ', res);
     if (res.response === 'success') {
       yield put({
         type: SIGN_SUCCESS,
-        payload: res.message,
+        payload: res.message === '이메일을 전송하였습니다.',
       });
     } else {
       yield put({

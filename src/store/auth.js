@@ -36,8 +36,9 @@ const initialState = {
     email: '',
     password: '',
   },
-  auth: null,
+  auth: null, //login success -> token, sign success -> true
   authError: null,
+  isFirstLogin: null,
 };
 
 const auth = handleActions(
@@ -51,10 +52,11 @@ const auth = handleActions(
       [form]: initialState[form],
     }),
 
-    [LOGIN_SUCCESS]: (state, { payload: token }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: token,
+      auth: message.token,
+      isFirstLogin: message.isFirstLogin,
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,

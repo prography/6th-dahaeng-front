@@ -71,7 +71,6 @@ const Sign = ({ history }) => {
   const validatePwConfirm = (value) => {
     const { password } = form;
 
-    console.log(value);
     if (value.trim() === '') {
       return 'empty';
     }
@@ -127,7 +126,6 @@ const Sign = ({ history }) => {
       }),
     );
 
-    console.log(validatePwConfirm(value));
     return setStatus({
       ...status,
       pwd_ok: validatePwConfirm(value),
@@ -138,7 +136,7 @@ const Sign = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password, passwordConfirm } = form;
+    const { email, password, passwordConfirm } = form;
 
     //입력창 모두 valid 아닐 때 alert
     if (
@@ -150,7 +148,7 @@ const Sign = ({ history }) => {
     ) {
       alert('입력을 확인해주세요!');
     }
-    dispatch(sign({ username, password }));
+    dispatch(sign({ email, password }));
   };
 
   useEffect(() => {
@@ -166,7 +164,8 @@ const Sign = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(getUser());
+      history.push('/signComplete');
+      //dispatch(getUser());
     }
   }, [auth, authError, dispatch]);
 

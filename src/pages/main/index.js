@@ -48,6 +48,13 @@ const ModalCharacter = styled.div`
   height: 10rem;
   border: 1px solid #e9e9e9;
   margin: 5% auto;
+  overflow: hidden;
+`;
+
+const ModalCharacterImage = styled.img`
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 `;
 
 const InputLabel = styled.label`
@@ -104,7 +111,7 @@ const Main = () => {
   const question = useSelector((state) => state.box.question);
 
   const [inputText, setInputText] = useState('');
-  const onChange = (e) => {
+  const onTextChange = (e) => {
     setInputText(e.target.value);
     console.log(inputText);
   };
@@ -115,8 +122,28 @@ const Main = () => {
   // }, [dispatch]);
 
   const completeRecord = () => {
-    dispatch(setRecord({ question: question, detail: inputText }));
+    dispatch(setRecord({ question: question, detail: inputText, img: img }));
     setModal();
+  };
+
+  //사진 업로드 시도!
+  //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
+  const [img, setImage] = useState(null);
+  const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
+
+  const onImageChange = (e) => {
+    let reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      if (base64) {
+        setImgBase64(base64.toString());
+      }
+    };
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+      setImage(e.target.files[0]);
+    }
   };
 
   return (
@@ -139,12 +166,24 @@ const Main = () => {
           content={
             <ModalContent>
               <ModalCharacter>
-                <InputLabel htmlFor="upload">
-                  행복사진을 <br /> 함께 기록해요!
-                </InputLabel>
-                <input type="file" id="upload" style={{ display: 'none' }} />
+                {img !== null ? (
+                  <ModalCharacterImage src={imgBase64} alt="" />
+                ) : (
+                  <InputLabel htmlFor="upload">
+                    행복사진을 <br /> 함께 기록해요!
+                  </InputLabel>
+                )}
+                <input
+                  type="file"
+                  id="upload"
+                  style={{ display: 'none' }}
+                  onChange={onImageChange}
+                />
               </ModalCharacter>
-              <ModalInput value={inputText} onChange={onChange}></ModalInput>
+              <ModalInput
+                value={inputText}
+                onChange={onTextChange}
+              ></ModalInput>
             </ModalContent>
           }
           button={

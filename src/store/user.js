@@ -16,6 +16,7 @@ const initialState = {
     name: '다스',
     title: 'Da:haeng',
     coin: 0,
+    picture: '조랭',
   },
   getUserError: null,
 };

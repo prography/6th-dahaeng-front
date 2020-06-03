@@ -1,28 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
-
-const Wrapper = styled.div`
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .title {
-    font-size: 1.125rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-  }
-`;
+import InfoBox from './info.js';
 
 const Spacer = styled.div`
   height: 4rem;
@@ -63,8 +48,8 @@ const DrawerBtn = styled.div`
   background-color: #ffffff;
 `;
 
-const DailyRecord = styled.div`
-  background-color: #ff9d73;
+const DailyRecordBox = styled.div`
+  background-color: rgb(255, 157, 115, 0.2);
   padding: 30px 0;
   flex: 1;
   margin: 1em;
@@ -72,12 +57,19 @@ const DailyRecord = styled.div`
   border-radius: 4px;
 `;
 
+const DailyRecord = styled.div`
+  display: inline;
+  width: 35px;
+  height: 35px;
+  margin: 12px;
+`;
+
 const useStyles = makeStyles({
   list: {
     width: 250,
   },
   fullList: {
-    width: 'auto',
+    width: 300,
   },
 });
 
@@ -89,7 +81,6 @@ const Slider = ({ history }) => {
   // const dispatch = useDispatch();
   //TODO: ??? token vs user
   const token = useSelector((state) => state.auth.auth);
-  const user = useSelector((state) => state.user.user);
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -102,8 +93,15 @@ const Slider = ({ history }) => {
     setOpen(open);
   };
 
-  function navigatePage() {
-    console.log('TODO');
+  function navigateBoxPage() {
+    history.push('/box');
+  }
+
+  function navigateMarketPage() {
+    history.push('/box');
+  }
+
+  function navigateDonationPage() {
     history.push('/box');
   }
 
@@ -116,42 +114,24 @@ const Slider = ({ history }) => {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <List>
-        {/* {['Username 조랭', 'Project name [수정]', 'Happy coin [충전]'].map(
-          (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon></ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ),
-        )} */}
-        <ListItem button>
-          <ListItemText primary={user.name} />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary={user.title} />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary={user.coin} />
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        {['출석부'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={'코인100'} />
-          </ListItem>
+      <InfoBox />
+      {/* 행복 기록시 입력한 카테고리 떠야 함 */}
+      <DailyRecordBox>
+        {['O', 'X'].map((text, index) => (
+          <DailyRecord key={text}>{text}</DailyRecord>
         ))}
-      </List>
-      <Divider />
+      </DailyRecordBox>
+
       <List>
-        {['행복보관함', '조랭 shop', '소액 기부'].map((text, index) => (
-          <ListItem button key={text} onClick={navigatePage}>
-            <ListItemIcon></ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem onClick={navigateBoxPage} style={{ cursor: 'pointer' }}>
+          <ListItemText primary={'행복보관함'} />
+        </ListItem>
+        <ListItem onClick={navigateMarketPage} style={{ cursor: 'pointer' }}>
+          <ListItemText primary={'조랭마켓'} />
+        </ListItem>
+        <ListItem onClick={navigateDonationPage} style={{ cursor: 'pointer' }}>
+          <ListItemText primary={'소액기부'} />
+        </ListItem>
       </List>
     </div>
   );
@@ -165,6 +145,7 @@ const Slider = ({ history }) => {
           {/* <DrawerCloseBtn onClick={toggleDrawer(anchor, false)}>
             test
           </DrawerCloseBtn> */}
+          <div>로그아웃</div>
         </Drawer>
       </React.Fragment>
       <Spacer />

@@ -4,7 +4,7 @@ import { create } from 'store/user';
 import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import defaultJorang from 'assets/defaultJorang.png';
+import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
 import Header from 'components/Header';
 
 const TextBox = styled.div`

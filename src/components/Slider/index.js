@@ -59,6 +59,7 @@ const LogoutText = styled.div`
   font-size: 14px;
   text-align: center;
   color: #bbbbbb;
+  margin: 1rem;
 `;
 
 const useStyles = makeStyles({

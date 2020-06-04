@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import defaultJorang from 'assets/defaultJorang.png';
+import defaultJoraeng from 'assets/joraeng/defaultJoraeng.png';
 
 const Wrapper = styled.span`
   width: 33.3%;
@@ -42,7 +42,8 @@ const FeedBox = ({ record }) => {
       <Wrapper>
         <ImageBox>
           <img
-            src={defaultJorang}
+            alt=""
+            src={defaultJoraeng}
             style={{
               position: 'absolute',
               top: '0px',

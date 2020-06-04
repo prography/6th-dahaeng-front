@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import defaultJorang from 'assets/defaultJorang.png';
+import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
 
 const Title = styled.div`
   font-size: 32px;

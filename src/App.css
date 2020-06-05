@@ -4,6 +4,10 @@
   --light-background: #fffaf1;
 
   --text-second: #4d4d4d;
+  --border-radius: 8px;
+  --small-border-radius: 4px;
+
+  --card-shadow: 2px 2px 5px 3px rgba(0, 0, 0, 0.05);
 }
 
 h1, h2, h3, h4 {

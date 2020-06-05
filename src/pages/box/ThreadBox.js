@@ -10,7 +10,8 @@ const Wrapper = styled.div`
   margin: 0 auto;
   margin-top: 1.5rem;
   background-color: white;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius);
   padding: 0.5rem;
 `;
 
@@ -27,8 +28,15 @@ const Date = styled.div`
 
 const Question = styled.div`
   font-size: 24px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
-  display: inline;
+  display: inline-block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap ;
+  
+  & > span{
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  }
 `;
 
 const ContentBox = styled.div`
@@ -44,14 +52,14 @@ const CharacterBox = styled.div`
   width: 7rem;
   height: 7rem;
   border: 1px solid #e9e9e9;
-
   overflow: hidden;
+  border-radius: var(--small-border-radius);
 `;
 
 const CharacterImg = styled.img`
-  object-fit: contain;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,7 +93,7 @@ const ThreadBox = ({ record }) => {
     <Wrapper>
       <TitleBox>
         <Date>{record.question.date}</Date>
-        <Question>{record.question.text}</Question>
+        <Question><span>{record.question.text}</span></Question>
       </TitleBox>
       <ContentBox>
         <CharacterBox>

@@ -80,7 +80,6 @@ const Detail = styled.textarea`
 `;
 
 const ThreadBox = ({ record }) => {
-  console.log(record.img);
   return (
     <Wrapper>
       <TitleBox>

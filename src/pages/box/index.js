@@ -43,6 +43,7 @@ const Content = styled.div`
   display: ${(props) => (props.sortingType === 'feed' ? 'flex' : 'none')};
   flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'none')};
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'none')};
+  justify-content: center;
 `;
 
 const Box = () => {

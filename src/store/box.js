@@ -47,14 +47,14 @@ const initialState = {
         text: 'text1',
       },
       detail: 'detail1',
-      img: '/images/defaultJoraeng.png', //img src에 넣을 값 저장됨...
+      img: 'assets/joraeng/defaultJoraeng.png', //img src에 넣을 값 저장됨...
     },
     {
       question: {
         date: '0523',
-        text: 'text2',
+        text: 'text2lkwaejflkjewlafelkwfjwfjlkweaflkwejlfknewkfnaelwkfnawlekfn',
       },
-      detail: 'detail2',
+      detail: 'text2lkwaejflkjewlafelkwfjwfjlkweaflkwejlfknewkfnaelwkfnawlekfn',
       img: null,
     },
     {

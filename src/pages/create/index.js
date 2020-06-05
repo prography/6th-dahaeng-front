@@ -4,7 +4,7 @@ import { create } from 'store/user';
 import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import defaultJorang from 'assets/defaultJorang.png';
+import congratulateJoraeng from 'assets/joraeng/congratulateJoraeng.png';
 import Header from 'components/Header';
 
 const TextBox = styled.div`
@@ -71,7 +71,7 @@ const Create = ({ history }) => {
           <div>조랭이의 이름을 지어주세요</div>
         </TextBox>
         <ImageBox>
-          <img src={defaultJorang}></img>
+          <img src={congratulateJoraeng}></img>
         </ImageBox>
         <InputBox>
           <input

@@ -6,9 +6,9 @@ import { withRouter } from 'react-router-dom';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
 import Header from 'components/Header';
-import search from 'assets/search.png';
-import feed from 'assets/feed.png';
-import thread from 'assets/thread.png';
+import search from 'assets/icon/search.png';
+import feed from 'assets/icon/feed.png';
+import thread from 'assets/icon/thread.png';
 
 const Wrapper = styled.div`
   width: 100%;

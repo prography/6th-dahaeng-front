@@ -7,13 +7,23 @@ import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
-import TitleText from '../../components/common/TitleText';
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.div`
+  font-size: 32px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
 
 const SubTitle = styled.div`
   font-size: 24px;
   margin-top: 2rem;
   text-align: center;
-
   @media screen and (max-width: 480px) {
     font-size: 18px;
   }
@@ -46,6 +56,8 @@ const Sign = ({ history }) => {
     // enum
   };
 
+  // 아래와 같은 형태로 각 form에 대해서 검증하능 방법을 바꾸세요
+  // email.StatusEnum[validateEmail('my-email')]
   const validatePassword = (value) => {
     if (value.trim() === '') {
       return 'empty';
@@ -59,7 +71,6 @@ const Sign = ({ history }) => {
   const validatePwConfirm = (value) => {
     const { password } = form;
 
-    console.log(value);
     if (value.trim() === '') {
       return 'empty';
     }
@@ -115,7 +126,6 @@ const Sign = ({ history }) => {
       }),
     );
 
-    console.log(validatePwConfirm(value));
     return setStatus({
       ...status,
       pwd_ok: validatePwConfirm(value),
@@ -126,7 +136,7 @@ const Sign = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password, passwordConfirm } = form;
+    const { email, password, passwordConfirm } = form;
 
     //입력창 모두 valid 아닐 때 alert
     if (
@@ -138,7 +148,7 @@ const Sign = ({ history }) => {
     ) {
       alert('입력을 확인해주세요!');
     }
-    dispatch(sign({ username, password }));
+    dispatch(sign({ email, password }));
   };
 
   useEffect(() => {
@@ -154,7 +164,8 @@ const Sign = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(getUser());
+      history.push('/signComplete');
+      //dispatch(getUser());
     }
   }, [auth, authError, dispatch]);
 
@@ -168,7 +179,7 @@ const Sign = ({ history }) => {
 
   return (
     <SignResponsive>
-      <TitleText>Da:haeng</TitleText>
+      <Title>Da:haeng</Title>
       <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
       <SignAuthForm
         type="sign"

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import AuthForm from 'components/AuthForm';
 import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
@@ -99,8 +98,8 @@ const Login = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const { username, password } = form;
-    dispatch(login({ username, password }));
+    const { email, password } = form;
+    dispatch(login({ email, password }));
   };
 
   useEffect(() => {
@@ -119,13 +118,13 @@ const Login = ({ history }) => {
     }
   }, [auth, authError, dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      console.log('getUser 성공');
-      console.log(user);
-      history.push('/');
-    }
-  }, [history, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log('getUser 성공');
+  //     console.log(user);
+  //     history.push('/');
+  //   }
+  // }, [history, user]);
 
   return (
     <SignResponsive>

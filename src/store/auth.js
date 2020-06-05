@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { createRequestAction } from './createAction';
+import { createRequestAction } from './createRequestAction';
 
 const CHANGE_FORM = 'CHANGE_FORM';
 const INIT_FORM = 'INIT_FORM';
@@ -8,7 +8,7 @@ const INIT_FORM = 'INIT_FORM';
 export const [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL] = createRequestAction('LOGIN');
 export const [SIGN, SIGN_SUCCESS, SIGN_FAIL] = createRequestAction('SIGN');
 
-//form: login/sign, type: username, password, passwordConfirm, value: 값
+//form: login/sign, key: email, password, passwordConfirm, value: 값
 export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
   form,
   key,
@@ -16,28 +16,29 @@ export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
 }));
 export const initForm = createAction(INIT_FORM, (form) => form);
 
-export const login = createAction(LOGIN, ({ username, password }) => ({
-  username,
+export const login = createAction(LOGIN, ({ email, password }) => ({
+  email,
   password,
 }));
 
-export const sign = createAction(SIGN, ({ username, password }) => ({
-  username,
+export const sign = createAction(SIGN, ({ email, password }) => ({
+  email,
   password,
 }));
 
-const initialState = {
+export const initialState = {
   sign: {
-    username: '',
+    email: '',
     password: '',
     passwordConfirm: '',
   },
   login: {
-    username: '',
+    email: '',
     password: '',
   },
-  auth: null,
+  auth: null, //login success -> token, sign success -> true
   authError: null,
+  isFirstLogin: null,
 };
 
 const auth = handleActions(
@@ -51,13 +52,16 @@ const auth = handleActions(
       [form]: initialState[form],
     }),
 
-    [LOGIN_SUCCESS]: (state, { payload: token }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: token,
+      auth: message.token,
+      isFirstLogin: message.isFirstLogin,
+      
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,
+      auth: 'invalid token',
       authError: error,
     }),
 
@@ -68,6 +72,7 @@ const auth = handleActions(
     }),
     [SIGN_FAIL]: (state, { payload: error }) => ({
       ...state,
+      auth: false,
       authError: error,
     }),
   },

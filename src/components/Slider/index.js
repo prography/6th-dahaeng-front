@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
+import menuIcon from '../../assets/icon/menu_icon.png'
 import { ListItemIcon } from '@material-ui/core';
 
 const Spacer = styled.div`
@@ -21,11 +22,15 @@ const DrawerOpenBtn = styled.button`
   top: 12px;
   width: 40px;
   height: 40px;
+  padding: 3px 8px 0 0;
   border: none;
   border-radius: 0 55% 55% 0;
   z-index: 1;
   background-color: var(--primary-color);
 `;
+const DrawerIcon = styled.img`
+  width: 18px;
+`
 
 //성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
 // const DrawerCloseBtn = styled.button`
@@ -154,7 +159,9 @@ const Slider = ({ history }) => {
 
   return (
     <>
-      <DrawerOpenBtn onClick={() => setOpen(true)}>test</DrawerOpenBtn>
+      <DrawerOpenBtn onClick={() => setOpen(true)}>
+        <DrawerIcon src={menuIcon}/>
+      </DrawerOpenBtn>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
           {list(anchor)}

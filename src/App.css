@@ -1,6 +1,9 @@
 :root {
   --primary-color: #FB8E5B;
   --secondary-color: #ffe8d1;
+  --light-background: #fffaf1;
+
+  --text-second: #4d4d4d;
 }
 
 h1, h2, h3, h4 {

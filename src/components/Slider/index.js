@@ -83,7 +83,7 @@ const DailyRecord = styled.div`
 const LogoutText = styled.div`
   font-size: 14px;
   text-align: center;
-  color: #bbbbbb;
+  color: var(--text-second);
   margin: 1rem;
 `;
 

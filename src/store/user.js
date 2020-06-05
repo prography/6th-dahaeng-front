@@ -19,7 +19,13 @@ export const create = createAction(CREATE, ({ nickname, color }) => ({
 }));
 
 const initialState = {
-  user: null,
+  user: {
+    id: 111,
+    name: '다스',
+    title: 'Da:haeng',
+    coin: 0,
+    picture: '조랭',
+  },
   getUserError: null,
   nickname: null,
   color: null,

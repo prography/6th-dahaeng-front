@@ -9,6 +9,14 @@ const Wrapper = styled.span`
   width: 33.3%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 1024px) {
+    width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ImageBox = styled.span`

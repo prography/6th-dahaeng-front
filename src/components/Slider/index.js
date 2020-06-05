@@ -9,6 +9,20 @@ import InfoBox from './info.js';
 import menuIcon from '../../assets/icon/menu_icon.png'
 import './slider.css'
 
+// 임시 기분표
+const emotionArray = [
+  '🥳',
+  '🥑',
+  '🌱',
+  '✈️',
+  '📚',
+  '⛄️',
+  '🌟',
+  '🌈',
+  '🌺',
+  '😴'
+]
+
 const Spacer = styled.div`
   height: 10rem;
 `;
@@ -49,13 +63,21 @@ const DailyRecordBox = styled.div`
   margin: 1em;
   height: 200px;
   border-radius: 4px;
+  
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
 `;
 //그날 행복기록에 입력한 카테고리 조랭 출력
 const DailyRecord = styled.div`
-  display: inline;
-  width: 35px;
-  height: 35px;
-  margin-left: 12px;
+  // 100/7% ~= 14.2%
+  flex: 1 1 14.2%;
+  max-width: 14.2%;
+  text-align: center;
+  padding: 10px;
+  font-size: 21px;
+  height: 50px;
 `;
 
 const LogoutText = styled.div`
@@ -130,7 +152,7 @@ const Slider = ({ history }) => {
       <InfoBox />
       {/* 행복 기록시 입력한 카테고리 떠야 함 */}
       <DailyRecordBox>
-        {['O', 'X'].map((text, index) => (
+        {emotionArray.map((text, index) => (
           <DailyRecord key={text}>{text}</DailyRecord>
         ))}
       </DailyRecordBox>
@@ -164,6 +186,7 @@ const Slider = ({ history }) => {
             <DrawerIcon src={menuIcon}/>
           </DrawerCloseBtn>
           <Spacer/>
+          {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
           <LogoutText>로그아웃</LogoutText>
         </Drawer>
       </React.Fragment>

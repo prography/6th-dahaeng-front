@@ -60,7 +60,7 @@ const ButtonBox = styled.div`
 
 const LoginButton = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;

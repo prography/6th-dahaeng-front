@@ -43,7 +43,7 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid #ff9d73;
+    border: 1px solid var(--primary-color);
     color: #4d4d4d;
   }
   &::placeholder {

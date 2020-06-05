@@ -31,13 +31,9 @@ const ImageBox = styled.div`
 
 const JoraengImg = styled.img`
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  height: 160px;
   align-items: center;
   justify-content: center;
-
-  /* animation: 'tada';
-  animation-duration: '2s'; */
 `;
 
 const InputBox = styled.div`
@@ -97,7 +93,7 @@ const Create = ({ history }) => {
           <div>조랭이의 이름을 지어주세요</div>
         </TextBox>
         <ImageBox>
-          <JoraengImg src={MyJoraeng} alt="" />
+          <JoraengImg id="joraengImg" src={MyJoraeng} alt="" />
         </ImageBox>
         <InputBox>
           <NicknameInput

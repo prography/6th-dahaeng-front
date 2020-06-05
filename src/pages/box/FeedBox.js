@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
+import Moment from 'moment';
 
 const Wrapper = styled.div`
   width: 30%;
@@ -97,18 +99,16 @@ const checkDetailLength = (text) => {
 const FeedBox = ({ record }) => {
   return (
     <>
-      <Wrapper>
-        <WrapperBox>
-          <CharacterBox>
-            <CharacterImg alt="" src={record.img} />
-          </CharacterBox>
-          <ContentBox>
-            <Date>{record.question.date}</Date>
-            <Question>{checkTitleLength(record.question.text)}</Question>
-            <Detail>{checkDetailLength(record.detail)}</Detail>
-          </ContentBox>
-        </WrapperBox>
-      </Wrapper>
+      <WrapperBox>
+        <CharacterBox>
+          <CharacterImg alt="" src={record.image} />
+        </CharacterBox>
+        <ContentBox>
+          <Date>{Moment(record.created_at).format('MM-DD')}</Date>
+          <Question>{checkTitleLength(record.question)}</Question>
+          <Detail>{checkDetailLength(record.detail)}</Detail>
+        </ContentBox>
+      </WrapperBox>
     </>
   );
 };

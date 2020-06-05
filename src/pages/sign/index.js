@@ -165,17 +165,16 @@ const Sign = ({ history }) => {
       console.log('회원가입 성공');
       console.log(auth);
       history.push('/signComplete');
-      //dispatch(getUser());
     }
-  }, [auth, authError, dispatch]);
+  }, [auth, authError, dispatch, history]);
 
-  useEffect(() => {
-    if (user) {
-      console.log('getUser 성공');
-      console.log(user);
-      history.push('/');
-    }
-  }, [history, user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     console.log('getUser 성공');
+  //     console.log(user);
+  //     history.push('/');
+  //   }
+  // }, [history, user]);
 
   return (
     <SignResponsive>

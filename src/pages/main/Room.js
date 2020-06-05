@@ -12,13 +12,13 @@ const Wrapper = styled.div`
   height: 350px;
   max-width: 664px;
   position: relative;
- 
-  @media screen and (max-width: 480px){
+
+  @media screen and (max-width: 480px) {
     height: 220px;
-  };
-  @media screen and (max-width: 440px){
+  }
+  @media screen and (max-width: 440px) {
     height: 200px;
-  };
+  }
 `;
 
 const PostBox = styled.button`
@@ -27,11 +27,11 @@ const PostBox = styled.button`
   top: 80px;
   left: 120px;
   z-index: 2;
-  @media screen and (max-width: 664px){
+  @media screen and (max-width: 664px) {
     top: 100px;
     left: 60px;
   }
-  @media screen and (max-width: 480px){
+  @media screen and (max-width: 480px) {
     width: 50px;
     top: 60px;
     left: 20px;
@@ -48,7 +48,7 @@ const Character = styled.button`
   width: 160px;
   z-index: 2;
   top: 40px;
-  @media screen and (max-width: 480px){
+  @media screen and (max-width: 480px) {
     right: 70px;
     top: 20px;
     width: 100px;
@@ -62,12 +62,12 @@ const CharacterImg = styled.img`
 const Closet = styled.button`
   position: absolute;
   width: 60px;
-  top: 140px;  
+  top: 140px;
   right: 70px;
   z-index: 3;
-  @media screen and (max-width: 480px){
+  @media screen and (max-width: 480px) {
     width: 50px;
-    top: 80px;  
+    top: 80px;
     right: 50px;
   }
 `;
@@ -84,12 +84,12 @@ const Background = styled.div`
   margin: 0 auto;
   z-index: 1;
   width: 100%;
- 
-  @media (min-width:481px) and (max-width: 520px){
+
+  @media (min-width: 481px) and (max-width: 520px) {
     bottom: 50px;
   }
-  @media screen and (max-width: 380px){
-    bottom: 10px;  
+  @media screen and (max-width: 380px) {
+    bottom: 10px;
   }
 `;
 
@@ -101,16 +101,16 @@ const Room = () => {
   return (
     <Wrapper>
       <PostBox>
-        <PostBoxImg src={postbox} alt=""/>
+        <PostBoxImg src={postbox} alt="" />
       </PostBox>
       <Character>
-        <CharacterImg src={character} alt=""/>
+        <CharacterImg src={character} alt="" />
       </Character>
       <Closet>
-        <ClosetImg src={closet} alt=""/>
+        <ClosetImg src={closet} alt="" />
       </Closet>
       <Background>
-        <BackgroundImg src={ground} alt=""/>
+        <BackgroundImg src={ground} alt="" />
       </Background>
     </Wrapper>
   );

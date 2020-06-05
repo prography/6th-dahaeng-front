@@ -46,9 +46,9 @@ const Box = () => {
 
   const dispatch = useDispatch();
 
-  //   useEffect(() => {
-  //     dispatch(getRecords(user));
-  //   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getRecords());
+  }, [dispatch]);
 
   return (
     <>
@@ -94,10 +94,12 @@ const Box = () => {
 
         <Content sortingType={'feed'}>
           {sortingType === 'thread' ? (
+            records &&
             records.map((record, index) => {
               return <ThreadBox record={record} key={index}></ThreadBox>;
             })
           ) : sortingType === 'feed' ? (
+            records &&
             records.map((record, index) => {
               return <FeedBox record={record} key={index}></FeedBox>;
             })

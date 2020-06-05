@@ -111,10 +111,10 @@ const LoginForm = ({
           </LabelWrapper>
             <>
               <Input
-                name="username"
+                name="email"
                 placeholder="이메일을 입력해주세요"
                 onChange={onChange}
-                value={form.username}
+                value={form.email}
               ></Input>
             </>
           <LabelWrapper>

@@ -4,6 +4,7 @@ import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import Moment from 'moment';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,10 +33,14 @@ const Question = styled.div`
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space:nowrap ;
-  
-  & > span{
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  white-space: nowrap;
+
+  & > span {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 60%,
+      #ffede5 40%
+    );
   }
 `;
 
@@ -92,12 +97,14 @@ const ThreadBox = ({ record }) => {
   return (
     <Wrapper>
       <TitleBox>
-        <Date>{record.question.date}</Date>
-        <Question><span>{record.question.text}</span></Question>
+        <Date>{Moment(record.created_at).format('MM-DD')}</Date>
+        <Question>
+          <span>{record.question}</span>
+        </Question>
       </TitleBox>
       <ContentBox>
         <CharacterBox>
-          <CharacterImg src={record.img} alt="" />
+          <CharacterImg src={record.image} alt="" />
         </CharacterBox>
         <Detail disabled value={record.detail} />
       </ContentBox>

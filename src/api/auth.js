@@ -5,11 +5,15 @@ export const login = ({ email, password }) => {
     // 'Access-Control-Allow-Origin': '*',
   };
 
-  client.post(
-    'http://ec2-52-79-232-8.ap-northeast-2.compute.amazonaws.com/login/',
-    { email: email, password: password },
-    { headers: headerParams },
-  );
+  client
+    .post(
+      'http://ec2-52-79-232-8.ap-northeast-2.compute.amazonaws.com/login/',
+      { email: email, password: password },
+      { headers: headerParams },
+    )
+    .then((res) => {
+      return res;
+    });
 };
 
 export const sign = ({ email, password }) => {
@@ -17,11 +21,21 @@ export const sign = ({ email, password }) => {
     // 'Access-Control-Allow-Origin': '*',
   };
 
-  client.post(
-    'http://ec2-52-79-232-8.ap-northeast-2.compute.amazonaws.com/signup/',
-    { profile: { email: email, password: password } },
-    { headers: headerParams },
-  );
+  const param = {
+    profile: {
+      email: email,
+      password: password,
+    },
+  };
+  client
+    .post(
+      'http://ec2-52-79-232-8.ap-northeast-2.compute.amazonaws.com/signup/',
+      { param },
+      { headers: headerParams },
+    )
+    .then((res) => {
+      return res;
+    });
 };
 
 export const create = ({ nickname, color }) => {

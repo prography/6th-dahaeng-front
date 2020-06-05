@@ -143,7 +143,7 @@ const SignAuthForm = ({
               name="email"
               placeholder="이메일을 입력해주세요"
               onChange={onEmailChange}
-              value={form.username}
+              value={form.email}
               className={status.email === 'wrong' ? 'error' : ''}
               // boolean값으로 받아올 때 왜 안되는지 생각해보기
             ></Input>

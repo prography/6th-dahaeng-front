@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -28,25 +28,26 @@ const Wrapper = styled.div`
 
 const Header = ({ history }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.auth);
+  const token = localStorage.getItem('accessToken');
 
   const moveMain = () => {
     history.push('/');
   };
-  //const user = useSelector((state) => state.user.user);
+
+  // const user = useSelector((state) => state.auth.user);
 
   // const [open, setOpen] = useState(false);
   // const anchor = 'left';
   // const classes = useStyles();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     history.push('/login');
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!token) {
+      history.push('/login');
+    }
+  }, [token]);
 
   return (
-    <>
+    <React.Fragment>
       <HeaderBlock>
         <Wrapper>
           <div className="title" onClick={moveMain}>
@@ -55,7 +56,7 @@ const Header = ({ history }) => {
         </Wrapper>
       </HeaderBlock>
       <Slider history={history} />
-    </>
+    </React.Fragment>
   );
 };
 

@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
 import menuIcon from '../../assets/icon/menu_icon.png'
-import { ListItemIcon } from '@material-ui/core';
+import './slider.css'
 
 const Spacer = styled.div`
   height: 10rem;
@@ -24,7 +21,7 @@ const DrawerOpenBtn = styled.button`
   height: 40px;
   padding: 3px 8px 0 0;
   border: none;
-  border-radius: 0 55% 55% 0;
+  border-radius: 0 50% 50% 0;
   z-index: 1;
   background-color: var(--primary-color);
 `;
@@ -32,20 +29,21 @@ const DrawerIcon = styled.img`
   width: 18px;
 `
 
-//성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
-// const DrawerCloseBtn = styled.button`
-//   position: absolute;
-//   right: -20px;
-//   top: 12px;
-//   width: 40px;
-//   height: 40px;
-//   border: none;
-//   z-index: 999999;
-//   background-color: var(--primary-color);
-// `;
+// 성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
+const DrawerCloseBtn = styled.button`
+  position: absolute;
+  right: -40px;
+  top: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 0 50% 50% 0;
+  padding: 3px 8px 0 0;
+  border: none;
+  background-color: var(--primary-color);
+`;
 
 const DailyRecordBox = styled.div`
-  background-color: rgb(255, 157, 115, 0.2);
+  background-color: var(--secondary-color);
   padding: 10px 0;
   flex: 1;
   margin: 1em;
@@ -67,9 +65,21 @@ const LogoutText = styled.div`
   margin: 1rem;
 `;
 
+const SliderButton = styled.button`
+  width: 100%;
+  padding: 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: .125s ease-in-out;
+  
+  &:hover {
+    background-color: #fafafa;
+  }
+`
+
 const useStyles = makeStyles({
   list: {
-    width: 250,
+    width: 400,
   },
   fullList: {
     width: 'auto',
@@ -126,33 +136,18 @@ const Slider = ({ history }) => {
       </DailyRecordBox>
 
       <List>
-        <ListItem
-          button
-          onClick={navigateBoxPage}
-          style={{ cursor: 'pointer' }}
-        >
-          <ListItemText inset={true}>
-            <div>행복보관함</div>
-          </ListItemText>
-        </ListItem>
-        <ListItem
-          button
-          onClick={navigateMarketPage}
-          style={{ cursor: 'pointer' }}
-        >
-          <ListItemText inset={true}>
-            <div>조랭마켓</div>
-          </ListItemText>
-        </ListItem>
-        <ListItem
-          button
-          onClick={navigateDonationPage}
-          style={{ cursor: 'pointer' }}
-        >
-          <ListItemText inset={true}>
-            <div>소액기부</div>
-          </ListItemText>
-        </ListItem>
+        <SliderButton
+          onClick={navigateBoxPage}>
+          행복보관함
+        </SliderButton>
+        <SliderButton
+          onClick={navigateMarketPage}>
+          조랭마켓
+        </SliderButton>
+        <SliderButton
+          onClick={navigateDonationPage}>
+          소액기부
+        </SliderButton>
       </List>
     </div>
   );
@@ -165,10 +160,10 @@ const Slider = ({ history }) => {
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
           {list(anchor)}
-          {/* <DrawerCloseBtn onClick={toggleDrawer(anchor, false)}>
-            test
-          </DrawerCloseBtn> */}
-          <Spacer />
+          <DrawerCloseBtn onClick={() => setOpen(false)}>
+            <DrawerIcon src={menuIcon}/>
+          </DrawerCloseBtn>
+          <Spacer/>
           <LogoutText>로그아웃</LogoutText>
         </Drawer>
       </React.Fragment>

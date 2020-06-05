@@ -25,9 +25,9 @@ const Donation = () => {
       <Responsive>
         <ContentBox>
           <WaitTitle>
-            조랭이가 열일중!
+            아직 조랭이가 열일중!
             <br />
-            재촉 금지
+            재촉 금지!
           </WaitTitle>
           <JoraengImg src={waitjoraeng} alt="" />
         </ContentBox>

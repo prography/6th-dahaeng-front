@@ -53,7 +53,7 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid #ff9d73;
+    border: 1px solid var(--primary-color);
     color: #4d4d4d;
   }
   &::placeholder {
@@ -76,7 +76,7 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;
@@ -89,7 +89,7 @@ const Button = styled.button`
 const Checkbox = styled.input`
   &:checked {
     color: #ffffff;
-    background: #ff9d73;
+    background: var(--primary-color);
   }
 `;
 

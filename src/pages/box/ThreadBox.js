@@ -39,7 +39,7 @@ const Question = styled.div`
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 60%,
-      #ffede5 40%
+      var(--secondary-color) 40%
     );
   }
 `;

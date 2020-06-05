@@ -24,7 +24,7 @@ const Market = () => {
       <Header></Header>
       <Responsive>
         <ContentBox>
-          <WaitTitle>조랭이가 열일중!</WaitTitle>
+          <WaitTitle>아직 조랭이가 열일중!</WaitTitle>
           <JoraengImg src={waitjoraeng} alt="" />
         </ContentBox>
       </Responsive>

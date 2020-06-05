@@ -9,24 +9,37 @@ import {
 } from 'store/auth';
 import * as authApi from 'api/auth';
 import createRequestSaga from './createSaga';
+import axios from 'axios';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
 function* loginSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
-    const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
-    console.log('response: ', res);
-    if (res.response === 'success') {
+    // const res = yield call(authApi.login, action.payload); //api.login(action.payload)와 같다
+
+    // console.log('response: ', res);
+
+    const param = {
+      email: action.payload.email,
+      password: action.payload.password,
+    };
+    const res = yield call(
+      [axios, 'post'],
+      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/login/',
+      param,
+    );
+
+    if (res.data.response === 'success') {
       yield put({
         type: LOGIN_SUCCESS,
-        payload: res.message,
+        payload: res.data.message,
       });
-      localStorage.setItem('accessToken', res.message.token);
+      localStorage.setItem('accessToken', res.data.message.token);
     } else {
       yield put({
         type: LOGIN_FAIL,
-        payload: res.non_field_errors,
+        payload: res.data.non_field_errors,
         error: true,
       });
     }
@@ -43,17 +56,33 @@ function* signSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
 
-    const res = yield call(authApi.sign, action.payload); //api.login(action.payload)와 같다
+    // const res = yield call(authApi.sign, action.payload); //api.login(action.payload)와 같다
+
+    // console.log(res);
+
+    const param = {
+      profile: {
+        email: action.payload.email,
+        password: action.payload.password,
+      },
+    };
+    const res = yield call(
+      [axios, 'post'],
+      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/signup/',
+      param,
+    );
+
     console.log('response: ', res);
-    if (res.response === 'success') {
+    localStorage.setItem('accessToken', res.data.message.token);
+    if (res.data.response === 'success') {
       yield put({
         type: SIGN_SUCCESS,
-        payload: res.message === '이메일을 전송하였습니다.',
+        payload: res.data.message === '회원가입이 완료되었습니다.',
       });
     } else {
       yield put({
         type: SIGN_FAIL,
-        payload: res.message,
+        payload: res.data.message,
         error: true,
       });
     }

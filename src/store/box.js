@@ -19,53 +19,15 @@ export const [
 ] = createRequestAction('GET_RECORDS');
 
 export const getQuestion = createAction(GET_QUESTION);
-export const setRecord = createAction(SET_RECORD, ({ question, detail }) => ({
-  question,
-  detail,
+export const setRecord = createAction(SET_RECORD, (formData) => ({
+  formData,
 }));
-export const getRecords = createAction(GET_RECORDS, ({ user }) => ({
-  user,
-}));
+export const getRecords = createAction(GET_RECORDS);
 
 const initialState = {
-  question: {
-    date: '0516',
-    text: '오늘의 색은?',
-  },
-  record: {
-    question: {
-      date: '0516',
-      text: '오늘의 색은?',
-    },
-    detail: '노랑색',
-    img: "/images/defaultJoraeng.png",
-  },
-  records: [
-    {
-      question: {
-        date: '0522',
-        text: 'text1',
-      },
-      detail: 'detail1',
-      img: null,
-    },
-    {
-      question: {
-        date: '0523',
-        text: 'text2',
-      },
-      detail: 'detail2',
-      img: null,
-    },
-    {
-      question: {
-        date: '0524',
-        text: 'text3',
-      },
-      detail: 'detail3',
-      img: null,
-    },
-  ],
+  question: null,
+  record: null,
+  records: null,
 };
 
 const box = handleActions(

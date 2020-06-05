@@ -4,6 +4,7 @@ import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import defaultJorang from 'assets/defaultJorang.png';
+import Moment from 'moment';
 
 const Wrapper = styled.span`
   width: 33.3%;
@@ -42,7 +43,7 @@ const FeedBox = ({ record }) => {
       <Wrapper>
         <ImageBox>
           <img
-            src={defaultJorang}
+            src={record.image}
             style={{
               position: 'absolute',
               top: '0px',
@@ -54,8 +55,8 @@ const FeedBox = ({ record }) => {
           ></img>
         </ImageBox>
         <Content>
-          <Date>{record.question.date}</Date>
-          <Question>{record.question.text}</Question>
+          <Date>{Moment(record.created_at).format('MM-DD')}</Date>
+          <Question>{record.question}</Question>
           <Detail>{record.detail}</Detail>
         </Content>
       </Wrapper>

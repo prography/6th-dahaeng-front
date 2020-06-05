@@ -4,6 +4,7 @@ import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import Moment from 'moment';
 
 const Wrapper = styled.div`
   width: 90%;
@@ -41,7 +42,7 @@ const Content = styled.div`
   padding: 1rem;
 `;
 
-const Character = styled.div`
+const ImageBox = styled.div`
   box-sizing: border-box;
   width: 7rem;
   height: 7rem;
@@ -61,11 +62,20 @@ const ThreadBox = ({ record }) => {
   return (
     <Wrapper>
       <Title>
-        <Date>{record.question.date}</Date>
-        <Question>{record.question.text}</Question>
+        <Date>{Moment(record.created_at).format('MM-DD')}</Date>
+        <Question>{record.question}</Question>
       </Title>
       <Content>
-        <Character></Character>
+        <ImageBox>
+          <img
+            src={record.image}
+            style={{
+              width: '7rem',
+              height: '7rem',
+              objectFit: 'cover',
+            }}
+          ></img>
+        </ImageBox>
         <Detail>{record.detail}</Detail>
       </Content>
     </Wrapper>

@@ -77,7 +77,7 @@ const Create = ({ history }) => {
           <input
             style={{
               border: 'none',
-              'border-bottom': '1px solid #bbbbbb',
+              borderBottom: '1px solid #bbbbbb',
               padding: '1px',
             }}
             value={name}

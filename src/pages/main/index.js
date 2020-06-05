@@ -6,6 +6,7 @@ import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, setRecord, getRecords } from 'store/box';
 import Responsive from '../../components/common/Responsive';
+import Moment from 'moment';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -114,12 +115,13 @@ const ModalButton = styled.button`
   cursor: pointer;
 `;
 
-const Main = () => {
+const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
   };
 
+  const user = useSelector((state) => state.auth.user);
   const question = useSelector((state) => state.box.question);
 
   const [inputText, setInputText] = useState('');
@@ -129,12 +131,21 @@ const Main = () => {
   };
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getQuestion());
-  // }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getQuestion());
+  }, [dispatch]);
 
   const completeRecord = () => {
-    dispatch(setRecord({ question: question, detail: inputText, img: img }));
+    const form_data = new FormData();
+    form_data.append('detail', inputText);
+    form_data.append('emotion', 'HAPPY');
+    form_data.append('image', img);
+
+    dispatch(
+      // setRecord({ detail: inputText, image: form_data, emotion: 'HAPPY' }),
+      setRecord(form_data),
+    );
     setModal();
   };
 
@@ -143,6 +154,7 @@ const Main = () => {
   //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
   const [img, setImage] = useState(null);
   const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
+  const [file, setFile] = useState(null);
 
   const onImageChange = (e) => {
     let reader = new FileReader();
@@ -166,16 +178,28 @@ const Main = () => {
       <Header></Header>
       <Responsive>
         <QuestionBox>
-          <Date>{question.date}</Date>
-          <Question onClick={setModal}>{question.text}</Question>
+          <Date>
+            {Moment(
+              question && question.last_login && question.last_login.dateForm,
+            ).format('MM-DD')}
+          </Date>
+          <Question onClick={setModal}>
+            {question && question.question}
+          </Question>
         </QuestionBox>
         <Modal
           openModal={openModal}
           setModal={setModal}
           title={
             <ModalTitle>
-              <Date>{question.date}</Date>
-              <ModalQuestion>{question.text}</ModalQuestion>
+              <Date>
+                {Moment(
+                  question &&
+                    question.last_login &&
+                    question.last_login.dateForm,
+                ).format('MM-DD')}
+              </Date>
+              <ModalQuestion>{question && question.question}</ModalQuestion>
             </ModalTitle>
           }
           content={

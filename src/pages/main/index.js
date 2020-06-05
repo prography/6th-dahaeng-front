@@ -4,7 +4,8 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord, getRecords } from 'store/box';
+import { getQuestion, setRecord } from 'store/box';
+import { reminder } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 
@@ -119,6 +120,7 @@ const Main = ({ history }) => {
 
   const user = useSelector((state) => state.auth.user);
   const question = useSelector((state) => state.box.question);
+  const reminders = useSelector((state) => state.user.reminders);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -130,6 +132,7 @@ const Main = ({ history }) => {
 
   useEffect(() => {
     dispatch(getQuestion());
+    dispatch(reminder());
   }, [dispatch]);
 
   const completeRecord = () => {
@@ -138,10 +141,7 @@ const Main = ({ history }) => {
     form_data.append('emotion', 'HAPPY');
     form_data.append('image', img);
 
-    dispatch(
-      // setRecord({ detail: inputText, image: form_data, emotion: 'HAPPY' }),
-      setRecord(form_data),
-    );
+    dispatch(setRecord(form_data));
     setModal();
   };
 
@@ -229,7 +229,7 @@ const Main = ({ history }) => {
             <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
           }
         ></Modal>
-        <Room></Room>
+        <Room reminders={reminders}></Room>
       </Responsive>
     </>
   );

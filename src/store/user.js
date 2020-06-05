@@ -6,12 +6,16 @@ const REFRESH_SET_USER = 'REFRESH_SET_USER';
 export const [CREATE, CREATE_SUCCESS, CREATE_FAIL] = createRequestAction(
   'CREATE',
 );
+export const [REMINDER, REMINDER_SUCCESS, REMINDER_FAIL] = createRequestAction(
+  'CREATE',
+);
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const create = createAction(CREATE, ({ nickname, color }) => ({
   nickname,
   color,
 }));
+export const reminder = createAction(REMINDER);
 
 const initialState = {
   user: {
@@ -24,6 +28,7 @@ const initialState = {
   getUserError: null,
   nickname: null,
   color: null,
+  reminders: null,
 };
 
 const user = handleActions(
@@ -42,6 +47,15 @@ const user = handleActions(
       ...state,
       auth: false,
       authError: error,
+    }),
+
+    [REMINDER_SUCCESS]: (state, { payload: reminders }) => ({
+      ...state,
+      reminders: reminders,
+    }),
+    [REMINDER_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      reminders: error,
     }),
   },
   initialState,

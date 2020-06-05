@@ -4,6 +4,7 @@ import palette from 'styles/palette';
 
 import ground from 'assets/main/ground.png';
 import postbox from 'assets/main/notification.png';
+import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
 import character from 'assets/joraeng/defaultJoraeng.png';
 
@@ -97,11 +98,11 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
-const Room = () => {
+const Room = ({ reminders }) => {
   return (
     <Wrapper>
       <PostBox>
-        <PostBoxImg src={postbox} alt="" />
+        <PostBoxImg src={reminders ? postboxOn : postbox} alt="" />
       </PostBox>
       <Character>
         <CharacterImg src={character} alt="" />

@@ -6,7 +6,7 @@ const Responsive = styled.div`
   padding-right: 1rem; */
   max-width: 1024px;
   height: 100%;
-  padding: 5vh 20px;
+  padding: 4rem 20px;
   margin: 0 auto;
 
   @media (max-width: 1024px) {

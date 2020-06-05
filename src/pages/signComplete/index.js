@@ -25,10 +25,13 @@ const ImageBox = styled.div`
 `;
 const CongratulateImg = styled.img`
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  height: 240px;
   align-items: center;
   justify-content: center;
+  @media screen and (max-width: 480px) {
+    height: auto;
+    width: 300px;
+  }
 `;
 const ButtonBox = styled.div`
   flex: 1;

@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import defaultJoraeng from 'assets/joraeng/defaultJoraeng.png';
-import { Input } from '@material-ui/core';
 
 const Wrapper = styled.div`
   width: 30%;
@@ -102,7 +100,7 @@ const FeedBox = ({ record }) => {
       <Wrapper>
         <WrapperBox>
           <CharacterBox>
-            <CharacterImg alt="" src={defaultJoraeng} />
+            <CharacterImg alt="" src={record.img} />
           </CharacterBox>
           <ContentBox>
             <Date>{record.question.date}</Date>

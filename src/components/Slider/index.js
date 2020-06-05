@@ -6,8 +6,8 @@ import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
-import menuIcon from '../../assets/icon/menu_icon.png'
-import './slider.css'
+import menuIcon from '../../assets/icon/menu_icon.png';
+import './slider.css';
 
 // 임시 기분표
 const emotionArray = [
@@ -20,8 +20,8 @@ const emotionArray = [
   '🌟',
   '🌈',
   '🌺',
-  '😴'
-]
+  '😴',
+];
 
 const Spacer = styled.div`
   height: 10rem;
@@ -41,7 +41,7 @@ const DrawerOpenBtn = styled.button`
 `;
 const DrawerIcon = styled.img`
   width: 18px;
-`
+`;
 
 // 성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
 const DrawerCloseBtn = styled.button`
@@ -63,7 +63,7 @@ const DailyRecordBox = styled.div`
   margin: 1em;
   height: 200px;
   border-radius: 4px;
-  
+
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -92,12 +92,12 @@ const SliderButton = styled.button`
   padding: 12px;
   font-size: 18px;
   cursor: pointer;
-  transition: .125s ease-in-out;
-  
+  transition: 0.125s ease-in-out;
+
   &:hover {
     background-color: #fafafa;
   }
-`
+`;
 
 const useStyles = makeStyles({
   list: {
@@ -116,6 +116,11 @@ const Slider = ({ history }) => {
   // const dispatch = useDispatch();
   //TODO: ??? token vs user
   const token = useSelector((state) => state.auth.auth);
+
+  const logout = () => {
+    history.push('/login');
+    localStorage.setItem('accessToken', null);
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -158,18 +163,9 @@ const Slider = ({ history }) => {
       </DailyRecordBox>
 
       <List>
-        <SliderButton
-          onClick={navigateBoxPage}>
-          행복보관함
-        </SliderButton>
-        <SliderButton
-          onClick={navigateMarketPage}>
-          조랭마켓
-        </SliderButton>
-        <SliderButton
-          onClick={navigateDonationPage}>
-          소액기부
-        </SliderButton>
+        <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
+        <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
+        <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
       </List>
     </div>
   );
@@ -177,17 +173,17 @@ const Slider = ({ history }) => {
   return (
     <>
       <DrawerOpenBtn onClick={() => setOpen(true)}>
-        <DrawerIcon src={menuIcon}/>
+        <DrawerIcon src={menuIcon} />
       </DrawerOpenBtn>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
           {list(anchor)}
           <DrawerCloseBtn onClick={() => setOpen(false)}>
-            <DrawerIcon src={menuIcon}/>
+            <DrawerIcon src={menuIcon} />
           </DrawerCloseBtn>
-          <Spacer/>
+          <Spacer />
           {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
-          <LogoutText>로그아웃</LogoutText>
+          <LogoutText onClick={logout}>로그아웃</LogoutText>
         </Drawer>
       </React.Fragment>
     </>

@@ -56,7 +56,7 @@ const CreateButton = styled.button`
 
 const signComplete = ({ history }) => {
   const createLink = () => {
-    history.push('/create');
+    history.push('/login');
   };
 
   return (

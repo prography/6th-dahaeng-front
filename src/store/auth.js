@@ -7,6 +7,9 @@ const INIT_FORM = 'INIT_FORM';
 
 export const [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL] = createRequestAction('LOGIN');
 export const [SIGN, SIGN_SUCCESS, SIGN_FAIL] = createRequestAction('SIGN');
+export const [CREATE, CREATE_SUCCESS, CREATE_FAIL] = createRequestAction(
+  'CREATE',
+);
 
 //form: login/sign, key: email, password, passwordConfirm, value: 값
 export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
@@ -25,6 +28,10 @@ export const sign = createAction(SIGN, ({ email, password }) => ({
   email,
   password,
 }));
+export const create = createAction(CREATE, ({ nickname, color }) => ({
+  nickname,
+  color,
+}));
 
 export const initialState = {
   sign: {
@@ -36,11 +43,12 @@ export const initialState = {
     email: '',
     password: '',
   },
-  auth: null, //login success -> token, sign success -> true
+  token: null,
+  auth: null, //sign success -> true
   authError: null,
   isFirstLogin: null,
   user: null,
-  hasJorang: null,
+  has_jorang: null,
 };
 
 const auth = handleActions(
@@ -58,9 +66,10 @@ const auth = handleActions(
       ...state,
       authError: null,
       auth: message.token,
+      token: message.token,
       isFirstLogin: message.isFirstLogin,
       user: message.jorang,
-      hasJorang: message.hasJorang,
+      has_jorang: message.has_jorang,
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,
@@ -77,6 +86,15 @@ const auth = handleActions(
       ...state,
       auth: false,
       authError: error,
+    }),
+
+    [CREATE_SUCCESS]: (state, { payload: isSuccess }) => ({
+      ...state,
+      has_jorang: true,
+    }),
+    [CREATE_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      has_jorang: false,
     }),
   },
   initialState,

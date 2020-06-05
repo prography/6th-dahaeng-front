@@ -121,6 +121,7 @@ const Main = ({ history }) => {
   const user = useSelector((state) => state.auth.user);
   const question = useSelector((state) => state.box.question);
   const reminders = useSelector((state) => state.user.reminders);
+  const has_jorang = useSelector((state) => state.auth.has_jorang);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -129,6 +130,12 @@ const Main = ({ history }) => {
   };
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (has_jorang === false) {
+      history.push('/create');
+    }
+  }, [dispatch, history]);
 
   useEffect(() => {
     dispatch(getQuestion());

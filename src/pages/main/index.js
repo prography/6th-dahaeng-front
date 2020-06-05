@@ -8,21 +8,17 @@ import { getQuestion, setRecord, getRecords } from 'store/box';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+const Date = styled.div`
+  font-size: 18px;
 `;
 
 const QuestionBox = styled.div`
   margin: auto auto;
-  height: 50%;
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-`;
-const Date = styled.div`
-  font-size: 18px;
 `;
 
 const Question = styled.div`
@@ -58,7 +54,7 @@ const ModalCharacter = styled.div`
 `;
 
 const ModalCharacterImage = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 `;
@@ -75,7 +71,7 @@ const InputLabel = styled.label`
   font-size: 14px;
   display: inline-block;
   overflow: hidden;
-  color: #bbbbbb;
+  color: var(--text-second);
   padding: 1rem;
 `;
 

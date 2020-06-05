@@ -1,0 +1,12 @@
+/* Customize Slider Width */
+.MuiPaper-root.MuiPaper-root {
+  width: 400px;
+  overflow: visible !important;
+  background-color: var(--light-background);
+}
+
+@media screen and (max-width: 768px) {
+  .MuiPaper-root {
+    width: 250px;
+  }
+}

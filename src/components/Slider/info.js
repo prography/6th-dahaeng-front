@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import egg from '../../assets/joraeng/egg/purpleegg.png'
 import { useSelector } from 'react-redux';
 
 const UserTitleBox = styled.div`
@@ -12,7 +13,7 @@ const UserTitleBox = styled.div`
 
 const UserTitle = styled.div`
   font-size: 24px;
-  flex: 1;
+  flex: none;
   margin-right: 1rem;
   max-width: 170px;
 `;
@@ -21,13 +22,11 @@ const UserInfoBtn = styled.button`
   flex: 1;
   border: none;
   background: none;
-  color: #bbbbbb;
+  color: var(--text-second);
   text-decoration: none;
-  text-align: center;
+  text-align: left;
   font-size: 12px;
   cursor: pointer;
-  margin-left: -8px;
-  margin-right: -15px;
 `;
 //전체 info(사진 + 유저정보) 감싸는 박스
 const UserInfoBox = styled.div`
@@ -42,19 +41,13 @@ const UserInfoBox = styled.div`
 const UserPictureBox = styled.div`
   flex: none;
   height: 4rem;
-  width: 4rem;
-  margin-bottom: 1rem;
-  border: solid;
-  border-radius: 50%;
+  margin-left: 1rem;
   overflow: hidden;
 `;
 
 //유저 정보에 반려 조랭 이미지 넘어오면 여기 img로 바꾸고 src에 리덕스로 연결하면 되려나
-const Picture = styled.div`
-  width: 100%;
+const UserPicture = styled.img`
   height: 100%;
-  background-color: red;
-  object-fit: cover;
 `;
 //전체 유저 정보 감싸는 박스
 const UserTextBox = styled.div`
@@ -72,16 +65,17 @@ const UserTextWrapper = styled.div`
 //불러온 유저 정보 부분
 const UserInfoText = styled.div`
   font-size: 16px;
-  flex: 1;
+  flex: none;
+  width: 64px;
+  text-align: right;
 `;
 //유저 정보의 종류 나오는 부분
 //한 줄로 안 맞춰지는 문제 해결해야 해유,,
 const UserText = styled.div`
   font-size: 14px;
-  text-align: right;
-  flex: 1;
-  padding-right: 2px;
-  padding-top: 2px;
+  text-align: left;
+  flex: none;
+  padding: 2px 2px 0 8px;
 `;
 
 //css 완료하고 시간 여유 있으면 수정 부분 해볼게요!
@@ -106,7 +100,7 @@ const InfoBox = (state) => {
       </UserTitleBox>
       <UserInfoBox>
         <UserPictureBox>
-          <Picture></Picture>
+          <UserPicture alt="joraeng-egg" src={egg}/>
         </UserPictureBox>
 
         <UserTextBox>

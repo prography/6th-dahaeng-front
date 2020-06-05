@@ -57,7 +57,7 @@ const Input = styled.input`
     color: #4d4d4d;
   }
   &::placeholder {
-    color: #bbbbbb;
+    color: var(--text-second);
   }
   &.error {
     border: 1px solid #fd5660;

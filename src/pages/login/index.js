@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, login } from 'store/auth';
 import { getUser } from 'store/user';
 import styled from 'styled-components';
-import SignResponsive from '../../components/common/SignResponsive';
 import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
+import SignResponsive from '../../components/common/SignResponsive';
 
 const Title = styled.div`
   font-size: 32px;

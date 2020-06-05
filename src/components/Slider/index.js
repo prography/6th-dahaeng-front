@@ -133,11 +133,11 @@ const Slider = ({ history }) => {
   }
 
   function navigateMarketPage() {
-    history.push('/box');
+    history.push('/market');
   }
 
   function navigateDonationPage() {
-    history.push('/box');
+    history.push('/donation');
   }
 
   const list = (anchor) => (

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from 'styles/palette';
 
-import ground from 'assets/main/ground.png';
+import ground from 'assets/main/ground.jpg';
 import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';

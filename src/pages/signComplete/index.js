@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import congratulateJoraeng from 'assets/joraeng/congratulateJoraeng.png';
+import congratulateJoraeng from 'assets/joraeng/congratulate-joraeng.png';
 
 const Title = styled.div`
   font-size: 32px;

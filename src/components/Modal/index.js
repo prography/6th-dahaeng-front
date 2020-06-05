@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import closeicon from 'assets/icon/closeicon.png';
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -12,14 +14,15 @@ const ModalOverlay = styled.div`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 50%;
+  top: 350px;
   left: 50%;
-  width: 60%;
-  min-width: 300px;
+  width: calc(100% - 20px);
+  max-width: 768px;
   transform: translate(-50%, -50%);
   background-color: white;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-  padding: 2rem;
+  box-shadow: 0px 0px 0px 500px rgba(0, 0, 0, 0.2);
+  z-index: 4;
+  padding: 1.5rem;
 `;
 
 const TitleField = styled.div``;
@@ -29,14 +32,18 @@ const ContentField = styled.div``;
 const ButtonField = styled.div``;
 
 const CloseButton = styled.button`
-  color: #faa084;
   float: right;
-  z-index: 10;
+  z-index: 5;
   border: none;
   outline: none;
   background: none;
+
   cursor: pointer;
   /* padding: 1rem 1rem 0 0; */
+`;
+
+const CloseIcon = styled.img`
+  width: 10px;
 `;
 
 const Modal = ({ openModal, setModal, title, content, button }) => {
@@ -46,7 +53,9 @@ const Modal = ({ openModal, setModal, title, content, button }) => {
         <>
           <ModalOverlay></ModalOverlay>
           <Wrapper>
-            <CloseButton onClick={setModal}>X</CloseButton>
+            <CloseButton onClick={setModal}>
+              <CloseIcon src={closeicon} alt="" />
+            </CloseButton>
             <TitleField>{title}</TitleField>
             <ContentField>{content}</ContentField>
             <ButtonField>{button}</ButtonField>

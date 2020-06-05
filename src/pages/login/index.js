@@ -70,13 +70,13 @@ const NaverLogin = styled.button`
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user, hasJorang, token } = useSelector(
+  const { form, auth, authError, user, has_jorang, token } = useSelector(
     ({ auth, user }) => ({
       form: auth.login,
       auth: auth.auth,
       authError: auth.authError,
       user: auth.user,
-      hasJorang: auth.hasJorang,
+      has_jorang: auth.has_jorang,
       token: auth.token,
     }),
   );
@@ -117,9 +117,7 @@ const Login = ({ history }) => {
     }
     if (token) {
       console.log('로그인 성공');
-      if (!hasJorang) {
-        history.push('/create');
-      }
+      console.log('has_jorang: ', has_jorang);
       history.push('/');
     }
     // } else if (user) {
@@ -127,7 +125,7 @@ const Login = ({ history }) => {
     //   console.log(user);
     //   history.push('/');
     // }
-  }, [auth, authError, dispatch, history, user]);
+  }, [auth, authError, dispatch, history, user, has_jorang, token]);
 
   return (
     <SignResponsive>

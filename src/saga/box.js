@@ -80,12 +80,12 @@ function* setRecordSaga(action) {
     );
 
     yield put({
-      type: GET_RECORDS_SUCCESS,
+      type: SET_RECORD_SUCCESS,
       payload: res.data.question,
     });
   } catch (e) {
     yield put({
-      type: GET_RECORDS_FAIL,
+      type: SET_RECORD_FAIL,
       payload: e,
     });
   }

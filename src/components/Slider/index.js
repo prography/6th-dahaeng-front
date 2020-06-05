@@ -118,8 +118,8 @@ const Slider = ({ history }) => {
   const token = useSelector((state) => state.auth.auth);
 
   const logout = () => {
-    localStorage.setItem('accessToken', null);
     history.push('/login');
+    localStorage.setItem('accessToken', null);
   };
 
   const toggleDrawer = (open) => (event) => {

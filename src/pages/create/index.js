@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { create } from 'store/user';
+import { create } from 'store/auth';
 import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
@@ -76,14 +76,22 @@ const Create = ({ history }) => {
 
   const [name, setName] = useState('');
 
-  const onSubmit = () => {
-    dispatch(create(name, '#ffffff'));
+  const has_jorang = useSelector((state) => state.auth.has_jorang);
 
-    history.push('/login');
-  };
+  useEffect(() => {
+    if (has_jorang === true) {
+      history.push('/');
+    }
+  }, [has_jorang, history]);
 
   const onChange = (e) => {
     setName(e.target.value);
+  };
+
+  const onSubmit = () => {
+    console.log('submit');
+    dispatch(create({ nickname: name, color: 'FFFFFF' }));
+    //history.push('/');
   };
 
   return (

@@ -22,7 +22,7 @@ const UserInfoBtn = styled.button`
   flex: 1;
   border: none;
   background: none;
-  color: #bbbbbb;
+  color: var(--text-second);
   text-decoration: none;
   text-align: left;
   font-size: 12px;
@@ -41,7 +41,6 @@ const UserInfoBox = styled.div`
 const UserPictureBox = styled.div`
   flex: none;
   height: 4rem;
-  width: 4rem;
   margin-left: 1rem;
   overflow: hidden;
 `;

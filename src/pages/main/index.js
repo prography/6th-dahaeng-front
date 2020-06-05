@@ -69,7 +69,7 @@ const QuestionBox = styled.div`
         font-size: 14px;
         display: inline-block;
         overflow: hidden;
-        color: #bbbbbb;
+        color: var(--text-second);
         padding: 1rem;
         `;
 

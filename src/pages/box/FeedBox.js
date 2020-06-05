@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
-import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg'
+import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   box-shadow: var(--card-shadow);
   border-radius: var(--small-border-radius);
   background-color: #ffffff;
-  
+
   flex: 1 1 calc(33.3333% - 20px);
   min-width: 256px;
   max-width: calc(33.3333% - 20px);
@@ -20,17 +20,17 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
-  
+
   @media (min-width: 612px) and (max-width: 1024px) {
-    max-width: calc(50% - 20px)
+    max-width: calc(50% - 20px);
   }
   @media (max-width: 612px) {
     max-width: inherit;
   }
-  
+
   display: flex;
   flex-direction: column;
-  
+
   cursor: pointer;
   transition: 0.125s ease-in-out;
   &:hover {
@@ -65,11 +65,15 @@ const Date = styled.div`
 const Question = styled.div`
   font-size: 18px;
   padding: 0.5rem 1rem;
- 
+
   & > span {
-   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 60%,
+      var(--secondary-color) 40%
+    );
   }
-  
+
   flex: none;
 `;
 
@@ -104,7 +108,10 @@ const FeedBox = ({ record }) => {
     <>
       <Wrapper>
         <CharacterBox>
-          <CharacterImg alt="" src={record.img === null ? placeholderImage : record.img} />
+          <CharacterImg
+            alt=""
+            src={record.img === null ? placeholderImage : record.img}
+          />
         </CharacterBox>
         <ContentBox>
           <Date>{Moment(record.created_at).format('MM-DD')}</Date>

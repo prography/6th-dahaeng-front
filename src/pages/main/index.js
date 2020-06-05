@@ -28,14 +28,14 @@ const Question = styled.div`
   margin-bottom: 1rem;
   cursor: pointer;
 
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, var(--secondary-color) 40%);
 `;
 
 const ModalTitle = styled.div``;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, var(--secondary-color) 40%);
   display: inline;
 `;
 

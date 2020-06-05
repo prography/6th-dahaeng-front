@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  padding: 0.5rem;
 `;
 
 const TitleBox = styled.div`

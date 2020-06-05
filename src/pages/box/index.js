@@ -13,8 +13,9 @@ import Responsive from '../../components/common/Responsive.js';
 
 const SortingBar = styled.div`
   margin: 0 auto;
-  margin-top: 4rem;
+  margin-top: 2rem;
   width: 100%;
+  background-color: white;
   height: 2rem;
 `;
 
@@ -44,6 +45,8 @@ const Content = styled.div`
   flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'none')};
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'none')};
   justify-content: center;
+  height: calc(100vh - 10rem - 16px);
+  overflow-y: auto;
 `;
 
 const Box = () => {

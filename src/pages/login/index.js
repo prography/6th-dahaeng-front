@@ -70,13 +70,14 @@ const NaverLogin = styled.button`
 
 const Login = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user, hasJorang } = useSelector(
+  const { form, auth, authError, user, hasJorang, token } = useSelector(
     ({ auth, user }) => ({
       form: auth.login,
       auth: auth.auth,
       authError: auth.authError,
       user: auth.user,
       hasJorang: auth.hasJorang,
+      token: auth.token,
     }),
   );
 
@@ -114,17 +115,18 @@ const Login = ({ history }) => {
       console.log(authError);
       return;
     }
-    if (auth) {
+    if (token) {
       console.log('로그인 성공');
       if (!hasJorang) {
         history.push('/create');
       }
       history.push('/');
-    } else if (user) {
-      console.log('getUser 성공');
-      console.log(user);
-      history.push('/');
     }
+    // } else if (user) {
+    //   console.log('getUser 성공');
+    //   console.log(user);
+    //   history.push('/');
+    // }
   }, [auth, authError, dispatch, history, user]);
 
   return (

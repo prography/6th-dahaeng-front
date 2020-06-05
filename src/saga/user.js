@@ -55,6 +55,7 @@ function* reminderSaga(action) {
 
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
+    console.log('rminder');
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };

@@ -79,7 +79,7 @@ const Create = ({ history }) => {
   const onSubmit = () => {
     dispatch(create(name, '#ffffff'));
 
-    history.push('/');
+    history.push('/login');
   };
 
   const onChange = (e) => {

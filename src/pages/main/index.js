@@ -7,11 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, setRecord, getRecords } from 'store/box';
 import Responsive from '../../components/common/Responsive';
 
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
 const QuestionBox = styled.div`
   margin: auto auto;
   height: 50%;
@@ -57,7 +52,7 @@ const ModalCharacter = styled.div`
 `;
 
 const ModalCharacterImage = styled.img`
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 `;
@@ -134,7 +129,9 @@ const Main = () => {
   // }, [dispatch]);
 
   const completeRecord = () => {
-    dispatch(setRecord({ question: question, detail: inputText, img: img }));
+    dispatch(
+      setRecord({ question: question, detail: inputText, img: imgBase64 }),
+    );
     setModal();
   };
 

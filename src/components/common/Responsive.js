@@ -14,7 +14,8 @@ const Responsive = styled.div`
   }
 
   @media (max-width: 768px) {
-    max-width: 200px;
+    /* max-width: 200px; */
+    /* 행복보관함 찌그러진다..! */
   }
 `;
 

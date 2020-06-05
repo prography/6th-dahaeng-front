@@ -38,7 +38,7 @@ const initialState = {
       text: '오늘의 색은?',
     },
     detail: '노랑색',
-    img: "/images/defaultJoraeng.png",
+    img: null,
   },
   records: [
     {
@@ -47,15 +47,15 @@ const initialState = {
         text: 'text1',
       },
       detail: 'detail1',
-      img: null,
+      img: '/images/defaultJoraeng.png', //img src에 넣을 값 저장됨...
     },
     {
       question: {
         date: '0523',
-        text: 'text2',
+        text: 'text2lkwaejflkjewlafelkwfjwfjlkweaflkwejlfknewkfnaelwkfnawlekfn',
       },
-      detail: 'detail2',
-      img: null,
+      detail: 'text2lkwaejflkjewlafelkwfjwfjlkweaflkwejlfknewkfnaelwkfnawlekfn',
+      img: '/images/exampleImg.jpeg',
     },
     {
       question: {

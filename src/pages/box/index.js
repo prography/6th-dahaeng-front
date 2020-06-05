@@ -9,40 +9,33 @@ import Header from 'components/Header';
 import search from 'assets/icon/search.png';
 import feed from 'assets/icon/feed.png';
 import thread from 'assets/icon/thread.png';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
+import Responsive from '../../components/common/Responsive.js';
 
 const SortingBar = styled.div`
   margin: 0 auto;
   margin-top: 4rem;
-  width: 90%;
-  height: 3rem;
+  width: 100%;
+  height: 2rem;
 `;
 
 const SortingBox = styled.div`
   float: right;
   display: flex;
   flex-direction: row;
-  width: 3rem;
 `;
 
 const Search = styled.div`
-  width: 1rem;
+  width: 1.5rem;
   height: 1rem;
 `;
 
 const Feed = styled.div`
-  width: 1rem;
+  width: 1.5rem;
   height: 1rem;
 `;
 
 const Thread = styled.div`
-  width: 1rem;
+  width: 1.5rem;
   height: 1rem;
 `;
 
@@ -50,6 +43,7 @@ const Content = styled.div`
   display: ${(props) => (props.sortingType === 'feed' ? 'flex' : 'none')};
   flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'none')};
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'none')};
+  justify-content: center;
 `;
 
 const Box = () => {
@@ -67,11 +61,12 @@ const Box = () => {
   return (
     <>
       <Header></Header>
-      <Wrapper>
+      <Responsive style={{ color: '#333333' }}>
         <SortingBar>
           <SortingBox>
             <Search onClick={() => setSortingType('search')}>
               <img
+                alt=""
                 src={search}
                 style={{
                   width: '1rem',
@@ -82,6 +77,7 @@ const Box = () => {
             </Search>
             <Feed onClick={() => setSortingType('feed')}>
               <img
+                alt=""
                 src={feed}
                 style={{
                   width: '1rem',
@@ -92,6 +88,7 @@ const Box = () => {
             </Feed>
             <Thread onClick={() => setSortingType('thread')}>
               <img
+                alt=""
                 src={thread}
                 style={{
                   width: '1rem',
@@ -105,18 +102,18 @@ const Box = () => {
 
         <Content sortingType={'feed'}>
           {sortingType === 'thread' ? (
-            records.map((record) => {
-              return <ThreadBox record={record}></ThreadBox>;
+            records.map((record, index) => {
+              return <ThreadBox record={record} key={index}></ThreadBox>;
             })
           ) : sortingType === 'feed' ? (
-            records.map((record) => {
-              return <FeedBox record={record}></FeedBox>;
+            records.map((record, index) => {
+              return <FeedBox record={record} key={index}></FeedBox>;
             })
           ) : (
             <Search></Search>
           )}
         </Content>
-      </Wrapper>
+      </Responsive>
     </>
   );
 };

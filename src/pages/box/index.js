@@ -29,13 +29,17 @@ const ListModeIcon = styled.div`
 `;
 
 const Content = styled.div`
-  display: ${(props) => (props.sortingType === 'feed' ? 'flex' : 'none')};
-  flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'none')};
-  flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'none')};
-  justify-content: center;
-  padding: 0 20px;
+  display: flex;
+  flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'column')};
+  flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'inherit')};
+  justify-content: ${(props) => (props.sortingType === 'feed' ? 'flex-start' : 'center')};
+  padding: 20px;
   height: calc(100vh - 10rem - 16px);
   overflow-y: auto;
+  
+  @media screen and (max-width: 480px){
+    padding: 10px;  
+  }
 `;
 
 const Box = () => {

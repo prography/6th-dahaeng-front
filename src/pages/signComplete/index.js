@@ -32,8 +32,8 @@ const CongratulateImg = styled.img`
 `;
 const ButtonBox = styled.div`
   flex: 1;
-  margin-left: 'none';
-  width: '100%';
+  margin-left: none;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-end;
 `;
@@ -48,6 +48,7 @@ const CreateButton = styled.button`
   height: 3rem;
   width: 100%;
   margin-top: 1em;
+  margin-bottom: 2rem;
 `;
 
 const signComplete = ({ history }) => {
@@ -56,19 +57,21 @@ const signComplete = ({ history }) => {
   };
 
   return (
-    <SignResponsive>
-      <Title>Da:haeng</Title>
-      <SubTitle>
-        <div>회원 가입이 완료되었습니다 !</div>
-        <div>다행과 함께 행복을 차근차근 모아보세요 :)</div>
-      </SubTitle>
-      <ImageBox>
-        <CongratulateImg src={congratulateJoraeng} alt="" />
-      </ImageBox>
-      <ButtonBox>
-        <CreateButton onClick={createLink}>행복 기록하러 가기</CreateButton>
-      </ButtonBox>
-    </SignResponsive>
+    <>
+      <SignResponsive>
+        <Title>Da:haeng</Title>
+        <SubTitle>
+          <div>회원 가입이 완료되었습니다 !</div>
+          <div>다행과 함께 행복을 차근차근 모아보세요 :)</div>
+        </SubTitle>
+        <ImageBox>
+          <CongratulateImg src={congratulateJoraeng} alt="" />
+        </ImageBox>
+        <ButtonBox>
+          <CreateButton onClick={createLink}>행복 기록하러 가기</CreateButton>
+        </ButtonBox>
+      </SignResponsive>
+    </>
   );
 };
 

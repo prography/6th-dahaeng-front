@@ -7,6 +7,13 @@ import SignResponsive from '../../components/common/SignResponsive';
 import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
 import Header from 'components/Header';
 
+const Title = styled.div`
+  font-size: 32px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
 const TextBox = styled.div`
   font-size: 15px;
   text-align: center;
@@ -49,7 +56,6 @@ const ButtonBox = styled.div`
   flex: 1;
   margin-left: none;
   width: 100%;
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
 `;
@@ -64,6 +70,7 @@ const LoginButton = styled.button`
   height: 3rem;
   width: 100%;
   margin-top: 1em;
+  margin-bottom: 2rem;
 `;
 
 const Create = ({ history }) => {
@@ -83,20 +90,21 @@ const Create = ({ history }) => {
 
   return (
     <>
-      <Header></Header>
       <SignResponsive>
+        <Title>Da:haeng</Title>
         <TextBox>
           <div>짜잔- 나만의 반려조랭이에요</div>
           <div>조랭이의 이름을 지어주세요</div>
         </TextBox>
         <ImageBox>
-          <JoraengImg
-            src={MyJoraeng}
-            alt=""
-          />
+          <JoraengImg src={MyJoraeng} alt="" />
         </ImageBox>
         <InputBox>
-          <NicknameInput value={name} onChange={onChange} placeholder="조랭이 이름을 적어주세요!"/>
+          <NicknameInput
+            value={name}
+            onChange={onChange}
+            placeholder="조랭이 이름을 적어주세요!"
+          />
         </InputBox>
         <TextBox>
           <div>매일 매일 행복을 기록하면, </div>

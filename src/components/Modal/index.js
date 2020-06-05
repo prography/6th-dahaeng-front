@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   position: fixed;
   top: 350px;
   left: 50%;
-  width: 80%;
+  width: calc(100% - 20px);
   max-width: 768px;
   transform: translate(-50%, -50%);
   background-color: white;

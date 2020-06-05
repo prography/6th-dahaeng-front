@@ -1,56 +1,54 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
+import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg'
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
 import Moment from 'moment';
 
 const Wrapper = styled.div`
-  width: 30%;
+  box-shadow: var(--card-shadow);
+  border-radius: var(--small-border-radius);
+  background-color: #ffffff;
+  
+  flex: 1 1 calc(33.3333% - 20px);
+  min-width: 256px;
+  max-width: calc(33.3333% - 20px);
+  height: 412px;
+  margin: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  
+  @media (min-width: 612px) and (max-width: 1024px) {
+    max-width: calc(50% - 20px)
+  }
+  @media (max-width: 612px) {
+    max-width: inherit;
+  }
+  
   display: flex;
   flex-direction: column;
-
-  margin: 1rem 0.5rem 0rem 0.5rem;
-  background-color: white;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-
-  /* @media (max-width: 1024px) {
-    width: 40%;
-  } */
-
-  @media (max-width: 768px) {
-    width: 100%;
+  
+  cursor: pointer;
+  transition: 0.125s ease-in-out;
+  &:hover {
+    background-color: var(--light-background);
   }
 `;
 
-const WrapperBox = styled.div`
-  position: relative;
-  padding-top: 70%;
-
-  display: flex;
-  flex-direction: column;
-`;
-
 const CharacterBox = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 70%;
-
-  border-style: none;
+  height: 200px;
+  width: 100%;
   overflow: hidden;
+  flex: none;
 `;
 
 const CharacterImg = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 200px;
 `;
 
 const ContentBox = styled.div`
@@ -60,24 +58,29 @@ const ContentBox = styled.div`
 
 const Date = styled.div`
   font-size: 18px;
-  margin: 0.5rem;
+  padding: 0.5rem 1rem 0;
+  flex: none;
 `;
 
 const Question = styled.div`
   font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
-  display: inline;
-  margin: 0.5rem;
-
-  word-break: break-all;
+  padding: 0.5rem 1rem;
+ 
+  & > span {
+   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  }
+  
+  flex: none;
 `;
 
 const Detail = styled.div`
+  flex: 1;
   font-size: 14px;
-  margin: 0.5rem;
+  padding: 0.5rem 1rem;
   align-items: center;
 
   word-break: break-all;
+  flex: 1;
 `;
 
 const checkTitleLength = (text) => {
@@ -89,7 +92,7 @@ const checkTitleLength = (text) => {
 };
 
 const checkDetailLength = (text) => {
-  if (text.length >= 60) {
+  if (text.length >= 120) {
     return text.substr(0, 60) + '...';
   } else {
     return text;
@@ -99,16 +102,16 @@ const checkDetailLength = (text) => {
 const FeedBox = ({ record }) => {
   return (
     <>
-      <WrapperBox>
+      <Wrapper>
         <CharacterBox>
-          <CharacterImg alt="" src={record.image} />
+          <CharacterImg alt="" src={record.img === null ? placeholderImage : record.img} />
         </CharacterBox>
         <ContentBox>
           <Date>{Moment(record.created_at).format('MM-DD')}</Date>
           <Question>{checkTitleLength(record.question)}</Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
-      </WrapperBox>
+      </Wrapper>
     </>
   );
 };

@@ -27,6 +27,8 @@ a {
 button {
   cursor: pointer;
   outline: none;
+  background-color: transparent;
+  border: none;
 }
 
 input {

@@ -9,7 +9,7 @@ import Responsive from '../../components/common/Responsive';
 
 const QuestionBox = styled.div`
         margin: auto auto;
-        height: 50%;
+        height: 300px;
         display: flex;
         align-items: center;
         justify-content: center;

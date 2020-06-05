@@ -44,7 +44,9 @@ const InputBox = styled.div`
 const NicknameInput = styled.input`
   border: none;
   border-bottom: 1px solid #bbbbbb;
-  width: 55%;
+  text-align: center;
+  padding: 4px 8px 6px;
+  width: 300px;
 `;
 
 const ButtonBox = styled.div`

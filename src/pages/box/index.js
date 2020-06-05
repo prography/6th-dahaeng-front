@@ -14,28 +14,16 @@ import Responsive from '../../components/common/Responsive.js';
 const SortingBar = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
-  width: 100%;
   background-color: white;
   height: 2rem;
 `;
 
 const SortingBox = styled.div`
-  float: right;
   display: flex;
-  flex-direction: row;
+  justify-content: flex-end;
 `;
 
-const Search = styled.div`
-  width: 1.5rem;
-  height: 1rem;
-`;
-
-const Feed = styled.div`
-  width: 1.5rem;
-  height: 1rem;
-`;
-
-const Thread = styled.div`
+const ListModeIcon = styled.div`
   width: 1.5rem;
   height: 1rem;
 `;
@@ -45,6 +33,7 @@ const Content = styled.div`
   flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'none')};
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'none')};
   justify-content: center;
+  padding: 0 20px;
   height: calc(100vh - 10rem - 16px);
   overflow-y: auto;
 `;
@@ -67,7 +56,7 @@ const Box = () => {
       <Responsive style={{ color: '#333333' }}>
         <SortingBar>
           <SortingBox>
-            <Search onClick={() => setSortingType('search')}>
+            <ListModeIcon onClick={() => setSortingType('search')}>
               <img
                 alt=""
                 src={search}
@@ -77,8 +66,8 @@ const Box = () => {
                   objectFit: 'scale-down',
                 }}
               ></img>
-            </Search>
-            <Feed onClick={() => setSortingType('feed')}>
+            </ListModeIcon>
+            <ListModeIcon onClick={() => setSortingType('feed')}>
               <img
                 alt=""
                 src={feed}
@@ -88,8 +77,8 @@ const Box = () => {
                   objectFit: 'scale-down',
                 }}
               ></img>
-            </Feed>
-            <Thread onClick={() => setSortingType('thread')}>
+            </ListModeIcon>
+            <ListModeIcon onClick={() => setSortingType('thread')}>
               <img
                 alt=""
                 src={thread}
@@ -99,7 +88,7 @@ const Box = () => {
                   objectFit: 'scale-down',
                 }}
               ></img>
-            </Thread>
+            </ListModeIcon>
           </SortingBox>
         </SortingBar>
 
@@ -113,7 +102,7 @@ const Box = () => {
               return <FeedBox record={record} key={index}></FeedBox>;
             })
           ) : (
-            <Search></Search>
+            <ListModeIcon></ListModeIcon>
           )}
         </Content>
       </Responsive>

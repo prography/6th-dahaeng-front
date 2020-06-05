@@ -6,6 +6,8 @@ import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 
+import loginJoraeng from 'assets/joraeng/login-joraeng.jpg';
+
 const Title = styled.div`
   font-size: 32px;
   margin-top: 2rem;
@@ -28,14 +30,26 @@ const LinkText = styled.div`
   font-size: 12px;
   margin-top: 1rem;
   text-align: center;
+
+  & > span {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 60%,
+      #ffede5 40%
+    );
+  }
 `;
 
-const Picture = styled.div`
-  display: block;
+const PictureBox = styled.div`
   margin: 0px auto;
-  background: blue;
-  width: 400px;
-  height: 120px;
+  width: 90%;
+`;
+
+const LoginImg = styled.img`
+  width: 100%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
 `;
 
 const SnsBox = styled.div`
@@ -135,8 +149,12 @@ const Login = ({ history }) => {
         <div>나만의 소소한 행복을 찾아</div>
         <div>보관하고, 또 다른 행복을 찾자</div>
       </Content>
-      <LinkText>더 알아보러 가기</LinkText>
-      <Picture />
+      <LinkText>
+        <span>더 알아보러 가기</span>
+      </LinkText>
+      <PictureBox>
+        <LoginImg src={loginJoraeng} alt="" />
+      </PictureBox>
       <LoginForm
         form={form}
         onChange={onChange}

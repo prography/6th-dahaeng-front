@@ -7,6 +7,8 @@ import Sign from 'pages/sign';
 import SignComplete from 'pages/signComplete';
 import Create from 'pages/create';
 import Box from 'pages/box';
+import Market from 'pages/market';
+import Donation from 'pages/donation';
 
 // import Header from 'components/Header';
 
@@ -21,6 +23,8 @@ function App() {
         <Route path="/signComplete" component={SignComplete} exact></Route>
         <Route path="/create" component={Create} exact></Route>
         <Route path="/box" component={Box} exact></Route>
+        <Route path="/donation" component={Donation} exact></Route>
+        <Route path="/market" component={Market} exact></Route>
         {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
         <Route
           render={({ location }) => (

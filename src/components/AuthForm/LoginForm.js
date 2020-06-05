@@ -76,7 +76,7 @@ const Footer = styled.div`
   display: flex;
   margin-top: 1rem;
   padding-bottom: 1rem;
-  borderbottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const FooterContent = styled.span`

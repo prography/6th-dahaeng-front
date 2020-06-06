@@ -28,14 +28,22 @@ const Question = styled.div`
   margin-bottom: 1rem;
   cursor: pointer;
 
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, var(--secondary-color) 40%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 60%,
+    var(--secondary-color) 40%
+  );
 `;
 
 const ModalTitle = styled.div``;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, var(--secondary-color) 40%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 60%,
+    var(--secondary-color) 40%
+  );
   display: inline;
 `;
 
@@ -122,6 +130,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const reminders = useSelector((state) => state.user.reminders);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
+  const token = useSelector((state) => state.auth.token);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -131,11 +140,20 @@ const Main = ({ history }) => {
 
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   if (has_jorang === false) {
+  //     history.push('/create');
+  //   }
+  // }, [dispatch, history]);
+
+  // const token = localStorage.getItem('accessToken');
+
   useEffect(() => {
-    if (has_jorang === false) {
-      history.push('/create');
+    console.log(token);
+    if (!token) {
+      history.push('/login');
     }
-  }, [dispatch, history]);
+  }, [token, history]);
 
   useEffect(() => {
     dispatch(getQuestion());

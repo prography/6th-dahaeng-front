@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
+import { logout } from 'store/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
 import menuIcon from '../../assets/icon/menu_icon.png';
@@ -113,13 +114,14 @@ const Slider = ({ history }) => {
   const anchor = 'left';
   const classes = useStyles();
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   //TODO: ??? token vs user
-  const token = useSelector((state) => state.auth.auth);
+  const token = useSelector((state) => state.auth.token);
 
-  const logout = () => {
+  const Trylogout = () => {
+    dispatch(logout());
     history.push('/login');
-    localStorage.setItem('accessToken', null);
+    //localStorage.setItem('accessToken', null);
   };
 
   const toggleDrawer = (open) => (event) => {
@@ -183,7 +185,7 @@ const Slider = ({ history }) => {
           </DrawerCloseBtn>
           <Spacer />
           {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
-          <LogoutText onClick={logout}>로그아웃</LogoutText>
+          <LogoutText onClick={Trylogout}>로그아웃</LogoutText>
         </Drawer>
       </React.Fragment>
     </>

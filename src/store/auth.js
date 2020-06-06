@@ -10,6 +10,7 @@ export const [SIGN, SIGN_SUCCESS, SIGN_FAIL] = createRequestAction('SIGN');
 export const [CREATE, CREATE_SUCCESS, CREATE_FAIL] = createRequestAction(
   'CREATE',
 );
+export const LOGOUT = 'LOGOUT';
 
 //form: login/sign, key: email, password, passwordConfirm, value: 값
 export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
@@ -32,6 +33,7 @@ export const create = createAction(CREATE, ({ nickname, color }) => ({
   nickname,
   color,
 }));
+export const logout = createAction(LOGOUT);
 
 export const initialState = {
   sign: {
@@ -95,6 +97,11 @@ const auth = handleActions(
     [CREATE_FAIL]: (state, { payload: error }) => ({
       ...state,
       has_jorang: false,
+    }),
+
+    [LOGOUT]: (state, { payload: error }) => ({
+      ...state,
+      token: null,
     }),
   },
   initialState,

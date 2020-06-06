@@ -30,6 +30,7 @@ const CongratulateImg = styled.img`
   justify-content: center;
   @media screen and (max-width: 480px) {
     height: auto;
+    max-height: 180px;
     width: 300px;
   }
 `;

@@ -130,6 +130,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const reminders = useSelector((state) => state.user.reminders);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
+  const token = useSelector((state) => state.auth.token);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -144,6 +145,15 @@ const Main = ({ history }) => {
   //     history.push('/create');
   //   }
   // }, [dispatch, history]);
+
+  // const token = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    console.log(token);
+    if (!token) {
+      history.push('/login');
+    }
+  }, [token, history]);
 
   useEffect(() => {
     dispatch(getQuestion());

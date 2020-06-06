@@ -110,7 +110,7 @@ const FeedBox = ({ record }) => {
         <CharacterBox>
           <CharacterImg
             alt=""
-            src={record.img === null ? placeholderImage : record.img}
+            src={record.image === null ? placeholderImage : record.image}
           />
         </CharacterBox>
         <ContentBox>

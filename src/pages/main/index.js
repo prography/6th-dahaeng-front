@@ -140,11 +140,11 @@ const Main = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (has_jorang === false) {
-  //     history.push('/create');
-  //   }
-  // }, [dispatch, history]);
+  useEffect(() => {
+    if (has_jorang === false) {
+      history.push('/create');
+    }
+  }, [dispatch, history]);
 
   // const token = localStorage.getItem('accessToken');
 

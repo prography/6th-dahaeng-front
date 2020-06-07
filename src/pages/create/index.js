@@ -91,6 +91,7 @@ const Create = ({ history }) => {
   const onSubmit = () => {
     console.log('submit');
     dispatch(create({ nickname: name, color: 'FFFFFF' }));
+    // dispatch(create({ nickname: 'asd', ... }))
     //history.push('/');
   };
 

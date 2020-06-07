@@ -39,4 +39,4 @@
            AWS_ACCESS_KEY_ID: ${{ secrets. IAM_ACCESS_ID }}
            AWS_SECRET_ACCESS_KEY: ${{ secrets.IAM_ACCESS_SECRET_KEY }}
            AWS_REGION: 'ap-northeast-2'
-           SOURCE_DIR: 'dist'
+           SOURCE_DIR: 'build'

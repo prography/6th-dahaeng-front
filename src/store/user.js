@@ -5,7 +5,7 @@ import { createRequestAction } from './createRequestAction';
 const REFRESH_SET_USER = 'REFRESH_SET_USER';
 
 export const [REMINDER, REMINDER_SUCCESS, REMINDER_FAIL] = createRequestAction(
-  'CREATE',
+  'REMINDER',
 );
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);

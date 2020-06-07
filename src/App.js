@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense, layzy} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Main from 'pages/main';
@@ -11,6 +11,7 @@ import Market from 'pages/market';
 import Donation from 'pages/donation';
 
 // import Header from 'components/Header';
+
 
 function App() {
   return (

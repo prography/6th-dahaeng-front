@@ -11,6 +11,7 @@ import Moment from 'moment';
 
 const Date = styled.div`
   font-size: 18px;
+  display: inline;
 `;
 
 const QuestionBox = styled.div`
@@ -35,7 +36,36 @@ const Question = styled.div`
   );
 `;
 
-const ModalTitle = styled.div``;
+const ModalTitle = styled.div`
+  margin-bottom: 0.2rem;
+`;
+
+//감정 카테고리 시도
+const ModalCategory = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+`;
+
+const DropdownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  z-index: 8;
+  width: 100%;
+  border: 0.5px solid #e9e9e9;
+`;
+
+const DropdownButton = styled.button`
+  background-color: #ffffff;
+  border: 0.5px solid #e9e9e9;
+  min-width: 45px;
+  min-height: 28px;
+
+  &:hover ${DropdownContent} {
+    display: block;
+  }
+`;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
@@ -212,16 +242,24 @@ const Main = ({ history }) => {
           openModal={openModal}
           setModal={setModal}
           title={
-            <ModalTitle>
-              <Date>
-                {Moment(
-                  question &&
-                    question.last_login &&
-                    question.last_login.dateForm,
-                ).format('MM-DD')}
-              </Date>
-              <ModalQuestion>{question && question.question}</ModalQuestion>
-            </ModalTitle>
+            <>
+              <ModalTitle>
+                <Date>
+                  {Moment(
+                    question &&
+                      question.last_login &&
+                      question.last_login.dateForm,
+                  ).format('MM-DD')}
+                </Date>
+                <ModalCategory>
+                  <DropdownButton>감정</DropdownButton>
+                  <DropdownContent>감정1</DropdownContent>
+                </ModalCategory>
+              </ModalTitle>
+              <ModalTitle>
+                <ModalQuestion>{question && question.question}</ModalQuestion>
+              </ModalTitle>
+            </>
           }
           content={
             <ModalContent>

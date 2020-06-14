@@ -81,11 +81,13 @@ const DailyRecord = styled.div`
   height: 50px;
 `;
 
-const LogoutText = styled.div`
+const LogoutBtn = styled.button`
   font-size: 14px;
   text-align: center;
   color: var(--text-second);
   margin: 1rem;
+  border: none;
+  text-decoration: none;
 `;
 
 const SliderButton = styled.button`
@@ -185,7 +187,7 @@ const Slider = ({ history }) => {
           </DrawerCloseBtn>
           <Spacer />
           {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
-          <LogoutText onClick={Trylogout}>로그아웃</LogoutText>
+          <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
         </Drawer>
       </React.Fragment>
     </>

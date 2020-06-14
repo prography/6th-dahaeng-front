@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import egg from '../../assets/joraeng/egg/purpleegg.png'
+import egg from '../../assets/joraeng/egg/purpleegg.png';
+import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector } from 'react-redux';
 
 const UserTitleBox = styled.div`
@@ -13,13 +14,13 @@ const UserTitleBox = styled.div`
 
 const UserTitle = styled.div`
   font-size: 24px;
-  flex: none;
+  flex: 2;
   margin-right: 1rem;
   max-width: 170px;
 `;
 
 const UserInfoBtn = styled.button`
-  flex: 1;
+  flex: none;
   border: none;
   background: none;
   color: var(--text-second);
@@ -28,6 +29,11 @@ const UserInfoBtn = styled.button`
   font-size: 12px;
   cursor: pointer;
 `;
+
+const UpdateIcon = styled.img`
+  height: 15px;
+`;
+
 //전체 info(사진 + 유저정보) 감싸는 박스
 const UserInfoBox = styled.div`
   display: flex;
@@ -82,9 +88,6 @@ const UserText = styled.div`
 const updateTitle = (e) => {
   alert('조랭이가 열심히 준비 중입니다요');
 };
-const updateNickname = (e) => {
-  alert('조랭이가 열심히 준비 중입니다요');
-};
 const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다요');
 };
@@ -96,18 +99,20 @@ const InfoBox = (state) => {
       <UserTitleBox>
         {/* title 글자수 제한 있어야 함! 8글자 이내쯤 */}
         <UserTitle>{user.title}</UserTitle>
-        <UserInfoBtn onClick={updateTitle}>[수정]</UserInfoBtn>
+        <UserInfoBtn onClick={updateTitle}>
+          <UpdateIcon src={updateicon} alt="" />
+        </UserInfoBtn>
       </UserTitleBox>
       <UserInfoBox>
         <UserPictureBox>
-          <UserPicture alt="joraeng-egg" src={egg}/>
+          <UserPicture alt="joraeng-egg" src={egg} />
         </UserPictureBox>
 
         <UserTextBox>
           <UserTextWrapper>
             <UserInfoText>{user.name}</UserInfoText>
             <UserText>조랭 </UserText>
-            <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn>
+            {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
           </UserTextWrapper>
 
           <UserTextWrapper>

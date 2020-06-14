@@ -2,6 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 import { createRequestAction } from './createRequestAction';
 
+//유저 정보 받아오기 도전중
 const REFRESH_SET_USER = 'REFRESH_SET_USER';
 
 export const [REMINDER, REMINDER_SUCCESS, REMINDER_FAIL] = createRequestAction(
@@ -14,15 +15,14 @@ export const reminder = createAction(REMINDER);
 
 const initialState = {
   user: {
-    id: 111,
-    name: '다스',
+    id: null,
+    nickname: null,
     title: 'Da:haeng',
     coin: 0,
-    picture: '조랭',
+    joraengstatus: null,
+    color: null,
   },
   getUserError: null,
-  nickname: null,
-  color: null,
   reminders: null,
 };
 

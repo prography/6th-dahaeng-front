@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -9,20 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
 import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
-
-// 임시 기분표
-const emotionArray = [
-  '🥳',
-  '🥑',
-  '🌱',
-  '✈️',
-  '📚',
-  '⛄️',
-  '🌟',
-  '🌈',
-  '🌺',
-  '😴',
-];
+import { getRecords } from '../../store/box.js';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -120,6 +107,14 @@ const Slider = ({ history }) => {
   //TODO: ??? token vs user
   const token = useSelector((state) => state.auth.token);
 
+  useEffect(() => {
+    if (open) {
+      dispatch(getRecords());
+    }
+  }, [open]);
+
+  const records = useSelector((state) => state.box.records);
+
   const Trylogout = () => {
     dispatch(logout());
     history.push('/login');
@@ -161,9 +156,11 @@ const Slider = ({ history }) => {
       <InfoBox />
       {/* 행복 기록시 입력한 카테고리 떠야 함 */}
       <DailyRecordBox>
-        {emotionArray.map((text, index) => (
-          <DailyRecord key={text}>{text}</DailyRecord>
-        ))}
+        {records
+          ? records.map((record, index) => (
+              <DailyRecord key={record}>{record.emotion}</DailyRecord>
+            ))
+          : null}
       </DailyRecordBox>
 
       <List>

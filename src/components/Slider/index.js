@@ -128,7 +128,6 @@ const Slider = ({ history }) => {
     ) {
       return;
     }
-
     setOpen(open);
   };
 
@@ -183,7 +182,6 @@ const Slider = ({ history }) => {
             <DrawerIcon src={menuIcon} />
           </DrawerCloseBtn>
           <Spacer />
-          {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
           <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
         </Drawer>
       </React.Fragment>

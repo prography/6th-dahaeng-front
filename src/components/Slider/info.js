@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import egg from '../../assets/joraeng/egg/purpleegg.png';
 import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector } from 'react-redux';
+
+import Modal from '../../components/Modal';
 
 const UserTitleBox = styled.div`
   display: flex;
@@ -75,8 +77,8 @@ const UserInfoText = styled.div`
   width: 64px;
   text-align: right;
 `;
+
 //유저 정보의 종류 나오는 부분
-//한 줄로 안 맞춰지는 문제 해결해야 해유,,
 const UserText = styled.div`
   font-size: 14px;
   text-align: left;
@@ -84,22 +86,40 @@ const UserText = styled.div`
   padding: 2px 2px 0 8px;
 `;
 
-//css 완료하고 시간 여유 있으면 수정 부분 해볼게요!
-const updateTitle = (e) => {
-  alert('조랭이가 열심히 준비 중입니다요');
-};
+const ModalButton = styled.button`
+  box-sizing: border-box;
+  float: center;
+  margin-top: 1rem;
+  border: none;
+  color: white;
+  height: 2rem;
+  background: var(--primary-color);
+  border-radius: 4px;
+  outline: none;
+`;
+
 const setCoinModal = (e) => {
-  alert('조랭이가 열심히 준비 중입니다요');
+  alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
 const InfoBox = (state) => {
   const user = useSelector((state) => state.user.user);
+
+  const [openModal, setOpenModal] = useState(false);
+  const setModal = () => {
+    setOpenModal(!openModal);
+  };
+
+  const completeUpdate = () => {
+    setModal();
+  };
+
   return (
     <>
       <UserTitleBox>
         {/* title 글자수 제한 있어야 함! 8글자 이내쯤 */}
         <UserTitle>{user.title}</UserTitle>
-        <UserInfoBtn onClick={updateTitle}>
+        <UserInfoBtn onClick={setModal}>
           <UpdateIcon src={updateicon} alt="" />
         </UserInfoBtn>
       </UserTitleBox>
@@ -122,6 +142,14 @@ const InfoBox = (state) => {
           </UserTextWrapper>
         </UserTextBox>
       </UserInfoBox>
+
+      <Modal
+        openModal={openModal}
+        setModal={setModal}
+        title={<div>개인 정보 수정</div>}
+        content={<div>수정 수정</div>}
+        button={<ModalButton onClick={completeUpdate}>수정 완료</ModalButton>}
+      />
     </>
   );
 };

@@ -18,7 +18,7 @@ const initialState = {
     id: null,
     nickname: null,
     title: 'Da:haeng',
-    coin: 0,
+    coin: null,
     joraengstatus: null,
     color: null,
   },

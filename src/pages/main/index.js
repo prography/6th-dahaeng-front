@@ -143,11 +143,9 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
-  background: #faa084;
+  background: var(--primary-color);
   border-radius: 4px;
   outline: none;
-
-  cursor: pointer;
 `;
 
 const Main = ({ history }) => {
@@ -165,7 +163,7 @@ const Main = ({ history }) => {
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
     setInputText(e.target.value);
-    console.log(inputText);
+    // console.log(inputText);
   };
 
   const dispatch = useDispatch();

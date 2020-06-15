@@ -102,12 +102,13 @@ const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = (state) => {
+const InfoBox = (setOpen) => {
   const user = useSelector((state) => state.user.user);
 
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
+    setOpen(true);
   };
 
   const completeUpdate = () => {

@@ -57,7 +57,8 @@ const DailyRecordBox = styled.div`
   align-items: flex-start;
   align-content: flex-start;
 `;
-//그날 행복기록에 입력한 카테고리 조랭 출력
+
+//그날 행복기록에 입력한 조랭 이모티콘 출력
 const DailyRecord = styled.div`
   // 100/7% ~= 14.2%
   flex: 1 1 14.2%;
@@ -152,8 +153,9 @@ const Slider = ({ history }) => {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <InfoBox />
-      {/* 행복 기록시 입력한 카테고리 떠야 함 */}
+      <InfoBox setOpen = {setOpen}/>
+      {/* 행복 기록시 입력한 카테고리 떠야 함 
+      행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecordBox>
         {records
           ? records.map((record, index) => (

@@ -86,9 +86,16 @@ const UserText = styled.div`
   padding: 2px 2px 0 8px;
 `;
 
+// 수정 모달 디자인
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
 const ModalButton = styled.button`
   box-sizing: border-box;
-  float: center;
+  float: right;
   margin-top: 1rem;
   border: none;
   color: white;
@@ -98,17 +105,32 @@ const ModalButton = styled.button`
   outline: none;
 `;
 
+const ModalInput = styled.textarea`
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 1px solid var(--text-fourth);
+  outline: none;
+  resize: none;
+`;
+
 const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = (setOpen) => {
+const InfoBox = () => {
   const user = useSelector((state) => state.user.user);
 
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
-    setOpen(true);
+  };
+
+  const [inputText, setInputText] = useState('');
+  const onTextChange = (e) => {
+    setInputText(e.target.value);
+    // console.log(inputText);
   };
 
   const completeUpdate = () => {
@@ -145,10 +167,14 @@ const InfoBox = (setOpen) => {
       </UserInfoBox>
 
       <Modal
+        className="update"
         openModal={openModal}
         setModal={setModal}
-        title={<div>개인 정보 수정</div>}
-        content={<div>수정 수정</div>}
+        title={<ModalTitle>조랭 정보 수정</ModalTitle>}
+        content={
+          <ModalInput value={inputText} onChange={onTextChange}>
+          </ModalInput>
+        }
         button={<ModalButton onClick={completeUpdate}>수정 완료</ModalButton>}
       />
     </>

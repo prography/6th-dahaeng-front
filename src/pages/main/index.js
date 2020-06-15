@@ -237,6 +237,7 @@ const Main = ({ history }) => {
           </Question>
         </QuestionBox>
         <Modal
+          className
           openModal={openModal}
           setModal={setModal}
           title={

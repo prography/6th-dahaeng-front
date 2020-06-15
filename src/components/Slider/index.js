@@ -124,8 +124,8 @@ const Slider = ({ history }) => {
 
   const toggleDrawer = (open) => (event) => {
     if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === 'keydown'
+      // && (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -150,10 +150,10 @@ const Slider = ({ history }) => {
         [classes.fullList]: anchor === 'left',
       })}
       role="presentation"
-      onClick={toggleDrawer(false)}
+      // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <InfoBox setOpen = {setOpen}/>
+      <InfoBox />
       {/* 행복 기록시 입력한 카테고리 떠야 함 
       행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecordBox>

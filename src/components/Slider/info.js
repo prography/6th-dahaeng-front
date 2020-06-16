@@ -83,6 +83,7 @@ const UserText = styled.div`
   font-size: 14px;
   text-align: left;
   flex: none;
+  display: inline;
   padding: 2px 2px 0 8px;
 `;
 
@@ -105,14 +106,34 @@ const ModalButton = styled.button`
   outline: none;
 `;
 
-const ModalInput = styled.textarea`
+const ModalInput = styled.input`
   box-sizing: border-box;
-  width: 80%;
-  margin: 0 auto;
+  flex: 2;
   border: none;
   border-bottom: 1px solid var(--text-fourth);
   outline: none;
   resize: none;
+  text-align: center;
+
+  line-height: 20px;
+  padding: 6px;
+`;
+
+const ModalTextBox = styled.div`
+  display: flex;
+  flex: 3;
+  flex-wrap: wrap;
+  width: 80%;
+  margin-left: 10%;
+  align-items: center;
+`;
+
+const ModalBox = styled.div`
+  flex: 3;
+  height: 4rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const setCoinModal = (e) => {
@@ -127,6 +148,7 @@ const InfoBox = () => {
     setOpenModal(!openModal);
   };
 
+  //TODO : 개인정보 수정
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
     setInputText(e.target.value);
@@ -172,8 +194,15 @@ const InfoBox = () => {
         setModal={setModal}
         title={<ModalTitle>조랭 정보 수정</ModalTitle>}
         content={
-          <ModalInput value={inputText} onChange={onTextChange}>
-          </ModalInput>
+          <ModalBox>
+            <ModalTextBox>
+              <ModalInput value={user.title} onChange={onTextChange} />
+            </ModalTextBox>
+            <ModalTextBox>
+              <ModalInput value={user.name} onChange={onTextChange} />
+              <UserText>조랭</UserText>
+            </ModalTextBox>
+          </ModalBox>
         }
         button={<ModalButton onClick={completeUpdate}>수정 완료</ModalButton>}
       />

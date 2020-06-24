@@ -17,11 +17,11 @@ const Wrapper = styled.div`
   top: 350px;
   left: 50%;
   width: calc(100% - 20px);
-  max-width: 768px;
+  max-width: ${(props) => (props.className === 'update' ? '380px' : '768px')};
   transform: translate(-50%, -50%);
   background-color: white;
   box-shadow: 0px 0px 0px 500px rgba(0, 0, 0, 0.2);
-  z-index: 4;
+  z-index: 10;
   padding: 1.5rem;
 `;
 
@@ -46,13 +46,13 @@ const CloseIcon = styled.img`
   width: 10px;
 `;
 
-const Modal = ({ openModal, setModal, title, content, button }) => {
+const Modal = ({ className, openModal, setModal, title, content, button }) => {
   return (
     <>
       {openModal ? (
         <>
           <ModalOverlay></ModalOverlay>
-          <Wrapper>
+          <Wrapper className={className}>
             <CloseButton onClick={setModal}>
               <CloseIcon src={closeicon} alt="" />
             </CloseButton>

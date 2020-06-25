@@ -177,7 +177,7 @@ const Room = ({ reminders }) => {
       </PostBox>
       <Character>
         {/*TODO: Dynamic color binding*/}
-        <MainJoraeng color="#ffe884"/>
+        <MainJoraeng age={0} color="#ffe884"/>
       </Character>
       <Closet>
         <ClosetImg src={closet} alt="" />

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import palette from 'styles/palette';
 import ground from 'assets/main/ground.jpg';
 import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
-import character from 'assets/joraeng/defaultJoraeng.png';
 import Moment from 'moment';
 import Modal from '../../components/Modal';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import { useSelector } from 'react-redux';
+import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
 
 //Modal
 const Date = styled.div`
@@ -50,15 +51,6 @@ const ModalCharacterDefaultImage = styled.img`
   margin-left: 3rem;
 `;
 
-const InputLabel = styled.label`
-  cursor: pointer;
-  font-size: 14px;
-  display: inline-block;
-  overflow: hidden;
-  color: var(--text-second);
-  padding: 1rem;
-`;
-
 const ModalInput = styled.textarea`
   box-sizing: border-box;
   width: 100%;
@@ -81,21 +73,7 @@ const ModalInput = styled.textarea`
   padding: 8px;
 `;
 
-const ModalButton = styled.button`
-  box-sizing: border-box;
-  float: right;
-  margin-top: 1rem;
-  border: none;
-  color: white;
-  height: 2rem;
-  background: #faa084;
-  border-radius: 4px;
-  outline: none;
-
-  cursor: pointer;
-`;
 //Modal
-
 const Wrapper = styled.div`
   margin: 0 auto;
   height: 350px;
@@ -144,10 +122,6 @@ const Character = styled.button`
   }
 `;
 
-const CharacterImg = styled.img`
-  width: 100%;
-`;
-
 const Closet = styled.button`
   position: absolute;
   width: 60px;
@@ -187,6 +161,7 @@ const BackgroundImg = styled.img`
 `;
 
 const Room = ({ reminders }) => {
+  const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
@@ -202,7 +177,8 @@ const Room = ({ reminders }) => {
         )}
       </PostBox>
       <Character>
-        <CharacterImg src={character} alt="" />
+        {/*TODO: Dynamic color binding*/}
+        <MainJoraeng age={user.joraengStatus} color={user.color} />
       </Character>
       <Closet>
         <ClosetImg src={closet} alt="" />

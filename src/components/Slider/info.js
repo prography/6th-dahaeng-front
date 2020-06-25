@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import egg from '../../assets/joraeng/egg/purpleegg.png';
 import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector } from 'react-redux';
 
 import Modal from '../../components/Modal';
+import SliderJoraeng from '../Joraeng/SliderJoraeng';
 
 const UserTitleBox = styled.div`
   display: flex;
@@ -49,14 +49,12 @@ const UserInfoBox = styled.div`
 const UserPictureBox = styled.div`
   flex: none;
   height: 4rem;
+  width: 4rem;
   margin-left: 1rem;
   overflow: hidden;
 `;
 
 //유저 정보에 반려 조랭 이미지 넘어오면 여기 img로 바꾸고 src에 리덕스로 연결하면 되려나
-const UserPicture = styled.img`
-  height: 100%;
-`;
 //전체 유저 정보 감싸는 박스
 const UserTextBox = styled.div`
   flex: 3;
@@ -170,12 +168,14 @@ const InfoBox = () => {
       </UserTitleBox>
       <UserInfoBox>
         <UserPictureBox>
-          <UserPicture alt="joraeng-egg" src={egg} />
+          {/*TODO: Dynamic color binding*/}
+          <SliderJoraeng age={user.joraengStatus} color={user.color} />
+          {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>
 
         <UserTextBox>
           <UserTextWrapper>
-            <UserInfoText>{user.name}</UserInfoText>
+            <UserInfoText>{user.nickname}</UserInfoText>
             <UserText>조랭 </UserText>
             {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
           </UserTextWrapper>

@@ -52,25 +52,11 @@ const ModalCategory = styled.div`
   padding-bottom: 2px;
 `;
 
-const DropdownContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #ffffff;
-  z-index: 8;
-  width: 100%;
-  border: 0.5px solid #e9e9e9;
-`;
-
-const DropdownButton = styled.button`
-  background-color: #ffffff;
-  border: 0.5px solid #e9e9e9;
-  min-width: 45px;
-  min-height: 28px;
-
-  &:hover ${DropdownContent} {
-    display: block;
-  }
-`;
+const DropdownStatusText = styled.span`
+  font-size: 14px;
+  padding-left: 12px;
+  color: var(--text-third);
+`
 
 const ModalQuestion = styled.div`
   font-size: 18px;
@@ -153,8 +139,11 @@ const ModalButton = styled.button`
   outline: none;
 `;
 
+const emotionWord = ['따뜻했어요!', '평온했어요!', '재밌었어요!', '두근두근!', '몽글몽글!'];
+
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(true);
+  const [dropdownState, setDropdownState] = useState(0);
   const setModal = () => {
     setOpenModal(!openModal);
   };
@@ -256,10 +245,11 @@ const Main = ({ history }) => {
                   ).format('MM-DD')}
                 </Date>
                 <ModalCategory>
-                  <EmotionDropdown />
-                  {/* <DropdownButton>감정</DropdownButton>
-                  <DropdownContent>감정1</DropdownContent> */}
+                  <EmotionDropdown updateDropdownValue={setDropdownState}/>
                 </ModalCategory>
+                <DropdownStatusText>
+                  {emotionWord[dropdownState]}
+                </DropdownStatusText>
               </ModalTitle>
               <ModalTitle>
                 <ModalQuestion>{question && question.question}</ModalQuestion>
@@ -296,7 +286,7 @@ const Main = ({ history }) => {
           button={
             <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
           }
-        ></Modal>
+        />
         <Room reminders={reminders}></Room>
       </Responsive>
     </>

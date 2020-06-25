@@ -61,11 +61,11 @@ const DropdownEmotion = styled.img`
 `;
 
 const EmotionArray = [
+  yellowEmotion,
   blueEmotion,
   purpleEmotion,
   redEmotion,
   whiteEmotion,
-  yellowEmotion,
 ];
 
 class EmotionDropdown extends Component {
@@ -84,11 +84,16 @@ class EmotionDropdown extends Component {
     });
   };
 
-  updateValue = (value) => {
-    this.setState({
+  updateValue = async (value) => {
+    await this.setState({
       dropdownValue: value,
     });
     this.toggleDropdown();
+    this.emitStatus();
+  };
+
+  emitStatus = () => {
+    this.props.updateDropdownValue(this.state.dropdownValue)
   };
 
   render() {

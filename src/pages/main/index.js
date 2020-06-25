@@ -8,6 +8,7 @@ import { getQuestion, setRecord } from 'store/box';
 import { reminder } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
+import EmotionDropdown from '../../components/Modal/EmotionDropdown';
 
 const Date = styled.div`
   font-size: 18px;
@@ -45,6 +46,10 @@ const ModalCategory = styled.div`
   position: relative;
   display: inline-block;
   margin-left: 0.5rem;
+  width: 42px;
+  height: 32px;
+  vertical-align: middle;
+  padding-bottom: 2px;
 `;
 
 const DropdownContent = styled.div`
@@ -149,7 +154,7 @@ const ModalButton = styled.button`
 `;
 
 const Main = ({ history }) => {
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const setModal = () => {
     setOpenModal(!openModal);
   };
@@ -251,8 +256,9 @@ const Main = ({ history }) => {
                   ).format('MM-DD')}
                 </Date>
                 <ModalCategory>
-                  <DropdownButton>감정</DropdownButton>
-                  <DropdownContent>감정1</DropdownContent>
+                  <EmotionDropdown />
+                  {/* <DropdownButton>감정</DropdownButton>
+                  <DropdownContent>감정1</DropdownContent> */}
                 </ModalCategory>
               </ModalTitle>
               <ModalTitle>

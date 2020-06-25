@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299"><defs><style>.cls-1{fill:#ffe884;}.cls-2,.cls-3{fill:none;}.cls-2{stroke:#212121;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px;}</style></defs><title>자산 37</title><g id="레이어_2" data-name="레이어 2"><g id="레이어_1-2" data-name="레이어 1"><path class="cls-1" d="M115.64,49.05c55.09-22.93,113.15,15.43,129.07,43.53,13.18,23.24,36.39,107.19-31.9,147.11C159.31,271,95.2,257.29,62.62,218.33,27.24,176.05,24,87.2,115.64,49.05Z"/><path class="cls-2" d="M166.67,108.22c-3.46,11.9-27.7,15.35-36,2.79"/><ellipse cx="137.8" cy="97.99" rx="4.13" ry="5.78"/><ellipse cx="157.62" cy="97.99" rx="4.13" ry="5.78"/><rect class="cls-3" width="299" height="299"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
+    <defs>
+        <style>
+            .cls-1{fill:#ffe884;}.cls-2,.cls-3{fill:none;}.cls-2{stroke:#212121;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px;}
+        </style>
+    </defs>
+    <g>
+        <g>
+            <path class="cls-1"
+                  d="M115.64,49.05c55.09-22.93,113.15,15.43,129.07,43.53,13.18,23.24,36.39,107.19-31.9,147.11C159.31,271,95.2,257.29,62.62,218.33,27.24,176.05,24,87.2,115.64,49.05Z"/>
+            <path class="cls-2" d="M166.67,108.22c-3.46,11.9-27.7,15.35-36,2.79"/>
+            <ellipse cx="137.8" cy="97.99" rx="4.13" ry="5.78"/>
+            <ellipse cx="157.62" cy="97.99" rx="4.13" ry="5.78"/>
+            <rect class="cls-3" width="299" height="299"/>
+        </g>
+    </g>
+</svg>

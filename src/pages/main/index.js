@@ -134,6 +134,7 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
+  padding: 4px 12px;
   background: var(--primary-color);
   border-radius: 4px;
   outline: none;
@@ -142,7 +143,7 @@ const ModalButton = styled.button`
 const emotionWord = ['따뜻했어요!', '평온했어요!', '재밌었어요!', '두근두근!', '몽글몽글!'];
 
 const Main = ({ history }) => {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const [dropdownState, setDropdownState] = useState(0);
   const setModal = () => {
     setOpenModal(!openModal);

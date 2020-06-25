@@ -175,7 +175,7 @@ const InfoBox = () => {
 
         <UserTextBox>
           <UserTextWrapper>
-            <UserInfoText>{user.name}</UserInfoText>
+            <UserInfoText>{user.nickname}</UserInfoText>
             <UserText>조랭 </UserText>
             {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
           </UserTextWrapper>

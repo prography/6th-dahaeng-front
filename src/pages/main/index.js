@@ -46,7 +46,7 @@ const ModalCategory = styled.div`
   position: relative;
   display: inline-block;
   margin-left: 0.5rem;
-  width: 42px;
+  width: 48px;
   height: 32px;
   vertical-align: middle;
   padding-bottom: 2px;

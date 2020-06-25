@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import styled from 'styled-components';
+
+import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.jpg';
+import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.jpg';
+import redEmotion from '../../assets/joraeng/category-joraeng/category-red.jpg';
+import whiteEmotion from '../../assets/joraeng/category-joraeng/category-white.jpg';
+import yellowEmotion from '../../assets/joraeng/category-joraeng/category-yellow.jpg';
+import downArrow from '../../assets/icon/downarrow.jpg';
 
 const DropdownWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 42px;
+  width: 48px;
   max-height: 32px;
   overflow: hidden;
 
@@ -15,12 +22,23 @@ const DropdownWrapper = styled.div`
 `;
 
 const DropdownButton = styled.button`
-  width: 42px;
+  width: 48px;
   height: 32px;
-  padding: 4px;
+  position: relative;
+  padding: 4px 12px 4px 4px;
   border: 1px solid var(--text-fourth);
   background: transparent;
   cursor: pointer;
+`;
+
+const DropdownTriangle = styled.img`
+  position: absolute;
+  right: 5px;
+  top: 12px;
+  width: 7px;
+  transform: ${(props) =>
+    props.className === 'open-list' ? 'rotate(180deg)' : 'none'};
+  transition: 0.25s ease-in-out;
 `;
 
 const DropdownList = styled.div`
@@ -30,15 +48,25 @@ const DropdownList = styled.div`
 `;
 
 const DropdownElement = styled.button`
-  width: 42px;
+  width: 48px;
   height: 32px;
-  padding: 4px;
+  padding: 4px 12px 4px 4px;
   border: none;
   background: transparent;
   cursor: pointer;
 `;
 
-const EmotionArray = [1, 2, 3, 4, 5];
+const DropdownEmotion = styled.img`
+  width: 21px;
+`;
+
+const EmotionArray = [
+  blueEmotion,
+  purpleEmotion,
+  redEmotion,
+  whiteEmotion,
+  yellowEmotion,
+];
 
 class EmotionDropdown extends Component {
   constructor(props) {
@@ -46,7 +74,7 @@ class EmotionDropdown extends Component {
 
     this.state = {
       dropdownState: false,
-      dropdownValue: '바보',
+      dropdownValue: 0,
     };
   }
 
@@ -56,15 +84,37 @@ class EmotionDropdown extends Component {
     });
   };
 
+  updateValue = (value) => {
+    this.setState({
+      dropdownValue: value,
+    });
+    this.toggleDropdown();
+  };
+
   render() {
     return (
       <DropdownWrapper
         className={this.state.dropdownState ? 'open-list' : null}
       >
-        <DropdownButton onClick={this.toggleDropdown}>뇸</DropdownButton>
+        <DropdownTriangle
+          src={downArrow}
+          alt=""
+          className={this.state.dropdownState ? 'open-list' : null}
+        />
+        <DropdownButton onClick={this.toggleDropdown}>
+          <DropdownEmotion
+            src={EmotionArray[this.state.dropdownValue]}
+            alt=""
+          />
+        </DropdownButton>
         <DropdownList>
           {EmotionArray.map((emotion, index) => (
-            <DropdownElement key={index}>{emotion}</DropdownElement>
+            <DropdownElement
+              key={index}
+              onClick={(e) => this.updateValue(index)}
+            >
+              <DropdownEmotion src={emotion} alt="" />
+            </DropdownElement>
           ))}
         </DropdownList>
       </DropdownWrapper>

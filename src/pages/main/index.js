@@ -179,7 +179,7 @@ const Main = ({ history }) => {
   useEffect(() => {
     console.log(token);
     if (!token) {
-      history.push('/login');
+      // history.push('/login');
     }
   }, [token, history]);
 

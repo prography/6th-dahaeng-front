@@ -1,9 +1,10 @@
 import React from 'react';
+import styled from 'styled-components'
 
-const MainJoraeng = ({ age, color }) => {
+const SliderJoraeng = ({ age, color }) => {
   if (age === 0) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206 261.5">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 100 200 200">
           <g>
             <g>
               <path fill="#f9f9f7"
@@ -18,14 +19,13 @@ const MainJoraeng = ({ age, color }) => {
                     d="M103.42,98.61c.1-.54.17-1.06.24-1.58a71.8,71.8,0,0,0-10.23.58c-14.07,1.77-25.57,9.23-34.57,19a30,30,0,0,0,11.9,2.78c8.17.09,16.11-2,20.26-4.51C94.73,112.61,102,106.49,103.42,98.61Z"/>
               <path fill={color}
                     d="M93.6,145.12a11.48,11.48,0,0,0-6.78-4.63,11.64,11.64,0,0,0-8,.67,11,11,0,0,0-6.56,7.15c-.7,2.95-.74,6.53,1.17,9.46a11.72,11.72,0,0,0,9.21,4.76,16.92,16.92,0,0,0,8.06-1.8c1.48-.89,4.38-3.32,4.94-6.46A12,12,0,0,0,93.6,145.12Z"/>
-              <rect width="206" height="261.5" fill="none"/>
             </g>
           </g>
         </svg>
     );
   } else if (age === 1) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206 261.5">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
           <g>
             <g>
               <path fill={color}
@@ -40,7 +40,6 @@ const MainJoraeng = ({ age, color }) => {
                     d="M98,157.5c-2.5,8.59-20,11.08-26,2"/>
               <ellipse cx="77.15" cy="150.12" rx="2.98" ry="4.17"/>
               <ellipse cx="91.46" cy="150.12" rx="2.98" ry="4.17"/>
-              <rect fill="none" width="206" height="261.5"/>
             </g>
           </g>
         </svg>
@@ -62,6 +61,7 @@ const MainJoraeng = ({ age, color }) => {
                     d="M103.45,55c-3.37,8.29-21,9-26.06-.68"/>
               <ellipse cx="83.48" cy="45.47" rx="4.17" ry="2.98" transform="translate(29.64 123.81) rotate(-84.08)"/>
               <ellipse cx="97.71" cy="46.94" rx="4.17" ry="2.98" transform="translate(40.94 139.29) rotate(-84.08)"/>
+              <rect fill="none" width="260" height="260"/>
             </g>
           </g>
         </svg>
@@ -69,4 +69,4 @@ const MainJoraeng = ({ age, color }) => {
   }
 };
 
-export default MainJoraeng;
+export default SliderJoraeng;

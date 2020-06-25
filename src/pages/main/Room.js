@@ -107,8 +107,7 @@ const PostBoxImg = styled.img`
   width: 100%;
 `;
 
-const
-  Character = styled.button`
+const Character = styled.button`
   position: absolute;
   right: 100px;
   width: 160px;

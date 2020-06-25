@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import palette from 'styles/palette';
 import ground from 'assets/main/ground.jpg';
 import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
-import character from 'assets/joraeng/defaultJoraeng.png';
 import Moment from 'moment';
 import Modal from '../../components/Modal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
@@ -109,7 +107,8 @@ const PostBoxImg = styled.img`
   width: 100%;
 `;
 
-const Character = styled.button`
+const
+  Character = styled.button`
   position: absolute;
   right: 100px;
   width: 160px;
@@ -177,7 +176,7 @@ const Room = ({ reminders }) => {
       </PostBox>
       <Character>
         {/*TODO: Dynamic color binding*/}
-        <MainJoraeng age={0} color="#ffe884"/>
+        <MainJoraeng age={2} color="#ffe884"/>
       </Character>
       <Closet>
         <ClosetImg src={closet} alt="" />

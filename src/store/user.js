@@ -19,8 +19,9 @@ const initialState = {
     nickname: null,
     title: 'Da:haeng',
     coin: null,
-    joraengstatus: null,
-    color: null,
+    // TODO: SET-UP DEFAULT
+    joraengStatus: 1,
+    color: "#ffe884",
   },
   getUserError: null,
   reminders: null,

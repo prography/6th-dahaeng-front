@@ -7,6 +7,8 @@ import closet from 'assets/main/itembox.png';
 import Moment from 'moment';
 import Modal from '../../components/Modal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import { useSelector } from 'react-redux';
+import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
 
 //Modal
 const Date = styled.div`
@@ -159,6 +161,7 @@ const BackgroundImg = styled.img`
 `;
 
 const Room = ({ reminders }) => {
+  const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
@@ -175,7 +178,7 @@ const Room = ({ reminders }) => {
       </PostBox>
       <Character>
         {/*TODO: Dynamic color binding*/}
-        <MainJoraeng age={2} color="#ffe884"/>
+        <MainJoraeng age={user.joraengStatus} color={user.color} />
       </Character>
       <Closet>
         <ClosetImg src={closet} alt="" />

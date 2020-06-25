@@ -169,7 +169,7 @@ const InfoBox = () => {
       <UserInfoBox>
         <UserPictureBox>
           {/*TODO: Dynamic color binding*/}
-          <SliderJoraeng age={0} color="#ffe884" />
+          <SliderJoraeng age={user.joraengStatus} color={user.color} />
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>
 

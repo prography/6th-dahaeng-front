@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector } from 'react-redux';
@@ -30,6 +30,7 @@ const UserInfoBtn = styled.button`
   text-align: left;
   font-size: 12px;
   cursor: pointer;
+  padding-right: 5px;
 `;
 
 const UpdateIcon = styled.img`
@@ -82,7 +83,7 @@ const UserText = styled.div`
   text-align: left;
   flex: none;
   display: inline;
-  padding: 2px 2px 0 8px;
+  padding: 2px 2px 0 5px;
 `;
 
 // 수정 모달 디자인
@@ -115,6 +116,11 @@ const ModalInput = styled.input`
 
   line-height: 20px;
   padding: 6px;
+
+  &::placeholder {
+    font-size: 12px;
+    color: var(--text-third);
+  }
 `;
 
 const ModalTextBox = styled.div`
@@ -147,11 +153,26 @@ const InfoBox = () => {
   };
 
   //TODO : 개인정보 수정
-  const [inputText, setInputText] = useState('');
-  const onTextChange = (e) => {
-    setInputText(e.target.value);
-    // console.log(inputText);
-  };
+  const [inputTitle, setInputTitle] = useState('');
+  const [inputNickname, setInputNickname] = useState('');
+
+  useEffect(() => {
+    setInputTitle(user ? user.title : '');
+  }, [user]);
+
+  useEffect(() => {
+    setInputNickname(user ? user.name : '');
+  }, [user]);
+
+  // const updateNewInfo = async () => {
+  //const newInfo = user
+  //newInfo.title = inputTitle
+  //newInfo.name = inputNickname
+
+  //if (await updateInfo(newInfo)) {
+  //getInfo()
+  //}
+  // }
 
   const completeUpdate = () => {
     setModal();
@@ -196,10 +217,18 @@ const InfoBox = () => {
         content={
           <ModalBox>
             <ModalTextBox>
-              <ModalInput value={user.title} onChange={onTextChange} />
+              <ModalInput
+                placeholder="나만의 다행 서비스 이름"
+                value={inputTitle}
+                onChange={(e) => setInputTitle(e.target.value)}
+              />
             </ModalTextBox>
             <ModalTextBox>
-              <ModalInput value={user.name} onChange={onTextChange} />
+              <ModalInput
+                placeholder="나만의 조랭닉네임"
+                value={inputNickname}
+                onChange={(e) => setInputNickname(e.target.value)}
+              />
               <UserText>조랭</UserText>
             </ModalTextBox>
           </ModalBox>

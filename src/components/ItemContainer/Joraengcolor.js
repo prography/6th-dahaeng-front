@@ -1,8 +1,15 @@
 import React from 'react';
 
+//object-fit: cover;
 const JoraengColor = ({ color }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.14 155.38">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 159.14 155.38"
+      width="50%"
+      height="85px"
+      // objectFit="cover"
+    >
       <g>
         <g>
           <path

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import JoraengColor from './Joraengcolor';
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -20,8 +21,10 @@ const Wrapper = styled.div`
 const ItemImageBox = styled.div`
   height: 134px;
   width: 100%;
-  overflow: hidden;
-  flex: none;
+  /* flex: none; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ItemImage = styled.img`
@@ -67,8 +70,12 @@ const ItemBox = ({ item }) => {
     <>
       <Wrapper>
         <ItemImageBox>
-          <ItemImage></ItemImage>
+          {/* <ItemImage
+            src={<JoraengColor color={item.color}></JoraengColor>}
+          ></ItemImage> */}
+          <JoraengColor color={item.color}></JoraengColor>
         </ItemImageBox>
+
         <ItemInfoBox>
           <ItemName>
             {item.name}

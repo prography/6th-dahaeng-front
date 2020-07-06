@@ -16,10 +16,7 @@ const IndexList = styled.div`
 `;
 
 const Index = styled.div`
-  /* background: #fffaf1; */
-  /* color: #fb8e5b; */
-  /* background: ${(props) => (props.select ? '#fb8e5b' : '#fffaf1')};
-  color: ${(props) => (props.select ? '#fffaf1' : '#fb8e5b')}; */
+  cursor: pointer;
 `;
 
 const ItemPage = styled.div`
@@ -35,7 +32,7 @@ const ItemPage = styled.div`
 `;
 
 const ItemContainer = ({ items, indexs }) => {
-  const [select, setSelect] = useState('컬러');
+  const [select, setSelect] = useState('color');
 
   const selectCategory = (index) => {
     setSelect(index);
@@ -55,16 +52,24 @@ const ItemContainer = ({ items, indexs }) => {
                     background: select === index ? '#fb8e5b' : '#fffaf1',
                   }}
                 >
-                  {index}
+                  {index === 'color'
+                    ? '컬러'
+                    : index === 'background'
+                    ? '배경'
+                    : index === 'item'
+                    ? '아이템'
+                    : null}
                 </Index>
               );
             })}
         </IndexList>
         <ItemPage>
           {items &&
-            items.map((item) => {
-              return <ItemBox key={item.name} item={item}></ItemBox>;
-            })}
+            items
+              .filter((item) => item.category === select)
+              .map((item) => {
+                return <ItemBox key={item.name} item={item}></ItemBox>;
+              })}
         </ItemPage>
       </Wrapper>
     </>

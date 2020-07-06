@@ -21,16 +21,9 @@ const Wrapper = styled.div`
 const ItemImageBox = styled.div`
   height: 134px;
   width: 100%;
-  /* flex: none; */
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const ItemImage = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 134px;
 `;
 
 const ItemInfoBox = styled.div`

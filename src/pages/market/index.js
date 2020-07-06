@@ -26,7 +26,7 @@ const ShopTitle = styled.div`
 
 const Market = () => {
   const items = useSelector((state) => state.user.items);
-  const indexs = ['컬러', '배경', '아이템'];
+  const indexs = ['color', 'background', 'item'];
 
   const dispatch = useDispatch();
 

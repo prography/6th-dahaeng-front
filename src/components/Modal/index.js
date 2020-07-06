@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import closeicon from 'assets/icon/closeicon.png';
 
 const ModalOverlay = styled.div`

@@ -1,21 +1,19 @@
 import React from 'react';
 import Responsive from '../../components/common/Responsive';
-import waitjoraeng from 'assets/joraeng/wait-joraeng.jpg';
 import styled from 'styled-components';
 import Header from '../../components/Header';
+import ItemContainer from '../../components/ItemContainer';
 
 const ContentBox = styled.div`
   margin: 0 auto;
   height: 350px;
   max-width: 480px;
   margin-top: 4rem;
+  text-align: center;
 `;
 
-const WaitTitle = styled.div`
-  font-size: 18px;
-`;
-const JoraengImg = styled.img`
-  width: 100%;
+const ShopTitle = styled.div`
+  font-size: 24px;
 `;
 
 const Market = () => {
@@ -24,8 +22,8 @@ const Market = () => {
       <Header></Header>
       <Responsive>
         <ContentBox>
-          <WaitTitle>아직 조랭이가 열일중!</WaitTitle>
-          <JoraengImg src={waitjoraeng} alt="" />
+          <ShopTitle>{'조랭 코인샵'}</ShopTitle>
+          <ItemContainer></ItemContainer>
         </ContentBox>
       </Responsive>
     </>

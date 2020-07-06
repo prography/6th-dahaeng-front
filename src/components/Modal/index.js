@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: var(--small-border-radius);
-  box-shadow: 0px 0px 0px 500px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 0px 700px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 1.5rem;
 `;

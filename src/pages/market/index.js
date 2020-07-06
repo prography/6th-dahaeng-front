@@ -1,22 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import Responsive from '../../components/common/Responsive';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { getItems } from '../../store/user';
+import Modal from '../../components/Modal';
 
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
   padding-top: 8rem;
   margin: 0 auto;
-  /* height: calc(100vh - 10rem - 16px); */
-
-  /* @media screen and (max-width: 480px) {
-    padding: 10px;
-  } */
-
   text-align: center;
 `;
 
@@ -24,9 +18,46 @@ const ShopTitle = styled.div`
   font-size: 24px;
 `;
 
+const ModalContent = styled.div`
+  font-size: 18px;
+`;
+
+const ModalButtonField = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ModalButtonLeft = styled.div`
+  width: 123px;
+  height: 29px;
+  border-radius: 4px;
+  background: #fb8e5b;
+  color: white;
+`;
+
+const ModalButtonRight = styled.div`
+  width: 123px;
+  height: 29px;
+  border-radius: 4px;
+  background: #fffaf1;
+  color: #fb8e5b;
+`;
+
 const Market = () => {
   const items = useSelector((state) => state.user.items);
   const indexs = ['color', 'background', 'item'];
+
+  const [openModal, setOpenModal] = useState(false);
+  const [itemName, setItemName] = useState('');
+
+  const setModal = (name) => {
+    setOpenModal(!openModal);
+    setItemName(name);
+  };
+
+  const buyItem = () => {
+    setModal();
+  };
 
   const dispatch = useDispatch();
 
@@ -38,8 +69,26 @@ const Market = () => {
     <>
       <Header></Header>
       <ContentBox>
+        <Modal
+          className="update"
+          openModal={openModal}
+          setModal={setModal}
+          content={
+            <ModalContent>{`'${itemName}'을 구매하시겠어요?`}</ModalContent>
+          }
+          button={
+            <ModalButtonField>
+              <ModalButtonLeft onClick={buyItem}>{'확인'}</ModalButtonLeft>
+              <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+            </ModalButtonField>
+          }
+        ></Modal>
         <ShopTitle>{'조랭 코인샵'}</ShopTitle>
-        <ItemContainer items={items} indexs={indexs}></ItemContainer>
+        <ItemContainer
+          items={items}
+          indexs={indexs}
+          setModal={setModal}
+        ></ItemContainer>
       </ContentBox>
     </>
   );

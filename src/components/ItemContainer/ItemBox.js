@@ -58,10 +58,10 @@ const ItemPrice = styled.div`
   text-align: left;
 `;
 
-const ItemBox = ({ item }) => {
+const ItemBox = ({ item, setModal }) => {
   return (
     <>
-      <Wrapper>
+      <Wrapper onClick={() => setModal(item.name)}>
         <ItemImageBox>
           {/* <ItemImage
             src={<JoraengColor color={item.color}></JoraengColor>}

@@ -31,7 +31,7 @@ const ItemPage = styled.div`
   overflow-y: auto;
 `;
 
-const ItemContainer = ({ items, indexs }) => {
+const ItemContainer = ({ items, indexs, setModal }) => {
   const [select, setSelect] = useState('color');
 
   const selectCategory = (index) => {
@@ -68,7 +68,13 @@ const ItemContainer = ({ items, indexs }) => {
             items
               .filter((item) => item.category === select)
               .map((item) => {
-                return <ItemBox key={item.name} item={item}></ItemBox>;
+                return (
+                  <ItemBox
+                    key={item.name}
+                    item={item}
+                    setModal={setModal}
+                  ></ItemBox>
+                );
               })}
         </ItemPage>
       </Wrapper>

@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Responsive from '../../components/common/Responsive';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
+import { getItems } from '../../store/user';
 
 const ContentBox = styled.div`
+  max-width: 1024px;
+  max-height: 709px;
+  padding-top: 8rem;
   margin: 0 auto;
-  height: 350px;
-  max-width: 480px;
-  margin-top: 4rem;
+  /* height: calc(100vh - 10rem - 16px); */
+
+  /* @media screen and (max-width: 480px) {
+    padding: 10px;
+  } */
+
   text-align: center;
 `;
 
@@ -17,15 +25,22 @@ const ShopTitle = styled.div`
 `;
 
 const Market = () => {
+  const items = useSelector((state) => state.user.items);
+  const indexs = ['컬러', '배경', '아이템'];
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getItems());
+  // }, [dispatch]);
+
   return (
     <>
       <Header></Header>
-      <Responsive>
-        <ContentBox>
-          <ShopTitle>{'조랭 코인샵'}</ShopTitle>
-          <ItemContainer></ItemContainer>
-        </ContentBox>
-      </Responsive>
+      <ContentBox>
+        <ShopTitle>{'조랭 코인샵'}</ShopTitle>
+        <ItemContainer items={items} indexs={indexs}></ItemContainer>
+      </ContentBox>
     </>
   );
 };

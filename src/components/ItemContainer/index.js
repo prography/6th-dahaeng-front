@@ -1,46 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-// const ModalOverlay = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   bottom: 0;
-//   right: 0;
-//   /* background-color: rgba(0, 0, 0, 0.16); */
-// `;
+import ItemBox from './ItemBox';
 
 const Wrapper = styled.div`
-  width: 100%;
+  max-height: 709px;
   border: 1px solid black;
-  
 `;
 
-// const TitleField = styled.div``;
+const IndexList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 34px;
+  /* height: 36px; */
+`;
 
-// const ContentField = styled.div``;
+const Index = styled.div`
+  /* background: #fffaf1; */
+  /* color: #fb8e5b; */
+  /* background: ${(props) => (props.select ? '#fb8e5b' : '#fffaf1')};
+  color: ${(props) => (props.select ? '#fffaf1' : '#fb8e5b')}; */
+`;
 
-// const ButtonField = styled.div``;
+const ItemPage = styled.div`
+  width: 100%;
+  height: 640px;
+  background: #fffaf1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 20px;
+  overflow-y: auto;
+`;
 
-// const CloseButton = styled.button`
-//   float: right;
-//   z-index: 5;
-//   border: none;
-//   outline: none;
-//   background: none;
+const ItemContainer = ({ items, indexs }) => {
+  const [select, setSelect] = useState('컬러');
 
-//   cursor: pointer;
-//   /* padding: 1rem 1rem 0 0; */
-// `;
+  const selectCategory = (index) => {
+    setSelect(index);
+  };
 
-// const CloseIcon = styled.img`
-//   width: 10px;
-// `;
-
-const ItemContainer = ({}) => {
   return (
     <>
-      <Wrapper></Wrapper>
+      <Wrapper>
+        <IndexList>
+          {indexs &&
+            indexs.map((index) => {
+              return (
+                <Index
+                  key={index}
+                  onClick={() => selectCategory(index)}
+                  style={{
+                    background: select === index ? '#fb8e5b' : '#fffaf1',
+                  }}
+                >
+                  {index}
+                </Index>
+              );
+            })}
+        </IndexList>
+        <ItemPage>
+          {items &&
+            items.map((item) => {
+              return <ItemBox key={item.name} item={item}></ItemBox>;
+            })}
+        </ItemPage>
+      </Wrapper>
     </>
   );
 };

@@ -63,9 +63,6 @@ const ItemBox = ({ item, setModal }) => {
     <>
       <Wrapper onClick={() => setModal(item.name)}>
         <ItemImageBox>
-          {/* <ItemImage
-            src={<JoraengColor color={item.color}></JoraengColor>}
-          ></ItemImage> */}
           <JoraengColor color={item.color}></JoraengColor>
         </ItemImageBox>
 

@@ -157,11 +157,10 @@ const Slider = ({ history }) => {
       {/* 행복 기록시 입력한 카테고리 떠야 함 
       행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecordBox>
-        {records
-          ? records.map((record, index) => (
-              <DailyRecord key={record}>{record.emotion}</DailyRecord>
-            ))
-          : null}
+        {/* {records &&
+          records.map((record, index) => (
+            <DailyRecord key={record}>{record.emotion}</DailyRecord>
+          ))} */}
       </DailyRecordBox>
 
       <List>

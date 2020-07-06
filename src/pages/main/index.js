@@ -56,7 +56,7 @@ const DropdownStatusText = styled.span`
   font-size: 14px;
   padding-left: 12px;
   color: var(--text-third);
-`
+`;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
@@ -140,7 +140,13 @@ const ModalButton = styled.button`
   outline: none;
 `;
 
-const emotionWord = ['따뜻했어요!', '평온했어요!', '재밌었어요!', '두근두근!', '몽글몽글!'];
+const emotionWord = [
+  '따뜻했어요!',
+  '평온했어요!',
+  '재밌었어요!',
+  '두근두근!',
+  '몽글몽글!',
+];
 
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -221,15 +227,13 @@ const Main = ({ history }) => {
     <>
       <Header></Header>
       <Responsive>
-        <QuestionBox>
+        <QuestionBox onClick={setModal}>
           <Date>
             {Moment(
               question && question.last_login && question.last_login.dateForm,
             ).format('MM-DD')}
           </Date>
-          <Question onClick={setModal}>
-            {question && question.question}
-          </Question>
+          <Question>{question && question.question}</Question>
         </QuestionBox>
         <Modal
           className
@@ -246,7 +250,7 @@ const Main = ({ history }) => {
                   ).format('MM-DD')}
                 </Date>
                 <ModalCategory>
-                  <EmotionDropdown updateDropdownValue={setDropdownState}/>
+                  <EmotionDropdown updateDropdownValue={setDropdownState} />
                 </ModalCategory>
                 <DropdownStatusText>
                   {emotionWord[dropdownState]}

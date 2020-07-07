@@ -7,9 +7,11 @@ import clsx from 'clsx';
 import { logout } from 'store/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
+
 import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
 import { getRecords } from '../../store/box.js';
+import DailyRecord from './dailyrecord.js';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -42,31 +44,6 @@ const DrawerCloseBtn = styled.button`
   padding: 3px 8px 0 0;
   border: none;
   background-color: var(--primary-color);
-`;
-
-const DailyRecordBox = styled.div`
-  background-color: var(--secondary-color);
-  padding: 10px 0;
-  flex: 1;
-  margin: 1em;
-  height: 200px;
-  border-radius: 4px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-`;
-
-//그날 행복기록에 입력한 조랭 이모티콘 출력
-const DailyRecord = styled.div`
-  // 100/7% ~= 14.2%
-  flex: 1 1 14.2%;
-  max-width: 14.2%;
-  text-align: center;
-  padding: 10px;
-  font-size: 21px;
-  height: 50px;
 `;
 
 const LogoutBtn = styled.button`
@@ -114,7 +91,7 @@ const Slider = ({ history }) => {
     }
   }, [open]);
 
-  const records = useSelector((state) => state.box.records);
+  // const records = useSelector((state) => state.box.records);
 
   const Trylogout = () => {
     dispatch(logout());
@@ -156,12 +133,7 @@ const Slider = ({ history }) => {
       <InfoBox />
       {/* 행복 기록시 입력한 카테고리 떠야 함 
       행복 기록 안 한 날 표시 어떻게 할지*/}
-      <DailyRecordBox>
-        {/* {records &&
-          records.map((record, index) => (
-            <DailyRecord key={record}>{record.emotion}</DailyRecord>
-          ))} */}
-      </DailyRecordBox>
+      <DailyRecord />
 
       <List>
         <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>

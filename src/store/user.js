@@ -28,8 +28,8 @@ const initialState = {
     title: 'Da:haeng',
     coin: null,
     // TODO: SET-UP DEFAULT
-    joraengStatus: 1,
-    color: '#ffe884',
+    joraengStatus: 2,
+    color: "#ffe884",
   },
   getUserError: null,
   reminders: null,

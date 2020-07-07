@@ -47,7 +47,7 @@ const Input = styled.input`
     color: #4d4d4d;
   }
   &::placeholder {
-    color: var(--text-second);
+    color: var(--text-third);
   }
 `;
 

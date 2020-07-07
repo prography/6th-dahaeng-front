@@ -22,7 +22,8 @@ const IndexList = styled.div`
 `;
 
 const Index = styled.div`
-  width: 78px;
+  /* width: 78px; */
+  min-width: 58px;
   line-height: 34px;
   border-radius: 4px 4px 0 0;
   margin-left: 8px;

@@ -14,12 +14,16 @@ export const [GETITEMS, GETITEMS_SUCCESS, GETITEMS_FAIL] = createRequestAction(
 export const [BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL] = createRequestAction(
   'BUYITEMS',
 );
+export const [SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL] = createRequestAction(
+  'SETITEMS',
+);
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 
 export const reminder = createAction(REMINDER);
 export const getItems = createAction(GETITEMS, (items) => items);
 export const buyItems = createAction(BUYITEMS);
+export const setItems = createAction(SETITEMS);
 
 const initialState = {
   user: {
@@ -104,6 +108,15 @@ const user = handleActions(
       user: { ...user, coin: payload.coin },
     }),
     [BUYITEMS_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      items: error,
+    }),
+
+    [SETITEMS_SUCCESS]: (state, { payload: items }) => ({
+      ...state,
+      items: items,
+    }),
+    [SETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
       items: error,
     }),

@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { getItems, buyItems } from '../../store/user';
 import Modal from '../../components/Modal';
+import Room from '../main/Room';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -43,7 +44,7 @@ const ModalButtonRight = styled.div`
   color: #fb8e5b;
 `;
 
-const Market = () => {
+const Closet = () => {
   const items = useSelector((state) => state.user.items);
   const indexs = ['color', 'background', 'item'];
   const dispatch = useDispatch();
@@ -57,8 +58,8 @@ const Market = () => {
     setItemName(name);
   };
 
-  const buyItem = (item) => {
-    dispatch(buyItems(item));
+  const setItem = (item) => {
+    // dispatch(buyItems(item));
     setModal();
     //refresh item list and coin
   };
@@ -67,25 +68,25 @@ const Market = () => {
   //   dispatch(getItems());
   // }, [dispatch]);
 
+  //TODO: Room : Itemcontainer  = 1 : 1
   return (
     <>
       <Header></Header>
       <ContentBox>
+        <Room></Room>
         <Modal
           className="update"
           openModal={openModal}
           setModal={setModal}
-          content={
-            <ModalContent>{`'${itemName}'을 구매하시겠어요?`}</ModalContent>
-          }
+          content={<ModalContent>{'현재 모습을 저장할까요?'}</ModalContent>}
           button={
             <ModalButtonField>
-              <ModalButtonLeft onClick={buyItem}>{'확인'}</ModalButtonLeft>
+              <ModalButtonLeft onClick={setItem}>{'확인'}</ModalButtonLeft>
               <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
             </ModalButtonField>
           }
         ></Modal>
-        <ShopTitle>{'조랭 코인샵'}</ShopTitle>
+        <ShopTitle>{'조랭옷장'}</ShopTitle>
         <ItemContainer
           items={items}
           indexs={indexs}
@@ -96,4 +97,4 @@ const Market = () => {
   );
 };
 
-export default Market;
+export default Closet;

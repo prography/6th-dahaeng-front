@@ -1,6 +1,6 @@
 import React from 'react';
 import Responsive from '../../components/common/Responsive';
-import waitjoraeng from 'assets/joraeng/wait-joraeng.jpg';
+import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 

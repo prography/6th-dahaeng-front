@@ -13,53 +13,67 @@ const ContentBox = styled.div`
   max-height: 709px;
   padding-top: 1rem;
   margin: 0 auto;
+  margin-bottom: 2rem;
   text-align: center;
 `;
 
-// const HeaderBlock = styled.div`
-//   position: fixed;
-//   width: 100%;
-//   background: white;
-//   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-// `;
-
-const ModalContent = styled.div`
+const ModalTitle = styled.div`
   font-size: 18px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
 `;
 
 const ModalButtonField = styled.div`
   display: flex;
   flex-direction: row;
+  margin: 0.5rem;
 `;
 
-const ModalButtonLeft = styled.div`
-  width: 123px;
-  height: 29px;
+const ModalButtonLeft = styled.button`
+  box-sizing: border-box;
+  flex: 1;
+  margin-right: 0.5rem;
+  border: none;
+  height: 30px;
   border-radius: var(--small-border-radius);
   background: var(--primary-color);
-  color: white;
+  color: #ffffff;
 `;
 
-const ModalButtonRight = styled.div`
-  width: 123px;
-  height: 29px;
+const ModalButtonRight = styled.button`
+  box-sizing: border-box;
+  flex: 1;
+  margin-left: 0.5rem;
+  border: none;
+  height: 30px;
   border-radius: 4px;
   background: var(--light-background);
   color: var(--primary-color);
 `;
 
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-third);
+`;
+
 const Market = () => {
   const items = useSelector((state) => state.user.items);
+  const user = useSelector((state) => state.user.user);
   const indexs = ['color', 'background', 'item'];
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   //나중에 item id값으로 바꿔야할듯?
   const [itemName, setItemName] = useState('');
+  const [itemPrice, setItemPrice] = useState('');
 
-  const setModal = (name) => {
+  const setModal = (item) => {
     setOpenModal(!openModal);
-    setItemName(name);
+    setItemName(item.name);
+    setItemPrice(item.price);
   };
 
   const buyItem = (item) => {
@@ -80,11 +94,15 @@ const Market = () => {
         <SubTitle title={'조랭코인샵'} />
         <ContentBox>
           <Modal
-            className="update"
+            className="popup"
             openModal={openModal}
             setModal={setModal}
+            title={<ModalTitle>{`'${itemName}'을 구매하시겠어요?`}</ModalTitle>}
             content={
-              <ModalContent>{`'${itemName}'을 구매하시겠어요?`}</ModalContent>
+              <>
+                <ModalText>{`아이템 : ${itemPrice} 코인`}</ModalText>
+                <ModalText>{`나의 행복코인 : ${user.coin} 코인`}</ModalText>
+              </>
             }
             button={
               <ModalButtonField>

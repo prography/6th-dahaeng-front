@@ -93,7 +93,7 @@ const ItemBox = ({ item, setModal }) => {
           </ItemInfoBox>
         </Wrapper>
       ) : (
-        <Wrapper onClick={() => setModal(item.name)}>
+        <Wrapper onClick={() => setModal(item)}>
           <ItemImageBox>
             <JoraengColor color={item.color}></JoraengColor>
           </ItemImageBox>

@@ -22,7 +22,7 @@ const Index = styled.div`
 const ItemPage = styled.div`
   width: 100%;
   height: 640px;
-  background: #fffaf1;
+  background: var(--light-background);
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -49,7 +49,10 @@ const ItemContainer = ({ items, indexs, setModal }) => {
                   key={index}
                   onClick={() => selectCategory(index)}
                   style={{
-                    background: select === index ? '#fb8e5b' : '#fffaf1',
+                    background:
+                      select === index
+                        ? 'var(--primary-color)'
+                        : 'var(--light-background)',
                   }}
                 >
                   {index === 'color'

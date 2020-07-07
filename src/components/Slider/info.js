@@ -210,7 +210,7 @@ const InfoBox = () => {
       </UserInfoBox>
 
       <Modal
-        className="update"
+        className="popup"
         openModal={openModal}
         setModal={setModal}
         title={<ModalTitle>조랭 정보 수정</ModalTitle>}

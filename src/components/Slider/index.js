@@ -26,7 +26,7 @@ const DrawerOpenBtn = styled.button`
   padding: 3px 8px 0 0;
   border: none;
   border-radius: 0 50% 50% 0;
-  z-index: 1;
+  z-index: 10;
   background-color: var(--primary-color);
 `;
 const DrawerIcon = styled.img`

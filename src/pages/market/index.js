@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
-import { getItems } from '../../store/user';
+import { getItems, buyItems } from '../../store/user';
 import Modal from '../../components/Modal';
 
 const ContentBox = styled.div`
@@ -46,8 +46,10 @@ const ModalButtonRight = styled.div`
 const Market = () => {
   const items = useSelector((state) => state.user.items);
   const indexs = ['color', 'background', 'item'];
+  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
+  //나중에 item id값으로 바꿔야할듯?
   const [itemName, setItemName] = useState('');
 
   const setModal = (name) => {
@@ -55,11 +57,11 @@ const Market = () => {
     setItemName(name);
   };
 
-  const buyItem = () => {
+  const buyItem = (item) => {
+    dispatch(buyItems(item));
     setModal();
+    //refresh item list?
   };
-
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch(getItems());

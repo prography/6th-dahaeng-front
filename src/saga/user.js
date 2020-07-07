@@ -90,10 +90,16 @@ function* buyItemSaga(action) {
     // const headers = {
     //   Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     // };
+
+    const param = {
+      id: action.payload.item,
+    };
+
     const res = yield call(
       [axios, 'post'],
       // 'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/items',
       // { headers: headers },
+      // param
     );
 
     console.log('response: ', res);

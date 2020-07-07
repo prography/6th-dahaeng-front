@@ -1,11 +1,11 @@
 import React, { Component, useState } from 'react';
 import styled from 'styled-components';
 
-import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.jpg';
-import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.jpg';
-import redEmotion from '../../assets/joraeng/category-joraeng/category-red.jpg';
-import whiteEmotion from '../../assets/joraeng/category-joraeng/category-white.jpg';
-import yellowEmotion from '../../assets/joraeng/category-joraeng/category-yellow.jpg';
+import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.png';
+import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.png';
+import redEmotion from '../../assets/joraeng/category-joraeng/category-red.png';
+import whiteEmotion from '../../assets/joraeng/category-joraeng/category-white.png';
+import yellowEmotion from '../../assets/joraeng/category-joraeng/category-yellow.png';
 import downArrow from '../../assets/icon/downarrow.jpg';
 
 const DropdownWrapper = styled.div`
@@ -93,7 +93,7 @@ class EmotionDropdown extends Component {
   };
 
   emitStatus = () => {
-    this.props.updateDropdownValue(this.state.dropdownValue)
+    this.props.updateDropdownValue(this.state.dropdownValue);
   };
 
   render() {

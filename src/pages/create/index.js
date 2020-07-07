@@ -4,7 +4,8 @@ import { create } from 'store/auth';
 import styled from 'styled-components';
 import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
+// import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import Header from 'components/Header';
 
 const Title = styled.div`
@@ -29,12 +30,12 @@ const ImageBox = styled.div`
   padding: 1rem;
 `;
 
-const JoraengImg = styled.img`
-  object-fit: cover;
-  height: 160px;
-  align-items: center;
-  justify-content: center;
-`;
+// const JoraengImg = styled.img`
+//   object-fit: cover;
+//   height: 160px;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 const InputBox = styled.div`
   display: flex;
@@ -104,7 +105,12 @@ const Create = ({ history }) => {
           <div>조랭이의 이름을 지어주세요</div>
         </TextBox>
         <ImageBox>
-          <JoraengImg id="joraengImg" src={MyJoraeng} alt="" />
+          {/* <JoraengImg
+            id="joraengImg"
+            src={}
+            alt=""
+          /> */}
+          <MainJoraeng age={0} color="green"></MainJoraeng>
         </ImageBox>
         <InputBox>
           <NicknameInput

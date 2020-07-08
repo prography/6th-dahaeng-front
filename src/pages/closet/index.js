@@ -63,11 +63,27 @@ const Closet = ({ history }) => {
     setOpenModal(!openModal);
   };
 
-  const [applyItems, setApplyItems] = useState(hasItems);
+  const [applyItems, setApplyItems] = useState({
+    color: hasItems.filter(
+      (item) => item.category === 'color' && item.apply === true,
+    )[0].color,
+
+    // background: hasItems.filter(
+    //   (item) => item.category === 'color' && item.apply === true,
+    // ),
+    // item: hasItems.filter(
+    //   (item) => item.category === 'color' && item.apply === true,
+    // ),
+  });
   const applyItem = (applyItem) => {
-    setApplyItems({
-      color: hasItems.filter((item) => item.id === applyItem.id)[0].color,
-    });
+    if (applyItem.category === 'color') {
+      setApplyItems({
+        color: applyItem.color,
+      });
+    } else {
+      // applyItems.append(applyItem);
+      // setApplyItems(applyItems);
+    }
   };
 
   const setItem = (item) => {
@@ -114,7 +130,6 @@ const Closet = ({ history }) => {
             hasItems &&
             hasItems
               .filter((item) => item.category === select)
-              .filter((item) => item.has === true)
               .map((item) => {
                 return (
                   <ItemBox

@@ -88,7 +88,7 @@ const initialState = {
       category: 'color',
       color: '#F4E9DC',
       price: 5,
-      has: true,
+      apply: true,
     },
     {
       id: 3,
@@ -96,7 +96,7 @@ const initialState = {
       category: 'color',
       color: '#FC9285',
       price: 5,
-      has: true,
+      apply: false,
     },
   ],
 };

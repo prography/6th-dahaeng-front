@@ -6,6 +6,7 @@ import ItemContainer from '../../components/ItemContainer';
 import { setItems } from '../../store/user';
 import Modal from '../../components/Modal';
 import Room from '../main/Room';
+import ItemBox from './ItemBox';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -17,6 +18,14 @@ const ContentBox = styled.div`
 
 const ClosetTitle = styled.div`
   font-size: 24px;
+`;
+
+const SetButton = styled.button`
+  width: 86px;
+  height: 39px;
+  background: #fb8e5b;
+  border-radius: 4px;
+  color: white;
 `;
 
 const ModalContent = styled.div`
@@ -46,24 +55,36 @@ const ModalButtonRight = styled.div`
 
 const Closet = ({ history }) => {
   const items = useSelector((state) => state.user.items);
-  const indexs = ['color', 'background', 'item'];
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   //나중에 item id값으로 바꿔야할듯?
-  const [itemName, setItemName] = useState('');
+  const [itemID, setItemID] = useState(-1);
 
-  const setModal = (name) => {
+  const setModal = (id) => {
     setOpenModal(!openModal);
-    setItemName(name);
+    setItemID(id);
+  };
+
+  const [applyItems, setApplyItems] = useState(items);
+  const applyItem = (applyItem) => {
+    console.log(applyItem);
+    setApplyItems({
+      color: items.filter((item) => item.id === applyItem.id)[0].color,
+    });
   };
 
   const setItem = (item) => {
-    dispatch(setItems(item));
+    dispatch(setItems(item.id));
     setModal();
-    //refresh item list and coin
+    //refresh item list and coin and jorang view
   };
 
+  const indexs = ['color', 'background', 'item'];
+  const [select, setSelect] = useState('color');
+  const selectCategory = (index) => {
+    setSelect(index);
+  };
   // useEffect(() => {
   //   dispatch(getItems());
   // }, [dispatch]);
@@ -73,7 +94,8 @@ const Closet = ({ history }) => {
     <>
       <Header></Header>
       <ContentBox>
-        <Room history={history}></Room>
+        <SetButton onClick={setModal}>{'착용하기'}</SetButton>
+        <Room history={history} items={applyItems}></Room>
         <Modal
           className="update"
           openModal={openModal}
@@ -88,10 +110,25 @@ const Closet = ({ history }) => {
         ></Modal>
         <ClosetTitle>{'조랭옷장'}</ClosetTitle>
         <ItemContainer
-          items={items}
           indexs={indexs}
+          select={select}
           setModal={setModal}
-          status={'closet'}
+          selectCategory={selectCategory}
+          itemBoxs={
+            items &&
+            items
+              .filter((item) => item.category === select)
+              .filter((item) => item.has === true)
+              .map((item) => {
+                return (
+                  <ItemBox
+                    key={item.name}
+                    item={item}
+                    applyItem={applyItem}
+                  ></ItemBox>
+                );
+              })
+          }
         ></ItemContainer>
       </ContentBox>
     </>

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import JoraengColor from './Joraengcolor';
+import JoraengColor from '../../components/ItemContainer/Joraengcolor';
 
 const Wrapper = styled.div`
   background-color: #ffffff;
@@ -75,7 +75,7 @@ const ItemPrice = styled.div`
   text-align: left;
 `;
 
-const ItemBox = ({ item, setModal, applyItem }) => {
+const ItemBox = ({ item, setModal }) => {
   return (
     <>
       {item.has ? (
@@ -97,7 +97,6 @@ const ItemBox = ({ item, setModal, applyItem }) => {
           <ItemImageBox>
             <JoraengColor color={item.color}></JoraengColor>
           </ItemImageBox>
-
           <ItemInfoBox>
             <ItemName>{item.name}</ItemName>
             <ItemPrice>{`${item.price} 코인`}</ItemPrice>

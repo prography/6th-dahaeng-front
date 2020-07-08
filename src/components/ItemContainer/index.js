@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ItemBox from './ItemBox';
-
 import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
 import { useSelector } from 'react-redux';
 
@@ -82,13 +81,7 @@ const WaitComment = styled.div`
   padding: 1rem;
 `;
 
-const ItemContainer = ({ items, indexs, setModal, status }) => {
-  const [select, setSelect] = useState('color');
-
-  const selectCategory = (index) => {
-    setSelect(index);
-  };
-
+const ItemContainer = ({ indexs, itemBoxs, selectCategory, select }) => {
   const user = useSelector((state) => state.user.user);
 
   return (
@@ -126,18 +119,7 @@ const ItemContainer = ({ items, indexs, setModal, status }) => {
         </ButtonWrapper>
         <ItemPage>
           {select === 'color' ? (
-            items &&
-            items
-              .filter((item) => item.category === select)
-              .map((item) => {
-                return (
-                  <ItemBox
-                    key={item.name}
-                    item={item}
-                    setModal={setModal}
-                  ></ItemBox>
-                );
-              })
+            itemBoxs
           ) : (
             <ImgBox>
               <WaitComment>아직 준비 중입니다!</WaitComment>

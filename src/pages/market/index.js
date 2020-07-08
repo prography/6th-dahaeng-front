@@ -90,6 +90,7 @@ const Market = () => {
           items={items}
           indexs={indexs}
           setModal={setModal}
+          status={'market'}
         ></ItemContainer>
       </ContentBox>
     </>

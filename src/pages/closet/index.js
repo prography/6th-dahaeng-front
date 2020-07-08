@@ -3,19 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
-import { getItems, buyItems } from '../../store/user';
+import { setItems } from '../../store/user';
 import Modal from '../../components/Modal';
 import Room from '../main/Room';
 
 const ContentBox = styled.div`
   max-width: 1024px;
-  max-height: 709px;
+  max-height: calc(100% - 4rem);
   padding-top: 8rem;
   margin: 0 auto;
   text-align: center;
 `;
 
-const ShopTitle = styled.div`
+const ClosetTitle = styled.div`
   font-size: 24px;
 `;
 
@@ -44,7 +44,7 @@ const ModalButtonRight = styled.div`
   color: #fb8e5b;
 `;
 
-const Closet = () => {
+const Closet = ({ history }) => {
   const items = useSelector((state) => state.user.items);
   const indexs = ['color', 'background', 'item'];
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const Closet = () => {
   };
 
   const setItem = (item) => {
-    // dispatch(buyItems(item));
+    dispatch(setItems(item));
     setModal();
     //refresh item list and coin
   };
@@ -73,7 +73,7 @@ const Closet = () => {
     <>
       <Header></Header>
       <ContentBox>
-        <Room></Room>
+        <Room history={history}></Room>
         <Modal
           className="update"
           openModal={openModal}
@@ -86,11 +86,12 @@ const Closet = () => {
             </ModalButtonField>
           }
         ></Modal>
-        <ShopTitle>{'조랭옷장'}</ShopTitle>
+        <ClosetTitle>{'조랭옷장'}</ClosetTitle>
         <ItemContainer
           items={items}
           indexs={indexs}
           setModal={setModal}
+          status={'closet'}
         ></ItemContainer>
       </ContentBox>
     </>

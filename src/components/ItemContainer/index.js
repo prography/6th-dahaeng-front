@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import ItemBox from './ItemBox';
 
 const Wrapper = styled.div`
-  max-height: 709px;
+  max-height: ${(props) => (props.status === 'market' ? '709px' : '50%')};
   border: 1px solid black;
+  /* display: flex;
+  flex-direction: column; */
 `;
 
 const IndexList = styled.div`
@@ -21,7 +23,8 @@ const Index = styled.div`
 
 const ItemPage = styled.div`
   width: 100%;
-  height: 640px;
+  height: ${(props) =>
+    props.status === 'market' ? '673px' : 'calc(100%-34px-20px)'};
   background: #fffaf1;
   display: flex;
   flex-direction: row;
@@ -31,7 +34,7 @@ const ItemPage = styled.div`
   overflow-y: auto;
 `;
 
-const ItemContainer = ({ items, indexs, setModal }) => {
+const ItemContainer = ({ items, indexs, setModal, status }) => {
   const [select, setSelect] = useState('color');
 
   const selectCategory = (index) => {

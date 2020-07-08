@@ -292,7 +292,7 @@ const Main = ({ history }) => {
             <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
           }
         />
-        <Room reminders={reminders}></Room>
+        <Room reminders={reminders} history={history}></Room>
       </Responsive>
     </>
   );

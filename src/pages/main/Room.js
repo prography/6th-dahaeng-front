@@ -100,7 +100,7 @@ const PostBox = styled.button`
   }
   @media screen and (max-width: 480px) {
     width: 50px;
-    top: 60px;
+    top: 70px;
     left: 20px;
   }
 `;
@@ -125,7 +125,7 @@ const Character = styled.button`
 const Closet = styled.button`
   position: absolute;
   width: 60px;
-  top: 140px;
+  top: 145px;
   right: 70px;
   z-index: 3;
   @media screen and (max-width: 480px) {

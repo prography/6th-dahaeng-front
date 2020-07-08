@@ -16,11 +16,11 @@ const Wrapper = styled.div`
   top: 350px;
   left: 50%;
   width: calc(100% - 20px);
-  max-width: ${(props) => (props.className === 'update' ? '380px' : '768px')};
+  max-width: ${(props) => (props.className === 'popup' ? '380px' : '768px')};
   transform: translate(-50%, -50%);
   background-color: white;
   border-radius: var(--small-border-radius);
-  box-shadow: 0px 0px 0px 700px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 0px 800px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 1.5rem;
 `;

@@ -298,6 +298,7 @@ const Main = ({ history }) => {
           reminders={reminders}
           history={history}
           hasItems={hasItems}
+          applyItems={null}
         ></Room>
       </Responsive>
     </>

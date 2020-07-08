@@ -66,12 +66,12 @@ const DailyRecord = () => {
   return (
     <>
       <DailyRecordBox>
-        {records &&
+        {/* {records &&
           records.map((record, index) => (
             <DailyRecordJoraeng key={index}>
               {renderSwitch(record.emotion)}
             </DailyRecordJoraeng>
-          ))}
+          ))} */}
       </DailyRecordBox>
     </>
   );

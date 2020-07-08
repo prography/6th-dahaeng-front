@@ -193,7 +193,9 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
             applyItems
               ? applyItems.color
               : hasItems &&
-                hasItems.filter((item) => item.category === 'color').color
+                hasItems
+                  .filter((item) => item.category === 'color')
+                  .filter((item) => item.apply === true)[0].color
           }
         />
       </Character>

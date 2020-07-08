@@ -38,7 +38,7 @@ const initialState = {
   getUserError: null,
   reminders: null,
   // items: null,
-  items: [
+  allItems: [
     {
       id: 0,
       name: '보라조랭',
@@ -78,6 +78,25 @@ const initialState = {
       color: '#FFE884',
       price: 5,
       has: false,
+    },
+  ],
+
+  hasItems: [
+    {
+      id: 1,
+      name: '하양조랭',
+      category: 'color',
+      color: '#F4E9DC',
+      price: 5,
+      has: true,
+    },
+    {
+      id: 3,
+      name: '빨강조랭',
+      category: 'color',
+      color: '#FC9285',
+      price: 5,
+      has: true,
     },
   ],
 };

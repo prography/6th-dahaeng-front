@@ -61,7 +61,7 @@ const ModalText = styled.div`
 `;
 
 const Market = () => {
-  const items = useSelector((state) => state.user.items);
+  const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
@@ -128,8 +128,8 @@ const Market = () => {
             setModal={setModal}
             selectCategory={selectCategory}
             itemBoxs={
-              items &&
-              items
+              allItems &&
+              allItems
                 .filter((item) => item.category === select)
                 .map((item) => {
                   return (

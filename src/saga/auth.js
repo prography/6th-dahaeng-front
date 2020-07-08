@@ -10,9 +10,9 @@ import {
   CREATE_SUCCESS,
   CREATE_FAIL,
 } from 'store/auth';
-import * as authApi from 'api/auth';
 import createRequestSaga from './createSaga';
 import axios from 'axios';
+import serverURL from './index';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
@@ -27,11 +27,7 @@ function* loginSaga(action) {
       email: action.payload.email,
       password: action.payload.password,
     };
-    const res = yield call(
-      [axios, 'post'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/login/',
-      param,
-    );
+    const res = yield call([axios, 'post'], `${serverURL}/login`, param);
 
     console.log(res);
     if (res.data.response === 'success') {
@@ -70,11 +66,7 @@ function* signSaga(action) {
         password: action.payload.password,
       },
     };
-    const res = yield call(
-      [axios, 'post'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/signup/',
-      param,
-    );
+    const res = yield call([axios, 'post'], `${serverURL}/sign`, param);
 
     console.log('response: ', res);
     localStorage.setItem('accessToken', res.data.message.token);
@@ -116,7 +108,7 @@ function* createSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/jorang_create/',
+      `${serverURL}/jorang_create`,
       param,
       { headers: headers },
     );

@@ -12,6 +12,7 @@ import {
 } from 'store/box';
 import * as boxApi from 'api/box';
 import axios from 'axios';
+import serverURL from './index';
 
 function* getQuestionSaga(action) {
   try {
@@ -36,7 +37,7 @@ function* getQuestionSaga(action) {
 
     const res = yield call(
       [axios, 'get'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/record/posts/create/',
+      `${serverURL}/record/posts/newpost/`,
       { headers: headers },
     );
 
@@ -73,7 +74,7 @@ function* setRecordSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/record/posts/create/',
+      `${serverURL}/record/posts/create/`,
       action.payload.formData,
       // param,
       { headers: headers },
@@ -99,11 +100,9 @@ function* getRecordsSaga(action) {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
 
-    const res = yield call(
-      [axios, 'get'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/record/posts/',
-      { headers: headers },
-    );
+    const res = yield call([axios, 'get'], `${serverURL}/record/posts/`, {
+      headers: headers,
+    });
 
     console.log('res', res);
     yield put({

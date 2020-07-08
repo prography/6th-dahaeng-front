@@ -54,23 +54,19 @@ const ModalButtonRight = styled.div`
 `;
 
 const Closet = ({ history }) => {
-  const items = useSelector((state) => state.user.items);
+  const hasItems = useSelector((state) => state.user.hasItems);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-  //나중에 item id값으로 바꿔야할듯?
-  const [itemID, setItemID] = useState(-1);
 
   const setModal = (id) => {
     setOpenModal(!openModal);
-    setItemID(id);
   };
 
-  const [applyItems, setApplyItems] = useState(items);
+  const [applyItems, setApplyItems] = useState(hasItems);
   const applyItem = (applyItem) => {
-    console.log(applyItem);
     setApplyItems({
-      color: items.filter((item) => item.id === applyItem.id)[0].color,
+      color: hasItems.filter((item) => item.id === applyItem.id)[0].color,
     });
   };
 
@@ -95,7 +91,7 @@ const Closet = ({ history }) => {
       <Header></Header>
       <ContentBox>
         <SetButton onClick={setModal}>{'착용하기'}</SetButton>
-        <Room history={history} items={applyItems}></Room>
+        <Room history={history} applyItems={applyItems}></Room>
         <Modal
           className="update"
           openModal={openModal}
@@ -115,8 +111,8 @@ const Closet = ({ history }) => {
           setModal={setModal}
           selectCategory={selectCategory}
           itemBoxs={
-            items &&
-            items
+            hasItems &&
+            hasItems
               .filter((item) => item.category === select)
               .filter((item) => item.has === true)
               .map((item) => {

@@ -5,6 +5,7 @@ import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import serverURL from './index';
 
 //const profile_id = useSelector((state) => state.auth.profile_id);
 //const getUserSaga = createRequestSaga(GETUSER, authApi.getUser);
@@ -57,11 +58,9 @@ function* reminderSaga(action) {
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
-    const res = yield call(
-      [axios, 'get'],
-      'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/reminder',
-      { headers: headers },
-    );
+    const res = yield call([axios, 'get'], `${serverURL}/reminder/`, {
+      headers: headers,
+    });
 
     console.log('response: ', res);
     if (res.response === 'success') {
@@ -97,7 +96,7 @@ function* getItemSaga(action) {
     // };
     const res = yield call(
       [axios, 'get'],
-      // 'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/items',
+      `${serverURL}/items/`,
       // { headers: headers },
     );
 
@@ -140,7 +139,7 @@ function* buyItemSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      // 'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/items',
+      `${serverURL}/items/`,
       // { headers: headers },
       // param
     );
@@ -184,7 +183,7 @@ function* setItemSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      // 'http://ec2-15-164-55-163.ap-northeast-2.compute.amazonaws.com:7878/items',
+      `${serverURL}/items/`,
       // { headers: headers },
       // param
     );

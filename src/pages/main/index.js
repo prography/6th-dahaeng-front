@@ -155,6 +155,7 @@ const Main = ({ history }) => {
     setOpenModal(!openModal);
   };
 
+  const hasItems = useSelector((state) => state.user.hasItems);
   const user = useSelector((state) => state.auth.user);
   const question = useSelector((state) => state.box.question);
   const reminders = useSelector((state) => state.user.reminders);
@@ -293,7 +294,11 @@ const Main = ({ history }) => {
             <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
           }
         />
-        <Room reminders={reminders} history={history}></Room>
+        <Room
+          reminders={reminders}
+          history={history}
+          hasItems={hasItems}
+        ></Room>
       </Responsive>
     </>
   );

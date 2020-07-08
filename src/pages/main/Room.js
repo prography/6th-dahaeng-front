@@ -160,7 +160,8 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
-const Room = ({ reminders, history, items }) => {
+//hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
+const Room = ({ reminders, history, hasItems, applyItems }) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -175,7 +176,6 @@ const Room = ({ reminders, history, items }) => {
     history.push('/');
   };
 
-  console.log(items);
   return (
     <Wrapper>
       <PostBox>
@@ -189,7 +189,12 @@ const Room = ({ reminders, history, items }) => {
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
           age={user.joraengStatus}
-          color={items && items.color ? items.color : user.color}
+          color={
+            applyItems
+              ? applyItems.color
+              : hasItems &&
+                hasItems.filter((item) => item.category === 'color').color
+          }
         />
       </Character>
       <Closet onClick={moveCloset}>

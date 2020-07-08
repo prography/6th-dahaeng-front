@@ -9,6 +9,7 @@ const SignComplete = lazy(() => import('./pages/signComplete'));
 const Create = lazy(() => import('./pages/create'));
 const Box = lazy(() => import('./pages/box'));
 const Market = lazy(() => import('./pages/market'));
+const Closet = lazy(() => import('./pages/closet'));
 const Donation = lazy(() => import('./pages/donation'));
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/box" component={Box} exact></Route>
           <Route path="/donation" component={Donation} exact></Route>
           <Route path="/market" component={Market} exact></Route>
+          <Route path="/closet" component={Closet} exact></Route>
           {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
           <Route
             render={({ location }) => (

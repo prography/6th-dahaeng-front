@@ -79,7 +79,7 @@ const Market = () => {
   const buyItem = (item) => {
     dispatch(buyItems(item));
     setModal();
-    //refresh item list?
+    //refresh item list and coin
   };
 
   // useEffect(() => {

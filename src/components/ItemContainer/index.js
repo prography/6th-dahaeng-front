@@ -6,6 +6,9 @@ import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
 import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
+  max-height: ${(props) => (props.status === 'market' ? '709px' : '50%')};
+  /* display: flex;
+  flex-direction: column; */
   height: 100%;
 `;
 
@@ -41,6 +44,8 @@ const CoinBox = styled.div`
 
 const ItemPage = styled.div`
   width: 100%;
+  /* height: ${(props) =>
+    props.status === 'market' ? '673px' : 'calc(100%-34px-20px)'}; */
   height: 640px;
   background: var(--light-background);
   border-radius: 4px;
@@ -77,7 +82,7 @@ const WaitComment = styled.div`
   padding: 1rem;
 `;
 
-const ItemContainer = ({ items, indexs, setModal }) => {
+const ItemContainer = ({ items, indexs, setModal, status }) => {
   const [select, setSelect] = useState('color');
 
   const selectCategory = (index) => {

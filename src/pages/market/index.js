@@ -66,19 +66,18 @@ const Market = () => {
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
-  //나중에 item id값으로 바꿔야할듯?
-  const [itemName, setItemName] = useState('');
-  const [itemPrice, setItemPrice] = useState('');
+
+  const [wantItem, setWantItem] = useState(null);
 
   const setModal = (item) => {
     setOpenModal(!openModal);
-    setItemName(item.name);
-    setItemPrice(item.price);
+    setWantItem(item);
   };
 
   const buyItem = (item) => {
-    dispatch(buyItems(item));
+    // dispatch(buyItems(item));
     setModal();
+
     //refresh item list and coin
   };
 
@@ -103,10 +102,16 @@ const Market = () => {
             className="popup"
             openModal={openModal}
             setModal={setModal}
-            title={<ModalTitle>{`'${itemName}'을 구매하시겠어요?`}</ModalTitle>}
+            title={
+              <ModalTitle>{`'${
+                wantItem && wantItem.name
+              }'을 구매하시겠어요?`}</ModalTitle>
+            }
             content={
               <>
-                <ModalText>{`아이템 : ${itemPrice} 코인`}</ModalText>
+                <ModalText>{`아이템 : ${
+                  wantItem && wantItem.price
+                } 코인`}</ModalText>
                 <ModalText>{`나의 행복코인 : ${user.coin} 코인`}</ModalText>
               </>
             }

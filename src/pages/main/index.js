@@ -193,7 +193,7 @@ const Main = ({ history }) => {
     const form_data = new FormData();
     form_data.append('detail', inputText);
     form_data.append('emotion', 'HAPPY');
-    form_data.append('image', img);
+    img && form_data.append('image', img);
 
     dispatch(setRecord(form_data));
     setModal();
@@ -213,9 +213,10 @@ const Main = ({ history }) => {
       const base64 = reader.result;
       if (base64) {
         setImgBase64(base64.toString());
-      } else {
-        setImgBase64('/images/defaultJoraeng.png');
       }
+      // else {
+      //   setImgBase64('/images/defaultJoraeng.png');
+      // }
     };
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);

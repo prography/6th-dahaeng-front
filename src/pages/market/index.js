@@ -7,6 +7,7 @@ import { getItems, buyItems } from '../../store/user';
 import Modal from '../../components/Modal';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
+import ItemBox from './ItemBox';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -62,7 +63,6 @@ const ModalText = styled.div`
 const Market = () => {
   const items = useSelector((state) => state.user.items);
   const user = useSelector((state) => state.user.user);
-  const indexs = ['color', 'background', 'item'];
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -80,6 +80,12 @@ const Market = () => {
     dispatch(buyItems(item));
     setModal();
     //refresh item list and coin
+  };
+
+  const indexs = ['color', 'background', 'item'];
+  const [select, setSelect] = useState('color');
+  const selectCategory = (index) => {
+    setSelect(index);
   };
 
   // useEffect(() => {
@@ -112,9 +118,24 @@ const Market = () => {
             }
           ></Modal>
           <ItemContainer
-            items={items}
             indexs={indexs}
+            select={select}
             setModal={setModal}
+            selectCategory={selectCategory}
+            itemBoxs={
+              items &&
+              items
+                .filter((item) => item.category === select)
+                .map((item) => {
+                  return (
+                    <ItemBox
+                      key={item.name}
+                      item={item}
+                      setModal={setModal}
+                    ></ItemBox>
+                  );
+                })
+            }
           ></ItemContainer>
         </ContentBox>
       </Responsive>

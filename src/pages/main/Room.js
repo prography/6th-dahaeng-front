@@ -160,7 +160,7 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
-const Room = ({ reminders, history }) => {
+const Room = ({ reminders, history, items }) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -175,6 +175,7 @@ const Room = ({ reminders, history }) => {
     history.push('/');
   };
 
+  console.log(items);
   return (
     <Wrapper>
       <PostBox>
@@ -186,7 +187,10 @@ const Room = ({ reminders, history }) => {
       </PostBox>
       <Character onClick={moveMain}>
         {/*TODO: Dynamic color binding*/}
-        <MainJoraeng age={user.joraengStatus} color={user.color} />
+        <MainJoraeng
+          age={user.joraengStatus}
+          color={items && items.color ? items.color : user.color}
+        />
       </Character>
       <Closet onClick={moveCloset}>
         <ClosetImg src={closet} alt="" />
@@ -196,7 +200,6 @@ const Room = ({ reminders, history }) => {
       </Background>
       <Modal
         openModal={openModal}
-        setModal={setModal}
         title={
           <ModalTitle>
             <Date>

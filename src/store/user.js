@@ -40,6 +40,7 @@ const initialState = {
   // items: null,
   items: [
     {
+      id: 0,
       name: '보라조랭',
       category: 'color',
       color: '#BD97B4',
@@ -47,6 +48,7 @@ const initialState = {
       has: false,
     },
     {
+      id: 1,
       name: '하양조랭',
       category: 'color',
       color: '#F4E9DC',
@@ -54,6 +56,7 @@ const initialState = {
       has: true,
     },
     {
+      id: 2,
       name: '하늘조랭',
       category: 'color',
       color: '#8BAAD8',
@@ -61,13 +64,15 @@ const initialState = {
       has: false,
     },
     {
+      id: 3,
       name: '빨강조랭',
       category: 'color',
       color: '#FC9285',
       price: 5,
-      has: false,
+      has: true,
     },
     {
+      id: 4,
       name: '노랑조랭',
       category: 'color',
       color: '#FFE884',

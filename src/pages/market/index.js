@@ -57,7 +57,7 @@ const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-  color: var(--text-third);
+  color: var(--text-second);
 `;
 
 const Market = ({ history }) => {

@@ -48,7 +48,7 @@ const initialState = {
   records: null,
   searchs: null,
   coin: 0,
-  continuity: 0,
+  continuity: 7,
 };
 
 const box = handleActions(

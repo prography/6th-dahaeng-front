@@ -6,6 +6,9 @@ import {
   SET_RECORD,
   SET_RECORD_SUCCESS,
   SET_RECORD_FAIL,
+  MODIFY_RECORD,
+  MODIFY_RECORD_SUCCESS,
+  MODIFY_RECORD_FAIL,
   GET_RECORDS,
   GET_RECORDS_SUCCESS,
   GET_RECORDS_FAIL,
@@ -95,6 +98,43 @@ function* setRecordSaga(action) {
   }
 }
 
+function* modifyRecordSaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+    // const res = yield call(boxApi.setRecord, action.payload); //api.login(action.payload)와 같다
+
+    // const param = {
+    //   detail: action.payload.detail,
+    //   emotion: action.payload.emotion,
+    //   image: action.payload.image,
+    // };
+
+    console.log(action.payload);
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+      // 'content-type':
+      //   'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+    };
+
+    const res = yield call(
+      [axios, 'patch'],
+      `${serverURL}/record/posts/${action.payload.id}/`,
+      // param,
+      { headers: headers },
+    );
+
+    yield put({
+      type: MODIFY_RECORD_SUCCESS,
+      payload: res.data,
+    });
+  } catch (e) {
+    yield put({
+      type: MODIFY_RECORD_FAIL,
+      payload: e,
+    });
+  }
+}
+
 function* getRecordsSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -155,5 +195,6 @@ export function* boxSaga() {
   yield takeLatest(GET_QUESTION, getQuestionSaga);
   yield takeLatest(SET_RECORD, setRecordSaga);
   yield takeLatest(GET_RECORDS, getRecordsSaga);
+  yield takeLatest(MODIFY_RECORD, modifyRecordSaga);
   yield takeLatest(SEARCH_RECORDS, searchRecordsSaga);
 }

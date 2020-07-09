@@ -27,7 +27,7 @@ function* loginSaga(action) {
       email: action.payload.email,
       password: action.payload.password,
     };
-    const res = yield call([axios, 'post'], `${serverURL}/login`, param);
+    const res = yield call([axios, 'post'], `${serverURL}/login/`, param);
 
     console.log(res);
     if (res.data.response === 'success') {
@@ -66,7 +66,7 @@ function* signSaga(action) {
         password: action.payload.password,
       },
     };
-    const res = yield call([axios, 'post'], `${serverURL}/signup`, param);
+    const res = yield call([axios, 'post'], `${serverURL}/signup/`, param);
 
     console.log('response: ', res);
     localStorage.setItem('accessToken', res.data.message.token);

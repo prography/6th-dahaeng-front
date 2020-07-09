@@ -18,6 +18,11 @@ export const [
   GET_RECORDS_FAIL,
 ] = createRequestAction('GET_RECORDS');
 export const [
+  MODIFY_RECORD,
+  MODIFY_RECORD_SUCCESS,
+  MODIFY_RECORD_FAIL,
+] = createRequestAction('MODIFY_RECORD');
+export const [
   SEARCH_RECORDS,
   SEARCH_RECORDS_SUCCESS,
   SEARCH_RECORDS_FAIL,
@@ -29,6 +34,7 @@ export const setRecord = createAction(SET_RECORD, (formData) => ({
 }));
 export const getRecords = createAction(GET_RECORDS);
 export const searchRecords = createAction(SEARCH_RECORDS);
+export const modifyRecord = createAction(MODIFY_RECORD);
 
 const initialState = {
   question: null,
@@ -52,6 +58,7 @@ const box = handleActions(
 
     [SET_RECORD_SUCCESS]: (state, { payload: detail }) => ({
       ...state,
+      record: detail.record,
       coin: detail.coin,
       continuity: detail.continuity,
     }),

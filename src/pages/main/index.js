@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord } from 'store/box';
+import { getQuestion, setRecord, modifyRecord } from 'store/box';
 import { reminder } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
@@ -148,7 +148,7 @@ const emotionWord = [
   '몽글몽글!',
 ];
 
-const emotionWordEn = ['WARM', 'FUN', 'HAPPY', 'TOUCHED', 'EXTRA'];
+const emotionWordEn = ['WARM', 'TOUCHED', 'FUN', 'HAPPY', 'EXTRA'];
 
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -192,6 +192,19 @@ const Main = ({ history }) => {
     dispatch(getQuestion());
     dispatch(reminder());
   }, [dispatch]);
+
+  //today record
+  const record = useSelector((state) => state.box.record);
+
+  const modifyRecord = () => {
+    dispatch(
+      modifyRecord({
+        detail: inputText,
+        emotion: emotionWordEn[dropdownState],
+        image: img,
+      }),
+    );
+  };
 
   const completeRecord = () => {
     const form_data = new FormData();
@@ -295,7 +308,11 @@ const Main = ({ history }) => {
             </ModalContent>
           }
           button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            record ? (
+              <ModalButton onClick={modifyRecord}>기록 수정하기</ModalButton>
+            ) : (
+              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            )
           }
         />
         <Room

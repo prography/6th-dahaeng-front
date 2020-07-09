@@ -123,6 +123,7 @@ const Market = () => {
             }
           ></Modal>
           <ItemContainer
+            status="market"
             indexs={indexs}
             select={select}
             setModal={setModal}

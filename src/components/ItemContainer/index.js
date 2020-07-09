@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ItemBox from './ItemBox';
-import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
+import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
+import noItemJoraeng from 'assets/joraeng/no-item-joraeng.png';
 import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
-  max-height: ${(props) => (props.status === 'market' ? '709px' : '50%')};
+  max-height: 709px;
   /* display: flex;
   flex-direction: column; */
   height: 100%;
@@ -41,11 +42,17 @@ const CoinBox = styled.div`
   color: var(--text-second);
 `;
 
+const ShopBox = styled.button`
+  flex: none;
+  margin-right: 8px;
+  line-height: 34px;
+  color: var(--text-second);
+`;
+
 const ItemPage = styled.div`
   width: 100%;
-  /* height: ${(props) =>
-    props.status === 'market' ? '673px' : 'calc(100%-34px-20px)'}; */
-  height: 640px;
+  height: ${(props) => (props.status === 'market' ? '640px' : '340px')};
+  /* height: 640px; */
   background: var(--light-background);
   border-radius: 4px;
 
@@ -62,27 +69,39 @@ const ItemPage = styled.div`
 `;
 
 const ImgBox = styled.div`
-  width: 200px;
+  width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  text-align: center;
   padding: 20px;
 `;
 
 const JoraengImg = styled.img`
-  width: 100%;
+  width: 150px;
+  margin: 0 auto;
 `;
 
 const WaitComment = styled.div`
   font-size: 14px;
   color: var(--text-second);
-  text-align: center;
   padding: 1rem;
 `;
 
-const ItemContainer = ({ indexs, itemBoxs, selectCategory, select }) => {
+const ItemContainer = ({
+  history,
+  status,
+  indexs,
+  itemBoxs,
+  selectCategory,
+  select,
+}) => {
   const user = useSelector((state) => state.user.user);
+
+  function navigateMarketPage() {
+    history.push('/market');
+  }
 
   return (
     <>
@@ -115,15 +134,30 @@ const ItemContainer = ({ indexs, itemBoxs, selectCategory, select }) => {
                 );
               })}
           </IndexList>
-          <CoinBox>{`${user.coin} 코인`}</CoinBox>
+          {status === 'market' ? (
+            <CoinBox>{`${user.coin} 코인`}</CoinBox>
+          ) : (
+            <ShopBox onClick={navigateMarketPage}>{`조랭마켓 >`}</ShopBox>
+          )}
         </ButtonWrapper>
-        <ItemPage>
+
+        {/* item 없을 때 화면 수정해야 함 */}
+        <ItemPage status={status}>
           {select === 'color' ? (
             itemBoxs
           ) : (
             <ImgBox>
-              <WaitComment>아직 준비 중입니다!</WaitComment>
-              <JoraengImg src={waitjoraeng} alt="" />
+              {status === 'market' ? (
+                <>
+                  <WaitComment>아직 준비 중입니다!</WaitComment>
+                  <JoraengImg src={waitJoraeng} alt="" />
+                </>
+              ) : (
+                <>
+                  <WaitComment>아이템이 하나도 없어요...</WaitComment>
+                  <JoraengImg src={noItemJoraeng} alt="" />
+                </>
+              )}
             </ImgBox>
           )}
         </ItemPage>

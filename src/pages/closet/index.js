@@ -11,11 +11,6 @@ import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 
 const ContentBox = styled.div`
-  /* max-width: 1024px;
-  max-height: calc(100% - 4rem);
-  padding-top: 8rem;
-  margin: 0 auto;
-  text-align: center; */
   max-width: 1024px;
   max-height: 709px;
   padding-top: 1rem;
@@ -25,7 +20,7 @@ const ContentBox = styled.div`
 `;
 
 const SetButton = styled.button`
-  width: 84px;
+  width: 64px;
   height: 30px;
   float: right;
   background: var(--primary-color);
@@ -34,7 +29,8 @@ const SetButton = styled.button`
 `;
 
 const RoomWrapper = styled.div`
-  margin: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 `;
 
 const ModalTitle = styled.div`
@@ -145,6 +141,8 @@ const Closet = ({ history }) => {
             }
           ></Modal>
           <ItemContainer
+            history={history}
+            status="closet"
             indexs={indexs}
             select={select}
             setModal={setModal}

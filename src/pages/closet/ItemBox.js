@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  cursor: ${(props) => (props.className === 'setItem' ? '' : 'pointer')};
+  cursor: pointer;
   transition: 0.125s ease-in-out;
   &:hover {
     background-color: ${(props) =>
@@ -76,7 +76,7 @@ const ItemBox = ({ item, applyItem }) => {
   return (
     <>
       {item.apply === true ? (
-        <Wrapper className="setItem">
+        <Wrapper className="setItem" onClick={() => applyItem(item)}>
           <SetItemWrapper>
             <ItemImageBox>
               <JoraengColor color={item.color}></JoraengColor>

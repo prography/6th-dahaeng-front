@@ -30,15 +30,17 @@ const ListModeIcon = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.sortingType === 'feed' ? 'row' : 'column')};
+  flex-direction: ${(props) =>
+    props.sortingType === 'feed' ? 'row' : 'column'};
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'inherit')};
-  justify-content: ${(props) => (props.sortingType === 'feed' ? 'flex-start' : 'center')};
+  justify-content: ${(props) =>
+    props.sortingType === 'feed' ? 'flex-start' : 'center'};
   padding: 20px;
   height: calc(100vh - 10rem - 16px);
   overflow-y: auto;
-  
-  @media screen and (max-width: 480px){
-    padding: 10px;  
+
+  @media screen and (max-width: 480px) {
+    padding: 10px;
   }
 `;
 
@@ -46,12 +48,12 @@ const Box = () => {
   const [sortingType, setSortingType] = useState('feed'); //search, feed, thread
 
   const records = useSelector((state) => state.box.records);
-  //const user = useSelector((state) => state.user.user);
+  
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRecords());
+    // dispatch(getRecords());
   }, [dispatch]);
 
   return (
@@ -106,6 +108,11 @@ const Box = () => {
             records &&
             records.map((record, index) => {
               return <FeedBox record={record} key={index}></FeedBox>;
+            })
+          ) : sortingType === 'search' ? (
+            records &&
+            records.map((record, index) => {
+              return <ThreadBox record={record} key={index}></ThreadBox>;
             })
           ) : (
             <ListModeIcon></ListModeIcon>

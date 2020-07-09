@@ -181,7 +181,8 @@ const Main = ({ history }) => {
   useEffect(() => {
     console.log(token);
     if (!token) {
-      history.push('/login');
+      //release
+      // history.push('/login');
     }
   }, [token, history]);
 
@@ -205,7 +206,6 @@ const Main = ({ history }) => {
   //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
   const [img, setImage] = useState(null);
   const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
-  const [file, setFile] = useState(null);
 
   const onImageChange = (e) => {
     let reader = new FileReader();

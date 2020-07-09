@@ -85,7 +85,7 @@ function* setRecordSaga(action) {
 
     yield put({
       type: SET_RECORD_SUCCESS,
-      payload: res.data.question,
+      payload: res.data,
     });
   } catch (e) {
     yield put({

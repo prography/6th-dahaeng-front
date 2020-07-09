@@ -35,6 +35,8 @@ const initialState = {
   record: null,
   records: null,
   searchs: null,
+  coin: 0,
+  continuity: 0,
 };
 
 const box = handleActions(
@@ -48,9 +50,10 @@ const box = handleActions(
       question: error,
     }),
 
-    [SET_RECORD_SUCCESS]: (state, { payload: record }) => ({
+    [SET_RECORD_SUCCESS]: (state, { payload: detail }) => ({
       ...state,
-      record: record,
+      coin: detail.coin,
+      continuity: detail.continuity,
     }),
     [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,

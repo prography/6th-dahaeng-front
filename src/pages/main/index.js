@@ -148,6 +148,8 @@ const emotionWord = [
   '몽글몽글!',
 ];
 
+const emotionWordEn = ['WARM', 'FUN', 'HAPPY', 'TOUCHED', 'EXTRA'];
+
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
   const [dropdownState, setDropdownState] = useState(0);
@@ -194,12 +196,14 @@ const Main = ({ history }) => {
   const completeRecord = () => {
     const form_data = new FormData();
     form_data.append('detail', inputText);
-    form_data.append('emotion', 'HAPPY');
+    form_data.append('emotion', emotionWordEn[dropdownState]);
     img && form_data.append('image', img);
 
     dispatch(setRecord(form_data));
     setModal();
   };
+  const coin = useSelector((state) => state.box.coin);
+  const continuity = useSelector((state) => state.box.continuity);
 
   //사진 업로드 시도!
   //미리보기 ok, 한 번 업로드 후 수정이 안 됨...

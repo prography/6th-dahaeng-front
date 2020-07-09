@@ -60,12 +60,14 @@ const ModalText = styled.div`
   color: var(--text-third);
 `;
 
-const Market = () => {
+const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
+  const [openBuySuccessModal, setOpenBuySuccessModal] = useState(false);
+  const [openBuyFailModal, setOpenBuyFailModal] = useState(false);
 
   const [wantItem, setWantItem] = useState(null);
 
@@ -74,11 +76,39 @@ const Market = () => {
     setWantItem(item);
   };
 
+  const setBuySuccessModal = (item) => {
+    if (openModal) {
+      setModal();
+      setOpenBuySuccessModal(!openBuySuccessModal);
+    } else {
+      setOpenBuySuccessModal(!openBuySuccessModal);
+    }
+  };
+
+  const setBuyFailModal = (item) => {
+    if (openModal) {
+      setModal();
+      setOpenBuyFailModal(!openBuyFailModal);
+    } else {
+      setOpenBuyFailModal(!openBuyFailModal);
+    }
+  };
+
+  //todo: 코인 충전 기능
+  const setCoinChargeModal = (e) => {
+    alert(
+      '조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요',
+    );
+  };
+
   const buyItem = (item) => {
     // dispatch(buyItems(item));
-    setModal();
+    // setModal();
 
     //refresh item list and coin
+    //구매 성공 -> 구매 완료 팝업/ 구매 실패 -> 구매 실패 팝업
+    setBuySuccessModal();
+    setBuyFailModal();
   };
 
   const indexs = ['color', 'background', 'item'];
@@ -90,6 +120,10 @@ const Market = () => {
   // useEffect(() => {
   //   dispatch(getItems());
   // }, [dispatch]);
+
+  function navigateMarketPage() {
+    history.push('/closet');
+  }
 
   return (
     <>
@@ -122,6 +156,55 @@ const Market = () => {
               </ModalButtonField>
             }
           ></Modal>
+
+          {/* 구매성공팝업 */}
+          <Modal
+            className="popup"
+            openModal={openBuySuccessModal}
+            setModal={setBuySuccessModal}
+            title={
+              <ModalTitle>{`성공적으로 구매가 완료되었습니다!`}</ModalTitle>
+            }
+            content={
+              <>
+                <ModalText>{`조랭옷장에서 착용할 수 있습니다 :)`}</ModalText>
+              </>
+            }
+            button={
+              <ModalButtonField>
+                <ModalButtonLeft onClick={setBuySuccessModal}>
+                  {'확인'}
+                </ModalButtonLeft>
+                <ModalButtonRight onClick={navigateMarketPage}>
+                  {'적용하러가기'}
+                </ModalButtonRight>
+              </ModalButtonField>
+            }
+          ></Modal>
+
+          {/* 구매실패팝업 */}
+          <Modal
+            className="popup"
+            openModal={openBuyFailModal}
+            setModal={setBuyFailModal}
+            title={<ModalTitle>{`구매에 실패했습니다!`}</ModalTitle>}
+            content={
+              <>
+                <ModalText>{`행복코인이 충분한지 확인해주세요 :(`}</ModalText>
+              </>
+            }
+            button={
+              <ModalButtonField>
+                <ModalButtonLeft onClick={setBuyFailModal}>
+                  {'확인'}
+                </ModalButtonLeft>
+                <ModalButtonRight onClick={setCoinChargeModal}>
+                  {'충전하기'}
+                </ModalButtonRight>
+              </ModalButtonField>
+            }
+          ></Modal>
+
           <ItemContainer
             status="market"
             indexs={indexs}

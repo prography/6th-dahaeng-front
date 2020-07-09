@@ -37,7 +37,7 @@ const Question = styled.div`
   );
 `;
 
-const ModalTitle = styled.div`
+const ModalTitleWrapper = styled.div`
   margin-bottom: 0.2rem;
 `;
 
@@ -140,6 +140,20 @@ const ModalButton = styled.button`
   outline: none;
 `;
 
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const emotionWord = [
   '따뜻했어요!',
   '평온했어요!',
@@ -152,13 +166,23 @@ const emotionWordEn = ['WARM', 'TOUCHED', 'FUN', 'HAPPY', 'EXTRA'];
 
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openCoinModal, setOpenCoinModal] = useState(false);
+
   const [dropdownState, setDropdownState] = useState(0);
   const setModal = () => {
     setOpenModal(!openModal);
   };
+  const setCoinModal = () => {
+    if (openModal) {
+      setModal();
+      setOpenCoinModal(!openCoinModal);
+    } else {
+      setOpenCoinModal(!openCoinModal);
+    }
+  };
 
   const hasItems = useSelector((state) => state.user.hasItems);
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
   const reminders = useSelector((state) => state.user.reminders);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
@@ -213,7 +237,7 @@ const Main = ({ history }) => {
     img && form_data.append('image', img);
 
     dispatch(setRecord(form_data));
-    setModal();
+    setCoinModal();
   };
   const coin = useSelector((state) => state.box.coin);
   const continuity = useSelector((state) => state.box.continuity);
@@ -260,7 +284,7 @@ const Main = ({ history }) => {
           setModal={setModal}
           title={
             <>
-              <ModalTitle>
+              <ModalTitleWrapper>
                 <Date>
                   {Moment(
                     question &&
@@ -274,10 +298,10 @@ const Main = ({ history }) => {
                 <DropdownStatusText>
                   {emotionWord[dropdownState]}
                 </DropdownStatusText>
-              </ModalTitle>
-              <ModalTitle>
+              </ModalTitleWrapper>
+              <ModalTitleWrapper>
                 <ModalQuestion>{question && question.question}</ModalQuestion>
-              </ModalTitle>
+              </ModalTitleWrapper>
             </>
           }
           content={
@@ -315,6 +339,32 @@ const Main = ({ history }) => {
             )
           }
         />
+
+        {/* 코인 주기 팝업 */}
+        <Modal
+          className="popup"
+          openModal={openCoinModal}
+          setModal={setCoinModal}
+          title={
+            <>
+              {continuity === 7 || 17 || 27 || 30 ? (
+                <ModalTitle>
+                  <ModalTitle>{`우와, ${continuity}일 연속으로 행복을 기록했어요!`}</ModalTitle>
+                </ModalTitle>
+              ) : (
+                <ModalTitle>{`${continuity}일 째 행복을 기록했어요!`}</ModalTitle>
+              )}
+            </>
+          }
+          content={
+            <>
+              <ModalText>{`짜잔- 오늘은 ${coin}코인을 받아서`}</ModalText>
+              <ModalText>{`총 나의 행복코인이 ${user.coin}이 되었습니다 :)`}</ModalText>
+            </>
+          }
+          button={<ModalButton onClick={setCoinModal}>확인</ModalButton>}
+        ></Modal>
+
         <Room
           reminders={reminders}
           history={history}

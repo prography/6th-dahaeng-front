@@ -26,12 +26,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  cursor: ${(props) => (props.className === 'hasItem' ? '' : 'pointer')};
+  cursor: ${(props) => (props.className === 'setItem' ? '' : 'pointer')};
   transition: 0.125s ease-in-out;
   &:hover {
     background-color: ${(props) =>
-      props.className === 'hasItem' ? '' : 'rgba(0, 0, 0, 0.2)'};
+      props.className === 'setItem' ? '' : 'rgba(0, 0, 0, 0.2)'};
   }
+`;
+
+const SetItemWrapper = styled.div`
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: var(--small-border-radius);
+
+  width: 100%;
+  height: 100%;
+  z-index: 2;
 `;
 
 const ItemImageBox = styled.div`
@@ -56,18 +65,6 @@ const ItemName = styled.div`
   align-items: center;
 `;
 
-const ItemHas = styled.div`
-  font-size: 8px;
-  border-radius: 15px;
-  border: 1px solid var(--text-red);
-  color: var(--text-red);
-  width: 95px;
-  height: 15px;
-  line-height: 10px;
-  padding: 2px;
-  margin-left: 0.5rem;
-`;
-
 const ItemPrice = styled.div`
   flex: 1;
   font-size: 14px;
@@ -78,15 +75,29 @@ const ItemPrice = styled.div`
 const ItemBox = ({ item, applyItem }) => {
   return (
     <>
-      <Wrapper onClick={() => applyItem(item)}>
-        <ItemImageBox>
-          <JoraengColor color={item.color}></JoraengColor>
-        </ItemImageBox>
-        <ItemInfoBox>
-          <ItemName>{item.name}</ItemName>
-          <ItemPrice>{`${item.price} 코인`}</ItemPrice>
-        </ItemInfoBox>
-      </Wrapper>
+      {item.apply === true ? (
+        <Wrapper className="setItem">
+          <SetItemWrapper>
+            <ItemImageBox>
+              <JoraengColor color={item.color}></JoraengColor>
+            </ItemImageBox>
+            <ItemInfoBox>
+              <ItemName>{item.name}</ItemName>
+              <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+            </ItemInfoBox>
+          </SetItemWrapper>
+        </Wrapper>
+      ) : (
+        <Wrapper onClick={() => applyItem(item)}>
+          <ItemImageBox>
+            <JoraengColor color={item.color}></JoraengColor>
+          </ItemImageBox>
+          <ItemInfoBox>
+            <ItemName>{item.name}</ItemName>
+            <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+          </ItemInfoBox>
+        </Wrapper>
+      )}
     </>
   );
 };

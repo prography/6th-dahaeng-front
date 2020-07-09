@@ -12,7 +12,7 @@ import {
 } from 'store/box';
 import * as boxApi from 'api/box';
 import axios from 'axios';
-import serverURL from './index';
+import { serverURL } from './index';
 
 function* getQuestionSaga(action) {
   try {

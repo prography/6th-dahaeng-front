@@ -12,7 +12,7 @@ import {
 } from 'store/auth';
 import createRequestSaga from './createSaga';
 import axios from 'axios';
-import serverURL from './index';
+import { serverURL } from './index';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
@@ -66,7 +66,7 @@ function* signSaga(action) {
         password: action.payload.password,
       },
     };
-    const res = yield call([axios, 'post'], `${serverURL}/sign`, param);
+    const res = yield call([axios, 'post'], `${serverURL}/signup`, param);
 
     console.log('response: ', res);
     localStorage.setItem('accessToken', res.data.message.token);

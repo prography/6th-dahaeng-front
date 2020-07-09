@@ -5,7 +5,7 @@ import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import serverURL from './index';
+import { serverURL } from './index';
 
 //const profile_id = useSelector((state) => state.auth.profile_id);
 //const getUserSaga = createRequestSaga(GETUSER, authApi.getUser);

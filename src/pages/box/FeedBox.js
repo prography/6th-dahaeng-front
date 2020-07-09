@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
+import { deleteRecord } from 'store/box';
 import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
@@ -87,6 +88,10 @@ const Detail = styled.div`
   flex: 1;
 `;
 
+const Dropdown = styled.div`
+  height: 8px;
+`;
+
 const checkTitleLength = (text) => {
   if (text.length >= 20) {
     return text.substr(0, 20) + '...';
@@ -101,6 +106,12 @@ const checkDetailLength = (text) => {
   } else {
     return text;
   }
+};
+
+const dispatch = useDispatch();
+
+const Delete = (id) => {
+  dispatch(deleteRecord(id));
 };
 
 const FeedBox = ({ record }) => {
@@ -118,6 +129,7 @@ const FeedBox = ({ record }) => {
           <Question>{checkTitleLength(record.question)}</Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
+        <Dropdown onClick={Delete(record.id)}>삭제</Dropdown>
       </Wrapper>
     </>
   );

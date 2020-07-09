@@ -69,12 +69,12 @@ const auth = handleActions(
     [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: message.token,
+      auth: message.profile_id,
       token: message.token,
       isFirstLogin: message.isFirstLogin,
       user: message.jorang,
       has_jorang: message.has_jorang,
-      
+
       profile_id: message.profile_id,
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({

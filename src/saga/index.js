@@ -4,7 +4,7 @@ import { userSaga } from './user';
 import { boxSaga } from './box';
 
 export const serverURL =
-  'http://dahaengbackend-dev.ap-northeast-2.elasticbeanstalk.com/';
+  'http://dahaengbackend-dev.ap-northeast-2.elasticbeanstalk.com';
 
 export default function* rootSaga() {
   //all: 여러 사가를 합쳐줌

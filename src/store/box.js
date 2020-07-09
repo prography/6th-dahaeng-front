@@ -17,17 +17,38 @@ export const [
   GET_RECORDS_SUCCESS,
   GET_RECORDS_FAIL,
 ] = createRequestAction('GET_RECORDS');
+export const [
+  MODIFY_RECORD,
+  MODIFY_RECORD_SUCCESS,
+  MODIFY_RECORD_FAIL,
+] = createRequestAction('MODIFY_RECORD');
+export const [
+  DELETE_RECORD,
+  DELETE_RECORD_SUCCESS,
+  DELETE_RECORD_FAIL,
+] = createRequestAction('DELETE_RECORD');
+export const [
+  SEARCH_RECORDS,
+  SEARCH_RECORDS_SUCCESS,
+  SEARCH_RECORDS_FAIL,
+] = createRequestAction('SEARCH_RECORDS');
 
 export const getQuestion = createAction(GET_QUESTION);
 export const setRecord = createAction(SET_RECORD, (formData) => ({
   formData,
 }));
 export const getRecords = createAction(GET_RECORDS);
+export const searchRecords = createAction(SEARCH_RECORDS);
+export const modifyRecord = createAction(MODIFY_RECORD);
+export const deleteRecord = createAction(DELETE_RECORD);
 
 const initialState = {
   question: null,
   record: null,
   records: null,
+  searchs: null,
+  coin: 0,
+  continuity: 0,
 };
 
 const box = handleActions(
@@ -41,13 +62,31 @@ const box = handleActions(
       question: error,
     }),
 
-    [SET_RECORD_SUCCESS]: (state, { payload: record }) => ({
+    [SET_RECORD_SUCCESS]: (state, { payload: detail }) => ({
       ...state,
-      record: record,
+      record: detail.record,
+      coin: detail.coin,
+      continuity: detail.continuity,
     }),
     [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
       record: error,
+    }),
+
+    [MODIFY_RECORD_SUCCESS]: (state, { payload: detail }) => ({
+      ...state,
+      record: detail.record,
+    }),
+    [MODIFY_RECORD_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      record: error,
+    }),
+
+    [DELETE_RECORD_SUCCESS]: (state, { payload: detail }) => ({
+      ...state,
+    }),
+    [DELETE_RECORD_FAIL]: (state, { payload: error }) => ({
+      ...state,
     }),
 
     [GET_RECORDS_SUCCESS]: (state, { payload: records }) => ({
@@ -57,6 +96,15 @@ const box = handleActions(
     [GET_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
       records: error,
+    }),
+
+    [SEARCH_RECORDS_SUCCESS]: (state, { payload: searchs }) => ({
+      ...state,
+      searchs: searchs,
+    }),
+    [SEARCH_RECORDS_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      searchs: error,
     }),
   },
   initialState,

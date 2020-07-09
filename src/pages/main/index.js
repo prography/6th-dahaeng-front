@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord } from 'store/box';
+import { getQuestion, setRecord, modifyRecord } from 'store/box';
 import { reminder } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
@@ -148,6 +148,8 @@ const emotionWord = [
   '몽글몽글!',
 ];
 
+const emotionWordEn = ['WARM', 'TOUCHED', 'FUN', 'HAPPY', 'EXTRA'];
+
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
   const [dropdownState, setDropdownState] = useState(0);
@@ -181,6 +183,7 @@ const Main = ({ history }) => {
   useEffect(() => {
     console.log(token);
     if (!token) {
+      //release
       // history.push('/login');
     }
   }, [token, history]);
@@ -190,22 +193,36 @@ const Main = ({ history }) => {
     dispatch(reminder());
   }, [dispatch]);
 
+  //today record
+  const record = useSelector((state) => state.box.record);
+
+  const modifyRecord = () => {
+    dispatch(
+      modifyRecord({
+        detail: inputText,
+        emotion: emotionWordEn[dropdownState],
+        image: img,
+      }),
+    );
+  };
+
   const completeRecord = () => {
     const form_data = new FormData();
     form_data.append('detail', inputText);
-    form_data.append('emotion', 'HAPPY');
+    form_data.append('emotion', emotionWordEn[dropdownState]);
     img && form_data.append('image', img);
 
     dispatch(setRecord(form_data));
     setModal();
   };
+  const coin = useSelector((state) => state.box.coin);
+  const continuity = useSelector((state) => state.box.continuity);
 
   //사진 업로드 시도!
   //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
   //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
   const [img, setImage] = useState(null);
   const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
-  const [file, setFile] = useState(null);
 
   const onImageChange = (e) => {
     let reader = new FileReader();
@@ -291,7 +308,11 @@ const Main = ({ history }) => {
             </ModalContent>
           }
           button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            record ? (
+              <ModalButton onClick={modifyRecord}>기록 수정하기</ModalButton>
+            ) : (
+              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            )
           }
         />
         <Room

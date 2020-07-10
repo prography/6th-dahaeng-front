@@ -5,6 +5,9 @@ import { createRequestAction } from './createRequestAction';
 //유저 정보 받아오기 도전중
 const REFRESH_SET_USER = 'REFRESH_SET_USER';
 
+export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(
+  'GETUSER',
+);
 export const [REMINDER, REMINDER_SUCCESS, REMINDER_FAIL] = createRequestAction(
   'REMINDER',
 );
@@ -24,7 +27,7 @@ export const [
 ] = createRequestAction('GETCLOSET');
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
-
+export const getUser = createAction(GETUSER, (id) => ({ id }));
 export const reminder = createAction(REMINDER);
 export const getItems = createAction(GETITEMS);
 export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
@@ -34,12 +37,12 @@ export const getCloset = createAction(GETCLOSET);
 const initialState = {
   user: {
     id: null,
-    nickname: null,
+    jorang_nickname: null,
     title: 'Da:haeng',
-    coin: 0,
+    user_coin: 0,
     // TODO: SET-UP DEFAULT
-    joraengStatus: 2,
-    color: '#ffe884',
+    jorang_status: '2',
+    jorang_color: 'ffe884',
   },
   getUserError: null,
   notices: {
@@ -78,21 +81,21 @@ const initialState = {
         id: 0,
         item_name: '보라조랭',
         item_type: 'jorang_color',
-        item_detail: '#BD97B4',
+        item_detail: 'BD97B4',
         item_price: 5,
       },
       {
         id: 1,
         item_name: '하양조랭',
         item_type: 'jorang_color',
-        item_detail: '#F4E9DC',
+        item_detail: 'F4E9DC',
         item_price: 5,
       },
       {
         id: 2,
         item_name: '하늘조랭',
         item_type: 'jorang_color',
-        item_detail: '#8BAAD8',
+        item_detail: '8BAAD8',
         item_price: 5,
       },
     ],
@@ -101,14 +104,14 @@ const initialState = {
         id: 3,
         item_name: '빨강조랭',
         item_type: 'jorang_color',
-        item_detail: '#FC9285',
+        item_detail: 'FC9285',
         item_price: 5,
       },
       {
         id: 4,
         item_name: '노랑조랭',
         item_type: 'jorang_color',
-        item_detail: '#FFE884',
+        item_detail: 'FFE884',
         item_price: 5,
       },
     ],
@@ -119,7 +122,7 @@ const initialState = {
       id: 1,
       item_name: '하양조랭',
       item_type: 'jorang_color',
-      item_detail: '#F4E9DC',
+      item_detail: 'F4E9DC',
       item_price: 5,
       is_worn: true,
     },
@@ -127,7 +130,7 @@ const initialState = {
       id: 3,
       item_name: '빨강조랭',
       item_type: 'jorang_color',
-      item_detail: '#FC9285',
+      item_detail: 'FC9285',
       item_price: 5,
       is_worn: false,
     },
@@ -139,6 +142,15 @@ const user = handleActions(
     [REFRESH_SET_USER]: (state, { payload: user }) => ({
       ...state,
       user,
+    }),
+
+    [GETUSER_SUCCESS]: (state, { payload: user }) => ({
+      ...state,
+      user: user,
+    }),
+    [GETUSER_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      // notices: error,
     }),
 
     [REMINDER_SUCCESS]: (state, { payload: notices }) => ({

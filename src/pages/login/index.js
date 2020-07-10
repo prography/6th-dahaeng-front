@@ -117,6 +117,7 @@ const Login = ({ history }) => {
 
     const { email, password } = form;
     dispatch(login({ email, password }));
+    localStorage.setItem('record_id', null);
   };
 
   useEffect(() => {

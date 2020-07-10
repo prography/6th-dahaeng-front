@@ -18,6 +18,9 @@ import {
   SEARCH_RECORDS,
   SEARCH_RECORDS_SUCCESS,
   SEARCH_RECORDS_FAIL,
+  GET_TODAY,
+  GET_TODAY_SUCCESS,
+  GET_TODAY_FAIL,
 } from 'store/box';
 import * as boxApi from 'api/box';
 import axios from 'axios';
@@ -74,7 +77,7 @@ function* setRecordSaga(action) {
     //   image: action.payload.image,
     // };
 
-    console.log(action.payload);
+    //console.log(action.payload);
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
       'content-type':
@@ -89,6 +92,8 @@ function* setRecordSaga(action) {
       { headers: headers },
     );
 
+    console.log('setRecord: ', res);
+    localStorage.setItem('record_id', res.data.post_detail.id);
     yield put({
       type: SET_RECORD_SUCCESS,
       payload: res.data,
@@ -122,7 +127,7 @@ function* modifyRecordSaga(action) {
     const res = yield call(
       [axios, 'patch'],
       `${serverURL}/record/posts/${action.payload.id}/`,
-      // param,
+      action.payload.formData,
       { headers: headers },
     );
 
@@ -152,8 +157,6 @@ function* deleteRecordSaga(action) {
     console.log(action.payload);
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-      // 'content-type':
-      //   'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
     };
 
     const res = yield call(
@@ -163,10 +166,29 @@ function* deleteRecordSaga(action) {
       { headers: headers },
     );
 
-    yield put({
-      type: DELETE_RECORD_SUCCESS,
-      payload: res.data,
-    });
+    console.log('delete ', res);
+    if (res.data === '') {
+      yield put({
+        type: DELETE_RECORD_SUCCESS,
+      });
+
+      const res = yield call(
+        [axios, 'get'],
+        `${serverURL}/record/posts/`,
+        // param,
+        { headers: headers },
+      );
+      if (res.data.response === 'success') {
+        yield put({
+          type: GET_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      }
+    } else {
+      yield put({
+        type: DELETE_RECORD_FAIL,
+      });
+    }
   } catch (e) {
     yield put({
       type: DELETE_RECORD_FAIL,
@@ -195,6 +217,35 @@ function* getRecordsSaga(action) {
   } catch (e) {
     yield put({
       type: GET_RECORDS_FAIL,
+      payload: e,
+    });
+  }
+}
+
+function* getTodaySaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+    //    const res = yield call(boxApi.getRecords, action.payload); //api.login(action.payload)와 같다
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
+
+    const res = yield call(
+      [axios, 'get'],
+      `${serverURL}/record/posts/${action.payload.id}`,
+      {
+        headers: headers,
+      },
+    );
+
+    console.log('res', res);
+    yield put({
+      type: GET_TODAY_SUCCESS,
+      payload: res.data,
+    });
+  } catch (e) {
+    yield put({
+      type: GET_TODAY_FAIL,
       payload: e,
     });
   }
@@ -238,4 +289,5 @@ export function* boxSaga() {
   yield takeLatest(MODIFY_RECORD, modifyRecordSaga);
   yield takeLatest(DELETE_RECORD, deleteRecordSaga);
   yield takeLatest(SEARCH_RECORDS, searchRecordsSaga);
+  yield takeLatest(GET_TODAY, getTodaySaga);
 }

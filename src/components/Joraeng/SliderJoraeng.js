@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SliderJoraeng = ({ age, color }) => {
-  if (age === 0) {
+  if (age === '0') {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
         <g>
@@ -30,12 +30,12 @@ const SliderJoraeng = ({ age, color }) => {
               fill={color}
               d="M138,108.35c-1.81-2.82-4.67-4.64-8.42-5.74a14.55,14.55,0,0,0-9.93.82c-4.15,1.76-7.27,5.23-8.14,8.88s-.91,8.11,1.45,11.74,7.27,5.86,11.43,5.9a20.74,20.74,0,0,0,10-2.23c1.83-1.1,5.44-4.12,6.13-8A15,15,0,0,0,138,108.35Z"
             />
-            <rect width="299" height="299" fill="none"/>
+            <rect width="299" height="299" fill="none" />
           </g>
         </g>
       </svg>
     );
-  } else if (age === 1) {
+  } else if (age === '1') {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
         <g>
@@ -54,14 +54,14 @@ const SliderJoraeng = ({ age, color }) => {
               }}
               d="M166.67,108.22c-3.46,11.9-27.7,15.35-36,2.79"
             />
-            <ellipse cx="137.8" cy="97.99" rx="4.13" ry="5.78"/>
-            <ellipse cx="157.62" cy="97.99" rx="4.13" ry="5.78"/>
-            <rect width="299" height="299" fill="none"/>
+            <ellipse cx="137.8" cy="97.99" rx="4.13" ry="5.78" />
+            <ellipse cx="157.62" cy="97.99" rx="4.13" ry="5.78" />
+            <rect width="299" height="299" fill="none" />
           </g>
         </g>
       </svg>
     );
-  } else if (age === 2) {
+  } else if (age === '2') {
     return (
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
         <g>
@@ -94,7 +94,7 @@ const SliderJoraeng = ({ age, color }) => {
               ry="2.98"
               transform="translate(94.84 213.81) rotate(-84.08)"
             />
-            <rect class="cls-3" width="299" height="299" fill="none"/>
+            <rect class="cls-3" width="299" height="299" fill="none" />
           </g>
         </g>
       </svg>

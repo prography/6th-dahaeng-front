@@ -224,7 +224,7 @@ const NoticeModal = ({
             <GoBackButton onClick={setNoticeModal}>
               <GoBackIcon src={backIcon} alt="" />
             </GoBackButton>
-            <CloseButton onClick={setModal}>
+            <CloseButton onClick={setReminder}>
               <CloseIcon src={closeicon} alt="" />
             </CloseButton>
             <ModalTitleWrapper>

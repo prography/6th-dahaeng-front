@@ -11,9 +11,6 @@ import { useSelector } from 'react-redux';
 import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
 
 //Modal
-const Date = styled.div`
-  font-size: 18px;
-`;
 
 const ModalTitle = styled.div``;
 
@@ -22,12 +19,6 @@ const Reminder = styled.div`
   text-align: center;
   z-index: 2;
 `;
-
-// const Notice = styled.div`
-//   width: 100%;
-//   padding-left: 1rem;
-//   padding-right: 1rem;
-// `;
 
 //Modal
 const Wrapper = styled.div`
@@ -140,7 +131,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
         {notice ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
-          <PostBoxImg src={postbox} alt="" />
+          <PostBoxImg onClick={setModal} src={postbox} alt="" />
         )}
       </PostBox>
       <Character onClick={moveMain}>
@@ -165,6 +156,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
       </Background>
 
       <NoticeModal
+        history={history}
         openModal={openModal}
         setModal={setModal}
         reminderInfo={reminder}

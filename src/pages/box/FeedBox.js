@@ -176,17 +176,6 @@ const FeedBox = ({ record, setModal }) => {
     setOpenDropdown(!openDropdown);
   };
 
-  // const dispatch = useDispatch();
-
-  // const Delete = (id) => {
-  //   dispatch(deleteRecord(id));
-  // };
-
-  // const [openModal, setOpenModal] = useState(false);
-  // const setModal = () => {
-  //   setOpenModal(!openModal);
-  // };
-
   return (
     <>
       <Wrapper>

@@ -271,7 +271,13 @@ const Box = () => {
           {sortingType === 'thread' ? (
             records &&
             records.map((record, index) => {
-              return <ThreadBox record={record} key={index}></ThreadBox>;
+              return (
+                <ThreadBox
+                  record={record}
+                  key={index}
+                  setModal={setModal}
+                ></ThreadBox>
+              );
             })
           ) : sortingType === 'feed' ? (
             records &&
@@ -292,6 +298,7 @@ const Box = () => {
                   <ThreadBox
                     record={record}
                     key={index}
+
                     // input={input}
                   ></ThreadBox>
                 </>
@@ -310,7 +317,7 @@ const Box = () => {
           title={<ModalTitle>{`행복기록을 삭제합니다!`}</ModalTitle>}
           content={
             <>
-              <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다:(`}</ModalText>
+              <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다 :(`}</ModalText>
               <ModalText>{`정말 삭제하시겠어요?`}</ModalText>
             </>
           }

@@ -134,7 +134,7 @@ const ItemContainer = ({
               })}
           </IndexList>
           {status === 'market' ? (
-            <CoinBox>{`${user.coin} 코인`}</CoinBox>
+            <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
           ) : (
             <ShopBox onClick={navigateMarketPage}>{`조랭마켓 >`}</ShopBox>
           )}

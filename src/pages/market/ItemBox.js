@@ -81,7 +81,7 @@ const ItemBox = ({ item, item_has, setModal }) => {
       {item_has ? (
         <Wrapper className="hasItem">
           <ItemImageBox>
-            <JoraengColor color={item.item_detail}></JoraengColor>
+            <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
           </ItemImageBox>
 
           <ItemInfoBox>
@@ -95,7 +95,7 @@ const ItemBox = ({ item, item_has, setModal }) => {
       ) : (
         <Wrapper onClick={() => setModal(item)}>
           <ItemImageBox>
-            <JoraengColor color={item.item_detail}></JoraengColor>
+            <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
           </ItemImageBox>
           <ItemInfoBox>
             <ItemName>{item.item_name}</ItemName>

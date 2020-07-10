@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
-import { getItems, buyItems } from '../../store/user';
+import { getItems, buyItems, getUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
@@ -63,6 +63,7 @@ const ModalText = styled.div`
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
+  const buy_success = useSelector((state) => state.user.buy_success);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -104,11 +105,10 @@ const Market = ({ history }) => {
   const buyItem = (item) => {
     dispatch(buyItems(item));
     setModal();
-
     //refresh item list and coin
     //구매 성공 -> 구매 완료 팝업/ 구매 실패 -> 구매 실패 팝업
     setBuySuccessModal();
-    setBuyFailModal();
+    //setBuyFailModal();
   };
 
   const indexs = ['jorang_color', 'background', 'item'];
@@ -118,8 +118,9 @@ const Market = ({ history }) => {
   };
 
   useEffect(() => {
+    dispatch(getUser(localStorage.getItem('profile')));
     dispatch(getItems());
-  }, [dispatch]);
+  }, [dispatch, buy_success]);
 
   function navigateMarketPage() {
     history.push('/closet');
@@ -138,20 +139,26 @@ const Market = ({ history }) => {
             setModal={setModal}
             title={
               <ModalTitle>{`'${
-                wantItem && wantItem.name
+                wantItem && wantItem.item_name
               }'을 구매하시겠어요?`}</ModalTitle>
             }
             content={
               <>
                 <ModalText>{`아이템 : ${
-                  wantItem && wantItem.price
+                  wantItem && wantItem.item_price
                 } 코인`}</ModalText>
-                <ModalText>{`나의 행복코인 : ${user.coin} 코인`}</ModalText>
+                <ModalText>{`나의 행복코인 : ${
+                  user && user.user_coin
+                } 코인`}</ModalText>
               </>
             }
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={buyItem}>{'확인'}</ModalButtonLeft>
+                <ModalButtonLeft
+                  onClick={() => buyItem(wantItem && wantItem.id)}
+                >
+                  {'확인'}
+                </ModalButtonLeft>
                 <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
               </ModalButtonField>
             }

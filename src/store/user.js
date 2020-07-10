@@ -31,7 +31,7 @@ export const getUser = createAction(GETUSER, (id) => ({ id }));
 export const reminder = createAction(REMINDER);
 export const getItems = createAction(GETITEMS);
 export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
-export const setItems = createAction(SETITEMS, (items) => ({ items }));
+export const setItems = createAction(SETITEMS, (id) => ({ id }));
 export const getCloset = createAction(GETCLOSET);
 
 const initialState = {
@@ -44,6 +44,7 @@ const initialState = {
     jorang_status: '2',
     jorang_color: 'ffe884',
   },
+  buy_success: null,
   getUserError: null,
   notices: {
     notice: [
@@ -120,19 +121,23 @@ const initialState = {
   hasItems: [
     {
       id: 1,
-      item_name: '하양조랭',
-      item_type: 'jorang_color',
-      item_detail: 'F4E9DC',
-      item_price: 5,
       is_worn: true,
+      item: {
+        item_name: '하양조랭',
+        item_type: 'jorang_color',
+        item_detail: 'F4E9DC',
+        item_price: 5,
+      },
     },
     {
       id: 3,
-      item_name: '빨강조랭',
-      item_type: 'jorang_color',
-      item_detail: 'FC9285',
-      item_price: 5,
       is_worn: false,
+      item: {
+        item_name: '빨강조랭',
+        item_type: 'jorang_color',
+        item_detail: 'FC9285',
+        item_price: 5,
+      },
     },
   ],
 };
@@ -171,14 +176,15 @@ const user = handleActions(
       // allItems: error,
     }),
 
-    [BUYITEMS_SUCCESS]: (state, { payload: payload }) => ({
+    [BUYITEMS_SUCCESS]: (state, { payload: coin }) => ({
       ...state,
-      items: payload.items,
-      user: { ...user, coin: payload.coin },
+      // items: payload.items,
+      user: { ...user, user_coin: coin },
+      buy_success: true,
     }),
     [BUYITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      //  items: error,
+      buy_success: false,
     }),
 
     [SETITEMS_SUCCESS]: (state, { payload: items }) => ({

@@ -79,22 +79,22 @@ const ItemBox = ({ item, applyItem }) => {
         <Wrapper className="setItem" onClick={() => applyItem(item)}>
           <SetItemWrapper>
             <ItemImageBox>
-              <JoraengColor color={item.item_detail}></JoraengColor>
+              <JoraengColor color={`#${item.item.item_detail}`}></JoraengColor>
             </ItemImageBox>
             <ItemInfoBox>
-              <ItemName>{item.item_name}</ItemName>
-              <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
+              <ItemName>{item.item.item_name}</ItemName>
+              <ItemPrice>{`${item.item.item_price} 코인`}</ItemPrice>
             </ItemInfoBox>
           </SetItemWrapper>
         </Wrapper>
       ) : (
         <Wrapper onClick={() => applyItem(item)}>
           <ItemImageBox>
-            <JoraengColor color={item.item_detail}></JoraengColor>
+            <JoraengColor color={`#${item.item.item_detail}`}></JoraengColor>
           </ItemImageBox>
           <ItemInfoBox>
-            <ItemName>{item.item_name}</ItemName>
-            <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
+            <ItemName>{item.item.item_name}</ItemName>
+            <ItemPrice>{`${item.item.item_price} 코인`}</ItemPrice>
           </ItemInfoBox>
         </Wrapper>
       )}

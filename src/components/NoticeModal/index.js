@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   top: 350px;
   left: 50%;
   width: calc(100% - 20px);
+  min-height: 400px;
   max-width: 768px;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -25,10 +26,12 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 0px 800px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 2rem;
+
+  overflow: auto;
 `;
 
 const ModalTitleWrapper = styled.div`
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   text-align: center;
 `;
 
@@ -41,9 +44,12 @@ const ReminderField = styled.div`
   height: 54px;
   max-width: calc(768px - 2rem);
   padding: 0.5rem;
+  display: flex;
+  align-items: center;
 
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const ReminderImg = styled.img`
@@ -71,6 +77,21 @@ const NoticeField = styled.div`
   position: relative;
 `;
 
+const Notice = styled.div`
+  /* width: 100%; */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  flex: 1;
+`;
+
+const NoticeDate = styled.div`
+  flex: none;
+  font-size: 12px;
+  color: var(--text-third);
+
+  padding-right: 2rem;
+`;
+
 const NoticeButton = styled.button`
   position: absolute;
   right: 5px;
@@ -80,7 +101,6 @@ const NoticeButton = styled.button`
 const NoticeIcon = styled.img`
   width: 8px;
   transform: rotate(90deg);
-  
 `;
 
 const CloseButton = styled.button`
@@ -98,7 +118,14 @@ const CloseIcon = styled.img`
   width: 10px;
 `;
 
-const NoticeModal = ({ openModal, setModal, title, reminder, notice }) => {
+const NoticeModal = ({
+  openModal,
+  setModal,
+  reminderInfo,
+  title,
+  reminder,
+  notice,
+}) => {
   return (
     <>
       {openModal ? (
@@ -111,16 +138,28 @@ const NoticeModal = ({ openModal, setModal, title, reminder, notice }) => {
             <ModalTitleWrapper>
               <TitleField>{title}</TitleField>
             </ModalTitleWrapper>
-            <ReminderField>
+            <ReminderField onClick={setModal}>
               {reminder}
               <ReminderImg src={reminderJoraeng} alt="" />
             </ReminderField>
-            <NoticeField>
+            {notice.map((notice) => {
+              return (
+                <NoticeField>
+                  <Notice>{notice.title}</Notice>
+                  <NoticeDate>{notice.created_at}</NoticeDate>
+                  <NoticeButton onClick={setModal}>
+                    <NoticeIcon src={backIcon} alt="" />
+                  </NoticeButton>
+                </NoticeField>
+              );
+            })}
+
+            {/* <NoticeField>
               {notice}
               <NoticeButton onClick={setModal}>
                 <NoticeIcon src={backIcon} alt="" />
               </NoticeButton>
-            </NoticeField>
+            </NoticeField> */}
           </Wrapper>
         </>
       ) : null}

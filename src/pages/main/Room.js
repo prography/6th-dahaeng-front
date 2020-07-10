@@ -18,72 +18,16 @@ const Date = styled.div`
 const ModalTitle = styled.div``;
 
 const Reminder = styled.div`
-  width: 90%;
-  height: 2rem;
-  border: 1px solid black;
-`;
-
-const Notice = styled.div`
-  width: 85%;
-  height: 1.5rem;
-  border: 1px solid black;
-`;
-
-const ModalQuestion = styled.div`
-  font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
-  display: inline;
-`;
-
-const ModalContent = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  z-index: 2;
 `;
 
-const ModalCharacter = styled.div`
-  box-sizing: border-box;
-  width: 10rem;
-  height: 10rem;
-  border: 1px solid #e9e9e9;
-  margin: 5% auto;
-  overflow: hidden;
-`;
-
-const ModalCharacterImage = styled.img`
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-`;
-
-const ModalCharacterDefaultImage = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  margin-left: 3rem;
-`;
-
-const ModalInput = styled.textarea`
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 auto;
-  border: none;
-  outline: none;
-  resize: none;
-
-  background-attachment: local;
-  background-image: linear-gradient(to right, white 10px, transparent 10px),
-    linear-gradient(to left, white 10px, transparent 10px),
-    repeating-linear-gradient(
-      white,
-      white 30px,
-      #e9e9e9 30px,
-      #e9e9e9 31px,
-      white 31px
-    );
-  line-height: 31px;
-  padding: 8px;
-`;
+// const Notice = styled.div`
+//   width: 100%;
+//   padding-left: 1rem;
+//   padding-right: 1rem;
+// `;
 
 //Modal
 const Wrapper = styled.div`
@@ -187,6 +131,9 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
   const moveMain = () => {
     history.push('/');
   };
+
+  const ReminderDate = reminder[0].created_at;
+
   return (
     <Wrapper>
       <PostBox>
@@ -216,15 +163,24 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
       <Background>
         <BackgroundImg src={ground} alt="" />
       </Background>
+
       <NoticeModal
         openModal={openModal}
         setModal={setModal}
+        reminderInfo={reminder}
+        notice={notice}
         title={<ModalTitle>{'공지사항'}</ModalTitle>}
-        notice={notice.map((notice) => {
-          return <Notice>{notice.title}</Notice>;
-        })}
+        // notice={notice.map((notice) => {
+        //   return <Notice>{notice.title}</Notice>;
+        // })}
         reminder={
-          <Reminder>{'1년 전, 나는 이렇게 행복했어요! 함께 볼까요?'}</Reminder>
+          <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
+            5,
+            7,
+          )}월 ${ReminderDate.slice(
+            8,
+            10,
+          )}일, 나는 이렇게 많이 행복했었네요! 함께 볼까요?`}</Reminder>
         }
       ></NoticeModal>
     </Wrapper>

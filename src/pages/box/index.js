@@ -141,6 +141,17 @@ const ModalButtonRight = styled.button`
   color: var(--primary-color);
 `;
 
+const ModalButton = styled.button`
+  box-sizing: border-box;
+  width: 130px;
+  margin: 0 auto;
+  border: none;
+  height: 30px;
+  border-radius: 4px;
+  background: var(--primary-color);
+  color: #ffffff;
+`;
+
 const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
@@ -166,6 +177,8 @@ const Box = ({ history }) => {
     dispatch(getRecords());
     if (records[0].id === id) {
       //마지막 기록은 지울 수 없어요
+      console.log('삭제 실패');
+      setDeleteFailModal();
     } else {
       dispatch(deleteRecord(id));
     }
@@ -179,6 +192,11 @@ const Box = ({ history }) => {
   const setModal = (id) => {
     setOpenModal(!openModal);
     setRecordId(id);
+  };
+
+  const [openDeleteFailModal, setOpenDeleteFailModal] = useState(false);
+  const setDeleteFailModal = () => {
+    setOpenDeleteFailModal(!openDeleteFailModal);
   };
 
   const onEnter = async (e) => {
@@ -335,6 +353,25 @@ const Box = ({ history }) => {
                 {'확인'}
               </ModalButtonLeft>
               <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+            </ModalButtonField>
+          }
+        ></Modal>
+
+        {/* 삭제 실패 팝업 */}
+        <Modal
+          className="popup"
+          openModal={openDeleteFailModal}
+          setModal={setDeleteFailModal}
+          title={<ModalTitle>{`행복 기록을 삭제할 수 없습니다 :(`}</ModalTitle>}
+          content={
+            <>
+              <ModalText>{`가장 마지막 행복 기록은 삭제할 수 없어요`}</ModalText>
+              <ModalText>{`이 행복까지 아껴주세요`}</ModalText>
+            </>
+          }
+          button={
+            <ModalButtonField>
+              <ModalButton onClick={setDeleteFailModal}>{'확인'}</ModalButton>
             </ModalButtonField>
           }
         ></Modal>

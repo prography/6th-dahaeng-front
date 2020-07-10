@@ -108,13 +108,13 @@ const checkDetailLength = (text) => {
   }
 };
 
-const dispatch = useDispatch();
-
-const Delete = (id) => {
-  dispatch(deleteRecord(id));
-};
-
 const FeedBox = ({ record }) => {
+  const dispatch = useDispatch();
+
+  const Delete = (id) => {
+    dispatch(deleteRecord(id));
+  };
+
   return (
     <>
       <Wrapper>

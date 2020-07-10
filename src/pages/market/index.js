@@ -111,8 +111,8 @@ const Market = ({ history }) => {
     setBuyFailModal();
   };
 
-  const indexs = ['color', 'background', 'item'];
-  const [select, setSelect] = useState('color');
+  const indexs = ['jorang_color', 'background', 'item'];
+  const [select, setSelect] = useState('jorang_color');
   const selectCategory = (index) => {
     setSelect(index);
   };
@@ -213,17 +213,34 @@ const Market = ({ history }) => {
             selectCategory={selectCategory}
             itemBoxs={
               allItems &&
-              allItems
-                .filter((item) => item.category === select)
+              allItems.not_had_items &&
+              allItems.not_had_items
+                .filter((item) => item.item_type === select)
                 .map((item) => {
                   return (
                     <ItemBox
                       key={item.name}
+                      item_has={false}
                       item={item}
                       setModal={setModal}
                     ></ItemBox>
                   );
                 })
+                .concat(
+                  allItems &&
+                    allItems.had_items
+                      .filter((item) => item.item_type === select)
+                      .map((item) => {
+                        return (
+                          <ItemBox
+                            key={item.name}
+                            item_has={true}
+                            item={item}
+                            setModal={setModal}
+                          ></ItemBox>
+                        );
+                      }),
+                )
             }
           ></ItemContainer>
         </ContentBox>

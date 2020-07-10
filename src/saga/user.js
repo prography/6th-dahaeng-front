@@ -5,6 +5,7 @@ import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import { GETCLOSET, GETCLOSET_SUCCESS, GETCLOSET_FAIL } from 'store/user';
 import { GETUSER, GETUSER_SUCCESS, GETUSER_FAIL } from 'store/user';
+import { SETUSER, SETUSER_SUCCESS, SETUSER_FAIL } from 'store/user';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { serverURL } from './index';
@@ -62,6 +63,51 @@ function* getUserSaga(action) {
     const res = yield call(
       [axios, 'get'],
       `${serverURL}/profile/${action.payload.id}/`,
+      {
+        headers: headers,
+      },
+    );
+
+    console.log('getUser: ', res);
+    if (res.data.response === 'success') {
+      yield put({
+        type: GETUSER_SUCCESS,
+        payload: res.data.message,
+      });
+    } else {
+      yield put({
+        type: GETUSER_FAIL,
+        payload: res.data.message,
+        error: true,
+      });
+    }
+  } catch (e) {
+    yield put({
+      type: GETUSER_FAIL,
+      payload: e,
+      error: true,
+    });
+  }
+}
+
+function* setUserSaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+
+    // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
+
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
+
+    const param = {
+      nickname: action.payload.nickname,
+      title: action.payload.title,
+    };
+    const res = yield call(
+      [axios, 'post'],
+      `${serverURL}/profile/${action.payload.id}/`,
+      param,
       {
         headers: headers,
       },
@@ -287,4 +333,5 @@ export function* userSaga() {
   yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(GETCLOSET, getClosetSaga);
+  yield takeLatest(SETUSER, setUserSaga);
 }

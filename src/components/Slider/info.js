@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/updateicon.png';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import SliderJoraeng from '../Joraeng/SliderJoraeng';
 
@@ -164,6 +164,8 @@ const InfoBox = () => {
     setInputNickname(user ? user.name : '');
   }, [user]);
 
+  const dispatch = useDispatch();
+  // const setInfo = () => {};
   // const updateNewInfo = async () => {
   //const newInfo = user
   //newInfo.title = inputTitle
@@ -175,6 +177,9 @@ const InfoBox = () => {
   // }
 
   const completeUpdate = () => {
+    dispatch(
+      setUser(inputTitle, inputNickname, localStorage.getItem('profile')),
+    );
     setModal();
   };
 

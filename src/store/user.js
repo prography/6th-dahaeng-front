@@ -5,6 +5,9 @@ import { createRequestAction } from './createRequestAction';
 //유저 정보 받아오기 도전중
 const REFRESH_SET_USER = 'REFRESH_SET_USER';
 
+export const [SETUSER, SETUSER_SUCCESS, SETUSER_FAIL] = createRequestAction(
+  'SETUSER',
+);
 export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(
   'GETUSER',
 );
@@ -27,6 +30,11 @@ export const [
 ] = createRequestAction('GETCLOSET');
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
+export const setUser = createAction(SETUSER, (nickname, title, id) => ({
+  nickname,
+  title,
+  id,
+}));
 export const getUser = createAction(GETUSER, (id) => ({ id }));
 export const reminder = createAction(REMINDER);
 export const getItems = createAction(GETITEMS);
@@ -155,7 +163,14 @@ const user = handleActions(
     }),
     [GETUSER_FAIL]: (state, { payload: error }) => ({
       ...state,
-      // notices: error,
+    }),
+
+    [SETUSER_SUCCESS]: (state, { payload: user }) => ({
+      ...state,
+      user: user,
+    }),
+    [SETUSER_FAIL]: (state, { payload: error }) => ({
+      ...state,
     }),
 
     [REMINDER_SUCCESS]: (state, { payload: notices }) => ({

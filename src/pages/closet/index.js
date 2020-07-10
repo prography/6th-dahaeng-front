@@ -79,9 +79,11 @@ const Closet = ({ history }) => {
   };
 
   const [applyItems, setApplyItems] = useState({
-    color: hasItems.filter(
-      (item) => item.item_type === 'jorang_color' && item.is_worn === true,
-    )[0].item_detail,
+    color:
+      hasItems &&
+      hasItems.filter(
+        (item) => item.item_type === 'jorang_color' && item.is_worn === true,
+      )[0].item_detail,
 
     // background: hasItems.filter(
     //   (item) => item.category === 'color' && item.apply === true,
@@ -112,9 +114,9 @@ const Closet = ({ history }) => {
   const selectCategory = (index) => {
     setSelect(index);
   };
-  // useEffect(() => {
-  //   dispatch(getCloset());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCloset());
+  }, [dispatch]);
 
   return (
     <>

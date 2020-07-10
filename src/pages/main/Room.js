@@ -199,14 +199,16 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
       <Character onClick={moveMain}>
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
-          age={user.joraengStatus}
+          age={user.jorang_status}
           color={
             applyItems !== null
-              ? applyItems.color
-              : hasItems &&
-                hasItems
-                  .filter((item) => item.item_type === 'jorang_color')
-                  .filter((item) => item.is_worn === true)[0].item_detail
+              ? `#${applyItems.color}`
+              : `#${
+                  hasItems &&
+                  hasItems
+                    .filter((item) => item.item_type === 'jorang_color')
+                    .filter((item) => item.is_worn === true)[0].item_detail
+                }`
           }
         />
       </Character>

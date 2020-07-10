@@ -190,19 +190,22 @@ const InfoBox = () => {
       <UserInfoBox>
         <UserPictureBox>
           {/*TODO: Dynamic color binding*/}
-          <SliderJoraeng age={user.joraengStatus} color={user.color} />
+          <SliderJoraeng
+            age={user.jorang_status}
+            color={`#${user.jorang_color}`}
+          />
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>
 
         <UserTextBox>
           <UserTextWrapper>
-            <UserInfoText>{user.nickname}</UserInfoText>
+            <UserInfoText>{user.jorang_nickname}</UserInfoText>
             <UserText>조랭 </UserText>
             {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
           </UserTextWrapper>
 
           <UserTextWrapper>
-            <UserInfoText>{user.coin}</UserInfoText>
+            <UserInfoText>{user.user_coin}</UserInfoText>
             <UserText>코인</UserText>
             <UserInfoBtn onClick={setCoinModal}>[충전]</UserInfoBtn>
           </UserTextWrapper>

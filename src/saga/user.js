@@ -4,6 +4,7 @@ import { GETITEMS, GETITEMS_SUCCESS, GETITEMS_FAIL } from 'store/user';
 import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import { GETCLOSET, GETCLOSET_SUCCESS, GETCLOSET_FAIL } from 'store/user';
+import { GETUSER, GETUSER_SUCCESS, GETUSER_FAIL } from 'store/user';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { serverURL } from './index';
@@ -48,6 +49,45 @@ import { serverURL } from './index';
 //     });
 //   }
 // }
+
+function* getUserSaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+
+    // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
+
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
+    const res = yield call(
+      [axios, 'get'],
+      `${serverURL}/profile/${action.payload.id}/`,
+      {
+        headers: headers,
+      },
+    );
+
+    console.log('getUser: ', res);
+    if (res.data.response === 'success') {
+      yield put({
+        type: GETUSER_SUCCESS,
+        payload: res.data.message,
+      });
+    } else {
+      yield put({
+        type: GETUSER_FAIL,
+        payload: res.data.message,
+        error: true,
+      });
+    }
+  } catch (e) {
+    yield put({
+      type: GETUSER_FAIL,
+      payload: e,
+      error: true,
+    });
+  }
+}
 
 function* reminderSaga(action) {
   try {
@@ -100,18 +140,10 @@ function* getItemSaga(action) {
     });
 
     console.log('response: ', res);
-    if (res.response === 'success') {
-      yield put({
-        type: GETITEMS_SUCCESS,
-        payload: res.data.message,
-      });
-    } else {
-      yield put({
-        type: GETITEMS_FAIL,
-        payload: res.data.message,
-        error: true,
-      });
-    }
+    yield put({
+      type: GETITEMS_SUCCESS,
+      payload: res.data,
+    });
   } catch (e) {
     yield put({
       type: GETITEMS_FAIL,
@@ -232,18 +264,10 @@ function* getClosetSaga(action) {
     );
 
     console.log('response: ', res);
-    if (res.response === 'success') {
-      yield put({
-        type: GETCLOSET_SUCCESS,
-        payload: res.data.message,
-      });
-    } else {
-      yield put({
-        type: GETCLOSET_FAIL,
-        payload: res.data.message,
-        error: true,
-      });
-    }
+    yield put({
+      type: GETCLOSET_SUCCESS,
+      payload: res.data,
+    });
   } catch (e) {
     yield put({
       type: GETCLOSET_FAIL,
@@ -254,7 +278,7 @@ function* getClosetSaga(action) {
 }
 
 export function* userSaga() {
-  //yield takeLatest(GETUSER, getUserSaga);
+  yield takeLatest(GETUSER, getUserSaga);
   yield takeLatest(REMINDER, reminderSaga);
   yield takeLatest(GETITEMS, getItemSaga);
   yield takeLatest(BUYITEMS, buyItemSaga);

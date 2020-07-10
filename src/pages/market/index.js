@@ -102,8 +102,8 @@ const Market = ({ history }) => {
   };
 
   const buyItem = (item) => {
-    // dispatch(buyItems(item));
-    // setModal();
+    dispatch(buyItems(item));
+    setModal();
 
     //refresh item list and coin
     //구매 성공 -> 구매 완료 팝업/ 구매 실패 -> 구매 실패 팝업
@@ -117,9 +117,9 @@ const Market = ({ history }) => {
     setSelect(index);
   };
 
-  // useEffect(() => {
-  //   dispatch(getItems());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getItems());
+  }, [dispatch]);
 
   function navigateMarketPage() {
     history.push('/closet');

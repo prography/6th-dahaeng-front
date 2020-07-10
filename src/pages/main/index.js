@@ -218,7 +218,7 @@ const Main = ({ history }) => {
     console.log(token);
     if (!token) {
       //release
-      // history.push('/login');
+      history.push('/login');
     }
   }, [token, history]);
 

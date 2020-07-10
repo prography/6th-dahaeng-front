@@ -8,6 +8,7 @@ import Moment from 'moment';
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 260px;
   margin: 0 auto;
   margin-top: 1.5rem;
   background-color: white;

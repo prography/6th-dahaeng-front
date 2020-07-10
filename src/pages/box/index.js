@@ -11,6 +11,9 @@ import feed from 'assets/icon/feed.png';
 import thread from 'assets/icon/thread.png';
 import Responsive from '../../components/common/Responsive.js';
 
+import Modal from '../../components/Modal';
+import { deleteRecord } from '../../store/box.js';
+
 const SortingBar = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
@@ -103,6 +106,48 @@ const SearchKeyText = styled.span`
   color: var(--primary-color);
 `;
 
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const ModalButtonField = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+`;
+
+const ModalButtonLeft = styled.button`
+  box-sizing: border-box;
+  flex: 1;
+  margin-right: 0.5rem;
+  border: none;
+  height: 30px;
+  border-radius: var(--small-border-radius);
+  background: var(--primary-color);
+  color: #ffffff;
+`;
+
+const ModalButtonRight = styled.button`
+  box-sizing: border-box;
+  flex: 1;
+  margin-left: 0.5rem;
+  border: none;
+  height: 30px;
+  border-radius: 4px;
+  background: var(--light-background);
+  color: var(--primary-color);
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const Box = () => {
   const [sortingType, setSortingType] = useState('search'); //search, feed, thread
 
@@ -114,6 +159,17 @@ const Box = () => {
   const [input, setInput] = useState('');
   const search = (field, search) => {
     dispatch(searchRecords({ field, search }));
+  };
+
+  const Delete = (id) => {
+    dispatch(deleteRecord(id));
+  };
+
+  const [openModal, setOpenModal] = useState(false);
+  const [recordId, setRecordId] = useState('');
+  const setModal = (id) => {
+    setOpenModal(!openModal);
+    setRecordId(id);
   };
 
   const onEnter = async (e) => {
@@ -210,6 +266,7 @@ const Box = () => {
             ) : null}
           </SearchWrapper>
         ) : null}
+
         <Content sortingType={'feed'}>
           {sortingType === 'thread' ? (
             records &&
@@ -219,7 +276,13 @@ const Box = () => {
           ) : sortingType === 'feed' ? (
             records &&
             records.map((record, index) => {
-              return <FeedBox record={record} key={index}></FeedBox>;
+              return (
+                <FeedBox
+                  record={record}
+                  key={index}
+                  setModal={setModal}
+                ></FeedBox>
+              );
             })
           ) : sortingType === 'search' ? (
             searchs &&
@@ -238,6 +301,28 @@ const Box = () => {
             <ListModeIcon></ListModeIcon>
           )}
         </Content>
+
+        {/* 삭제 팝업 */}
+        <Modal
+          className="popup"
+          openModal={openModal}
+          setModal={setModal}
+          title={<ModalTitle>{`행복기록을 삭제합니다!`}</ModalTitle>}
+          content={
+            <>
+              <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다:(`}</ModalText>
+              <ModalText>{`정말 삭제하시겠어요?`}</ModalText>
+            </>
+          }
+          button={
+            <ModalButtonField>
+              <ModalButtonLeft onClick={() => Delete(recordId)}>
+                {'확인'}
+              </ModalButtonLeft>
+              <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+            </ModalButtonField>
+          }
+        ></Modal>
       </Responsive>
     </>
   );

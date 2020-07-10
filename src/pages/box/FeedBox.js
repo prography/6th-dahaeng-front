@@ -12,16 +12,15 @@ import deleteIcon from '../../assets/icon/deleteicon.png';
 const Wrapper = styled.div`
   box-shadow: var(--card-shadow);
   border-radius: var(--small-border-radius);
-  background-color: ${(props) =>
-    props.status === true ? 'var(--light-background)' : '#ffffff'};
+  background-color: #ffffff;
 
   position: relative;
 
-  flex: 1 1 calc(33.3333% - 3rem);
+  flex: 1 1 calc(33.3333% - 20px);
   min-width: 256px;
-  max-width: calc(33.3333% - 3rem);
-  height: 412px;
-  margin: 1.5rem;
+  max-width: calc(33.3333% - 20px);
+  height: 392px;
+  margin: 10px;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
@@ -94,21 +93,31 @@ const Detail = styled.div`
 
 const DropdownWrapper = styled.div`
   width: 38px;
-  overflow: hidden;
+  border-radius: 4px;
 
   position: absolute;
-  right: 0px;
-  bottom: 7px;
-
+  right: 0;
+  bottom: 0;
   /* max-width: 96px;
   max-height: 64px; */
-  transition: 0.25s ease-in-out;
+`;
+
+const DropdownOpenWrapper = styled.div`
+  width: 38px;
+  border-radius: 4px;
+  background-color: var(--light-background);
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* max-width: 96px;
+  max-height: 64px; */
 `;
 
 const DropdownButton = styled.button`
   height: 32px;
   width: 38px;
-  padding: 4px;
+  padding: 7px 4px 4px 4px;
   background: transparent;
 
   cursor: pointer;
@@ -119,12 +128,15 @@ const DropdownIcon = styled.img`
 `;
 
 const DropdownList = styled.div`
-  border: 1px solid var(--secondary-color);
   position: absolute;
-  bottom: -24px;
-  right: -50px;
+  bottom: -32px;
+  right: 0;
 
-  transition: 0.25s ease-in-out;
+  z-index: 2;
+
+  box-shadow: var(--card-shadow);
+  border-radius: var(--small-border-radius);
+  background-color: #ffffff;
 `;
 
 const DropdownOption = styled.button`
@@ -135,7 +147,6 @@ const DropdownOption = styled.button`
   line-height: 24px;
   padding: 4px;
   border: none;
-  background: var(--light-background);
   color: var(--text-second);
   font-size: 14px;
 
@@ -158,22 +169,27 @@ const checkDetailLength = (text) => {
   }
 };
 
-const FeedBox = ({ record }) => {
+const FeedBox = ({ record, setModal }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const toggleDropdown = () => {
     setOpenDropdown(!openDropdown);
   };
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const Delete = (id) => {
-    dispatch(deleteRecord(id));
-  };
+  // const Delete = (id) => {
+  //   dispatch(deleteRecord(id));
+  // };
+
+  // const [openModal, setOpenModal] = useState(false);
+  // const setModal = () => {
+  //   setOpenModal(!openModal);
+  // };
 
   return (
     <>
-      <Wrapper status={openDropdown}>
+      <Wrapper>
         <CharacterBox>
           <CharacterImg
             alt=""
@@ -185,18 +201,28 @@ const FeedBox = ({ record }) => {
           <Question>{checkTitleLength(record.question)}</Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
-        <DropdownWrapper>
-          <DropdownButton onClick={toggleDropdown}>
-            <DropdownIcon src={deleteIcon} alt="" />
-          </DropdownButton>
-        </DropdownWrapper>
         {openDropdown ? (
-          <DropdownList>
-            <DropdownOption onClick={Delete(record.id)}>
-              삭제하기
-            </DropdownOption>
-          </DropdownList>
-        ) : null}
+          <>
+            <DropdownOpenWrapper status={openDropdown}>
+              <DropdownButton onClick={toggleDropdown}>
+                <DropdownIcon src={deleteIcon} alt="" />
+              </DropdownButton>
+            </DropdownOpenWrapper>
+            <DropdownList>
+              <DropdownOption onClick={() => setModal(record.id)}>
+                삭제하기
+              </DropdownOption>
+            </DropdownList>
+          </>
+        ) : (
+          <>
+            <DropdownWrapper status={openDropdown}>
+              <DropdownButton onClick={toggleDropdown}>
+                <DropdownIcon src={deleteIcon} alt="" />
+              </DropdownButton>
+            </DropdownWrapper>
+          </>
+        )}
       </Wrapper>
     </>
   );

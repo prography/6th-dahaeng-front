@@ -70,6 +70,7 @@ const ModalButtonRight = styled.button`
 
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
+  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -79,11 +80,15 @@ const Closet = ({ history }) => {
   };
 
   const [applyItems, setApplyItems] = useState({
-    color:
-      hasItems &&
-      hasItems.filter(
-        (item) => item.item_type === 'jorang_color' && item.is_worn === true,
-      )[0].item_detail,
+    // color: `#${
+    //   hasItems &&
+    //   hasItems.filter(
+    //     (item) =>
+    //       item.item.item_type === 'jorang_color' && item.is_worn === true,
+    //   )[0].item.item_detail
+    // }`,
+    color: `#${user.jorang_color}`,
+    id: -1,
 
     // background: hasItems.filter(
     //   (item) => item.category === 'color' && item.apply === true,
@@ -93,9 +98,10 @@ const Closet = ({ history }) => {
     // ),
   });
   const applyItem = (applyItem) => {
-    if (applyItem.item_type === 'jorang_color') {
+    if (applyItem.item.item_type === 'jorang_color') {
       setApplyItems({
-        color: applyItem.item_detail,
+        color: `#${applyItem.item.item_detail}`,
+        id: applyItem.item.id,
       });
     } else {
       // applyItems.append(applyItem);
@@ -104,7 +110,7 @@ const Closet = ({ history }) => {
   };
 
   const setItem = (item) => {
-    dispatch(setItems(item.id));
+    dispatch(setItems(item));
     setModal();
     //refresh item list and coin and jorang view
   };
@@ -136,7 +142,9 @@ const Closet = ({ history }) => {
             title={<ModalTitle>{'현재 모습을 적용하시겠어요?'}</ModalTitle>}
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={setItem}>{'확인'}</ModalButtonLeft>
+                <ModalButtonLeft onClick={() => setItem(applyItems.id)}>
+                  {'확인'}
+                </ModalButtonLeft>
                 <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
               </ModalButtonField>
             }
@@ -151,11 +159,11 @@ const Closet = ({ history }) => {
             itemBoxs={
               hasItems &&
               hasItems
-                .filter((item) => item.item_type === select)
+                .filter((item) => item.item.item_type === select)
                 .map((item) => {
                   return (
                     <ItemBox
-                      key={item.name}
+                      key={item.item.item_name}
                       item={item}
                       applyItem={applyItem}
                     ></ItemBox>

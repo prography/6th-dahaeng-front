@@ -165,21 +165,21 @@ function* buyItemSaga(action) {
     };
 
     const param = {
-      item: action.payload.item,
+      item: action.payload.id,
     };
 
     const res = yield call(
       [axios, 'post'],
-      `${serverURL}/shop/${param.item}`,
-      { headers: headers },
+      `${serverURL}/shop/${param.item}/`,
       param,
+      { headers: headers },
     );
 
     console.log('response: ', res);
-    if (res.response === 'success') {
+    if (res.data.response === 'success') {
       yield put({
         type: BUYITEMS_SUCCESS,
-        payload: res.data.message,
+        payload: res.data.coin,
       });
     } else {
       yield put({
@@ -209,14 +209,16 @@ function* setItemSaga(action) {
     };
 
     const param = {
-      id: action.payload.item,
+      color: {
+        item: action.payload.id,
+      },
     };
 
     const res = yield call(
       [axios, 'post'],
       `${serverURL}/shop/mycloset/`,
-      { headers: headers },
       param,
+      { headers: headers },
     );
 
     console.log('response: ', res);

@@ -201,15 +201,13 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
         <MainJoraeng
           age={user.jorang_status}
           color={
-            // applyItems !== null
-            //   ? `#${applyItems.color}`
-            //   : `#${
-            //       hasItems &&
-            //       hasItems
-            //         .filter((item) => item.item_type === 'jorang_color')
-            //         .filter((item) => item.is_worn === true)[0].item_detail
-            //     }`
-            color
+            applyItems !== null ? applyItems.color : color
+            // //`#${
+            //   hasItems &&
+            //   hasItems
+            //     .filter((item) => item.item.item_type === 'jorang_color')
+            //     .filter((item) => item.is_worn === true)[0].item.item_detail
+            // }`
           }
         />
       </Character>

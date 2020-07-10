@@ -110,7 +110,7 @@ const BackgroundImg = styled.img`
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
 const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
   const user = useSelector((state) => state.user.user);
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(true);
   const setModal = () => {
     setOpenModal(!openModal);
   };

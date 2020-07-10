@@ -135,13 +135,13 @@ const user = handleActions(
       user,
     }),
 
-    [REMINDER_SUCCESS]: (state, { payload: reminders }) => ({
+    [REMINDER_SUCCESS]: (state, { payload: notices }) => ({
       ...state,
-      reminders: reminders,
+      notices: notices,
     }),
     [REMINDER_FAIL]: (state, { payload: error }) => ({
       ...state,
-      reminders: error,
+      notices: error,
     }),
 
     [GETITEMS_SUCCESS]: (state, { payload: items }) => ({

@@ -38,28 +38,23 @@ export const setRecord = createAction(SET_RECORD, (formData) => ({
   formData,
 }));
 export const getRecords = createAction(GET_RECORDS);
-export const searchRecords = createAction(SEARCH_RECORDS);
-export const modifyRecord = createAction(MODIFY_RECORD);
-export const deleteRecord = createAction(DELETE_RECORD);
+export const searchRecords = createAction(
+  SEARCH_RECORDS,
+  (search_fields, search) => ({ search_fields, search }),
+);
+export const modifyRecord = createAction(MODIFY_RECORD, (id) => ({ id }));
+export const deleteRecord = createAction(DELETE_RECORD, (id) => ({ id }));
 
 const initialState = {
-  question: null,
-  record: [
-    {
-      id: 0,
-      created_at: '0000-00-00',
-      question: '행복 랜덤 질문',
-      detail: '사용자 행복 기록',
-      profile: '사용자 이메일',
-      emotion: '대표감정',
-      image: '이미지 url',
-      continuity: '연속 기록 횟수',
-    },
-  ],
+  question: {
+    last_login: '2020-07-10',
+    question: '오늘 하루는 어땠나요?',
+  },
+  record: null,
   records: [
     {
       id: 0,
-      created_at: '0000-00-00',
+      created_at: '2020-07-10',
       question: '행복 랜덤 질문',
       detail: '사용자 행복 기록',
       profile: '사용자 이메일',
@@ -68,18 +63,8 @@ const initialState = {
       continuity: '연속 기록 횟수',
     },
     {
-      id: 0,
-      created_at: '0000-00-00',
-      question: '행복 랜덤 질문',
-      detail: '사용자 행복 기록',
-      profile: '사용자 이메일',
-      emotion: '대표감정',
-      image: '이미지 url',
-      continuity: '연속 기록 횟수',
-    },
-    {
-      id: 0,
-      created_at: '0000-00-00',
+      id: 1,
+      created_at: '2020-07-11',
       question: '행복 랜덤 질문',
       detail: '사용자 행복 기록',
       profile: '사용자 이메일',
@@ -89,6 +74,18 @@ const initialState = {
     },
   ],
   searchs: null,
+  // searchs: [
+  //   {
+  //     id: 0,
+  //     created_at: '0000-00-00',
+  //     question: '행복 랜덤 질문',
+  //     detail: '사용자 행복 기록',
+  //     profile: '사용자 이메일',
+  //     emotion: '대표감정',
+  //     image: '이미지 url',
+  //     continuity: '연속 기록 횟수',
+  //   },
+  // ],
   coin: 0,
   continuity: 0,
 };
@@ -101,7 +98,7 @@ const box = handleActions(
     }),
     [GET_QUESTION_FAIL]: (state, { payload: error }) => ({
       ...state,
-      question: error,
+      // question: error,
     }),
 
     [SET_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -112,7 +109,7 @@ const box = handleActions(
     }),
     [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      record: error,
+      //record: error,
     }),
 
     [MODIFY_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -121,7 +118,7 @@ const box = handleActions(
     }),
     [MODIFY_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      record: error,
+      //record: error,
     }),
 
     [DELETE_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -137,7 +134,7 @@ const box = handleActions(
     }),
     [GET_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      records: error,
+      // records: error,
     }),
 
     [SEARCH_RECORDS_SUCCESS]: (state, { payload: searchs }) => ({
@@ -146,7 +143,7 @@ const box = handleActions(
     }),
     [SEARCH_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      searchs: error,
+      // searchs: error,
     }),
   },
   initialState,

@@ -188,7 +188,7 @@ const Box = () => {
   };
 
   useEffect(() => {
-    // dispatch(getRecords());
+    dispatch(getRecords());
   }, [dispatch]);
 
   return (
@@ -298,7 +298,6 @@ const Box = () => {
                   <ThreadBox
                     record={record}
                     key={index}
-
                     // input={input}
                   ></ThreadBox>
                 </>

@@ -5,7 +5,7 @@ import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
 import Moment from 'moment';
-import Modal from '../../components/Modal';
+import NoticeModal from '../../components/NoticeModal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useSelector } from 'react-redux';
 import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
@@ -16,6 +16,18 @@ const Date = styled.div`
 `;
 
 const ModalTitle = styled.div``;
+
+const Reminder = styled.div`
+  width: 90%;
+  height: 2rem;
+  border: 1px solid black;
+`;
+
+const Notice = styled.div`
+  width: 85%;
+  height: 1.5rem;
+  border: 1px solid black;
+`;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
@@ -161,7 +173,7 @@ const BackgroundImg = styled.img`
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ reminders, history, hasItems, applyItems }) => {
+const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -175,11 +187,10 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
   const moveMain = () => {
     history.push('/');
   };
-  console.log(applyItems);
   return (
     <Wrapper>
       <PostBox>
-        {reminders ? (
+        {notice ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
           <PostBoxImg src={postbox} alt="" />
@@ -205,43 +216,17 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
       <Background>
         <BackgroundImg src={ground} alt="" />
       </Background>
-      <Modal
+      <NoticeModal
         openModal={openModal}
-        title={
-          <ModalTitle>
-            <Date>
-              {Moment(
-                reminders &&
-                  reminders.created_at &&
-                  reminders.created_at.dateForm,
-              ).format('MM-DD')}
-            </Date>
-            <ModalQuestion>
-              {reminders && reminders.posts && reminders.posts.question}
-            </ModalQuestion>
-          </ModalTitle>
+        setModal={setModal}
+        title={<ModalTitle>{'공지사항'}</ModalTitle>}
+        notice={notice.map((notice) => {
+          return <Notice>{notice.title}</Notice>;
+        })}
+        reminder={
+          <Reminder>{'1년 전, 나는 이렇게 행복했어요! 함께 볼까요?'}</Reminder>
         }
-        content={
-          <ModalContent>
-            <ModalCharacter>
-              {reminders &&
-              reminders.posts &&
-              reminders.posts.image !== null ? (
-                <ModalCharacterImage
-                  src={reminders && reminders.posts.image}
-                  alt=""
-                />
-              ) : (
-                <ModalCharacterDefaultImage
-                  src="/images/defaultJoraeng.png"
-                  alt=""
-                />
-              )}
-            </ModalCharacter>
-            <ModalInput></ModalInput>
-          </ModalContent>
-        }
-      ></Modal>
+      ></NoticeModal>
     </Wrapper>
   );
 };

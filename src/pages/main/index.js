@@ -167,6 +167,7 @@ const emotionWordEn = ['WARM', 'TOUCHED', 'FUN', 'HAPPY', 'EXTRA'];
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
   const [openCoinModal, setOpenCoinModal] = useState(false);
+  //const [openNoticeModal, setOpenNoticeModal] = useState(false);
 
   const [dropdownState, setDropdownState] = useState(0);
   const setModal = () => {
@@ -180,11 +181,19 @@ const Main = ({ history }) => {
       setOpenCoinModal(!openCoinModal);
     }
   };
+  // const setNoticeModal = () => {
+  //   if (openNoticeModal) {
+  //     setModal();
+  //     setOpenNoticeModal(!openNoticeModal);
+  //   } else {
+  //     setOpenNoticeModal(!openNoticeModal);
+  //   }
+  // };
 
   const hasItems = useSelector((state) => state.user.hasItems);
   const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
-  const reminders = useSelector((state) => state.user.reminders);
+  const notices = useSelector((state) => state.user.notices);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const token = useSelector((state) => state.auth.token);
 
@@ -366,7 +375,8 @@ const Main = ({ history }) => {
         ></Modal>
 
         <Room
-          reminders={reminders}
+          notice={notices.notice}
+          reminder={notices.reminder}
           history={history}
           hasItems={hasItems}
           applyItems={null}

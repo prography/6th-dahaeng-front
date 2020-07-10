@@ -98,7 +98,7 @@ const box = handleActions(
     }),
     [GET_QUESTION_FAIL]: (state, { payload: error }) => ({
       ...state,
-      question: error,
+      // question: error,
     }),
 
     [SET_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -109,7 +109,7 @@ const box = handleActions(
     }),
     [SET_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      record: error,
+      //record: error,
     }),
 
     [MODIFY_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -118,7 +118,7 @@ const box = handleActions(
     }),
     [MODIFY_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
-      record: error,
+      //record: error,
     }),
 
     [DELETE_RECORD_SUCCESS]: (state, { payload: detail }) => ({
@@ -134,7 +134,7 @@ const box = handleActions(
     }),
     [GET_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      records: error,
+      // records: error,
     }),
 
     [SEARCH_RECORDS_SUCCESS]: (state, { payload: searchs }) => ({
@@ -143,7 +143,7 @@ const box = handleActions(
     }),
     [SEARCH_RECORDS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      searchs: error,
+      // searchs: error,
     }),
   },
   initialState,

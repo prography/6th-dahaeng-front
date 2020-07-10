@@ -141,7 +141,7 @@ const user = handleActions(
     }),
     [REMINDER_FAIL]: (state, { payload: error }) => ({
       ...state,
-      notices: error,
+      // notices: error,
     }),
 
     [GETITEMS_SUCCESS]: (state, { payload: items }) => ({
@@ -150,7 +150,7 @@ const user = handleActions(
     }),
     [GETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      allItems: error,
+      // allItems: error,
     }),
 
     [BUYITEMS_SUCCESS]: (state, { payload: payload }) => ({
@@ -160,7 +160,7 @@ const user = handleActions(
     }),
     [BUYITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      items: error,
+      //  items: error,
     }),
 
     [SETITEMS_SUCCESS]: (state, { payload: items }) => ({
@@ -169,7 +169,7 @@ const user = handleActions(
     }),
     [SETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      items: error,
+      // items: error,
     }),
 
     [GETCLOSET_SUCCESS]: (state, { payload: items }) => ({
@@ -178,7 +178,7 @@ const user = handleActions(
     }),
     [GETCLOSET_FAIL]: (state, { payload: error }) => ({
       ...state,
-      hasItems: error,
+      //   hasItems: error,
     }),
   },
   initialState,

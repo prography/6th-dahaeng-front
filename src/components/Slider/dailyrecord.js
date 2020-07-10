@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-
+import Moment from 'moment';
 import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.png';
 import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.png';
 import redEmotion from '../../assets/joraeng/category-joraeng/category-red.png';
@@ -45,6 +45,10 @@ const DropdownEmotion = styled.img`
 
 const DailyRecord = () => {
   const records = useSelector((state) => state.box.records);
+  let days = [];
+  for (let i = 1; i <= 30; i++) {
+    days = days.concat(i);
+  }
 
   const renderSwitch = (emotion) => {
     switch (emotion) {
@@ -66,10 +70,28 @@ const DailyRecord = () => {
   return (
     <>
       <DailyRecordBox>
+        {days.map((day) => (
+          <DailyRecordJoraeng>
+            {records &&
+            records.filter(
+              (record) =>
+                parseInt(Moment(record.created_at).format('DD')) === day,
+            )[0]
+              ? renderSwitch(
+                  records.filter(
+                    (record) =>
+                      parseInt(Moment(record.created_at).format('DD')) === day,
+                  )[0].emotion,
+                )
+              : renderSwitch('NONE')}
+          </DailyRecordJoraeng>
+        ))}
         {/* {records &&
           records.map((record, index) => (
             <DailyRecordJoraeng key={index}>
-              {renderSwitch(record.emotion)}
+              {parseInt(Moment(record.created_at).format('DD'))
+                ? renderSwitch(record.emotion)
+                : renderSwitch('NONE')}
             </DailyRecordJoraeng>
           ))} */}
       </DailyRecordBox>

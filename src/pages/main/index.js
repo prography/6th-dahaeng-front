@@ -196,7 +196,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const notices = useSelector((state) => state.user.notices);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
-  const token = useSelector((state) => state.auth.token);
+ // const token = useSelector((state) => state.auth.token);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -212,7 +212,7 @@ const Main = ({ history }) => {
     }
   }, [dispatch, history]);
 
-  // const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');
 
   useEffect(() => {
     console.log(token);

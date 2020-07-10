@@ -130,7 +130,7 @@ const Slider = ({ history }) => {
       // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <InfoBox />
+      <InfoBox toggleDrawer={toggleDrawer} />
       {/* 행복 기록시 입력한 카테고리 떠야 함 
       행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecord />

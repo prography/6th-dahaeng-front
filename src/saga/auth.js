@@ -103,12 +103,11 @@ function* createSaga(action) {
 
     const param = {
       nickname: action.payload.nickname,
-      color: action.payload.color,
     };
 
     const res = yield call(
       [axios, 'post'],
-      `${serverURL}/jorang_create`,
+      `${serverURL}/jorang_create/`,
       param,
       { headers: headers },
     );

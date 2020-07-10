@@ -83,7 +83,7 @@ function* setRecordSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      `${serverURL}/record/posts/create/`,
+      `${serverURL}/record/posts/newpost/`,
       action.payload.formData,
       // param,
       { headers: headers },

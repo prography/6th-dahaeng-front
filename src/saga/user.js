@@ -101,8 +101,8 @@ function* setUserSaga(action) {
     };
 
     const param = {
-      nickname: action.payload.nickname,
       title: action.payload.title,
+      nickname: action.payload.nickname,
     };
     const res = yield call(
       [axios, 'post'],

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../store/user';
+import { setUser, getUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import SliderJoraeng from '../Joraeng/SliderJoraeng';
 
@@ -18,7 +18,7 @@ const UserTitle = styled.div`
   font-size: 24px;
   flex: 2;
   margin-right: 1rem;
-  max-width: 170px;
+  max-width: 250px;
 `;
 
 const UserInfoBtn = styled.button`
@@ -73,7 +73,7 @@ const UserTextWrapper = styled.div`
 const UserInfoText = styled.div`
   font-size: 16px;
   flex: none;
-  width: 64px;
+  max-width: 120px;
   text-align: right;
 `;
 
@@ -132,6 +132,13 @@ const ModalTextBox = styled.div`
   align-items: center;
 `;
 
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const ModalBox = styled.div`
   flex: 3;
   height: 4rem;
@@ -144,12 +151,20 @@ const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = () => {
+const InfoBox = ({ toggleDrawer }) => {
   const user = useSelector((state) => state.user.user);
 
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
+  };
+
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const setUpdateModal = () => {
+    if (openModal) {
+      setOpenModal(!openModal);
+      setOpenUpdateModal(!openUpdateModal);
+    }
   };
 
   //TODO : 개인정보 수정
@@ -161,26 +176,18 @@ const InfoBox = () => {
   }, [user]);
 
   useEffect(() => {
-    setInputNickname(user ? user.name : '');
+    setInputNickname(user ? user.jorang_nickname : '');
   }, [user]);
 
   const dispatch = useDispatch();
-  // const setInfo = () => {};
-  // const updateNewInfo = async () => {
-  //const newInfo = user
-  //newInfo.title = inputTitle
-  //newInfo.name = inputNickname
-
-  //if (await updateInfo(newInfo)) {
-  //getInfo()
-  //}
-  // }
 
   const completeUpdate = () => {
+    console.log(inputTitle, inputNickname);
     dispatch(
-      setUser(inputTitle, inputNickname, localStorage.getItem('profile')),
+      setUser(inputNickname, inputTitle, localStorage.getItem('profile')),
     );
-    setModal();
+
+    window.location.reload(false);
   };
 
   return (
@@ -241,7 +248,18 @@ const InfoBox = () => {
             </ModalTextBox>
           </ModalBox>
         }
-        button={<ModalButton onClick={completeUpdate}>수정 완료</ModalButton>}
+        button={<ModalButton onClick={setUpdateModal}>수정 완료</ModalButton>}
+      />
+
+      <Modal
+        className="popup"
+        openModal={openUpdateModal}
+        setModal={setUpdateModal}
+        title={<ModalTitle>정보 수정이 완료되었습니다!</ModalTitle>}
+        content={
+          <ModalText>{`'${inputTitle}', '${inputNickname}'(으)로 변경했어요!`}</ModalText>
+        }
+        button={<ModalButton onClick={completeUpdate}>확인</ModalButton>}
       />
     </>
   );

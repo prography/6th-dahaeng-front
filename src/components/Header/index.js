@@ -35,7 +35,7 @@ const Header = ({ history }) => {
     history.push('/');
   };
 
-  // const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.user);
 
   // const [open, setOpen] = useState(false);
   // const anchor = 'left';
@@ -52,7 +52,7 @@ const Header = ({ history }) => {
       <HeaderBlock>
         <Wrapper>
           <div className="title" onClick={moveMain}>
-            Da:haeng
+            {user.title}
           </div>
         </Wrapper>
       </HeaderBlock>

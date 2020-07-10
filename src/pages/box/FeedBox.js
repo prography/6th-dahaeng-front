@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
 import { deleteRecord } from 'store/box';
@@ -7,10 +7,15 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Moment from 'moment';
 
+import deleteIcon from '../../assets/icon/deleteicon.png';
+
 const Wrapper = styled.div`
   box-shadow: var(--card-shadow);
   border-radius: var(--small-border-radius);
-  background-color: #ffffff;
+  background-color: ${(props) =>
+    props.status === true ? 'var(--light-background)' : '#ffffff'};
+
+  position: relative;
 
   flex: 1 1 calc(33.3333% - 3rem);
   min-width: 256px;
@@ -87,8 +92,54 @@ const Detail = styled.div`
   flex: 1;
 `;
 
-const Dropdown = styled.div`
-  height: 8px;
+const DropdownWrapper = styled.div`
+  width: 38px;
+  overflow: hidden;
+
+  position: absolute;
+  right: 0px;
+  bottom: 7px;
+
+  /* max-width: 96px;
+  max-height: 64px; */
+  transition: 0.25s ease-in-out;
+`;
+
+const DropdownButton = styled.button`
+  height: 32px;
+  width: 38px;
+  padding: 4px;
+  background: transparent;
+
+  cursor: pointer;
+`;
+
+const DropdownIcon = styled.img`
+  height: 14px;
+`;
+
+const DropdownList = styled.div`
+  border: 1px solid var(--secondary-color);
+  position: absolute;
+  bottom: -24px;
+  right: -50px;
+
+  transition: 0.25s ease-in-out;
+`;
+
+const DropdownOption = styled.button`
+  width: 72px;
+  height: 32px;
+  text-align: center;
+
+  line-height: 24px;
+  padding: 4px;
+  border: none;
+  background: var(--light-background);
+  color: var(--text-second);
+  font-size: 14px;
+
+  cursor: pointer;
 `;
 
 const checkTitleLength = (text) => {
@@ -108,6 +159,12 @@ const checkDetailLength = (text) => {
 };
 
 const FeedBox = ({ record }) => {
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setOpenDropdown(!openDropdown);
+  };
+
   const dispatch = useDispatch();
 
   const Delete = (id) => {
@@ -116,7 +173,7 @@ const FeedBox = ({ record }) => {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper status={openDropdown}>
         <CharacterBox>
           <CharacterImg
             alt=""
@@ -128,7 +185,18 @@ const FeedBox = ({ record }) => {
           <Question>{checkTitleLength(record.question)}</Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
-        <Dropdown onClick={Delete(record.id)}>삭제</Dropdown>
+        <DropdownWrapper>
+          <DropdownButton onClick={toggleDropdown}>
+            <DropdownIcon src={deleteIcon} alt="" />
+          </DropdownButton>
+        </DropdownWrapper>
+        {openDropdown ? (
+          <DropdownList>
+            <DropdownOption onClick={Delete(record.id)}>
+              삭제하기
+            </DropdownOption>
+          </DropdownList>
+        ) : null}
       </Wrapper>
     </>
   );

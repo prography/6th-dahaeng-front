@@ -44,8 +44,30 @@ export const deleteRecord = createAction(DELETE_RECORD);
 
 const initialState = {
   question: null,
-  record: null,
-  records: null,
+  record: [
+    {
+      id: 0,
+      created_at: '0000-00-00',
+      question: '행복 랜덤 질문',
+      detail: '사용자 행복 기록',
+      profile: '사용자 이메일',
+      emotion: '대표감정',
+      image: '이미지 url',
+      continuity: '연속 기록 횟수',
+    },
+  ],
+  records: [
+    {
+      id: 0,
+      created_at: '0000-00-00',
+      question: '행복 랜덤 질문',
+      detail: '사용자 행복 기록',
+      profile: '사용자 이메일',
+      emotion: '대표감정',
+      image: '이미지 url',
+      continuity: '연속 기록 횟수',
+    },
+  ],
   searchs: null,
   coin: 0,
   continuity: 0,

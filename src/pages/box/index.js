@@ -26,6 +26,8 @@ const SortingBox = styled.div`
 const ListModeIcon = styled.div`
   width: 1.5rem;
   height: 1rem;
+
+  cursor: pointer;
 `;
 
 const Content = styled.div`

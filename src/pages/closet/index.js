@@ -80,8 +80,8 @@ const Closet = ({ history }) => {
 
   const [applyItems, setApplyItems] = useState({
     color: hasItems.filter(
-      (item) => item.category === 'color' && item.apply === true,
-    )[0].color,
+      (item) => item.item_type === 'jorang_color' && item.is_worn === true,
+    )[0].item_detail,
 
     // background: hasItems.filter(
     //   (item) => item.category === 'color' && item.apply === true,
@@ -91,9 +91,9 @@ const Closet = ({ history }) => {
     // ),
   });
   const applyItem = (applyItem) => {
-    if (applyItem.category === 'color') {
+    if (applyItem.item_type === 'jorang_color') {
       setApplyItems({
-        color: applyItem.color,
+        color: applyItem.item_detail,
       });
     } else {
       // applyItems.append(applyItem);
@@ -107,8 +107,8 @@ const Closet = ({ history }) => {
     //refresh item list and coin and jorang view
   };
 
-  const indexs = ['color', 'background', 'item'];
-  const [select, setSelect] = useState('color');
+  const indexs = ['jorang_color', 'background', 'item'];
+  const [select, setSelect] = useState('jorang_color');
   const selectCategory = (index) => {
     setSelect(index);
   };
@@ -150,7 +150,7 @@ const Closet = ({ history }) => {
             itemBoxs={
               hasItems &&
               hasItems
-                .filter((item) => item.category === select)
+                .filter((item) => item.item_type === select)
                 .map((item) => {
                   return (
                     <ItemBox

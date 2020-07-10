@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ItemBox from './ItemBox';
 import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
 import noItemJoraeng from 'assets/joraeng/no-item-joraeng.png';
 import { useSelector } from 'react-redux';
@@ -123,7 +122,7 @@ const ItemContainer = ({
                         select === index ? '#ffffff' : 'var(--primary-color)',
                     }}
                   >
-                    {index === 'color'
+                    {index === 'jorang_color'
                       ? '컬러'
                       : index === 'background'
                       ? '배경'
@@ -143,7 +142,7 @@ const ItemContainer = ({
 
         {/* item 없을 때 화면 수정해야 함 */}
         <ItemPage status={status}>
-          {select === 'color' ? (
+          {select === 'jorang_color' ? (
             itemBoxs
           ) : (
             <ImgBox>

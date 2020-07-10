@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord, modifyRecord } from 'store/box';
+import { getQuestion, setRecord, modifyRecord, getToday } from 'store/box';
 import { reminder } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
@@ -224,19 +224,24 @@ const Main = ({ history }) => {
   useEffect(() => {
     dispatch(getQuestion());
     dispatch(reminder());
+    localStorage.getItem('record_id') &&
+      dispatch(getToday(localStorage.getItem('record_id')));
   }, [dispatch]);
 
   //today record
   const record = useSelector((state) => state.box.record);
 
-  const modifyRecord = () => {
-    dispatch(
-      modifyRecord({
-        detail: inputText,
-        emotion: emotionWordEn[dropdownState],
-        image: img,
-      }),
-    );
+  useEffect(() => {
+    record && setInputText(record.detail);
+  }, [record]);
+
+  const modify = () => {
+    const form_data = new FormData();
+    form_data.append('detail', inputText);
+    form_data.append('emotion', emotionWordEn[dropdownState]);
+    img && form_data.append('image', img);
+
+    dispatch(modifyRecord(form_data, record.id));
   };
 
   const completeRecord = () => {
@@ -250,6 +255,7 @@ const Main = ({ history }) => {
   };
   const coin = useSelector((state) => state.box.coin);
   const continuity = useSelector((state) => state.box.continuity);
+  const reward_of_today = useSelector((state) => state.box.reward_of_today);
 
   //사진 업로드 시도!
   //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
@@ -302,10 +308,20 @@ const Main = ({ history }) => {
                   ).format('MM-DD')}
                 </Date>
                 <ModalCategory>
-                  <EmotionDropdown updateDropdownValue={setDropdownState} />
+                  <EmotionDropdown
+                    updateDropdownValue={setDropdownState}
+                    dropdownState={
+                      record &&
+                      emotionWordEn.findIndex((e) => e === record.emotion)
+                    }
+                  />
                 </ModalCategory>
                 <DropdownStatusText>
-                  {emotionWord[dropdownState]}
+                  {record
+                    ? emotionWord[
+                        emotionWordEn.findIndex((e) => e === record.emotion)
+                      ]
+                    : emotionWord[dropdownState]}
                 </DropdownStatusText>
               </ModalTitleWrapper>
               <ModalTitleWrapper>
@@ -342,7 +358,7 @@ const Main = ({ history }) => {
           }
           button={
             record ? (
-              <ModalButton onClick={modifyRecord}>기록 수정하기</ModalButton>
+              <ModalButton onClick={modify}>기록 수정하기</ModalButton>
             ) : (
               <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
             )
@@ -367,8 +383,8 @@ const Main = ({ history }) => {
           }
           content={
             <>
-              <ModalText>{`짜잔- 오늘은 ${coin}코인을 받아서`}</ModalText>
-              <ModalText>{`총 나의 행복코인이 ${user.coin}이 되었습니다 :)`}</ModalText>
+              <ModalText>{`짜잔- 오늘은 ${reward_of_today}코인을 받아서`}</ModalText>
+              <ModalText>{`총 나의 행복코인이 ${coin}이 되었습니다 :)`}</ModalText>
             </>
           }
           button={<ModalButton onClick={setCoinModal}>확인</ModalButton>}

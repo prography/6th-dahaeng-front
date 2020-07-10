@@ -108,7 +108,13 @@ class EmotionDropdown extends Component {
         />
         <DropdownButton onClick={this.toggleDropdown}>
           <DropdownEmotion
-            src={EmotionArray[this.state.dropdownValue]}
+            src={
+              EmotionArray[
+                this.props.dropdownState
+                  ? this.state.dropdownState
+                  : this.state.dropdownValue
+              ]
+            }
             alt=""
           />
         </DropdownButton>

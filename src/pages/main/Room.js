@@ -1,101 +1,26 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import palette from 'styles/palette';
 import ground from 'assets/main/ground.jpg';
 import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
-import character from 'assets/joraeng/defaultJoraeng.png';
 import Moment from 'moment';
-import Modal from '../../components/Modal';
+import NoticeModal from '../../components/NoticeModal';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import { useSelector } from 'react-redux';
+import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
 
 //Modal
-const Date = styled.div`
-  font-size: 18px;
-`;
 
 const ModalTitle = styled.div``;
 
-const ModalQuestion = styled.div`
-  font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
-  display: inline;
-`;
-
-const ModalContent = styled.div`
+const Reminder = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  text-align: center;
+  z-index: 2;
 `;
 
-const ModalCharacter = styled.div`
-  box-sizing: border-box;
-  width: 10rem;
-  height: 10rem;
-  border: 1px solid #e9e9e9;
-  margin: 5% auto;
-  overflow: hidden;
-`;
-
-const ModalCharacterImage = styled.img`
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-`;
-
-const ModalCharacterDefaultImage = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  margin-left: 3rem;
-`;
-
-const InputLabel = styled.label`
-  cursor: pointer;
-  font-size: 14px;
-  display: inline-block;
-  overflow: hidden;
-  color: var(--text-second);
-  padding: 1rem;
-`;
-
-const ModalInput = styled.textarea`
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0 auto;
-  border: none;
-  outline: none;
-  resize: none;
-
-  background-attachment: local;
-  background-image: linear-gradient(to right, white 10px, transparent 10px),
-    linear-gradient(to left, white 10px, transparent 10px),
-    repeating-linear-gradient(
-      white,
-      white 30px,
-      #e9e9e9 30px,
-      #e9e9e9 31px,
-      white 31px
-    );
-  line-height: 31px;
-  padding: 8px;
-`;
-
-const ModalButton = styled.button`
-  box-sizing: border-box;
-  float: right;
-  margin-top: 1rem;
-  border: none;
-  color: white;
-  height: 2rem;
-  background: #faa084;
-  border-radius: 4px;
-  outline: none;
-
-  cursor: pointer;
-`;
 //Modal
-
 const Wrapper = styled.div`
   margin: 0 auto;
   height: 350px;
@@ -122,7 +47,7 @@ const PostBox = styled.button`
   }
   @media screen and (max-width: 480px) {
     width: 50px;
-    top: 60px;
+    top: 70px;
     left: 20px;
   }
 `;
@@ -144,14 +69,10 @@ const Character = styled.button`
   }
 `;
 
-const CharacterImg = styled.img`
-  width: 100%;
-`;
-
 const Closet = styled.button`
   position: absolute;
   width: 60px;
-  top: 140px;
+  top: 145px;
   right: 70px;
   z-index: 3;
   @media screen and (max-width: 480px) {
@@ -186,68 +107,77 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
-const Room = ({ reminders }) => {
+//hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
+const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
+  const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
     setOpenModal(!openModal);
   };
 
+  const moveCloset = () => {
+    history.push('/closet');
+  };
+
+  const moveMain = () => {
+    history.push('/');
+  };
+
+  const ReminderDate = reminder && reminder[0] && reminder[0].created_at;
+
   return (
     <Wrapper>
       <PostBox>
-        {reminders ? (
+        {notice ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
-          <PostBoxImg src={postbox} alt="" />
+          <PostBoxImg onClick={setModal} src={postbox} alt="" />
         )}
       </PostBox>
-      <Character>
-        <CharacterImg src={character} alt="" />
+      <Character onClick={moveMain}>
+        {/*TODO: Dynamic color binding*/}
+        <MainJoraeng
+          age={user.jorang_status}
+          color={
+            applyItems !== null ? applyItems.color : color
+            // //`#${
+            //   hasItems &&
+            //   hasItems
+            //     .filter((item) => item.item.item_type === 'jorang_color')
+            //     .filter((item) => item.is_worn === true)[0].item.item_detail
+            // }`
+          }
+        />
       </Character>
-      <Closet>
+      <Closet onClick={moveCloset}>
         <ClosetImg src={closet} alt="" />
       </Closet>
       <Background>
         <BackgroundImg src={ground} alt="" />
       </Background>
-      <Modal
+
+      <NoticeModal
+        history={history}
         openModal={openModal}
         setModal={setModal}
-        title={
-          <ModalTitle>
-            <Date>
-              {Moment(
-                reminders &&
-                  reminders.created_at &&
-                  reminders.created_at.dateForm,
-              ).format('MM-DD')}
-            </Date>
-            <ModalQuestion>
-              {reminders && reminders.posts && reminders.posts.question}
-            </ModalQuestion>
-          </ModalTitle>
+        reminderInfo={reminder}
+        notices={notice}
+        title={<ModalTitle>{'공지사항'}</ModalTitle>}
+        // notice={notice.map((notice) => {
+        //   return <Notice>{notice.title}</Notice>;
+        // })
+        reminder={
+          ReminderDate ? (
+            <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
+              5,
+              7,
+            )}월 ${ReminderDate.slice(
+              8,
+              10,
+            )}일, 나는 이렇게 많이 행복했었네요! 함께 볼까요?`}</Reminder>
+          ) : null
         }
-        content={
-          <ModalContent>
-            <ModalCharacter>
-              {reminders &&
-              reminders.posts &&
-              reminders.posts.image !== null ? (
-                <ModalCharacterImage
-                  src={reminders && reminders.posts.image}
-                  alt=""
-                />
-              ) : (
-                <ModalCharacterDefaultImage
-                  src="/images/defaultJoraeng.png"
-                  alt=""
-                />
-              )}
-            </ModalCharacter>
-            <ModalInput></ModalInput>
-          </ModalContent>
-        }
-      ></Modal>
+      ></NoticeModal>
     </Wrapper>
   );
 };

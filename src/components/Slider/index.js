@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -7,22 +7,11 @@ import clsx from 'clsx';
 import { logout } from 'store/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoBox from './info.js';
+
 import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
-
-// 임시 기분표
-const emotionArray = [
-  '🥳',
-  '🥑',
-  '🌱',
-  '✈️',
-  '📚',
-  '⛄️',
-  '🌟',
-  '🌈',
-  '🌺',
-  '😴',
-];
+import { getRecords } from '../../store/box.js';
+import DailyRecord from './dailyrecord.js';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -37,7 +26,7 @@ const DrawerOpenBtn = styled.button`
   padding: 3px 8px 0 0;
   border: none;
   border-radius: 0 50% 50% 0;
-  z-index: 1;
+  z-index: 10;
   background-color: var(--primary-color);
 `;
 const DrawerIcon = styled.img`
@@ -57,35 +46,13 @@ const DrawerCloseBtn = styled.button`
   background-color: var(--primary-color);
 `;
 
-const DailyRecordBox = styled.div`
-  background-color: var(--secondary-color);
-  padding: 10px 0;
-  flex: 1;
-  margin: 1em;
-  height: 200px;
-  border-radius: 4px;
-
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: flex-start;
-`;
-//그날 행복기록에 입력한 카테고리 조랭 출력
-const DailyRecord = styled.div`
-  // 100/7% ~= 14.2%
-  flex: 1 1 14.2%;
-  max-width: 14.2%;
-  text-align: center;
-  padding: 10px;
-  font-size: 21px;
-  height: 50px;
-`;
-
-const LogoutText = styled.div`
+const LogoutBtn = styled.button`
   font-size: 14px;
   text-align: center;
   color: var(--text-second);
   margin: 1rem;
+  border: none;
+  text-decoration: none;
 `;
 
 const SliderButton = styled.button`
@@ -118,6 +85,14 @@ const Slider = ({ history }) => {
   //TODO: ??? token vs user
   const token = useSelector((state) => state.auth.token);
 
+  useEffect(() => {
+    if (open) {
+      dispatch(getRecords());
+    }
+  }, [open]);
+
+  // const records = useSelector((state) => state.box.records);
+
   const Trylogout = () => {
     dispatch(logout());
     history.push('/login');
@@ -126,12 +101,11 @@ const Slider = ({ history }) => {
 
   const toggleDrawer = (open) => (event) => {
     if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
+      event.type === 'keydown'
+      // && (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
-
     setOpen(open);
   };
 
@@ -153,16 +127,13 @@ const Slider = ({ history }) => {
         [classes.fullList]: anchor === 'left',
       })}
       role="presentation"
-      onClick={toggleDrawer(false)}
+      // onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <InfoBox />
-      {/* 행복 기록시 입력한 카테고리 떠야 함 */}
-      <DailyRecordBox>
-        {emotionArray.map((text, index) => (
-          <DailyRecord key={text}>{text}</DailyRecord>
-        ))}
-      </DailyRecordBox>
+      {/* 행복 기록시 입력한 카테고리 떠야 함 
+      행복 기록 안 한 날 표시 어떻게 할지*/}
+      <DailyRecord />
 
       <List>
         <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
@@ -184,8 +155,7 @@ const Slider = ({ history }) => {
             <DrawerIcon src={menuIcon} />
           </DrawerCloseBtn>
           <Spacer />
-          {/*TODO: 지호야 요거 밑에거 버튼으로 바꾸면 될듯*/}
-          <LogoutText onClick={Trylogout}>로그아웃</LogoutText>
+          <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
         </Drawer>
       </React.Fragment>
     </>

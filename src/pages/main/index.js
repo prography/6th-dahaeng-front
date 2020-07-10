@@ -4,13 +4,15 @@ import Header from '../../components/Header';
 import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord } from 'store/box';
-import { reminder } from 'store/user';
+import { getQuestion, setRecord, modifyRecord, getToday } from 'store/box';
+import { reminder, getUser } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
+import EmotionDropdown from '../../components/Modal/EmotionDropdown';
 
 const Date = styled.div`
   font-size: 18px;
+  display: inline;
 `;
 
 const QuestionBox = styled.div`
@@ -35,7 +37,26 @@ const Question = styled.div`
   );
 `;
 
-const ModalTitle = styled.div``;
+const ModalTitleWrapper = styled.div`
+  margin-bottom: 0.2rem;
+`;
+
+//감정 카테고리 시도
+const ModalCategory = styled.div`
+  position: relative;
+  display: inline-block;
+  margin-left: 0.5rem;
+  width: 48px;
+  height: 32px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+`;
+
+const DropdownStatusText = styled.span`
+  font-size: 14px;
+  padding-left: 12px;
+  color: var(--text-third);
+`;
 
 const ModalQuestion = styled.div`
   font-size: 18px;
@@ -113,29 +134,74 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
-  background: #faa084;
+  padding: 4px 12px;
+  background: var(--primary-color);
   border-radius: 4px;
   outline: none;
-
-  cursor: pointer;
 `;
+
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
+const emotionWord = [
+  '따뜻했어요!',
+  '평온했어요!',
+  '재밌었어요!',
+  '두근두근!',
+  '몽글몽글!',
+];
+
+const emotionWordEn = ['WARM', 'TOUCHED', 'FUN', 'HAPPY', 'EXTRA'];
 
 const Main = ({ history }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openCoinModal, setOpenCoinModal] = useState(false);
+  //const [openNoticeModal, setOpenNoticeModal] = useState(false);
+
+  const [dropdownState, setDropdownState] = useState(0);
   const setModal = () => {
     setOpenModal(!openModal);
   };
+  const setCoinModal = () => {
+    if (openModal) {
+      setModal();
+      setOpenCoinModal(!openCoinModal);
+    } else {
+      setOpenCoinModal(!openCoinModal);
+    }
+  };
+  // const setNoticeModal = () => {
+  //   if (openNoticeModal) {
+  //     setModal();
+  //     setOpenNoticeModal(!openNoticeModal);
+  //   } else {
+  //     setOpenNoticeModal(!openNoticeModal);
+  //   }
+  // };
 
-  const user = useSelector((state) => state.auth.user);
+  const hasItems = useSelector((state) => state.user.hasItems);
+  const id = useSelector((state) => state.auth.profile_id);
+  const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
-  const reminders = useSelector((state) => state.user.reminders);
+  const notices = useSelector((state) => state.user.notices);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const token = useSelector((state) => state.auth.token);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
     setInputText(e.target.value);
-    console.log(inputText);
+    // console.log(inputText);
   };
 
   const dispatch = useDispatch();
@@ -151,31 +217,57 @@ const Main = ({ history }) => {
   useEffect(() => {
     console.log(token);
     if (!token) {
+      //release
       history.push('/login');
     }
   }, [token, history]);
 
   useEffect(() => {
+    //dispatch(getUser(id));
+    localStorage.getItem('profile') &&
+      dispatch(getUser(localStorage.getItem('profile')));
     dispatch(getQuestion());
     dispatch(reminder());
-  }, [dispatch]);
+    localStorage.getItem('record_id') &&
+      dispatch(getToday(localStorage.getItem('record_id')));
+  }, [dispatch, id]);
+
+  //today record
+  const record = useSelector((state) => state.box.record);
+
+  useEffect(() => {
+    record && setInputText(record.detail);
+  }, [record]);
+
+  const modify = () => {
+    const form_data = new FormData();
+    form_data.append('detail', inputText);
+    form_data.append('emotion', emotionWordEn[dropdownState]);
+    img && form_data.append('image', img);
+
+    dispatch(modifyRecord(form_data, record.id));
+  };
 
   const completeRecord = () => {
     const form_data = new FormData();
     form_data.append('detail', inputText);
-    form_data.append('emotion', 'HAPPY');
-    form_data.append('image', img);
+    form_data.append('emotion', emotionWordEn[dropdownState]);
+    img && form_data.append('image', img);
 
     dispatch(setRecord(form_data));
-    setModal();
+    setCoinModal();
+    localStorage.getItem('profile') &&
+      dispatch(getUser(localStorage.getItem('profile')));
   };
+  const coin = useSelector((state) => state.box.coin);
+  const continuity = useSelector((state) => state.box.continuity);
+  const reward_of_today = useSelector((state) => state.box.reward_of_today);
 
   //사진 업로드 시도!
   //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
   //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
   const [img, setImage] = useState(null);
   const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
-  const [file, setFile] = useState(null);
 
   const onImageChange = (e) => {
     let reader = new FileReader();
@@ -184,9 +276,10 @@ const Main = ({ history }) => {
       const base64 = reader.result;
       if (base64) {
         setImgBase64(base64.toString());
-      } else {
-        setImgBase64('/images/defaultJoraeng.png');
       }
+      // else {
+      //   setImgBase64('/images/defaultJoraeng.png');
+      // }
     };
     if (e.target.files[0]) {
       reader.readAsDataURL(e.target.files[0]);
@@ -198,36 +291,57 @@ const Main = ({ history }) => {
     <>
       <Header></Header>
       <Responsive>
-        <QuestionBox>
+        <QuestionBox onClick={setModal}>
           <Date>
             {Moment(
               question && question.last_login && question.last_login.dateForm,
             ).format('MM-DD')}
           </Date>
-          <Question onClick={setModal}>
-            {question && question.question}
-          </Question>
+          <Question>{question && question.question}</Question>
         </QuestionBox>
         <Modal
+          className
           openModal={openModal}
           setModal={setModal}
           title={
-            <ModalTitle>
-              <Date>
-                {Moment(
-                  question &&
-                    question.last_login &&
-                    question.last_login.dateForm,
-                ).format('MM-DD')}
-              </Date>
-              <ModalQuestion>{question && question.question}</ModalQuestion>
-            </ModalTitle>
+            <>
+              <ModalTitleWrapper>
+                <Date>
+                  {Moment(
+                    question &&
+                      question.last_login &&
+                      question.last_login.dateForm,
+                  ).format('MM-DD')}
+                </Date>
+                <ModalCategory>
+                  <EmotionDropdown
+                    updateDropdownValue={setDropdownState}
+                    dropdownState={
+                      record &&
+                      emotionWordEn.findIndex((e) => e === record.emotion)
+                    }
+                  />
+                </ModalCategory>
+                <DropdownStatusText>
+                  {record
+                    ? emotionWord[
+                        emotionWordEn.findIndex((e) => e === record.emotion)
+                      ]
+                    : emotionWord[dropdownState]}
+                </DropdownStatusText>
+              </ModalTitleWrapper>
+              <ModalTitleWrapper>
+                <ModalQuestion>{question && question.question}</ModalQuestion>
+              </ModalTitleWrapper>
+            </>
           }
           content={
             <ModalContent>
               <ModalCharacter>
                 {img !== null ? (
                   <ModalCharacterImage src={imgBase64} alt="" />
+                ) : record && record.image ? (
+                  <ModalCharacterDefaultImage src={record.image} alt="" />
                 ) : (
                   <InputLabel htmlFor="upload">
                     행복사진을 <br /> 함께 기록해요!
@@ -251,10 +365,47 @@ const Main = ({ history }) => {
             </ModalContent>
           }
           button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            record ? (
+              <ModalButton onClick={modify}>기록 수정하기</ModalButton>
+            ) : (
+              <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
+            )
           }
+        />
+
+        {/* 코인 주기 팝업 */}
+        <Modal
+          className="popup"
+          openModal={openCoinModal}
+          setModal={setCoinModal}
+          title={
+            <>
+              {continuity === 7 || 17 || 27 || 30 ? (
+                <ModalTitle>
+                  <ModalTitle>{`우와, ${continuity}일 연속으로 행복을 기록했어요!`}</ModalTitle>
+                </ModalTitle>
+              ) : (
+                <ModalTitle>{`${continuity}일 째 행복을 기록했어요!`}</ModalTitle>
+              )}
+            </>
+          }
+          content={
+            <>
+              <ModalText>{`짜잔- 오늘은 ${reward_of_today}코인을 받아서`}</ModalText>
+              <ModalText>{`총 나의 행복코인이 ${coin}이 되었습니다 :)`}</ModalText>
+            </>
+          }
+          button={<ModalButton onClick={setCoinModal}>확인</ModalButton>}
         ></Modal>
-        <Room reminders={reminders}></Room>
+
+        <Room
+          notice={notices.notice}
+          reminder={notices.reminder}
+          history={history}
+          hasItems={hasItems}
+          applyItems={null}
+          color={`#${user.jorang_color}`}
+        ></Room>
       </Responsive>
     </>
   );

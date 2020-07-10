@@ -50,7 +50,9 @@ export const initialState = {
   authError: null,
   isFirstLogin: null,
   user: null,
-  has_jorang: null,
+  has_jorang: true,
+
+  profile_id: null,
 };
 
 const auth = handleActions(
@@ -67,11 +69,12 @@ const auth = handleActions(
     [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: message.token,
+      auth: message.profile_id,
       token: message.token,
       isFirstLogin: message.isFirstLogin,
       user: message.jorang,
       has_jorang: message.has_jorang,
+      profile_id: message.profile_id,
     }),
     [LOGIN_FAIL]: (state, { payload: error }) => ({
       ...state,

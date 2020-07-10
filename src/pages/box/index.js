@@ -120,7 +120,7 @@ const Box = () => {
       if (enterValue.trim()) {
         console.log(enterValue);
         setInput(e.target);
-        await search(input);
+        await search(('detail', input));
       }
     }
   };
@@ -227,6 +227,7 @@ const Box = () => {
                   <ThreadBox
                     record={record}
                     key={index}
+                    // input={input}
                   ></ThreadBox>
                 </>
               );

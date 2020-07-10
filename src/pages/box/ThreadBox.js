@@ -94,8 +94,10 @@ const Detail = styled.textarea`
 `;
 
 const ThreadBox = ({ record }) => {
-  // const inputValue = input.value;
-  // console.log(inputValue)
+  // todo : 키워드 컬러 바꾸기
+  // const keywordValue = input.value;
+  // console.log(keywordValue);
+
   return (
     <Wrapper>
       <TitleBox>

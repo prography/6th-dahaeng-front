@@ -92,14 +92,12 @@ function* getItemSaga(action) {
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
     console.log('getItmes');
-    // const headers = {
-    //   Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-    // };
-    const res = yield call(
-      [axios, 'get'],
-      `${serverURL}/shop/`,
-      // { headers: headers },
-    );
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
+    const res = yield call([axios, 'get'], `${serverURL}/shop/`, {
+      headers: headers,
+    });
 
     console.log('response: ', res);
     if (res.response === 'success') {
@@ -130,9 +128,9 @@ function* buyItemSaga(action) {
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
     console.log('getItmes');
-    // const headers = {
-    //   Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-    // };
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
 
     const param = {
       item: action.payload.item,
@@ -141,8 +139,8 @@ function* buyItemSaga(action) {
     const res = yield call(
       [axios, 'post'],
       `${serverURL}/shop/${param.item}`,
-      // { headers: headers },
-      // param
+      { headers: headers },
+      param,
     );
 
     console.log('response: ', res);
@@ -174,9 +172,9 @@ function* setItemSaga(action) {
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
     console.log('getItmes');
-    // const headers = {
-    //   Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-    // };
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
 
     const param = {
       id: action.payload.item,
@@ -185,8 +183,8 @@ function* setItemSaga(action) {
     const res = yield call(
       [axios, 'post'],
       `${serverURL}/shop/mycloset/`,
-      // { headers: headers },
-      // param
+      { headers: headers },
+      param,
     );
 
     console.log('response: ', res);
@@ -218,19 +216,19 @@ function* getClosetSaga(action) {
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
     console.log('getItmes');
-    // const headers = {
-    //   Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-    // };
-
-    const param = {
-      id: action.payload.item,
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
+
+    // const param = {
+    //   id: action.payload.item,
+    // };
 
     const res = yield call(
       [axios, 'get'],
       `${serverURL}/shop/mycloset/`,
-      // { headers: headers },
-      // param
+      { headers: headers },
+      // param,
     );
 
     console.log('response: ', res);

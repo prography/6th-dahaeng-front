@@ -162,7 +162,7 @@ const box = handleActions(
     }),
     [GET_TODAY_FAIL]: (state, { payload: error }) => ({
       ...state,
-      //  searchs: error,
+      record: null,
     }),
   },
   initialState,

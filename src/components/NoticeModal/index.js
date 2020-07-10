@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import closeicon from 'assets/icon/closeicon.png';
+import backIcon from 'assets/icon/backicon.png';
+import reminderJoraeng from 'assets/joraeng/login-joraeng.png';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -22,14 +24,64 @@ const Wrapper = styled.div`
   border-radius: var(--small-border-radius);
   box-shadow: 0px 0px 0px 800px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  padding: 1.5rem;
+  padding: 2rem;
 `;
 
-const TitleField = styled.div``;
+const ModalTitleWrapper = styled.div`
+  padding: 1rem;
+  text-align: center;
+`;
 
-const ReminderField = styled.div``;
+const TitleField = styled.div`
+  font-size: 18px;
+`;
 
-const NoticeField = styled.div``;
+const ReminderField = styled.div`
+  background: var(--light-background);
+  height: 54px;
+  max-width: calc(768px - 2rem);
+  padding: 0.5rem;
+
+  position: relative;
+  overflow: hidden;
+`;
+
+const ReminderImg = styled.img`
+  position: absolute;
+
+  max-width: 140px;
+  bottom: -11px;
+  right: 0;
+
+  @media screen and (max-width: 380px) {
+    width: 100px;
+    bottom: -7px;
+  }
+`;
+
+const NoticeField = styled.div`
+  height: 54px;
+  max-width: calc(768px - 2rem);
+  padding: 0.5rem;
+  border-bottom: 1px solid #e9e9e9;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  position: relative;
+`;
+
+const NoticeButton = styled.button`
+  position: absolute;
+  right: 5px;
+  padding-top: 6px;
+`;
+
+const NoticeIcon = styled.img`
+  width: 8px;
+  transform: rotate(90deg);
+  
+`;
 
 const CloseButton = styled.button`
   float: right;
@@ -56,9 +108,19 @@ const NoticeModal = ({ openModal, setModal, title, reminder, notice }) => {
             <CloseButton onClick={setModal}>
               <CloseIcon src={closeicon} alt="" />
             </CloseButton>
-            <TitleField>{title}</TitleField>
-            <ReminderField>{reminder}</ReminderField>
-            <NoticeField>{notice}</NoticeField>
+            <ModalTitleWrapper>
+              <TitleField>{title}</TitleField>
+            </ModalTitleWrapper>
+            <ReminderField>
+              {reminder}
+              <ReminderImg src={reminderJoraeng} alt="" />
+            </ReminderField>
+            <NoticeField>
+              {notice}
+              <NoticeButton onClick={setModal}>
+                <NoticeIcon src={backIcon} alt="" />
+              </NoticeButton>
+            </NoticeField>
           </Wrapper>
         </>
       ) : null}

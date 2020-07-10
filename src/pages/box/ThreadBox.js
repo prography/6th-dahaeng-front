@@ -94,6 +94,8 @@ const Detail = styled.textarea`
 `;
 
 const ThreadBox = ({ record }) => {
+  // const inputValue = input.value;
+  // console.log(inputValue)
   return (
     <Wrapper>
       <TitleBox>

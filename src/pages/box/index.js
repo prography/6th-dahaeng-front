@@ -96,6 +96,11 @@ const SearchResult = styled.div`
   color: var(--text-second);
 `;
 
+const SearchKeyText = styled.span`
+  font-size: 14px;
+  color: var(--primary-color);
+`;
+
 const Box = () => {
   const [sortingType, setSortingType] = useState('search'); //search, feed, thread
 
@@ -114,7 +119,8 @@ const Box = () => {
       const enterValue = e.target.value;
       if (enterValue.trim()) {
         console.log(enterValue);
-        await search(enterValue);
+        setInput(e.target);
+        await search(input);
       }
     }
   };
@@ -193,7 +199,11 @@ const Box = () => {
               searchs === null ? (
                 <SearchResult>{`검색 결과가 없습니다 :(`}</SearchResult>
               ) : (
-                <SearchResult>{`총 ${searchs.length}개의 행복을 찾았습니다!`}</SearchResult>
+                <SearchResult>
+                  {`총 `}
+                  <SearchKeyText>{searchs.length}</SearchKeyText>
+                  {` 개의 행복을 찾았습니다!`}
+                </SearchResult>
               )
             ) : null}
           </SearchWrapper>
@@ -214,7 +224,10 @@ const Box = () => {
             searchs.map((record, index) => {
               return (
                 <>
-                  <ThreadBox record={record} key={index}></ThreadBox>
+                  <ThreadBox
+                    record={record}
+                    key={index}
+                  ></ThreadBox>
                 </>
               );
             })

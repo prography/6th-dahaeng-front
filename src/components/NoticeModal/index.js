@@ -217,7 +217,7 @@ const NoticeModal = ({
         </>
       ) : null}
 
-      {openReminder ? (
+      {openReminder && reminderInfo !== [] && reminder!==null ? (
         <>
           <ModalOverlay></ModalOverlay>
           <Wrapper className="reminder">

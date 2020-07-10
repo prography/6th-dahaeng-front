@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUser } from 'store/user';
 import Slider from '../Slider';
 
 const HeaderBlock = styled.div`
@@ -46,6 +47,10 @@ const Header = ({ history }) => {
       history.push('/login');
     }
   }, [token]);
+
+  // useEffect(() => {
+  //   dispatch(getUser());
+  // }, [dispatch]);
 
   return (
     <React.Fragment>

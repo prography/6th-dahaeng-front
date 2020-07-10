@@ -181,7 +181,6 @@ const NoticeModal = ({
     }
   };
 
-  //console.log(reminder);
   const setNoticeModal = () => {
     setOpenReminder(!openReminder);
     setModal();

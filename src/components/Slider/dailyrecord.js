@@ -46,7 +46,7 @@ const DropdownEmotion = styled.img`
 const DailyRecord = () => {
   const records = useSelector((state) => state.box.records);
   let days = [];
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= parseInt(Moment().format('DD')); i++) {
     days = days.concat(i);
   }
 

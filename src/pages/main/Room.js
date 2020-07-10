@@ -175,7 +175,6 @@ const Room = ({ notices, history, hasItems, applyItems }) => {
   const moveMain = () => {
     history.push('/');
   };
-  console.log(applyItems);
   return (
     <Wrapper>
       <PostBox>

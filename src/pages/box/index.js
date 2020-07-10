@@ -130,7 +130,7 @@ const Box = () => {
   };
 
   useEffect(() => {
-    // dispatch(getRecords());
+    dispatch(getRecords());
   }, [dispatch]);
 
   return (

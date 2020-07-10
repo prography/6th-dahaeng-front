@@ -166,7 +166,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
         // notice={notice.map((notice) => {
         //   return <Notice>{notice.title}</Notice>;
         // })
-        reminder={
+        reminderContent={
           ReminderDate ? (
             <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
               5,

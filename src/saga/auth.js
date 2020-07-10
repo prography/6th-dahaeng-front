@@ -36,6 +36,7 @@ function* loginSaga(action) {
         payload: res.data.message,
       });
       localStorage.setItem('accessToken', res.data.message.token);
+      localStorage.setItem('profile', res.data.message.profile_id);
     } else {
       yield put({
         type: LOGIN_FAIL,

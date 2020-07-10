@@ -223,7 +223,9 @@ const Main = ({ history }) => {
   }, [token, history]);
 
   useEffect(() => {
-    dispatch(getUser(id));
+    //dispatch(getUser(id));
+    localStorage.getItem('profile') &&
+      dispatch(getUser(localStorage.getItem('profile')));
     dispatch(getQuestion());
     dispatch(reminder());
     localStorage.getItem('record_id') &&
@@ -254,6 +256,8 @@ const Main = ({ history }) => {
 
     dispatch(setRecord(form_data));
     setCoinModal();
+    localStorage.getItem('profile') &&
+      dispatch(getUser(localStorage.getItem('profile')));
   };
   const coin = useSelector((state) => state.box.coin);
   const continuity = useSelector((state) => state.box.continuity);
@@ -398,6 +402,7 @@ const Main = ({ history }) => {
           history={history}
           hasItems={hasItems}
           applyItems={null}
+          color={`#${user.jorang_color}`}
         ></Room>
       </Responsive>
     </>

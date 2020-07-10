@@ -110,7 +110,7 @@ const Create = ({ history }) => {
             src={}
             alt=""
           /> */}
-          <MainJoraeng age={0} color="green"></MainJoraeng>
+          <MainJoraeng age={'0'} color="green"></MainJoraeng>
         </ImageBox>
         <InputBox>
           <NicknameInput

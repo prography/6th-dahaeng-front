@@ -170,6 +170,7 @@ const Main = ({ history }) => {
   //const [openNoticeModal, setOpenNoticeModal] = useState(false);
 
   const [dropdownState, setDropdownState] = useState(0);
+
   const setModal = () => {
     setOpenModal(!openModal);
   };
@@ -181,14 +182,6 @@ const Main = ({ history }) => {
       setOpenCoinModal(!openCoinModal);
     }
   };
-  // const setNoticeModal = () => {
-  //   if (openNoticeModal) {
-  //     setModal();
-  //     setOpenNoticeModal(!openNoticeModal);
-  //   } else {
-  //     setOpenNoticeModal(!openNoticeModal);
-  //   }
-  // };
 
   const hasItems = useSelector((state) => state.user.hasItems);
   const id = useSelector((state) => state.auth.profile_id);
@@ -196,7 +189,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const notices = useSelector((state) => state.user.notices);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
- // const token = useSelector((state) => state.auth.token);
+  // const token = useSelector((state) => state.auth.token);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -251,6 +244,7 @@ const Main = ({ history }) => {
   const completeRecord = () => {
     const form_data = new FormData();
     form_data.append('detail', inputText);
+    console.log();
     form_data.append('emotion', emotionWordEn[dropdownState]);
     img && form_data.append('image', img);
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
-import { setItems } from '../../store/user';
+import { setItems, getCloset } from '../../store/user';
 import Modal from '../../components/Modal';
 import Room from '../main/Room';
 import ItemBox from './ItemBox';
@@ -113,10 +113,9 @@ const Closet = ({ history }) => {
     setSelect(index);
   };
   // useEffect(() => {
-  //   dispatch(getItems());
+  //   dispatch(getCloset());
   // }, [dispatch]);
 
-  //TODO: Room : Itemcontainer  = 1 : 1
   return (
     <>
       <Header />

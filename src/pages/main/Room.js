@@ -168,7 +168,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
         openModal={openModal}
         setModal={setModal}
         reminderInfo={reminder}
-        notice={notice}
+        notices={notice}
         title={<ModalTitle>{'공지사항'}</ModalTitle>}
         // notice={notice.map((notice) => {
         //   return <Notice>{notice.title}</Notice>;

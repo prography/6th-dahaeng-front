@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import closeicon from 'assets/icon/closeicon.png';
 import backIcon from 'assets/icon/backicon.png';
 import reminderJoraeng from 'assets/joraeng/login-joraeng.png';
+import Notice from './Notice';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
   top: 350px;
   left: 50%;
   width: calc(100% - 20px);
-  min-height: 400px;
+  height: 400px;
   max-width: 768px;
   transform: translate(-50%, -50%);
   background-color: white;
@@ -64,44 +65,58 @@ const ReminderImg = styled.img`
     bottom: -7px;
   }
 `;
+// const NoticeWrapper = styled.div``;
 
-const NoticeField = styled.div`
-  height: 54px;
-  max-width: calc(768px - 2rem);
-  padding: 0.5rem;
-  border-bottom: 1px solid #e9e9e9;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+// const NoticeField = styled.div`
+//   height: 54px;
+//   max-width: calc(768px - 2rem);
+//   padding: 0.5rem;
+//   border-bottom: 1px solid #e9e9e9;
+//   display: flex;
+//   flex-direction: row;
+//   align-items: center;
 
-  position: relative;
-`;
+//   position: relative;
+// `;
 
-const Notice = styled.div`
-  /* width: 100%; */
-  padding-left: 1rem;
-  padding-right: 1rem;
-  flex: 1;
-`;
+// const Notice = styled.div`
+//   /* width: 100%; */
+//   padding-left: 1rem;
+//   padding-right: 1rem;
+//   flex: 1;
+// `;
 
-const NoticeDate = styled.div`
-  flex: none;
-  font-size: 12px;
-  color: var(--text-third);
+// const NoticeDate = styled.div`
+//   flex: none;
+//   font-size: 12px;
+//   color: var(--text-third);
 
-  padding-right: 2rem;
-`;
+//   padding-right: 2rem;
+// `;
 
-const NoticeButton = styled.button`
-  position: absolute;
-  right: 5px;
-  padding-top: 6px;
-`;
+// const NoticeButton = styled.button`
+//   position: absolute;
+//   right: 5px;
+//   padding-top: 6px;
+// `;
 
-const NoticeIcon = styled.img`
-  width: 8px;
-  transform: rotate(90deg);
-`;
+// const NoticeIcon = styled.img`
+//   width: 8px;
+
+//   transform: ${(props) =>
+//     props.className === 'open-content' ? 'rotate(270deg)' : 'rotate(90deg)'};
+//   transition: 0.25s ease-in-out;
+// `;
+
+// const NoticeContentField = styled.div`
+//   min-height: 200px;
+//   max-width: calc(768px - 2rem - 70px);
+// `;
+
+// const NoticeContent = styled.div`
+//   font-size: 14px;
+//   margin: 1.5rem 2rem;
+// `;
 
 const CloseButton = styled.button`
   float: right;
@@ -124,7 +139,7 @@ const NoticeModal = ({
   reminderInfo,
   title,
   reminder,
-  notice,
+  notices,
 }) => {
   return (
     <>
@@ -142,24 +157,30 @@ const NoticeModal = ({
               {reminder}
               <ReminderImg src={reminderJoraeng} alt="" />
             </ReminderField>
-            {notice.map((notice) => {
+            {notices.map((notice) => {
               return (
-                <NoticeField>
-                  <Notice>{notice.title}</Notice>
-                  <NoticeDate>{notice.created_at}</NoticeDate>
-                  <NoticeButton onClick={setModal}>
-                    <NoticeIcon src={backIcon} alt="" />
-                  </NoticeButton>
-                </NoticeField>
+                <>
+                  <Notice key={notice.id} notice={notice}>
+                    {/* <NoticeField>
+                      <Notice>{notice.title}</Notice>
+                      <NoticeDate>{notice.created_at}</NoticeDate>
+                      <NoticeButton onClick={setNotice()}>
+                        <NoticeIcon
+                          className={openNotice ? 'open-content' : null}
+                          src={backIcon}
+                          alt=""
+                        />
+                      </NoticeButton>
+                    </NoticeField>
+                    {openNotice ? (
+                      <NoticeContentField>
+                        <NoticeContent>{notice.content}</NoticeContent>
+                      </NoticeContentField>
+                    ) : null} */}
+                  </Notice>
+                </>
               );
             })}
-
-            {/* <NoticeField>
-              {notice}
-              <NoticeButton onClick={setModal}>
-                <NoticeIcon src={backIcon} alt="" />
-              </NoticeButton>
-            </NoticeField> */}
           </Wrapper>
         </>
       ) : null}

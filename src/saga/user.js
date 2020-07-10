@@ -59,20 +59,20 @@ function* reminderSaga(action) {
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
-    const res = yield call([axios, 'get'], `${serverURL}/reminder/`, {
+    const res = yield call([axios, 'get'], `${serverURL}/notice/reminder/`, {
       headers: headers,
     });
 
     console.log('response: ', res);
-    if (res.response === 'success') {
+    if (res.data.response === 'success') {
       yield put({
         type: REMINDER_SUCCESS,
-        payload: res.data.message,
+        payload: res.data,
       });
     } else {
       yield put({
         type: REMINDER_FAIL,
-        payload: res.data.message,
+        payload: res.data,
         error: true,
       });
     }

@@ -17,13 +17,19 @@ export const [BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL] = createRequestAction(
 export const [SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL] = createRequestAction(
   'SETITEMS',
 );
+export const [
+  GETCLOSET,
+  GETCLOSET_SUCCESS,
+  GETCLOSET_FAIL,
+] = createRequestAction('GETCLOSET');
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 
 export const reminder = createAction(REMINDER);
-export const getItems = createAction(GETITEMS, (items) => items);
-export const buyItems = createAction(BUYITEMS);
-export const setItems = createAction(SETITEMS);
+export const getItems = createAction(GETITEMS);
+export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
+export const setItems = createAction(SETITEMS, (items) => ({ items }));
+export const getCloset = createAction(GETCLOSET);
 
 const initialState = {
   user: {
@@ -36,7 +42,29 @@ const initialState = {
     color: '#ffe884',
   },
   getUserError: null,
-  reminders: null,
+  notices: {
+    notice: [
+      {
+        id: 1,
+        title: '다행에 가입하신걸 환영합니다!',
+        content: '보다 나은 서비스로 제공하겠습니다.\r\n\r\n감사합니다 :)',
+        created_at: '2020-07-10',
+      },
+    ],
+    reminder: [
+      {
+        post: 1,
+        interval: 2,
+        created_at: '2020-06-03',
+        posts: {
+          emotion: 'WARM',
+          detail: '오늘은 날씨가 참 좋았어요!',
+          question: '테스트 질문입니다.',
+          image: '/media/default_image_sample.jpg',
+        },
+      },
+    ],
+  },
   // items: null,
   allItems: {
     had_items: [
@@ -118,11 +146,11 @@ const user = handleActions(
 
     [GETITEMS_SUCCESS]: (state, { payload: items }) => ({
       ...state,
-      items: items,
+      allItems: items,
     }),
     [GETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      items: error,
+      allItems: error,
     }),
 
     [BUYITEMS_SUCCESS]: (state, { payload: payload }) => ({
@@ -142,6 +170,15 @@ const user = handleActions(
     [SETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
       items: error,
+    }),
+
+    [GETCLOSET_SUCCESS]: (state, { payload: items }) => ({
+      ...state,
+      hasItems: items,
+    }),
+    [GETCLOSET_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      hasItems: error,
     }),
   },
   initialState,

@@ -161,7 +161,7 @@ const BackgroundImg = styled.img`
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ reminders, history, hasItems, applyItems }) => {
+const Room = ({ notices, history, hasItems, applyItems }) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -179,7 +179,7 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
   return (
     <Wrapper>
       <PostBox>
-        {reminders ? (
+        {notices ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
           <PostBoxImg src={postbox} alt="" />
@@ -211,24 +211,20 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
           <ModalTitle>
             <Date>
               {Moment(
-                reminders &&
-                  reminders.created_at &&
-                  reminders.created_at.dateForm,
+                notices && notices.created_at && notices.created_at.dateForm,
               ).format('MM-DD')}
             </Date>
             <ModalQuestion>
-              {reminders && reminders.posts && reminders.posts.question}
+              {notices && notices.posts && notices.posts.question}
             </ModalQuestion>
           </ModalTitle>
         }
         content={
           <ModalContent>
             <ModalCharacter>
-              {reminders &&
-              reminders.posts &&
-              reminders.posts.image !== null ? (
+              {notices && notices.posts && notices.posts.image !== null ? (
                 <ModalCharacterImage
-                  src={reminders && reminders.posts.image}
+                  src={notices && notices.posts.image}
                   alt=""
                 />
               ) : (

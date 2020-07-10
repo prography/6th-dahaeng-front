@@ -149,7 +149,7 @@ const Box = () => {
           ) : sortingType === 'search' ? (
             searchs &&
             searchs.map((record, index) => {
-              return <ThreadBox record={record} key={index}></ThreadBox>;
+              return <ThreadBox record={record} key={index} keyword={"사용자"}></ThreadBox>;
             })
           ) : (
             <ListModeIcon></ListModeIcon>

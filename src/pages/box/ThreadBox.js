@@ -93,7 +93,7 @@ const Detail = styled.textarea`
   padding: 8px;
 `;
 
-const ThreadBox = ({ record }) => {
+const ThreadBox = ({ record, keyword }) => {
   return (
     <Wrapper>
       <TitleBox>

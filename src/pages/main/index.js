@@ -340,6 +340,8 @@ const Main = ({ history }) => {
               <ModalCharacter>
                 {img !== null ? (
                   <ModalCharacterImage src={imgBase64} alt="" />
+                ) : record && record.image ? (
+                  <ModalCharacterDefaultImage src={record.image} alt="" />
                 ) : (
                   <InputLabel htmlFor="upload">
                     행복사진을 <br /> 함께 기록해요!

@@ -162,8 +162,13 @@ const Box = ({ history }) => {
   };
 
   const Delete = (id) => {
-    dispatch(deleteRecord(id));
-    // dispatch(getRecords());
+    dispatch(getRecords());
+    if (records[0].id === id) {
+      //마지막 기록은 지울 수 없어요
+    } else {
+      dispatch(deleteRecord(id));
+    }
+
     // history.push('/box');
     setOpenModal(!openModal);
   };

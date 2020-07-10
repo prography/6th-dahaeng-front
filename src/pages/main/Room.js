@@ -175,7 +175,7 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
   const moveMain = () => {
     history.push('/');
   };
-
+  console.log(applyItems);
   return (
     <Wrapper>
       <PostBox>
@@ -190,12 +190,12 @@ const Room = ({ reminders, history, hasItems, applyItems }) => {
         <MainJoraeng
           age={user.joraengStatus}
           color={
-            applyItems
+            applyItems !== null
               ? applyItems.color
               : hasItems &&
                 hasItems
-                  .filter((item) => item.category === 'color')
-                  .filter((item) => item.apply === true)[0].color
+                  .filter((item) => item.item_type === 'jorang_color')
+                  .filter((item) => item.is_worn === true)[0].item_detail
           }
         />
       </Character>

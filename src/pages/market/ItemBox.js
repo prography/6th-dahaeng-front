@@ -75,31 +75,31 @@ const ItemPrice = styled.div`
   text-align: left;
 `;
 
-const ItemBox = ({ item, setModal }) => {
+const ItemBox = ({ item, item_has, setModal }) => {
   return (
     <>
-      {item.has ? (
+      {item_has ? (
         <Wrapper className="hasItem">
           <ItemImageBox>
-            <JoraengColor color={item.color}></JoraengColor>
+            <JoraengColor color={item.item_detail}></JoraengColor>
           </ItemImageBox>
 
           <ItemInfoBox>
             <ItemName>
-              {item.name}
+              {item.item_name}
               <ItemHas>{'이미 가지고 있어요!'}</ItemHas>
             </ItemName>
-            <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+            <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
           </ItemInfoBox>
         </Wrapper>
       ) : (
         <Wrapper onClick={() => setModal(item)}>
           <ItemImageBox>
-            <JoraengColor color={item.color}></JoraengColor>
+            <JoraengColor color={item.item_detail}></JoraengColor>
           </ItemImageBox>
           <ItemInfoBox>
-            <ItemName>{item.name}</ItemName>
-            <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+            <ItemName>{item.item_name}</ItemName>
+            <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
           </ItemInfoBox>
         </Wrapper>
       )}

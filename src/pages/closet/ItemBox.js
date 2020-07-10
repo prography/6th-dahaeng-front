@@ -75,26 +75,26 @@ const ItemPrice = styled.div`
 const ItemBox = ({ item, applyItem }) => {
   return (
     <>
-      {item.apply === true ? (
+      {item.is_worn === true ? (
         <Wrapper className="setItem" onClick={() => applyItem(item)}>
           <SetItemWrapper>
             <ItemImageBox>
-              <JoraengColor color={item.color}></JoraengColor>
+              <JoraengColor color={item.item_detail}></JoraengColor>
             </ItemImageBox>
             <ItemInfoBox>
-              <ItemName>{item.name}</ItemName>
-              <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+              <ItemName>{item.item_name}</ItemName>
+              <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
             </ItemInfoBox>
           </SetItemWrapper>
         </Wrapper>
       ) : (
         <Wrapper onClick={() => applyItem(item)}>
           <ItemImageBox>
-            <JoraengColor color={item.color}></JoraengColor>
+            <JoraengColor color={item.item_detail}></JoraengColor>
           </ItemImageBox>
           <ItemInfoBox>
-            <ItemName>{item.name}</ItemName>
-            <ItemPrice>{`${item.price} 코인`}</ItemPrice>
+            <ItemName>{item.item_name}</ItemName>
+            <ItemPrice>{`${item.item_price} 코인`}</ItemPrice>
           </ItemInfoBox>
         </Wrapper>
       )}

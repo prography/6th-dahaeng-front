@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: var(--card-shadow);
-  border-radius: var(--border-radius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem;
 `;
 
@@ -93,7 +93,11 @@ const Detail = styled.textarea`
   padding: 8px;
 `;
 
-const ThreadBox = ({ record, keyword }) => {
+const ThreadBox = ({ record }) => {
+  // todo : 키워드 컬러 바꾸기
+  // const keywordValue = input.value;
+  // console.log(keywordValue);
+
   return (
     <Wrapper>
       <TitleBox>

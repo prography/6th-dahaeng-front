@@ -87,7 +87,7 @@ const initialState = {
   //   },
   // ],
   coin: 0,
-  continuity: 7,
+  continuity: 0,
 };
 
 const box = handleActions(

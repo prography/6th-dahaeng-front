@@ -148,8 +148,8 @@ const ModalText = styled.div`
   color: var(--text-second);
 `;
 
-const Box = () => {
-  const [sortingType, setSortingType] = useState('search'); //search, feed, thread
+const Box = ({ history }) => {
+  const [sortingType, setSortingType] = useState('feed'); //search, feed, thread
 
   const records = useSelector((state) => state.box.records);
   const searchs = useSelector((state) => state.box.searchs);
@@ -163,6 +163,9 @@ const Box = () => {
 
   const Delete = (id) => {
     dispatch(deleteRecord(id));
+    // dispatch(getRecords());
+    // history.push('/box');
+    setOpenModal(!openModal);
   };
 
   const [openModal, setOpenModal] = useState(false);
@@ -313,11 +316,11 @@ const Box = () => {
           className="popup"
           openModal={openModal}
           setModal={setModal}
-          title={<ModalTitle>{`행복기록을 삭제합니다!`}</ModalTitle>}
+          title={<ModalTitle>{`행복 기록을 정말 삭제하시겠어요?`}</ModalTitle>}
           content={
             <>
-              <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다 :(`}</ModalText>
-              <ModalText>{`정말 삭제하시겠어요?`}</ModalText>
+              <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다 :( `}</ModalText>
+              <ModalText>{`또한 오늘의 기록도 더이상 작성할 수 없습니다.`}</ModalText>
             </>
           }
           button={

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, setRecord, modifyRecord, getToday } from 'store/box';
-import { reminder } from 'store/user';
+import { reminder, getUser } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 import EmotionDropdown from '../../components/Modal/EmotionDropdown';
@@ -191,6 +191,7 @@ const Main = ({ history }) => {
   // };
 
   const hasItems = useSelector((state) => state.user.hasItems);
+  const id = useSelector((state) => state.auth.profile_id);
   const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
   const notices = useSelector((state) => state.user.notices);
@@ -222,11 +223,12 @@ const Main = ({ history }) => {
   }, [token, history]);
 
   useEffect(() => {
+    dispatch(getUser(id));
     dispatch(getQuestion());
     dispatch(reminder());
     localStorage.getItem('record_id') &&
       dispatch(getToday(localStorage.getItem('record_id')));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   //today record
   const record = useSelector((state) => state.box.record);

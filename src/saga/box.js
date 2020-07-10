@@ -157,8 +157,6 @@ function* deleteRecordSaga(action) {
     console.log(action.payload);
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
-      // 'content-type':
-      //   'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
     };
 
     const res = yield call(
@@ -168,10 +166,29 @@ function* deleteRecordSaga(action) {
       { headers: headers },
     );
 
-    yield put({
-      type: DELETE_RECORD_SUCCESS,
-      payload: res.data,
-    });
+    console.log('delete ', res);
+    if (res.data === '') {
+      yield put({
+        type: DELETE_RECORD_SUCCESS,
+      });
+
+      const res = yield call(
+        [axios, 'get'],
+        `${serverURL}/record/posts/`,
+        // param,
+        { headers: headers },
+      );
+      if (res.data.response === 'success') {
+        yield put({
+          type: GET_RECORDS_SUCCESS,
+          payload: res.data,
+        });
+      }
+    } else {
+      yield put({
+        type: DELETE_RECORD_FAIL,
+      });
+    }
   } catch (e) {
     yield put({
       type: DELETE_RECORD_FAIL,

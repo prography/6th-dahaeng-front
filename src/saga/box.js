@@ -258,10 +258,13 @@ function* searchRecordsSaga(action) {
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
+    console.log(action.payload);
 
+    // console.log(action.payload.search_field);
+    // console.log(action.payload.search);
     const res = yield call(
       [axios, 'get'],
-      `${serverURL}/record/posts/?search_fields=${action.payload.search_field}&search=${action.payload.search_field}`,
+      `${serverURL}/record/posts/?search_fields=${action.payload.search_fields}&search=${action.payload.search}`,
       {
         headers: headers,
       },

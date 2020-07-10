@@ -157,8 +157,9 @@ const Box = ({ history }) => {
   const dispatch = useDispatch();
 
   const [input, setInput] = useState('');
-  const search = (field, search) => {
-    dispatch(searchRecords({ field, search }));
+  const search = () => {
+    console.log(input);
+    dispatch(searchRecords('detail', input));
   };
 
   const Delete = (id) => {
@@ -185,14 +186,14 @@ const Box = ({ history }) => {
       const enterValue = e.target.value;
       if (enterValue.trim()) {
         console.log(enterValue);
-        setInput(e.target);
-        await search(('detail', input));
+        setInput(e.target.value);
+        await search();
       }
     }
   };
 
   const onChange = (e) => {
-    setInput(e.target);
+    setInput(e.target.value);
   };
 
   useEffect(() => {

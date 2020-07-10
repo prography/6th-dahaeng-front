@@ -5,7 +5,6 @@ import { deleteRecord } from 'store/box';
 import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import defaultJorang from 'assets/joraeng/defaultJoraeng.png';
 import Moment from 'moment';
 
 const Wrapper = styled.div`
@@ -13,11 +12,11 @@ const Wrapper = styled.div`
   border-radius: var(--small-border-radius);
   background-color: #ffffff;
 
-  flex: 1 1 calc(33.3333% - 20px);
+  flex: 1 1 calc(33.3333% - 3rem);
   min-width: 256px;
-  max-width: calc(33.3333% - 20px);
+  max-width: calc(33.3333% - 3rem);
   height: 412px;
-  margin: 10px;
+  margin: 1.5rem;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
@@ -108,13 +107,13 @@ const checkDetailLength = (text) => {
   }
 };
 
-const dispatch = useDispatch();
-
-const Delete = (id) => {
-  dispatch(deleteRecord(id));
-};
-
 const FeedBox = ({ record }) => {
+  const dispatch = useDispatch();
+
+  const Delete = (id) => {
+    dispatch(deleteRecord(id));
+  };
+
   return (
     <>
       <Wrapper>

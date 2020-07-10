@@ -12,7 +12,7 @@ const Wrapper = styled.div`
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: var(--card-shadow);
-  border-radius: var(--border-radius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem;
 `;
 

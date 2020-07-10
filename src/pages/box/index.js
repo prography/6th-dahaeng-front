@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
 import Header from 'components/Header';
-import search from 'assets/icon/search.png';
+import searchIcon from 'assets/icon/search.png';
 import feed from 'assets/icon/feed.png';
 import thread from 'assets/icon/thread.png';
 import Responsive from '../../components/common/Responsive.js';
@@ -14,7 +14,7 @@ import Responsive from '../../components/common/Responsive.js';
 const SortingBar = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
-  background-color: white;
+  background-color: #ffffff;
   height: 2rem;
 `;
 
@@ -36,6 +36,7 @@ const Content = styled.div`
   justify-content: ${(props) =>
     props.sortingType === 'feed' ? 'flex-start' : 'center'};
   padding: 20px;
+  padding-top: 0;
   height: calc(100vh - 10rem - 16px);
   overflow-y: auto;
 
@@ -44,24 +45,55 @@ const Content = styled.div`
   }
 `;
 
+const SearchWrapper = styled.div`
+  background-color: #ffffff;
+  margin: 0 auto;
+`;
+
 const SearchBar = styled.div`
-  width: 90%;
+  width: calc(100% - 0.5rem - 20px);
+  margin: 0 auto;
   height: 3rem;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
+  border-radius: var(--small-border-radius);
   display: flex;
+`;
+
+const SearchIconWrapper = styled.div`
+  width: 3rem;
+  height: 3rem;
+  overflow: hidden;
+`;
+const SearchIcon = styled.div`
+  width: 3rem;
+  height: 3rem;
+  padding: 14px 12px 8px 12px;
+  background: transparent;
+  /* cursor: pointer; */
 `;
 
 const SearchText = styled.input.attrs((props) => ({
   type: 'text',
-  placeholder: '키워드로 내 행복을 검색하세요 (여행, 맛집 ...)',
+  placeholder: '키워드로 내 행복을 검색하세요 (ex. 여행, 맛집...)',
 }))`
-  width: 90%;
+  width: 80%;
   padding: 1%;
   border: none;
+
+  &::placeholder {
+    color: var(--text-third);
+  }
 `;
 
-const SearchButton = styled.button`
-  width: 10%;
+// const SearchButton = styled.button`
+//   width: 10%;
+// `;
+
+const SearchResult = styled.div`
+  font-size: 14px;
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-second);
 `;
 
 const Box = () => {
@@ -77,6 +109,16 @@ const Box = () => {
     dispatch(searchRecords({ field, search }));
   };
 
+  const onEnter = async (e) => {
+    if (e.key === 'Enter') {
+      const enterValue = e.target.value;
+      if (enterValue.trim()) {
+        console.log(enterValue);
+        await search(enterValue);
+      }
+    }
+  };
+
   const onChange = (e) => {
     setInput(e.target);
   };
@@ -88,13 +130,13 @@ const Box = () => {
   return (
     <>
       <Header></Header>
-      <Responsive style={{ color: '#333333' }}>
+      <Responsive>
         <SortingBar>
           <SortingBox>
             <ListModeIcon onClick={() => setSortingType('search')}>
               <img
                 alt=""
-                src={search}
+                src={searchIcon}
                 style={{
                   width: '1rem',
                   height: '1rem',
@@ -128,12 +170,33 @@ const Box = () => {
         </SortingBar>
 
         {sortingType === 'search' ? (
-          <SearchBar>
-            <SearchText></SearchText>
-            <SearchButton onChange={onChange} onClick={() => search(input)}>
-              {'검색'}
-            </SearchButton>
-          </SearchBar>
+          <SearchWrapper>
+            <SearchBar>
+              <SearchIconWrapper>
+                <SearchIcon>
+                  <img
+                    alt=""
+                    src={searchIcon}
+                    style={{
+                      width: '20px',
+                      objectFit: 'scale-down',
+                    }}
+                  />
+                </SearchIcon>
+              </SearchIconWrapper>
+              <SearchText onChange={onChange} onKeyPress={onEnter} />
+              {/* <SearchButton onChange={onChange} onClick={() => search(input)}>
+                {'검색'}
+              </SearchButton> */}
+            </SearchBar>
+            {searchs ? (
+              searchs === null ? (
+                <SearchResult>{`검색 결과가 없습니다 :(`}</SearchResult>
+              ) : (
+                <SearchResult>{`총 ${searchs.length}개의 행복을 찾았습니다!`}</SearchResult>
+              )
+            ) : null}
+          </SearchWrapper>
         ) : null}
         <Content sortingType={'feed'}>
           {sortingType === 'thread' ? (
@@ -149,7 +212,11 @@ const Box = () => {
           ) : sortingType === 'search' ? (
             searchs &&
             searchs.map((record, index) => {
-              return <ThreadBox record={record} key={index}></ThreadBox>;
+              return (
+                <>
+                  <ThreadBox record={record} key={index}></ThreadBox>
+                </>
+              );
             })
           ) : (
             <ListModeIcon></ListModeIcon>

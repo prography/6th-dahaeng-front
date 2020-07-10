@@ -6,7 +6,7 @@ import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 
-import loginJoraeng from 'assets/joraeng/login-joraeng.jpg';
+import loginJoraeng from 'assets/joraeng/login-joraeng.png';
 
 const Title = styled.div`
   font-size: 32px;

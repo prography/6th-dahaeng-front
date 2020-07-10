@@ -54,6 +54,12 @@ const initialState = {
         content: '보다 나은 서비스로 제공하겠습니다.\r\n\r\n감사합니다 :)',
         created_at: '2020-07-10',
       },
+      {
+        id: 2,
+        title: '휴',
+        content: '어렵구먼\r\n\r\n감사합니다 :)',
+        created_at: '2020-07-10',
+      },
     ],
     reminder: [
       {

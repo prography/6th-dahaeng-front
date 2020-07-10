@@ -173,7 +173,7 @@ const BackgroundImg = styled.img`
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
+const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -201,14 +201,15 @@ const Room = ({ notice, reminder, history, hasItems, applyItems }) => {
         <MainJoraeng
           age={user.jorang_status}
           color={
-            applyItems !== null
-              ? `#${applyItems.color}`
-              : `#${
-                  hasItems &&
-                  hasItems
-                    .filter((item) => item.item_type === 'jorang_color')
-                    .filter((item) => item.is_worn === true)[0].item_detail
-                }`
+            // applyItems !== null
+            //   ? `#${applyItems.color}`
+            //   : `#${
+            //       hasItems &&
+            //       hasItems
+            //         .filter((item) => item.item_type === 'jorang_color')
+            //         .filter((item) => item.is_worn === true)[0].item_detail
+            //     }`
+            color
           }
         />
       </Character>

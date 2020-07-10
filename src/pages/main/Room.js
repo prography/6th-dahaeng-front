@@ -123,7 +123,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
     history.push('/');
   };
 
-  const ReminderDate = reminder[0].created_at;
+  const ReminderDate = reminder && reminder[0] && reminder[0].created_at;
 
   return (
     <Wrapper>
@@ -167,13 +167,15 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
         //   return <Notice>{notice.title}</Notice>;
         // })
         reminder={
-          <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
-            5,
-            7,
-          )}월 ${ReminderDate.slice(
-            8,
-            10,
-          )}일, 나는 이렇게 많이 행복했었네요! 함께 볼까요?`}</Reminder>
+          ReminderDate ? (
+            <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
+              5,
+              7,
+            )}월 ${ReminderDate.slice(
+              8,
+              10,
+            )}일, 나는 이렇게 많이 행복했었네요! 함께 볼까요?`}</Reminder>
+          ) : null
         }
       ></NoticeModal>
     </Wrapper>

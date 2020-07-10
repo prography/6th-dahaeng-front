@@ -181,6 +181,7 @@ const NoticeModal = ({
     }
   };
 
+  //console.log(reminder);
   const setNoticeModal = () => {
     setOpenReminder(!openReminder);
     setModal();
@@ -217,7 +218,7 @@ const NoticeModal = ({
         </>
       ) : null}
 
-      {openReminder ? (
+      {openReminder && reminderInfo !== [] && reminder!==null ? (
         <>
           <ModalOverlay></ModalOverlay>
           <Wrapper className="reminder">

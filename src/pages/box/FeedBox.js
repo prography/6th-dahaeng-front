@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from 'store/user';
 import { deleteRecord } from 'store/box';
@@ -7,16 +7,20 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import Moment from 'moment';
 
+import deleteIcon from '../../assets/icon/deleteicon.png';
+
 const Wrapper = styled.div`
   box-shadow: var(--card-shadow);
   border-radius: var(--small-border-radius);
   background-color: #ffffff;
 
-  flex: 1 1 calc(33.3333% - 3rem);
+  position: relative;
+
+  flex: 1 1 calc(33.3333% - 20px);
   min-width: 256px;
-  max-width: calc(33.3333% - 3rem);
-  height: 412px;
-  margin: 1.5rem;
+  max-width: calc(33.3333% - 20px);
+  height: 392px;
+  margin: 10px;
   justify-content: flex-start;
   align-items: flex-start;
   align-content: flex-start;
@@ -87,8 +91,66 @@ const Detail = styled.div`
   flex: 1;
 `;
 
-const Dropdown = styled.div`
-  height: 8px;
+const DropdownWrapper = styled.div`
+  width: 38px;
+  border-radius: 4px;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* max-width: 96px;
+  max-height: 64px; */
+`;
+
+const DropdownOpenWrapper = styled.div`
+  width: 38px;
+  border-radius: 4px;
+  background-color: var(--light-background);
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* max-width: 96px;
+  max-height: 64px; */
+`;
+
+const DropdownButton = styled.button`
+  height: 32px;
+  width: 38px;
+  padding: 7px 4px 4px 4px;
+  background: transparent;
+
+  cursor: pointer;
+`;
+
+const DropdownIcon = styled.img`
+  height: 14px;
+`;
+
+const DropdownList = styled.div`
+  position: absolute;
+  bottom: -32px;
+  right: 0;
+
+  z-index: 2;
+
+  box-shadow: var(--card-shadow);
+  border-radius: var(--small-border-radius);
+  background-color: #ffffff;
+`;
+
+const DropdownOption = styled.button`
+  width: 72px;
+  height: 32px;
+  text-align: center;
+
+  line-height: 24px;
+  padding: 4px;
+  border: none;
+  color: var(--text-second);
+  font-size: 14px;
+
+  cursor: pointer;
 `;
 
 const checkTitleLength = (text) => {
@@ -107,11 +169,11 @@ const checkDetailLength = (text) => {
   }
 };
 
-const FeedBox = ({ record }) => {
-  const dispatch = useDispatch();
+const FeedBox = ({ record, setModal }) => {
+  const [openDropdown, setOpenDropdown] = useState(false);
 
-  const Delete = (id) => {
-    dispatch(deleteRecord(id));
+  const toggleDropdown = () => {
+    setOpenDropdown(!openDropdown);
   };
 
   return (
@@ -128,7 +190,28 @@ const FeedBox = ({ record }) => {
           <Question>{checkTitleLength(record.question)}</Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
-        <Dropdown onClick={Delete(record.id)}>삭제</Dropdown>
+        {openDropdown ? (
+          <>
+            <DropdownOpenWrapper status={openDropdown}>
+              <DropdownButton onClick={toggleDropdown}>
+                <DropdownIcon src={deleteIcon} alt="" />
+              </DropdownButton>
+            </DropdownOpenWrapper>
+            <DropdownList>
+              <DropdownOption onClick={() => setModal(record.id)}>
+                삭제하기
+              </DropdownOption>
+            </DropdownList>
+          </>
+        ) : (
+          <>
+            <DropdownWrapper status={openDropdown}>
+              <DropdownButton onClick={toggleDropdown}>
+                <DropdownIcon src={deleteIcon} alt="" />
+              </DropdownButton>
+            </DropdownWrapper>
+          </>
+        )}
       </Wrapper>
     </>
   );

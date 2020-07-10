@@ -150,7 +150,7 @@ const user = handleActions(
     }),
     [GETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      //  allItems: error,
+      // allItems: error,
     }),
 
     [BUYITEMS_SUCCESS]: (state, { payload: payload }) => ({
@@ -169,7 +169,7 @@ const user = handleActions(
     }),
     [SETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
-      //   items: error,
+      // items: error,
     }),
 
     [GETCLOSET_SUCCESS]: (state, { payload: items }) => ({

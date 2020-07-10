@@ -108,7 +108,7 @@ const box = handleActions(
     }),
     [GET_QUESTION_FAIL]: (state, { payload: error }) => ({
       ...state,
-      //question: error,
+      // question: error,
     }),
 
     [SET_RECORD_SUCCESS]: (state, { payload: data }) => ({
@@ -128,6 +128,7 @@ const box = handleActions(
     }),
     [MODIFY_RECORD_FAIL]: (state, { payload: error }) => ({
       ...state,
+      //record: error,
     }),
 
     [DELETE_RECORD_SUCCESS]: (state, { payload: detail }) => ({

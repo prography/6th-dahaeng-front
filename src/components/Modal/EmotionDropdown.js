@@ -45,6 +45,7 @@ const DropdownList = styled.div`
   border: 1px solid var(--text-fourth);
   border-top: none;
   transition: 0.25s ease-in-out;
+  background: #ffffff;
 `;
 
 const DropdownElement = styled.button`

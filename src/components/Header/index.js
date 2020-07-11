@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from 'store/user';
+import { useSelector } from 'react-redux';
 import Slider from '../Slider';
 
 const HeaderBlock = styled.div`
@@ -29,7 +28,6 @@ const Wrapper = styled.div`
 `;
 
 const Header = ({ history }) => {
-  const dispatch = useDispatch();
   const token = localStorage.getItem('accessToken');
 
   const moveMain = () => {
@@ -46,7 +44,7 @@ const Header = ({ history }) => {
     if (!token) {
       history.push('/login');
     }
-  }, [token]);
+  }, [token, history]);
 
   // useEffect(() => {
   //   dispatch(getUser());

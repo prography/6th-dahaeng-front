@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 import congratulateJoraeng from 'assets/joraeng/congratulate-joraeng.png';
 

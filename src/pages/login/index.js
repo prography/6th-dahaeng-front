@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, login } from 'store/auth';
 import styled from 'styled-components';
@@ -106,7 +106,7 @@ const Login = ({ history }) => {
     );
   };
 
-  const [status, setStatus] = useState({
+  const [status] = useState({
     email: 'empty',
     pwd: 'empty',
     pwd_ok: 'empty',

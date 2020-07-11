@@ -1,17 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
-import { getUser } from 'store/user';
 import styled from 'styled-components';
 import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 const Title = styled.div`
   font-size: 32px;
@@ -31,11 +25,10 @@ const SubTitle = styled.div`
 
 const Sign = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.sign,
     auth: auth.auth,
     authError: auth.authError,
-    user: user && user.user,
   }));
 
   const [status, setStatus] = useState({
@@ -137,7 +130,7 @@ const Sign = ({ history }) => {
     e.preventDefault();
 
     const { email, password, passwordConfirm } = form;
-
+    console.log(passwordConfirm);
     //입력창 모두 valid 아닐 때 alert
     if (
       !(

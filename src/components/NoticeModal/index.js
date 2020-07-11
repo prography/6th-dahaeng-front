@@ -42,6 +42,12 @@ const TitleField = styled.div`
   font-size: 18px;
 `;
 
+const Reminder = styled.div`
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+`;
+
 const ReminderField = styled.div`
   background: var(--light-background);
   height: 54px;
@@ -168,7 +174,7 @@ const NoticeModal = ({
   setModal,
   reminderInfo,
   title,
-  reminder,
+  reminderContent,
   notices,
 }) => {
   const [openReminder, setOpenReminder] = useState(false);
@@ -202,10 +208,19 @@ const NoticeModal = ({
             <ModalTitleWrapper>
               <TitleField>{title}</TitleField>
             </ModalTitleWrapper>
-            <ReminderField onClick={setReminder}>
-              {reminder}
-              <ReminderImg src={reminderJoraeng} alt="" />
-            </ReminderField>
+
+            {reminderContent === null ? (
+              <ReminderField>
+                <Reminder>{`오늘도 조랭이와 함께 열심히 행복을 찾아봐요!`}</Reminder>
+                <ReminderImg src={reminderJoraeng} alt="" />
+              </ReminderField>
+            ) : (
+              <ReminderField onClick={setReminder}>
+                {reminderContent}
+                <ReminderImg src={reminderJoraeng} alt="" />
+              </ReminderField>
+            )}
+
             {notices.map((notice) => {
               return (
                 <>
@@ -217,7 +232,7 @@ const NoticeModal = ({
         </>
       ) : null}
 
-      {openReminder && reminderInfo !== [] && reminder!==null ? (
+      {openReminder && reminderInfo !== [] && reminderContent !== null ? (
         <>
           <ModalOverlay></ModalOverlay>
           <Wrapper className="reminder">

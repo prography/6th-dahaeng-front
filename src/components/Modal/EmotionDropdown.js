@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.png';

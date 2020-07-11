@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   GET_QUESTION,
   GET_QUESTION_SUCCESS,
@@ -22,7 +22,6 @@ import {
   GET_TODAY_SUCCESS,
   GET_TODAY_FAIL,
 } from 'store/box';
-import * as boxApi from 'api/box';
 import axios from 'axios';
 import { serverURL } from './index';
 
@@ -31,10 +30,10 @@ function* getQuestionSaga(action) {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
     // const res = yield call(boxApi.getQuestion, action.payload); //api.login(action.payload)와 같다
 
-    const params = {
-      content:
-        '오늘 본 것 중에 가장 예쁜 색을 갖고 있던 것은 무엇인가요? 성은이sfa이d이',
-    };
+    // const params = {
+    //   content:
+    //     '오늘 본 것 중에 가장 예쁜 색을 갖고 있던 것은 무엇인가요? 성은이sfa이d이',
+    // };
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };

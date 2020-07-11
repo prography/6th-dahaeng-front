@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
-import Slider from '../Slider';
 
 const SubTitleBlock = styled.div`
   /* position: fixed; */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
 import noItemJoraeng from 'assets/joraeng/no-item-joraeng.png';

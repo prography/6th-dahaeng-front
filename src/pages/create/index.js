@@ -1,12 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { create } from 'store/auth';
 import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 // import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
-import Header from 'components/Header';
 
 const Title = styled.div`
   font-size: 32px;

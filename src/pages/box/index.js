@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRecords, searchRecords } from 'store/box';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
 import Header from 'components/Header';

@@ -1,5 +1,4 @@
 import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
 import { createRequestAction } from './createRequestAction';
 
 export const [

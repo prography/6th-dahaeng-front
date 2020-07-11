@@ -203,7 +203,7 @@ const Main = ({ history }) => {
     if (has_jorang === false) {
       history.push('/create');
     }
-  }, [dispatch, history]);
+  }, [dispatch, history, has_jorang]);
 
   const token = localStorage.getItem('accessToken');
 

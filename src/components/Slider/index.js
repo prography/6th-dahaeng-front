@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import { logout } from 'store/auth';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import InfoBox from './info.js';
 
 import menuIcon from '../../assets/icon/menu_icon.png';
@@ -83,13 +83,12 @@ const Slider = ({ history }) => {
 
   const dispatch = useDispatch();
   //TODO: ??? token vs user
-  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     if (open) {
       dispatch(getRecords());
     }
-  }, [open]);
+  }, [open, dispatch]);
 
   // const records = useSelector((state) => state.box.records);
 

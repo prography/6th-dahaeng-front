@@ -4,11 +4,9 @@ import ground from 'assets/main/ground.jpg';
 import postbox from 'assets/main/notification.png';
 import postboxOn from 'assets/main/notificationOn.png';
 import closet from 'assets/main/itembox.png';
-import Moment from 'moment';
 import NoticeModal from '../../components/NoticeModal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useSelector } from 'react-redux';
-import SliderJoraeng from '../../components/Joraeng/SliderJoraeng';
 
 //Modal
 

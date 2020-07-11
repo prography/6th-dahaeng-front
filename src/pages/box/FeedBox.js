@@ -1,10 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from 'store/user';
-import { deleteRecord } from 'store/box';
+import React, { useState } from 'react';
 import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 import Moment from 'moment';
 
 import deleteIcon from '../../assets/icon/deleteicon.png';

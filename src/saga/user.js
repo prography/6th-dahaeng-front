@@ -1,13 +1,12 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { REMINDER, REMINDER_SUCCESS, REMINDER_FAIL } from 'store/user';
 import { GETITEMS, GETITEMS_SUCCESS, GETITEMS_FAIL } from 'store/user';
 import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import { GETCLOSET, GETCLOSET_SUCCESS, GETCLOSET_FAIL } from 'store/user';
 import { GETUSER, GETUSER_SUCCESS, GETUSER_FAIL } from 'store/user';
-import { SETUSER, SETUSER_SUCCESS, SETUSER_FAIL } from 'store/user';
+import { SETUSER } from 'store/user';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import { serverURL } from './index';
 
 //const profile_id = useSelector((state) => state.auth.profile_id);

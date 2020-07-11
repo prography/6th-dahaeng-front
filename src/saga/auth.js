@@ -1,4 +1,4 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import {
   LOGIN,
   LOGIN_SUCCESS,
@@ -10,7 +10,6 @@ import {
   CREATE_SUCCESS,
   CREATE_FAIL,
 } from 'store/auth';
-import createRequestSaga from './createSaga';
 import axios from 'axios';
 import { serverURL } from './index';
 

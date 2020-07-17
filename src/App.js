@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import ReactGA from 'react-ga';
 
 const Main = lazy(() => import('./pages/main'));
 const Login = lazy(() => import('./pages/login'));
@@ -11,6 +12,9 @@ const Box = lazy(() => import('./pages/box'));
 const Market = lazy(() => import('./pages/market'));
 const Closet = lazy(() => import('./pages/closet'));
 const Donation = lazy(() => import('./pages/donation'));
+
+ReactGA.initialize('UA-17294375-01');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   return (

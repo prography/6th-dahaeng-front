@@ -30,6 +30,7 @@ const LinkText = styled.div`
   font-size: 12px;
   margin-top: 1rem;
   text-align: center;
+  cursor: pointer;
 
   & > span {
     background: linear-gradient(
@@ -142,6 +143,10 @@ const Login = ({ history }) => {
     // }
   }, [auth, authError, dispatch, history, user, has_jorang, token]);
 
+  const moveServiceInfo = () => {
+    history.push('/serviceInfo');
+  };
+
   return (
     <SignResponsive>
       <Title>Da:haeng</Title>
@@ -150,8 +155,8 @@ const Login = ({ history }) => {
         <div>나만의 소소한 행복을 찾아</div>
         <div>보관하고, 또 다른 행복을 찾자</div>
       </Content>
-      <LinkText>
-        <span>더 알아보러 가기</span>
+      <LinkText onClick={moveServiceInfo}>
+        <span>'다행, 더 알아보러가기'</span>
       </LinkText>
       <PictureBox>
         <LoginImg src={loginJoraeng} alt="" />

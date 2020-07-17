@@ -24,7 +24,6 @@ const WaitTitle = styled.div`
 
 const ImgWrapper = styled.div`
   flex: none;
-  flex-direction: row;
 `;
 
 const spinAnimation = keyframes`

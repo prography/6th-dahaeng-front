@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/updateicon.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../store/user';
+import { setUser, getUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import SliderJoraeng from '../Joraeng/SliderJoraeng';
 
@@ -151,7 +151,7 @@ const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = ({ toggleDrawer }) => {
+const InfoBox = ({ toggleDrawer, history }) => {
   const user = useSelector((state) => state.user.user);
 
   const [openModal, setOpenModal] = useState(false);
@@ -171,6 +171,8 @@ const InfoBox = ({ toggleDrawer }) => {
   const [inputTitle, setInputTitle] = useState('');
   const [inputNickname, setInputNickname] = useState('');
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setInputTitle(user ? user.title : '');
   }, [user]);
@@ -179,15 +181,17 @@ const InfoBox = ({ toggleDrawer }) => {
     setInputNickname(user ? user.jorang_nickname : '');
   }, [user]);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch, user]);
 
   const completeUpdate = () => {
-    console.log(inputTitle, inputNickname);
+    //console.log(inputTitle, inputNickname);
     dispatch(
       setUser(inputNickname, inputTitle, localStorage.getItem('profile')),
     );
-
-    window.location.reload(false);
+    setOpenUpdateModal(false);
+    //window.location.reload(false);
   };
 
   return (

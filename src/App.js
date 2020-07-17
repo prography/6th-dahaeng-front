@@ -13,6 +13,7 @@ const Box = lazy(() => import('./pages/box'));
 const Market = lazy(() => import('./pages/market'));
 const Closet = lazy(() => import('./pages/closet'));
 const Donation = lazy(() => import('./pages/donation'));
+const ServiceInfo = lazy(() => import('./pages/serviceInfo'));
 
 ReactGA.initialize('UA-17294375-01');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -32,6 +33,8 @@ function App() {
           <Route path="/donation" component={Donation} exact></Route>
           <Route path="/market" component={Market} exact></Route>
           <Route path="/closet" component={Closet} exact></Route>
+
+          <Route path="/serviceInfo" component={ServiceInfo} exact></Route>
           {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
           <Route
             render={({ location }) => (

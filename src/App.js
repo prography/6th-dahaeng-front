@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import ReactGA from 'react-ga';
+import Loading from './loading';
 
 const Main = lazy(() => import('./pages/main'));
 const Login = lazy(() => import('./pages/login'));
@@ -20,7 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <Header></Header> */}
-      <Suspense fallback="loading....">
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route path="/" component={Main} exact></Route>
           <Route path="/login" component={Login} exact></Route>

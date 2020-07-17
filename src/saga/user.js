@@ -5,7 +5,7 @@ import { BUYITEMS, BUYITEMS_SUCCESS, BUYITEMS_FAIL } from 'store/user';
 import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import { GETCLOSET, GETCLOSET_SUCCESS, GETCLOSET_FAIL } from 'store/user';
 import { GETUSER, GETUSER_SUCCESS, GETUSER_FAIL } from 'store/user';
-import { SETUSER } from 'store/user';
+import { SETUSER, SETUSER_SUCCESS, SETUSER_FAIL } from 'store/user';
 import axios from 'axios';
 import { serverURL } from './index';
 
@@ -115,19 +115,19 @@ function* setUserSaga(action) {
     console.log('getUser: ', res);
     if (res.data.response === 'success') {
       yield put({
-        type: GETUSER_SUCCESS,
+        type: SETUSER_SUCCESS,
         payload: res.data.message,
       });
     } else {
       yield put({
-        type: GETUSER_FAIL,
+        type: SETUSER_FAIL,
         payload: res.data.message,
         error: true,
       });
     }
   } catch (e) {
     yield put({
-      type: GETUSER_FAIL,
+      type: SETUSER_FAIL,
       payload: e,
       error: true,
     });

@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import ReactGA from 'react-ga';
+import Loading from './loading';
 
 const Main = lazy(() => import('./pages/main'));
 const Login = lazy(() => import('./pages/login'));
@@ -11,12 +13,16 @@ const Box = lazy(() => import('./pages/box'));
 const Market = lazy(() => import('./pages/market'));
 const Closet = lazy(() => import('./pages/closet'));
 const Donation = lazy(() => import('./pages/donation'));
+const ServiceInfo = lazy(() => import('./pages/serviceInfo'));
+
+ReactGA.initialize('UA-17294375-01');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 function App() {
   return (
     <BrowserRouter>
       {/* <Header></Header> */}
-      <Suspense fallback="loading....">
+      <Suspense fallback={<Loading />}>
         <Switch>
           <Route path="/" component={Main} exact></Route>
           <Route path="/login" component={Login} exact></Route>
@@ -27,6 +33,8 @@ function App() {
           <Route path="/donation" component={Donation} exact></Route>
           <Route path="/market" component={Market} exact></Route>
           <Route path="/closet" component={Closet} exact></Route>
+
+          <Route path="/serviceInfo" component={ServiceInfo} exact></Route>
           {/* <Route path={['/login', 'sign']} component={Login}></Route> */}
           <Route
             render={({ location }) => (

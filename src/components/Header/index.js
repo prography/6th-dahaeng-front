@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Slider from '../Slider';
+import { getUser } from '../../store/user';
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -39,6 +40,11 @@ const Header = ({ history }) => {
   // const [open, setOpen] = useState(false);
   // const anchor = 'left';
   // const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch, user]);
 
   useEffect(() => {
     if (!token) {

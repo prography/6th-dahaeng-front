@@ -7,6 +7,8 @@ import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 
 import loginJoraeng from 'assets/joraeng/login-joraeng.png';
+import KakaoLogo from 'assets/logo/kakao-logo.png';
+import NaverLogo from 'assets/logo/naver-logo.png';
 
 const Title = styled.div`
   font-size: 32px;
@@ -64,11 +66,31 @@ const KakaoLogin = styled.button`
   float: left;
   height: 2.5rem;
   background: #fbde6f;
-  font-size: 14px;
-  color: #453333;
   border: none;
   border-radius: 63px;
   width: 45%;
+
+  display: flex;
+  align-items: center;
+  padding: 0 56px;
+
+  @media screen and (max-width: 480px) {
+    padding: 0 32px;
+  }
+`;
+
+const KakaoLogoImg = styled.img`
+  width: 23px;
+  flex: none;
+  margin-bottom: 2px;
+`;
+
+const KakaoLabel = styled.div`
+  font-size: 14px;
+  color: #453333;
+  flex: 1;
+  text-align: right;
+  margin-right: 5px;
 `;
 
 const NaverLogin = styled.button`
@@ -76,11 +98,31 @@ const NaverLogin = styled.button`
   outline: none;
   height: 2.5rem;
   background: #4ec867;
-  font-size: 14px;
-  color: #ffffff;
   border: none;
   border-radius: 63px;
   width: 45%;
+
+  display: flex;
+  align-items: center;
+  padding: 0 56px;
+
+  @media screen and (max-width: 480px) {
+    padding: 0 32px;
+  }
+`;
+
+const NaverLogoImg = styled.img`
+  width: 20px;
+  flex: none;
+  margin-bottom: 2px;
+`;
+
+const NaverLabel = styled.div`
+  font-size: 14px;
+  color: #ffffff;
+  flex: 1;
+  text-align: right;
+  margin-right: 5px;
 `;
 
 const Login = ({ history }) => {
@@ -168,8 +210,14 @@ const Login = ({ history }) => {
         status={status}
       ></LoginForm>
       <SnsBox>
-        <KakaoLogin>로그인</KakaoLogin>
-        <NaverLogin>로그인</NaverLogin>
+        <KakaoLogin>
+          <KakaoLogoImg src={KakaoLogo} alt=""></KakaoLogoImg>
+          <KakaoLabel>로그인</KakaoLabel>
+        </KakaoLogin>
+        <NaverLogin>
+          <NaverLogoImg src={NaverLogo} alt=""></NaverLogoImg>
+          <NaverLabel>로그인</NaverLabel>
+        </NaverLogin>
       </SnsBox>
     </SignResponsive>
   );

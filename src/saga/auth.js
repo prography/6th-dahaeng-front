@@ -15,6 +15,7 @@ import { serverURL } from './index';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
+
 function* loginSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -22,11 +23,25 @@ function* loginSaga(action) {
 
     // console.log('response: ', res);
 
-    const param = {
-      email: action.payload.email,
-      password: action.payload.password,
-    };
-    const res = yield call([axios, 'post'], `${serverURL}/login/`, param);
+    let res = null;
+
+    switch (action.payload.sns) {
+      case 'kakao':
+        res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`);
+        break;
+
+      case 'naver':
+        res = yield call([axios, 'get'], `${serverURL}/social/naver_login/`);
+        break;
+
+      default:
+        const param = {
+          email: action.payload.email,
+          password: action.payload.password,
+        };
+        res = yield call([axios, 'post'], `${serverURL}/login/`, param);
+        break;
+    }
 
     console.log(res);
     if (res.data.response === 'success') {

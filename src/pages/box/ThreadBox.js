@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Moment from 'moment';
 
-import placeholderImage from '../../assets/joraeng/defaultjoraeng.png';
+import placeholderImage from '../../assets/joraeng/default-joraeng.png';
 import deleteIcon from '../../assets/icon/deleteicon.png';
 
 const Wrapper = styled.div`

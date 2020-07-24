@@ -355,7 +355,7 @@ const Main = ({ history }) => {
                   <InputLabel htmlFor="upload">
                     행복사진을 <br /> 함께 기록해요!
                     <ModalCharacterDefaultImage
-                      src="/images/defaultJoraeng.png"
+                      src="/images/defaultjoraeng.png"
                       alt=""
                     />
                   </InputLabel>

@@ -25,10 +25,6 @@ function* loginSaga(action) {
 
     let res = null;
 
-    // const headerParams = {
-    //   'Access-Control-Allow-Headers': '*',
-    // };
-
     switch (action.payload.sns) {
       case 'kakao':
         res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`);

@@ -25,17 +25,28 @@ const QuestionBox = styled.div`
 `;
 
 const Question = styled.div`
-  font-size: 24px;
   margin-top: 1rem;
   margin-bottom: 1rem;
+
   cursor: pointer;
 
+  /* background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 60%,
+    var(--secondary-color) 40%
+  );
+  display: inline; */
+`;
+
+const QuestionHighlight = styled.div`
+  font-size: 24px;
+  word-break: keep-all;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 60%,
     var(--secondary-color) 40%
   );
-  
+  display: inline;
 `;
 
 const ModalTitleWrapper = styled.div`
@@ -61,6 +72,7 @@ const DropdownStatusText = styled.span`
 
 const ModalQuestion = styled.div`
   font-size: 18px;
+  word-break: keep-all;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 60%,
@@ -94,7 +106,6 @@ const ModalCharacterDefaultImage = styled.img`
   object-fit: cover;
   width: 100%;
   height: 100%;
-  margin-left: 3rem;
 `;
 
 const InputLabel = styled.label`
@@ -292,7 +303,9 @@ const Main = ({ history }) => {
             ).format('MM-DD')}
           </Date>
           <Question onClick={setModal}>
-            {question && question.question}
+            <QuestionHighlight>
+              {question && question.question}
+            </QuestionHighlight>
           </Question>
         </QuestionBox>
         <Modal
@@ -313,7 +326,7 @@ const Main = ({ history }) => {
                   <EmotionDropdown
                     updateDropdownValue={setDropdownState}
                     dropdownState={
-                      record !== null &&
+                      record &&
                       emotionWordEn.findIndex((e) => e === record.emotion)
                     }
                   />

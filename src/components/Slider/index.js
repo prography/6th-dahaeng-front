@@ -140,7 +140,10 @@ const Slider = ({ history }) => {
         <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
         <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
         <SliderButton>
-          <Link to="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link">
+          <Link
+            to="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link"
+            style={{ textDecoration: 'none' }}
+          >
             의견 보내기
           </Link>
         </SliderButton>

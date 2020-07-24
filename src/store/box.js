@@ -55,32 +55,11 @@ export const getToday = createAction(GET_TODAY, (id) => ({ id }));
 
 const initialState = {
   question: {
-    last_login: '2020-07-10',
-    question: '오늘 하루는 어땠나요?',
+    last_login: null,
+    question: null,
   },
   record: null,
-  records: [
-    {
-      id: 0,
-      created_at: '2020-07-10',
-      question: '행복 랜덤 질문',
-      detail: '사용자 행복 기록',
-      profile: '사용자 이메일',
-      emotion: '대표감정',
-      image: '이미지 url',
-      continuity: '연속 기록 횟수',
-    },
-    {
-      id: 1,
-      created_at: '2020-07-11',
-      question: '행복 랜덤 질문',
-      detail: '사용자 행복 기록',
-      profile: '사용자 이메일',
-      emotion: '대표감정',
-      image: '이미지 url',
-      continuity: '연속 기록 횟수',
-    },
-  ],
+  records: null,
   searchs: null,
   // searchs: [
   //   {

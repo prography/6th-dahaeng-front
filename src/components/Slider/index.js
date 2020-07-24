@@ -12,6 +12,7 @@ import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
+import { Link } from 'react-router-dom';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -49,8 +50,10 @@ const DrawerCloseBtn = styled.button`
 const LogoutBtn = styled.button`
   font-size: 14px;
   text-align: center;
+  width: 90%;
   color: var(--text-second);
   margin: 1rem;
+  padding-top: 2rem;
   border: none;
   text-decoration: none;
 `;
@@ -64,6 +67,18 @@ const SliderButton = styled.button`
 
   &:hover {
     background-color: #fafafa;
+  }
+`;
+
+const ListBox = styled.div`
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    height: 200px;
   }
 `;
 
@@ -133,12 +148,22 @@ const Slider = ({ history }) => {
       {/* 행복 기록시 입력한 카테고리 떠야 함 
       행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecord />
-
-      <List>
-        <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
-        <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
-        <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
-      </List>
+      <ListBox>
+        <List>
+          <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
+          <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
+          <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
+          <SliderButton>
+            <Link
+              to="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link"
+              style={{ textDecoration: 'none' }}
+            >
+              의견 보내기
+            </Link>
+          </SliderButton>
+        </List>
+        <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
+      </ListBox>
     </div>
   );
 
@@ -154,7 +179,6 @@ const Slider = ({ history }) => {
             <DrawerIcon src={menuIcon} />
           </DrawerCloseBtn>
           <Spacer />
-          <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
         </Drawer>
       </React.Fragment>
     </>

@@ -31,15 +31,11 @@ function* loginSaga(action) {
 
     switch (action.payload.sns) {
       case 'kakao':
-        res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`, {
-          headers: headerParams,
-        });
+        res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`);
         break;
 
       case 'naver':
-        res = yield call([axios, 'get'], `${serverURL}/social/naver_login/`, {
-          headers: headerParams,
-        });
+        res = yield call([axios, 'get'], `${serverURL}/social/naver_login/`);
         break;
 
       default:

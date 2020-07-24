@@ -110,7 +110,7 @@ const Slider = ({ history }) => {
   const Trylogout = () => {
     dispatch(logout());
     history.push('/login');
-    //localStorage.setItem('accessToken', null);
+    localStorage.setItem('accessToken', null);
   };
 
   const toggleDrawer = (open) => (event) => {
@@ -162,7 +162,7 @@ const Slider = ({ history }) => {
             </Link>
           </SliderButton>
         </List>
-        <LogoutBtn onClick={Trylogout}>로그아웃</LogoutBtn>
+        <LogoutBtn onClick={() => Trylogout()}>로그아웃</LogoutBtn>
       </ListBox>
     </div>
   );

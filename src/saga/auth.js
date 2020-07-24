@@ -25,9 +25,9 @@ function* loginSaga(action) {
 
     let res = null;
 
-    const headerParams = {
-      'Access-Control-Allow-Headers': '*',
-    };
+    // const headerParams = {
+    //   'Access-Control-Allow-Headers': '*',
+    // };
 
     switch (action.payload.sns) {
       case 'kakao':

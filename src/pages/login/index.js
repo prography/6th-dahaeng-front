@@ -159,7 +159,15 @@ const Login = ({ history }) => {
     e.preventDefault();
 
     const { email, password } = form;
-    dispatch(login({ email, password }));
+    const sns = 'none';
+    dispatch(login({ email, password, sns }));
+    localStorage.setItem('record_id', null);
+  };
+
+  const snsLogin = (sns) => {
+    const email = '';
+    const password = '';
+    dispatch(login({ email, password, sns }));
     localStorage.setItem('record_id', null);
   };
 
@@ -210,11 +218,11 @@ const Login = ({ history }) => {
         status={status}
       ></LoginForm>
       <SnsBox>
-        <KakaoLogin>
+        <KakaoLogin onClick={() => snsLogin('kakao')}>
           <KakaoLogoImg src={KakaoLogo} alt=""></KakaoLogoImg>
           <KakaoLabel>로그인</KakaoLabel>
         </KakaoLogin>
-        <NaverLogin>
+        <NaverLogin onClick={() => snsLogin('naver')}>
           <NaverLogoImg src={NaverLogo} alt=""></NaverLogoImg>
           <NaverLabel>로그인</NaverLabel>
         </NaverLogin>

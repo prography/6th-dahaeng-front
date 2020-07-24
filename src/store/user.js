@@ -48,8 +48,8 @@ const initialState = {
     title: 'Da:haeng',
     user_coin: 0,
     // TODO: SET-UP DEFAULT
-    jorang_status: '2',
-    jorang_color: 'ffe884',
+    jorang_status: '0',
+    jorang_color: 'ffffff',
   },
   buy_success: null,
   getUserError: null,
@@ -59,12 +59,6 @@ const initialState = {
         id: 1,
         title: '다행에 가입하신걸 환영합니다!',
         content: '보다 나은 서비스로 제공하겠습니다.\r\n\r\n감사합니다 :)',
-        created_at: '2020-07-10',
-      },
-      {
-        id: 2,
-        title: '휴',
-        content: '어렵구먼\r\n\r\n감사합니다 :)',
         created_at: '2020-07-10',
       },
     ],

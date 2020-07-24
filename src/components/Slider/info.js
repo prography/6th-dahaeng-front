@@ -198,7 +198,7 @@ const InfoBox = ({ toggleDrawer, history }) => {
     <>
       <UserTitleBox>
         {/* title 글자수 제한 있어야 함! 8글자 이내쯤 */}
-        <UserTitle>{user.title}</UserTitle>
+        <UserTitle>{user.persoonal_title}</UserTitle>
         <UserInfoBtn onClick={setModal}>
           <UpdateIcon src={updateicon} alt="" />
         </UserInfoBtn>

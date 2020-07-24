@@ -20,9 +20,10 @@ export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
 }));
 export const initForm = createAction(INIT_FORM, (form) => form);
 
-export const login = createAction(LOGIN, ({ email, password }) => ({
+export const login = createAction(LOGIN, ({ email, password, sns }) => ({
   email,
   password,
+  sns,
 }));
 
 export const sign = createAction(SIGN, ({ email, password }) => ({

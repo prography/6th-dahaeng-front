@@ -97,7 +97,7 @@ const ModalCharacter = styled.div`
 `;
 
 const ModalCharacterImage = styled.img`
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   height: 100%;
 `;

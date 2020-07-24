@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Moment from 'moment';
 
+import placeholderImage from '../../assets/joraeng/defaultjoraeng.png';
 import deleteIcon from '../../assets/icon/deleteicon.png';
 
 const Wrapper = styled.div`
@@ -176,7 +177,10 @@ const ThreadBox = ({ record, setModal }) => {
       </TitleBox>
       <ContentBox>
         <CharacterBox>
-          <CharacterImg src={record.image} alt="" />
+          <CharacterImg
+            src={record.image === null ? placeholderImage : record.image}
+            alt=""
+          />
         </CharacterBox>
         <Detail disabled value={record.detail} />
       </ContentBox>

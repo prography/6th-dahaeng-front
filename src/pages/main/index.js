@@ -35,6 +35,7 @@ const Question = styled.div`
     rgba(255, 255, 255, 0) 60%,
     var(--secondary-color) 40%
   );
+  
 `;
 
 const ModalTitleWrapper = styled.div`
@@ -280,18 +281,19 @@ const Main = ({ history }) => {
       setImage(e.target.files[0]);
     }
   };
-
   return (
     <>
       <Header></Header>
       <Responsive>
-        <QuestionBox onClick={setModal}>
+        <QuestionBox>
           <Date>
             {Moment(
               question && question.last_login && question.last_login.dateForm,
             ).format('MM-DD')}
           </Date>
-          <Question>{question && question.question}</Question>
+          <Question onClick={setModal}>
+            {question && question.question}
+          </Question>
         </QuestionBox>
         <Modal
           className
@@ -311,7 +313,7 @@ const Main = ({ history }) => {
                   <EmotionDropdown
                     updateDropdownValue={setDropdownState}
                     dropdownState={
-                      record &&
+                      record !== null &&
                       emotionWordEn.findIndex((e) => e === record.emotion)
                     }
                   />

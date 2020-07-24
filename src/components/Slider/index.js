@@ -12,6 +12,7 @@ import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
+import { Link } from 'react-router-dom';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -138,6 +139,11 @@ const Slider = ({ history }) => {
         <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
         <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
         <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
+        <SliderButton>
+          <Link to="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link">
+            의견 보내기
+          </Link>
+        </SliderButton>
       </List>
     </div>
   );

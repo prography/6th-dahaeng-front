@@ -25,13 +25,21 @@ function* loginSaga(action) {
 
     let res = null;
 
+    const headerParams = {
+      'Access-Control-Allow-Origin': '*',
+    };
+
     switch (action.payload.sns) {
       case 'kakao':
-        res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`);
+        res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`, {
+          headers: headerParams,
+        });
         break;
 
       case 'naver':
-        res = yield call([axios, 'get'], `${serverURL}/social/naver_login/`);
+        res = yield call([axios, 'get'], `${serverURL}/social/naver_login/`, {
+          headers: headerParams,
+        });
         break;
 
       default:

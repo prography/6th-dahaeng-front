@@ -26,7 +26,7 @@ function* loginSaga(action) {
     let res = null;
 
     const headerParams = {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
     };
 
     switch (action.payload.sns) {

@@ -154,12 +154,13 @@ const Slider = ({ history }) => {
           <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
           <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
           <SliderButton>
-            <Link
-              to="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link"
               style={{ textDecoration: 'none' }}
+              target="_blank"
             >
               의견 보내기
-            </Link>
+            </a>
           </SliderButton>
         </List>
         <LogoutBtn onClick={() => Trylogout()}>로그아웃</LogoutBtn>

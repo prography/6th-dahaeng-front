@@ -27,7 +27,14 @@ function* loginSaga(action) {
 
     switch (action.payload.sns) {
       case 'kakao':
+        //console.log(action.payload);
         res = yield call([axios, 'get'], `${serverURL}/social/kakao_login/`);
+        // res = yield call(
+        //   [axios, 'get'],
+        //   `${serverURL}/social/kakao_login_callback/?code=`.concat(
+        //     action.payload.sns,
+        //   ),
+        // );
         break;
 
       case 'naver':

@@ -169,6 +169,7 @@ const Login = ({ history }) => {
     const password = '';
     dispatch(login({ email, password, sns }));
     localStorage.setItem('record_id', null);
+    //window.location.href = 'https://www.dahaengback.shop/social/kakao_login/';
   };
 
   useEffect(() => {

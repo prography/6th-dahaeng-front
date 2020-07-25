@@ -48,7 +48,7 @@ const CharacterBox = styled.div`
 const CharacterImg = styled.img`
   object-fit: cover;
   width: 100%;
-  height: 200px;
+  min-height: 200px;
 `;
 
 const ContentBox = styled.div`

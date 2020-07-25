@@ -65,7 +65,7 @@ const CharacterBox = styled.div`
 
 const CharacterImg = styled.img`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   object-fit: cover;
   display: flex;
   align-items: center;

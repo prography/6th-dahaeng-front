@@ -59,8 +59,36 @@ const initialState = {
     question: null,
   },
   record: null,
-  records: null,
+  // records: null,
+
+  records: [
+    {
+      created_at: 2020 - 8 - 14,
+      question: '주히 바보',
+      detail: '다스 몽총',
+    },
+
+    {
+      created_at: 2020 - 8 - 14,
+      question: '주히 바보',
+      detail: '다스 몽총',
+    },
+
+    {
+      created_at: 2020 - 8 - 14,
+      question: '주히 바보',
+      detail: '다스 몽총',
+    },
+
+    {
+      created_at: 2020 - 8 - 14,
+      question: '주히 바보',
+      detail: '다스 몽총',
+    },
+  ],
+
   searchs: null,
+
   // searchs: [
   //   {
   //     id: 0,

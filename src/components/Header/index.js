@@ -48,7 +48,8 @@ const Header = ({ history }) => {
 
   useEffect(() => {
     if (!token) {
-      history.push('/login');
+      //release
+      //history.push('/login');
     }
   }, [token, history]);
 

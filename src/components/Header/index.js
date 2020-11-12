@@ -43,7 +43,7 @@ const Header = ({ history }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser());
+    //dispatch(getUser(localStorage.getItem('profile')));
   }, [dispatch, user]);
 
   useEffect(() => {

@@ -25,6 +25,7 @@ import {
 import axios from 'axios';
 import { serverURL } from './index';
 
+//OK
 function* getQuestionSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -48,7 +49,7 @@ function* getQuestionSaga(action) {
 
     const res = yield call(
       [axios, 'get'],
-      `${serverURL}/record/posts/newpost/`,
+      `${serverURL}/record/posts/questions/`,
       { headers: headers },
     );
 
@@ -64,7 +65,7 @@ function* getQuestionSaga(action) {
     });
   }
 }
-
+//OK
 function* setRecordSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -85,7 +86,7 @@ function* setRecordSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      `${serverURL}/record/posts/newpost/`,
+      `${serverURL}/record/posts/`,
       action.payload.formData,
       // param,
       { headers: headers },
@@ -104,7 +105,7 @@ function* setRecordSaga(action) {
     });
   }
 }
-
+//OK
 function* modifyRecordSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)

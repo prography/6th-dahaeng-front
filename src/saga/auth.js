@@ -16,6 +16,7 @@ import { serverURL } from './index';
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
 
+//OK
 function* loginSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -74,6 +75,7 @@ function* loginSaga(action) {
   }
 }
 
+//OK
 function* signSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -95,7 +97,7 @@ function* signSaga(action) {
     if (res.data.response === 'success') {
       yield put({
         type: SIGN_SUCCESS,
-        payload: res.data.message === '회원가입이 완료되었습니다.',
+        payload: res.data.message === '이메일을 전송하였습니다.',
       });
     } else {
       yield put({
@@ -113,6 +115,7 @@ function* signSaga(action) {
   }
 }
 
+//OK
 function* createSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -127,12 +130,9 @@ function* createSaga(action) {
       nickname: action.payload.nickname,
     };
 
-    const res = yield call(
-      [axios, 'post'],
-      `${serverURL}/jorang_create/`,
-      param,
-      { headers: headers },
-    );
+    const res = yield call([axios, 'post'], `${serverURL}/jorang/`, param, {
+      headers: headers,
+    });
 
     console.log('response: ', res);
     if (res.data.response === 'success') {

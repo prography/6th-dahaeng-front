@@ -49,7 +49,7 @@ import { serverURL } from './index';
 //     });
 //   }
 // }
-
+//OK
 function* getUserSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -88,7 +88,7 @@ function* getUserSaga(action) {
     });
   }
 }
-
+//OK
 function* setUserSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -169,7 +169,7 @@ function* reminderSaga(action) {
     });
   }
 }
-
+//OK
 function* getItemSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -180,7 +180,7 @@ function* getItemSaga(action) {
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
-    const res = yield call([axios, 'get'], `${serverURL}/shop/`, {
+    const res = yield call([axios, 'get'], `${serverURL}/shop/item/user/`, {
       headers: headers,
     });
 
@@ -197,7 +197,7 @@ function* getItemSaga(action) {
     });
   }
 }
-
+//OK
 function* buyItemSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -215,7 +215,7 @@ function* buyItemSaga(action) {
 
     const res = yield call(
       [axios, 'post'],
-      `${serverURL}/shop/${param.item}/`,
+      `${serverURL}/shop/item/buy/`,
       param,
       { headers: headers },
     );
@@ -241,7 +241,7 @@ function* buyItemSaga(action) {
     });
   }
 }
-
+//OK
 function* setItemSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
@@ -287,7 +287,7 @@ function* setItemSaga(action) {
     });
   }
 }
-
+//OK
 function* getClosetSaga(action) {
   try {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)

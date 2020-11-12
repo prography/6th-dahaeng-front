@@ -182,7 +182,7 @@ const InfoBox = ({ toggleDrawer, history }) => {
   }, [user]);
 
   useEffect(() => {
-    dispatch(getUser());
+    // dispatch(getUser(localStorage.getItem('profile')));
   }, [dispatch, user]);
 
   const completeUpdate = () => {

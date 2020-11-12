@@ -110,6 +110,7 @@ const Slider = ({ history }) => {
   const Trylogout = () => {
     dispatch(logout());
     history.push('/login');
+    
     localStorage.setItem('accessToken', null);
   };
 

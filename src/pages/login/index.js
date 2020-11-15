@@ -206,7 +206,7 @@ const Login = ({ history }) => {
     if (authError === '유효하지않은 계정입니다.') {
       console.log('회원가입 필요');
       setModal();
-    } else if (authError !== '') {
+    } else if (authError !== '' && authError !== null) {
       console.log('이메일 인증 필요');
       history.push('/emailAuth');
       //setModal();

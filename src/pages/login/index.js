@@ -206,11 +206,16 @@ const Login = ({ history }) => {
     if (authError === '유효하지않은 계정입니다.') {
       console.log('회원가입 필요');
       setModal();
-    } else if (authError !== '' && authError !== null) {
+    } else if (
+      authError ===
+      '활성화 되지 않은 계정입니다. 메일을 확인하고, 본인인증을 해주세요.'
+    ) {
       console.log('이메일 인증 필요');
       history.push('/emailAuth');
       //setModal();
       return;
+    } else if (authError === 'JWT token 생성에 실패하였습니다.') {
+      setModal();
     }
     if (token) {
       console.log('로그인 성공');
@@ -272,14 +277,14 @@ const Login = ({ history }) => {
           <ModalTitle>
             {authError === '유효하지않은 계정입니다.'
               ? '회원가입되지 않은 계정입니다.'
-              : '아직 이메일 인증 확인이 되지 않았습니다!'}
+              : '아이디 혹은 비밀번호가 일치하지 않습니다.'}
           </ModalTitle>
         }
         content={
           <ModalText>
             {authError === '유효하지않은 계정입니다.'
               ? '회원 가입페이지로 이동해 회원가입을 완료해주세요!'
-              : '회원 가입하신 이메일로 들어가 계정 인증을 해주세요!'}
+              : '다시 입력해주세요'}
           </ModalText>
         }
         button={<ModalButton onClick={setModal}>확인</ModalButton>}

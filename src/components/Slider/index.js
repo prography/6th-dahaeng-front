@@ -112,6 +112,7 @@ const Slider = ({ history }) => {
     history.push('/login');
     
     localStorage.setItem('accessToken', null);
+
   };
 
   const toggleDrawer = (open) => (event) => {

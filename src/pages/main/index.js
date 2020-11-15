@@ -221,7 +221,7 @@ const Main = ({ history }) => {
 
   useEffect(() => {
     console.log(token);
-    if (!token) {
+    if (!token || token === null) {
       //release
       history.push('/login');
     }

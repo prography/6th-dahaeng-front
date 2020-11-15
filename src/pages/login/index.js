@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
+import Modal from '../../components/Modal';
 
 import loginJoraeng from 'assets/joraeng/login-joraeng.png';
 import KakaoLogo from 'assets/logo/kakao-logo.png';
@@ -125,6 +126,31 @@ const NaverLabel = styled.div`
   margin-right: 5px;
 `;
 
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const ModalButton = styled.button`
+  box-sizing: border-box;
+  float: right;
+  margin-top: 1rem;
+  border: none;
+  color: white;
+  height: 2rem;
+  background: var(--primary-color);
+  border-radius: 4px;
+  outline: none;
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const Login = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError, user, has_jorang, token } = useSelector(
@@ -177,9 +203,13 @@ const Login = ({ history }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (authError) {
-      console.log('로그인 실패');
-      console.log(authError);
+    if (authError === '유효하지않은 계정입니다.') {
+      console.log('회원가입 필요');
+      setModal();
+    } else if (authError !== '') {
+      console.log('이메일 인증 필요');
+      history.push('/emailAuth');
+      //setModal();
       return;
     }
     if (token) {
@@ -193,6 +223,11 @@ const Login = ({ history }) => {
     //   history.push('/');
     // }
   }, [auth, authError, dispatch, history, user, has_jorang, token]);
+
+  const [openModal, setOpenModal] = useState(false);
+  const setModal = () => {
+    setOpenModal(!openModal);
+  };
 
   const moveServiceInfo = () => {
     history.push('/serviceInfo');
@@ -228,6 +263,27 @@ const Login = ({ history }) => {
           <NaverLabel>로그인</NaverLabel>
         </NaverLogin>
       </SnsBox>
+
+      <Modal
+        className="popup"
+        openModal={openModal}
+        setModal={setModal}
+        title={
+          <ModalTitle>
+            {authError === '유효하지않은 계정입니다.'
+              ? '회원가입되지 않은 계정입니다.'
+              : '아직 이메일 인증 확인이 되지 않았습니다!'}
+          </ModalTitle>
+        }
+        content={
+          <ModalText>
+            {authError === '유효하지않은 계정입니다.'
+              ? '회원 가입페이지로 이동해 회원가입을 완료해주세요!'
+              : '회원 가입하신 이메일로 들어가 계정 인증을 해주세요!'}
+          </ModalText>
+        }
+        button={<ModalButton onClick={setModal}>확인</ModalButton>}
+      />
     </SignResponsive>
   );
 };

@@ -8,6 +8,7 @@ const Main = lazy(() => import('./pages/main'));
 const Login = lazy(() => import('./pages/login'));
 const Sign = lazy(() => import('./pages/sign'));
 const SignComplete = lazy(() => import('./pages/signComplete'));
+const EmailAuth = lazy(() => import('./pages/emailAuth'));
 const Create = lazy(() => import('./pages/create'));
 const Box = lazy(() => import('./pages/box'));
 const Market = lazy(() => import('./pages/market'));
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" component={Login} exact></Route>
           <Route path="/sign" component={Sign} exact></Route>
           <Route path="/signComplete" component={SignComplete} exact></Route>
+          <Route path="/emailAuth" component={EmailAuth} exact></Route>
           <Route path="/create" component={Create} exact></Route>
           <Route path="/box" component={Box} exact></Route>
           <Route path="/donation" component={Donation} exact></Route>

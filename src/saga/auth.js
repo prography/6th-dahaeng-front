@@ -12,6 +12,7 @@ import {
 } from 'store/auth';
 import axios from 'axios';
 import { serverURL } from './index';
+import { keyframes } from 'styled-components';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
@@ -60,11 +61,18 @@ function* loginSaga(action) {
       localStorage.setItem('accessToken', res.data.message.token);
       localStorage.setItem('profile', res.data.message.profile_id);
     } else {
-      yield put({
-        type: LOGIN_FAIL,
-        payload: res.data.non_field_errors,
-        error: true,
-      });
+      if (res.data.message === '유효하지않은 계정입니다.') {
+        yield put({
+          type: LOGIN_FAIL,
+          payload: res.data.message,
+          error: true,
+        });
+      } else {
+        yield put({
+          type: LOGIN_FAIL,
+          payload: res.data.message,
+        });
+      }
     }
   } catch (e) {
     yield put({

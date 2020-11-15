@@ -157,7 +157,7 @@ const Sign = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      history.push('/signComplete');
+      history.push('/emailAuth');
     }
   }, [auth, authError, dispatch, history]);
 

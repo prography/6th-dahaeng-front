@@ -55,7 +55,7 @@ const LoginButton = styled.button`
 `;
 
 const emailAuth = ({ history }) => {
-  const createLink = () => {
+  const moveLogin = () => {
     history.push('/login');
   };
 
@@ -71,7 +71,7 @@ const emailAuth = ({ history }) => {
           <div>도착한 메일을 확인하고 인증을 완료해주세요</div>
           <div> 인증은 가입 후 딱 한 번만 해주시면 됩니다</div>
         </SubTitle>
-        <LoginButton>로그인하러 가기</LoginButton>
+        <LoginButton onClick={moveLogin}>로그인하러 가기</LoginButton>
       </SignResponsive>
     </>
   );

@@ -111,6 +111,8 @@ const pwConfirmStatusEnum = {
   valid: 'valid',
 };
 
+// const signLoadig = '처리중입니다.';
+
 const SignAuthForm = ({
   type,
   form,

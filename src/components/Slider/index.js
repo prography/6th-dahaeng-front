@@ -136,6 +136,10 @@ const Slider = ({ history }) => {
     history.push('/donation');
   }
 
+  function navigateReportPage() {
+    history.push('/report');
+  }
+
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -154,15 +158,7 @@ const Slider = ({ history }) => {
           <SliderButton onClick={navigateBoxPage}>행복보관함</SliderButton>
           <SliderButton onClick={navigateMarketPage}>조랭마켓</SliderButton>
           <SliderButton onClick={navigateDonationPage}>소액기부</SliderButton>
-          <SliderButton>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdthxPg8koZz_XarRt3txQyASADROZXqb4e-PKQwDpnYk43Ew/viewform?usp=sf_link"
-              style={{ textDecoration: 'none' }}
-              target="_blank"
-            >
-              의견 보내기
-            </a>
-          </SliderButton>
+          <SliderButton onClick={navigateReportPage}>의견 보내기</SliderButton>
         </List>
         {/* <LogoutBtn onClick={() => Trylogout()}>로그아웃</LogoutBtn> */}
       </ListBox>

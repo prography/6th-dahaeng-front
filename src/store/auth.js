@@ -46,7 +46,7 @@ export const initialState = {
     email: '',
     password: '',
   },
-  token: null,
+  token: '',
   auth: null, //sign success -> true
   authError: '',
   isFirstLogin: null,

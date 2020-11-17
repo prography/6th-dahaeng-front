@@ -222,7 +222,12 @@ const Main = ({ history }) => {
   useEffect(() => {
     console.log(token);
     console.log(typeof token);
-    if (!token || token === null || token === undefined || token === '') {
+    if (
+      token === null ||
+      token === 'undefined' ||
+      token === '' ||
+      token.length <= 0
+    ) {
       //release
       history.push('/login');
     }

@@ -107,7 +107,11 @@ const Market = ({ history }) => {
     setModal();
     //refresh item list and coin
     //구매 성공 -> 구매 완료 팝업/ 구매 실패 -> 구매 실패 팝업
-    setBuySuccessModal();
+    if (buy_success) {
+      setBuySuccessModal();
+    } else {
+      setBuyFailModal();
+    }
     //setBuyFailModal();
   };
 

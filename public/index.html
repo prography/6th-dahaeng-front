@@ -27,8 +27,34 @@
     <title>나만의 행복보관함</title>
   </head>
   <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: 'AIzaSyBrbbEkq6tl3LX1tpA_9XlpNVsUi4eUtyY',
+        authDomain: 'da-haeng-b4f92.firebaseapp.com',
+        databaseURL: 'https://da-haeng-b4f92.firebaseio.com',
+        projectId: 'da-haeng-b4f92',
+        storageBucket: 'da-haeng-b4f92.appspot.com',
+        messagingSenderId: '836057707701',
+        appId: '1:836057707701:web:5ce5a214bd4b43187afafc',
+        measurementId: 'G-1CQP2R6S0Q',
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

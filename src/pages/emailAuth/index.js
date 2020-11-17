@@ -41,7 +41,7 @@ const ButtonBox = styled.div`
   justify-content: flex-end;
 `;
 
-const CreateButton = styled.button`
+const LoginButton = styled.button`
   outline: none;
   background: var(--primary-color);
   font-size: 14px;
@@ -67,10 +67,11 @@ const emailAuth = ({ history }) => {
           <CongratulateImg src={authJoraeng} alt="" />
         </ImageBox>
         <SubTitle>
-          <div>인증 메일이 완료되었습니다 !</div>
+          <div>인증 메일이 전송되었습니다 !</div>
           <div>도착한 메일을 확인하고 인증을 완료해주세요</div>
           <div> 인증은 가입 후 딱 한 번만 해주시면 됩니다</div>
         </SubTitle>
+        <LoginButton>로그인하러 가기</LoginButton>
       </SignResponsive>
     </>
   );

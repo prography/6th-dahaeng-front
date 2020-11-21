@@ -64,6 +64,7 @@ const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
   const buy_success = useSelector((state) => state.user.buy_success);
+  const buyError = useSelector((state) => state.user.buyError);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -107,13 +108,21 @@ const Market = ({ history }) => {
     setModal();
     //refresh item list and coin
     //구매 성공 -> 구매 완료 팝업/ 구매 실패 -> 구매 실패 팝업
-    if (buy_success) {
-      setBuySuccessModal();
-    } else {
-      setBuyFailModal();
-    }
+    // if (buy_success) {
+    //   setBuySuccessModal();
+    // } else {
+    //   setBuyFailModal();
+    // }
     //setBuyFailModal();
   };
+
+  useEffect(() => {
+    if (!buy_success && buyError.includes('코인이 부족합니다.')) {
+      setBuyFailModal();
+    } else if (buy_success) {
+      setBuySuccessModal();
+    }
+  }, [buy_success, buyError]);
 
   const indexs = ['jorang_color', 'background', 'item'];
   const [select, setSelect] = useState('jorang_color');

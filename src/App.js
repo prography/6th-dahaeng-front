@@ -15,7 +15,7 @@ const Market = lazy(() => import('./pages/market'));
 const Closet = lazy(() => import('./pages/closet'));
 const Donation = lazy(() => import('./pages/donation'));
 const ServiceInfo = lazy(() => import('./pages/serviceInfo'));
-const Report = lazy(() => import('./pages/report'));
+const Feedback = lazy(() => import('./pages/feedback'));
 const SnsLogin = lazy(() => import('./components/SnsLogin.js'));
 
 ReactGA.initialize('UA-17294375-01');
@@ -38,7 +38,7 @@ function App() {
           <Route path="/market" component={Market} exact></Route>
           <Route path="/closet" component={Closet} exact></Route>
           <Route path="/serviceInfo" component={ServiceInfo} exact></Route>
-          <Route path="/report" component={Report} exact></Route>
+          <Route path="/feedback" component={Feedback} exact></Route>
           <Route
             path="/social/kakao_login_callback"
             component={SnsLogin}

@@ -6,6 +6,7 @@ import { SETITEMS, SETITEMS_SUCCESS, SETITEMS_FAIL } from 'store/user';
 import { GETCLOSET, GETCLOSET_SUCCESS, GETCLOSET_FAIL } from 'store/user';
 import { GETUSER, GETUSER_SUCCESS, GETUSER_FAIL } from 'store/user';
 import { SETUSER, SETUSER_SUCCESS, SETUSER_FAIL } from 'store/user';
+import { FEEDBACK, FEEDBACK_SUCCESS, FEEDBACK_FAIL } from 'store/user';
 import axios from 'axios';
 import { serverURL } from './index';
 
@@ -230,7 +231,6 @@ function* buyItemSaga(action) {
       yield put({
         type: BUYITEMS_FAIL,
         payload: res.data.message,
-        error: true,
       });
     }
   } catch (e) {
@@ -323,6 +323,44 @@ function* getClosetSaga(action) {
     });
   }
 }
+function* feedbackSaga(action) {
+  try {
+    //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
+
+    // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
+    const headers = {
+      Authorization: `jwt ${localStorage.getItem('accessToken')}`,
+    };
+
+    const param = {
+      feedback: {
+        feedback: action.payload.content,
+      },
+    };
+
+    const res = yield call([axios, 'post'], `${serverURL}/feedback/`, param, {
+      headers: headers,
+    });
+
+    console.log('response: ', res);
+    if (res.response === 'success') {
+      yield put({
+        type: FEEDBACK_SUCCESS,
+        payload: res.data.message,
+      });
+    } else {
+      yield put({
+        type: FEEDBACK_FAIL,
+        payload: res.data.message,
+      });
+    }
+  } catch (e) {
+    yield put({
+      type: FEEDBACK_FAIL,
+      payload: e,
+    });
+  }
+}
 
 export function* userSaga() {
   yield takeLatest(GETUSER, getUserSaga);
@@ -333,4 +371,5 @@ export function* userSaga() {
   yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(GETCLOSET, getClosetSaga);
   yield takeLatest(SETUSER, setUserSaga);
+  yield takeLatest(FEEDBACK, feedbackSaga);
 }

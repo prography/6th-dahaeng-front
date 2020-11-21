@@ -13,7 +13,8 @@ const ModalOverlay = styled.div`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 350px;
+  //top: 350px;
+  top: 35%;
   left: 50%;
   width: calc(100% - 20px);
   max-width: ${(props) => (props.className === 'popup' ? '380px' : '768px')};

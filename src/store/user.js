@@ -27,6 +27,9 @@ export const [
   GETCLOSET_SUCCESS,
   GETCLOSET_FAIL,
 ] = createRequestAction('GETCLOSET');
+export const [FEEDBACK, FEEDBACK_SUCCESS, FEEDBACK_FAIL] = createRequestAction(
+  'FEEDBACK',
+);
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const setUser = createAction(SETUSER, (nickname, title, id) => ({
@@ -40,6 +43,7 @@ export const getItems = createAction(GETITEMS);
 export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
 export const setItems = createAction(SETITEMS, (id) => ({ id }));
 export const getCloset = createAction(GETCLOSET);
+export const feedback = createAction(FEEDBACK, (content) => ({ content }));
 
 const initialState = {
   user: {
@@ -51,7 +55,8 @@ const initialState = {
     jorang_status: '0',
     jorang_color: 'ffffff',
   },
-  buy_success: null,
+  buy_success: false,
+  buyError: '',
   getUserError: null,
   notices: {
     notice: [
@@ -178,6 +183,8 @@ const user = handleActions(
     [GETITEMS_SUCCESS]: (state, { payload: items }) => ({
       ...state,
       allItems: items,
+      buy_success: false,
+      buyError: '',
     }),
     [GETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
@@ -193,6 +200,7 @@ const user = handleActions(
     [BUYITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,
       buy_success: false,
+      buyError: error,
     }),
 
     [SETITEMS_SUCCESS]: (state, { payload: items }) => ({
@@ -211,6 +219,13 @@ const user = handleActions(
     [GETCLOSET_FAIL]: (state, { payload: error }) => ({
       ...state,
       //   hasItems: error,
+    }),
+
+    [FEEDBACK_SUCCESS]: (state, { payload: payload }) => ({
+      ...state,
+    }),
+    [FEEDBACK_FAIL]: (state, { payload: error }) => ({
+      ...state,
     }),
   },
   initialState,

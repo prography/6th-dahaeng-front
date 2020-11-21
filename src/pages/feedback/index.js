@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Header from '../../components/Header';
 import { feedback } from '../../store/user';
 import { useDispatch } from 'react-redux';
+import Modal from '../../components/Modal';
 
 const ContentBox = styled.div`
   margin: 0 auto;
@@ -49,6 +50,31 @@ const ReportButton = styled.button`
   margin-top: 3rem;
 `;
 
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const ModalButton = styled.button`
+  box-sizing: border-box;
+  float: right;
+  margin-top: 1rem;
+  border: none;
+  color: white;
+  height: 2rem;
+  background: var(--primary-color);
+  border-radius: 4px;
+  outline: none;
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const Feedback = () => {
   const dispatch = useDispatch();
 
@@ -59,6 +85,12 @@ const Feedback = () => {
 
   const sendFeedback = () => {
     dispatch(feedback(inputText));
+    setModal();
+  };
+
+  const [openModal, setOpenModal] = useState(false);
+  const setModal = () => {
+    setOpenModal(!openModal);
   };
 
   return (
@@ -73,6 +105,14 @@ const Feedback = () => {
           <ReportInput value={inputText} onChange={onTextChange}></ReportInput>
           <ReportButton onClick={sendFeedback}>의견 보내기</ReportButton>
         </ContentBox>
+        <Modal
+          className="popup"
+          openModal={openModal}
+          setModal={setModal}
+          title={<ModalTitle>의견이 잘 전달되었어요!</ModalTitle>}
+          content={<ModalText>앞으로도 많은 이용부탁드립니다 :)</ModalText>}
+          button={<ModalButton onClick={setModal}>확인</ModalButton>}
+        />
       </Responsive>
     </>
   );

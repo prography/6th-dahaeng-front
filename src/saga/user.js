@@ -333,9 +333,10 @@ function* feedbackSaga(action) {
     };
 
     const param = {
-      feedback: {
-        feedback: action.payload.content,
-      },
+      // feedback: {
+      //   feedback: action.payload.content,
+      // },
+      feedback: action.payload.content,
     };
 
     const res = yield call([axios, 'post'], `${serverURL}/feedback/`, param, {

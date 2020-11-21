@@ -3,7 +3,12 @@ import React from 'react';
 const MainJoraeng = ({ age, color }) => {
   if (age === '0') {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 206 261.5">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 206 261.5"
+        width="100"
+        height="100"
+      >
         <g>
           <g>
             <path
@@ -63,7 +68,12 @@ const MainJoraeng = ({ age, color }) => {
     );
   } else if (age === '2') {
     return (
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205.92 261.77">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 205.92 261.77"
+        width="100"
+        height="100"
+      >
         <g>
           <g>
             <path

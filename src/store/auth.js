@@ -54,6 +54,7 @@ export const initialState = {
   has_jorang: true,
 
   profile_id: null,
+  record_id: null,
 };
 
 const auth = handleActions(
@@ -76,6 +77,7 @@ const auth = handleActions(
       user: message.jorang,
       has_jorang: message.has_jorang,
       profile_id: message.profile_id,
+      record_id: message.today_post_id,
     }),
     [LOGIN_FAIL]: (state, { payload: message }) => ({
       ...state,

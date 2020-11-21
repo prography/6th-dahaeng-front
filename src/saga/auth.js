@@ -60,6 +60,7 @@ function* loginSaga(action) {
       });
       localStorage.setItem('accessToken', res.data.message.token);
       localStorage.setItem('profile', res.data.message.profile_id);
+      localStorage.setItem('record_id', res.data.message.today_post_id);
     } else {
       if (res.data.message === '유효하지않은 계정입니다.') {
         yield put({

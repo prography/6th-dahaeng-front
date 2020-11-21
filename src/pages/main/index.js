@@ -9,6 +9,7 @@ import { reminder, getUser } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 import EmotionDropdown from '../../components/Modal/EmotionDropdown';
+import FloatingButton from '../../components/MainFloatingButton';
 
 const Date = styled.div`
   font-size: 18px;
@@ -301,6 +302,7 @@ const Main = ({ history }) => {
   return (
     <>
       <Header></Header>
+      <FloatingButton/>
       <Responsive>
         <QuestionBox>
           <Date>

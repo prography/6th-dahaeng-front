@@ -29,13 +29,13 @@ const Info = styled.div`
 const ReportInputBox = styled.div`
   border: 1px solid var(--text-second);
   margin-top: 1rem;
-  height: 130px;
+  height: 50px;
 `;
 
 const ReportInput = styled.input`
   width: 100%;
   border: none;
-  margin: 50px 0px;
+  margin: 15px 0px;
 `;
 
 const ReportButton = styled.button`
@@ -86,6 +86,7 @@ const Feedback = () => {
 
   const sendFeedback = () => {
     dispatch(feedback(inputText));
+    setInputText('');
     setModal();
   };
 
@@ -108,7 +109,10 @@ const Feedback = () => {
             <Info>소중한 의견으로 더욱 행복한 다행이 됩니다 :)</Info>
           </InfoBox>
           <ReportInputBox>
-            <ReportInput />
+            <ReportInput
+              onChange={onTextChange}
+              value={inputText}
+            ></ReportInput>
           </ReportInputBox>
           <ReportButton onClick={sendFeedback}>의견 보내기</ReportButton>
         </ContentBox>

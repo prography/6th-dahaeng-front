@@ -94,3 +94,11 @@ input {
 
   font-family: RIDIBatang, serif;
 }
+
+/*  ios default elimination  */
+input[type=text] {
+  /* Remove First */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

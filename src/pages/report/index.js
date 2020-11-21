@@ -1,8 +1,8 @@
 import React from 'react';
 import Responsive from '../../components/common/Responsive';
-import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
 import styled from 'styled-components';
 import Header from '../../components/Header';
+import SubTitle from '../../components/SubTitle';
 
 const ContentBox = styled.div`
   margin: 0 auto;
@@ -12,26 +12,27 @@ const ContentBox = styled.div`
   flex-direction: column;
 `;
 
-const WaitTitle = styled.div`
-  font-size: 18px;
-  height: 50px;
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const InfoBox = styled.div`
+  width: 320px;
+  margin: 0 auto;
 `;
-const JoraengImg = styled.img`
-  width: 50px;
-  height: 50px;
-  margin-left: 1rem;
+
+const Info = styled.div`
+  font-size: 12px;
+  margin: 0.5rem;
+  word-break: keep-all;
+`;
+
+const ReportInputBox = styled.div`
+  border: 1px solid var(--text-second);
+  margin-top: 1rem;
+  height: 130px;
 `;
 
 const ReportInput = styled.input`
   width: 100%;
   border: none;
-  border-bottom: 1px solid black;
-  margin-top: 2rem;
-  //margin: 0 auto;
+  margin: 50px 0px;
 `;
 
 const ReportButton = styled.button`
@@ -41,10 +42,10 @@ const ReportButton = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
-  height: 30px;
+  height: 40px;
   width: 6rem;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
 `;
 
 const Report = () => {
@@ -53,11 +54,17 @@ const Report = () => {
       <Header></Header>
       <Responsive>
         <ContentBox>
-          <WaitTitle>
-            조랭이에게 바라는 점
-            <JoraengImg src={waitjoraeng} alt="" />
-          </WaitTitle>
-          <ReportInput></ReportInput>
+          <SubTitle title={'조랭이에게 의견 보내기'} />
+          <InfoBox>
+            <Info>
+              다행 서비스를 사용하면서 부족하거나 아쉬운 점을 발견하셨다면,
+              망설이지 말고 의견을 보내주세요!
+            </Info>
+            <Info>소중한 의견으로 더욱 행복한 다행이 됩니다 :)</Info>
+          </InfoBox>
+          <ReportInputBox>
+            <ReportInput />
+          </ReportInputBox>
           <ReportButton>의견 보내기</ReportButton>
         </ContentBox>
       </Responsive>

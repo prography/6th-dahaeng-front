@@ -137,7 +137,7 @@ const Slider = ({ history }) => {
   }
 
   function navigateReportPage() {
-    history.push('/report');
+    history.push('/feedback');
   }
 
   const list = (anchor) => (

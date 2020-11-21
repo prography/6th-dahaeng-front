@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Responsive from '../../components/common/Responsive';
 import waitjoraeng from 'assets/joraeng/wait-joraeng.png';
 import styled from 'styled-components';
 import Header from '../../components/Header';
+import { feedback } from '../../store/user';
+import { useDispatch } from 'react-redux';
 
 const ContentBox = styled.div`
   margin: 0 auto;
@@ -47,7 +49,18 @@ const ReportButton = styled.button`
   margin-top: 3rem;
 `;
 
-const Report = () => {
+const Feedback = () => {
+  const dispatch = useDispatch();
+
+  const [inputText, setInputText] = useState('');
+  const onTextChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const sendFeedback = () => {
+    dispatch(feedback(inputText));
+  };
+
   return (
     <>
       <Header></Header>
@@ -57,12 +70,12 @@ const Report = () => {
             조랭이에게 바라는 점
             <JoraengImg src={waitjoraeng} alt="" />
           </WaitTitle>
-          <ReportInput></ReportInput>
-          <ReportButton>의견 보내기</ReportButton>
+          <ReportInput value={inputText} onChange={onTextChange}></ReportInput>
+          <ReportButton onClick={sendFeedback}>의견 보내기</ReportButton>
         </ContentBox>
       </Responsive>
     </>
   );
 };
 
-export default Report;
+export default Feedback;

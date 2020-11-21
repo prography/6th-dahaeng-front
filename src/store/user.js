@@ -27,6 +27,9 @@ export const [
   GETCLOSET_SUCCESS,
   GETCLOSET_FAIL,
 ] = createRequestAction('GETCLOSET');
+export const [FEEDBACK, FEEDBACK_SUCCESS, FEEDBACK_FAIL] = createRequestAction(
+  'FEEDBACK',
+);
 
 export const refreshSetUser = createAction(REFRESH_SET_USER, (user) => user);
 export const setUser = createAction(SETUSER, (nickname, title, id) => ({
@@ -40,6 +43,7 @@ export const getItems = createAction(GETITEMS);
 export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
 export const setItems = createAction(SETITEMS, (id) => ({ id }));
 export const getCloset = createAction(GETCLOSET);
+export const feedback = createAction(FEEDBACK, (content) => ({ content }));
 
 const initialState = {
   user: {
@@ -215,6 +219,13 @@ const user = handleActions(
     [GETCLOSET_FAIL]: (state, { payload: error }) => ({
       ...state,
       //   hasItems: error,
+    }),
+
+    [FEEDBACK_SUCCESS]: (state, { payload: payload }) => ({
+      ...state,
+    }),
+    [FEEDBACK_FAIL]: (state, { payload: error }) => ({
+      ...state,
     }),
   },
   initialState,

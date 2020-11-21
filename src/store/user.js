@@ -51,8 +51,8 @@ const initialState = {
     jorang_status: '0',
     jorang_color: 'ffffff',
   },
-  buy_success: null,
-  buyError: null,
+  buy_success: false,
+  buyError: '',
   getUserError: null,
   notices: {
     notice: [
@@ -179,6 +179,8 @@ const user = handleActions(
     [GETITEMS_SUCCESS]: (state, { payload: items }) => ({
       ...state,
       allItems: items,
+      buy_success: false,
+      buyError: '',
     }),
     [GETITEMS_FAIL]: (state, { payload: error }) => ({
       ...state,

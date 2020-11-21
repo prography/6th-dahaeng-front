@@ -230,7 +230,6 @@ function* buyItemSaga(action) {
       yield put({
         type: BUYITEMS_FAIL,
         payload: res.data.message,
-        error: true,
       });
     }
   } catch (e) {

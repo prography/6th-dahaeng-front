@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ground from 'assets/main/ground.jpg';
-import postbox from 'assets/main/notification.png';
-import postboxOn from 'assets/main/notificationOn.png';
-import closet from 'assets/main/itembox.png';
+import ground from 'assets/main/ground.png';
 import NoticeModal from '../../components/NoticeModal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useSelector } from 'react-redux';
@@ -125,13 +122,13 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
 
   return (
     <Wrapper>
-      <PostBox>
+      {/* <PostBox>
         {notice ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
           <PostBoxImg onClick={setModal} src={postbox} alt="" />
         )}
-      </PostBox>
+      </PostBox> */}
       <Character onClick={moveMain}>
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
@@ -148,7 +145,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
         />
       </Character>
       <Closet onClick={moveCloset}>
-        <ClosetImg src={closet} alt="" />
+        {/* <ClosetImg src={closet} alt="" /> */}
       </Closet>
       <Background>
         <BackgroundImg src={ground} alt="" />

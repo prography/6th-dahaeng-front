@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.png';
 import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.png';
 import redEmotion from '../../assets/joraeng/category-joraeng/category-red.png';
-import whiteEmotion from '../../assets/joraeng/category-joraeng/category-white.png';
+import whiteEmotion from '../../assets/joraeng/category-joraeng/category-green.png';
 import yellowEmotion from '../../assets/joraeng/category-joraeng/category-yellow.png';
-import downArrow from '../../assets/icon/downarrow.jpg';
 
 const DropdownWrapper = styled.div`
   position: absolute;
@@ -102,11 +101,11 @@ class EmotionDropdown extends Component {
       <DropdownWrapper
         className={this.state.dropdownState ? 'open-list' : null}
       >
-        <DropdownTriangle
+        {/* <DropdownTriangle
           src={downArrow}
           alt=""
           className={this.state.dropdownState ? 'open-list' : null}
-        />
+        /> */}
         <DropdownButton onClick={this.toggleDropdown}>
           <DropdownEmotion
             src={

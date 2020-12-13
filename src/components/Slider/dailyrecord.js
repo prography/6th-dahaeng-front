@@ -5,7 +5,7 @@ import Moment from 'moment';
 import blueEmotion from '../../assets/joraeng/category-joraeng/category-blue.png';
 import purpleEmotion from '../../assets/joraeng/category-joraeng/category-purple.png';
 import redEmotion from '../../assets/joraeng/category-joraeng/category-red.png';
-import whiteEmotion from '../../assets/joraeng/category-joraeng/category-white.png';
+import whiteEmotion from '../../assets/joraeng/category-joraeng/category-green.png';
 import yellowEmotion from '../../assets/joraeng/category-joraeng/category-yellow.png';
 import defaultEmotion from '../../assets/joraeng/category-joraeng/no-record.png';
 

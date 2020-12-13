@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
-import noItemJoraeng from 'assets/joraeng/no-item-joraeng.png';
+import noItemJoraeng from 'assets/joraeng/no-item.png';
 import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`

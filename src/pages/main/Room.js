@@ -103,7 +103,15 @@ const BackgroundImg = styled.img`
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
+const Room = ({
+  notice,
+  reminder,
+  history,
+  hasItems,
+  applyItems,
+  mainColor,
+  thirdColor,
+}) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -133,8 +141,8 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
           age={user.jorang_status}
-          color={
-            applyItems !== null ? applyItems.color : color
+          mainColor={
+            applyItems !== null ? applyItems.color : mainColor
             // //`#${
             //   hasItems &&
             //   hasItems
@@ -142,6 +150,7 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
             //     .filter((item) => item.is_worn === true)[0].item.item_detail
             // }`
           }
+          thirdColor={applyItems !== null ? applyItems.color : thirdColor}
         />
       </Character>
       <Closet onClick={moveCloset}>

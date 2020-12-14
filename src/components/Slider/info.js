@@ -208,7 +208,8 @@ const InfoBox = ({ toggleDrawer, history }) => {
           {/*TODO: Dynamic color binding*/}
           <SliderJoraeng
             age={user.jorang_status}
-            color={`#${user.jorang_color}`}
+            mainColor={`#${user.main_color}`}
+            thirdColor={`#${user.third_color}`}
           />
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>

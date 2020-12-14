@@ -302,7 +302,7 @@ const Main = ({ history }) => {
   return (
     <>
       <Header></Header>
-      <FloatingButton/>
+      <FloatingButton />
       <Responsive>
         <QuestionBox>
           <Date>
@@ -422,7 +422,8 @@ const Main = ({ history }) => {
           history={history}
           hasItems={hasItems}
           applyItems={null}
-          color={`#${user.jorang_color}`}
+          mainColor={`#${user.main_color}`}
+          thirdColor={`#${user.third_color}`}
         ></Room>
       </Responsive>
     </>

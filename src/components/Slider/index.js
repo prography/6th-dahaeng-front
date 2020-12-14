@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import { logout } from 'store/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InfoBox from './info.js';
 
 import menuIcon from '../../assets/icon/menu_icon.png';
@@ -13,6 +13,7 @@ import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
 import { Link } from 'react-router-dom';
+import MenuIcon from '../../assets/icon/MenuIcon.js';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -30,7 +31,7 @@ const DrawerOpenBtn = styled.button`
   z-index: 10;
   background-color: var(--primary-color);
 `;
-const DrawerIcon = styled.img`
+const DrawerIcon = styled.div`
   width: 18px;
 `;
 
@@ -95,6 +96,8 @@ const Slider = ({ history }) => {
   const [open, setOpen] = useState(false);
   const anchor = 'left';
   const classes = useStyles();
+
+  const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
   //TODO: ??? token vs user
@@ -168,7 +171,9 @@ const Slider = ({ history }) => {
   return (
     <>
       <DrawerOpenBtn onClick={() => setOpen(true)}>
-        <DrawerIcon src={menuIcon} />
+        <DrawerIcon>
+          <MenuIcon color={`#${user.main_color}`} />
+        </DrawerIcon>
       </DrawerOpenBtn>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>

@@ -302,7 +302,7 @@ const Main = ({ history }) => {
   return (
     <>
       <Header></Header>
-      <FloatingButton />
+      <FloatingButton history={history} />
       <Responsive>
         <QuestionBox>
           <Date>

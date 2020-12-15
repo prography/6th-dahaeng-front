@@ -53,7 +53,9 @@ const initialState = {
     user_coin: 0,
     // TODO: SET-UP DEFAULT
     jorang_status: '0',
-    jorang_color: 'ffffff',
+    main_color: 'a26c8f',
+    second_color: 'd9c4d2',
+    third_color: 'ede3eb',
   },
   buy_success: false,
   buyError: '',

@@ -5,7 +5,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
 import { logout } from 'store/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InfoBox from './info.js';
 
 import menuIcon from '../../assets/icon/menu_icon.png';
@@ -13,6 +13,7 @@ import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
 import { Link } from 'react-router-dom';
+import MenuIcon from '../../assets/icon/MenuIcon.js';
 
 const Spacer = styled.div`
   height: 10rem;
@@ -30,8 +31,12 @@ const DrawerOpenBtn = styled.button`
   z-index: 10;
   background-color: var(--primary-color);
 `;
-const DrawerIcon = styled.img`
-  width: 18px;
+
+const DrawerIcon = styled.div`
+  position: fixed;
+  left: 12px;
+  top: 18px;
+  width: 28px;
 `;
 
 // 성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
@@ -95,6 +100,8 @@ const Slider = ({ history }) => {
   const [open, setOpen] = useState(false);
   const anchor = 'left';
   const classes = useStyles();
+
+  const user = useSelector((state) => state.user.user);
 
   const dispatch = useDispatch();
   //TODO: ??? token vs user
@@ -167,9 +174,9 @@ const Slider = ({ history }) => {
 
   return (
     <>
-      <DrawerOpenBtn onClick={() => setOpen(true)}>
-        <DrawerIcon src={menuIcon} />
-      </DrawerOpenBtn>
+      <DrawerIcon onClick={() => setOpen(true)}>
+        <MenuIcon color={`#${user.main_color}`} />
+      </DrawerIcon>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
           {list(anchor)}

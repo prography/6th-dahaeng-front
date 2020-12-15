@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import Loading from './loading';
 
 const Main = lazy(() => import('./pages/main'));
+const Record = lazy(() => import('./pages/record'));
 const Login = lazy(() => import('./pages/login'));
 const Sign = lazy(() => import('./pages/sign'));
 const SignComplete = lazy(() => import('./pages/signComplete'));
@@ -28,6 +29,7 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Switch>
           <Route path="/" component={Main} exact></Route>
+          <Route path="/record" component={Record} exact></Route>
           <Route path="/login" component={Login} exact></Route>
           <Route path="/sign" component={Sign} exact></Route>
           <Route path="/signComplete" component={SignComplete} exact></Route>

@@ -1,6 +1,5 @@
 import React from 'react';
 import SignResponsive from '../../components/common/SignResponsive';
-import nojoraeng from 'assets/joraeng/no-access-joraeng.png';
 import styled from 'styled-components';
 
 const ContentBox = styled.div`
@@ -29,10 +28,7 @@ const ServiceInfo = () => {
     <>
       <SignResponsive>
         <ContentBox>
-          <WaitTitle>힝 아직 소개할 준비가 되지 않았어요,,</WaitTitle>
-          <ImgWrapper>
-            <JoraengImg src={nojoraeng} alt="" />
-          </ImgWrapper>
+          <WaitTitle>아직 소개할 준비가 되지 않았어요,,</WaitTitle>
         </ContentBox>
       </SignResponsive>
     </>

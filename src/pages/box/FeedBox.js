@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import placeholderImage from '../../assets/joraeng/thread-placeholder.jpeg';
+import placeholderImage from '../../assets/joraeng/thread-placeholder.png';
 import styled from 'styled-components';
 import Moment from 'moment';
 

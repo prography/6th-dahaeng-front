@@ -54,9 +54,9 @@ const Modal = ({ className, openModal, setModal, title, content, button }) => {
         <>
           <ModalOverlay></ModalOverlay>
           <Wrapper className={className}>
-            <CloseButton onClick={setModal}>
+            {/* <CloseButton onClick={setModal}>
               <CloseIcon src={closeicon} alt="" />
-            </CloseButton>
+            </CloseButton> */}
             <TitleField>{title}</TitleField>
             <ContentField>{content}</ContentField>
             <ButtonField>{button}</ButtonField>

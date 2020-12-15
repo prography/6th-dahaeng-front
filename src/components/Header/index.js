@@ -66,7 +66,7 @@ const Header = ({ history }) => {
           </div>
         </Wrapper>
       </HeaderBlock>
-      <Slider history={history} />
+      
     </React.Fragment>
   );
 };

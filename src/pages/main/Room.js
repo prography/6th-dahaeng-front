@@ -30,27 +30,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const PostBox = styled.button`
-  position: absolute;
-  width: 90px;
-  top: 80px;
-  left: 120px;
-  z-index: 2;
-  @media screen and (max-width: 664px) {
-    top: 100px;
-    left: 60px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 50px;
-    top: 70px;
-    left: 20px;
-  }
-`;
-
-const PostBoxImg = styled.img`
-  width: 100%;
-`;
-
 const Character = styled.button`
   position: absolute;
   right: 100px;
@@ -62,23 +41,6 @@ const Character = styled.button`
     top: 20px;
     width: 100px;
   }
-`;
-
-const Closet = styled.button`
-  position: absolute;
-  width: 60px;
-  top: 145px;
-  right: 70px;
-  z-index: 3;
-  @media screen and (max-width: 480px) {
-    width: 50px;
-    top: 80px;
-    right: 50px;
-  }
-`;
-
-const ClosetImg = styled.img`
-  width: 100%;
 `;
 
 const Background = styled.div`
@@ -153,9 +115,7 @@ const Room = ({
           thirdColor={applyItems !== null ? applyItems.color : thirdColor}
         />
       </Character>
-      <Closet onClick={moveCloset}>
-        {/* <ClosetImg src={closet} alt="" /> */}
-      </Closet>
+      
       <Background>
         <BackgroundImg src={ground} alt="" />
       </Background>

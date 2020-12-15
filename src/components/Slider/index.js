@@ -31,8 +31,12 @@ const DrawerOpenBtn = styled.button`
   z-index: 10;
   background-color: var(--primary-color);
 `;
+
 const DrawerIcon = styled.div`
-  width: 18px;
+  position: fixed;
+  left: 12px;
+  top: 18px;
+  width: 28px;
 `;
 
 // 성환오빠의 슬라이더 버튼 꼼수 쓰기 시도
@@ -170,11 +174,9 @@ const Slider = ({ history }) => {
 
   return (
     <>
-      <DrawerOpenBtn onClick={() => setOpen(true)}>
-        <DrawerIcon>
-          <MenuIcon color={`#${user.main_color}`} />
-        </DrawerIcon>
-      </DrawerOpenBtn>
+      <DrawerIcon onClick={() => setOpen(true)}>
+        <MenuIcon color={`#${user.main_color}`} />
+      </DrawerIcon>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
           {list(anchor)}

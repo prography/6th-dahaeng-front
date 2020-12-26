@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ground from 'assets/main/ground.jpg';
-import postbox from 'assets/main/notification.png';
-import postboxOn from 'assets/main/notificationOn.png';
-import closet from 'assets/main/itembox.png';
+import ground from 'assets/main/ground.png';
 import NoticeModal from '../../components/NoticeModal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useSelector } from 'react-redux';
@@ -33,27 +30,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const PostBox = styled.button`
-  position: absolute;
-  width: 90px;
-  top: 80px;
-  left: 120px;
-  z-index: 2;
-  @media screen and (max-width: 664px) {
-    top: 100px;
-    left: 60px;
-  }
-  @media screen and (max-width: 480px) {
-    width: 50px;
-    top: 70px;
-    left: 20px;
-  }
-`;
-
-const PostBoxImg = styled.img`
-  width: 100%;
-`;
-
 const Character = styled.button`
   position: absolute;
   right: 100px;
@@ -65,23 +41,6 @@ const Character = styled.button`
     top: 20px;
     width: 100px;
   }
-`;
-
-const Closet = styled.button`
-  position: absolute;
-  width: 60px;
-  top: 145px;
-  right: 70px;
-  z-index: 3;
-  @media screen and (max-width: 480px) {
-    width: 50px;
-    top: 80px;
-    right: 50px;
-  }
-`;
-
-const ClosetImg = styled.img`
-  width: 100%;
 `;
 
 const Background = styled.div`
@@ -106,7 +65,15 @@ const BackgroundImg = styled.img`
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
+const Room = ({
+  notice,
+  reminder,
+  history,
+  hasItems,
+  applyItems,
+  mainColor,
+  thirdColor,
+}) => {
   const user = useSelector((state) => state.user.user);
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -125,19 +92,19 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
 
   return (
     <Wrapper>
-      <PostBox>
+      {/* <PostBox>
         {notice ? (
           <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
         ) : (
           <PostBoxImg onClick={setModal} src={postbox} alt="" />
         )}
-      </PostBox>
+      </PostBox> */}
       <Character onClick={moveMain}>
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
           age={user.jorang_status}
-          color={
-            applyItems !== null ? applyItems.color : color
+          mainColor={
+            applyItems !== null ? applyItems.color : mainColor
             // //`#${
             //   hasItems &&
             //   hasItems
@@ -145,11 +112,10 @@ const Room = ({ notice, reminder, history, hasItems, applyItems, color }) => {
             //     .filter((item) => item.is_worn === true)[0].item.item_detail
             // }`
           }
+          thirdColor={applyItems !== null ? applyItems.color : thirdColor}
         />
       </Character>
-      <Closet onClick={moveCloset}>
-        <ClosetImg src={closet} alt="" />
-      </Closet>
+      
       <Background>
         <BackgroundImg src={ground} alt="" />
       </Background>

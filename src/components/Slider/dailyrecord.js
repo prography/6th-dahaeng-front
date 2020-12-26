@@ -69,7 +69,9 @@ const DailyRecord = () => {
     <>
       <DailyRecordBox>
         {days.map((day) => (
-          <DailyRecordJoraeng>
+          <DailyRecordJoraeng
+             key={day}
+          >
             {records &&
             records.filter(
               (record) =>

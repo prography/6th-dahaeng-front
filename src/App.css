@@ -103,6 +103,7 @@ input {
   box-sizing: border-box;
 
   font-family: SCoreDream, serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /*  ios default elimination  */

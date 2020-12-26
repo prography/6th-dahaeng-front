@@ -16,9 +16,21 @@ const UserTitleBox = styled.div`
 
 const UserTitle = styled.div`
   font-size: 24px;
-  flex: 2;
+  flex: none;
   margin-right: 1rem;
   max-width: 250px;
+  position: relative;
+  
+  &:after {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    height: 12px;
+    content: ' ';
+    background-color: #A26C8F;
+    opacity: .3;
+  }
 `;
 
 const UserInfoBtn = styled.button`
@@ -43,8 +55,7 @@ const UserInfoBox = styled.div`
   flex-wrap: wrap;
   width: 100%;
   min-width: 200px;
-  padding: 0.5rem;
-  height: 5rem;
+  padding: 12px 18px 12px 12px;
 `;
 
 const UserPictureBox = styled.div`
@@ -53,6 +64,11 @@ const UserPictureBox = styled.div`
   width: 4rem;
   margin-left: 1rem;
   overflow: hidden;
+  -webkit-border-radius: 2rem;
+  -moz-border-radius: 2rem;
+  border-radius: 2rem;
+  border: 3px solid #212121;
+ 
 `;
 
 //유저 정보에 반려 조랭 이미지 넘어오면 여기 img로 바꾸고 src에 리덕스로 연결하면 되려나
@@ -83,7 +99,6 @@ const UserText = styled.div`
   text-align: left;
   flex: none;
   display: inline;
-  padding: 2px 2px 0 5px;
 `;
 
 // 수정 모달 디자인
@@ -147,11 +162,15 @@ const ModalBox = styled.div`
   margin-right: auto;
 `;
 
+const ChevronRightInInfo = styled.img`
+  height: 12px;
+`
+
 const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = ({ toggleDrawer, history }) => {
+const InfoBox = ({ }) => {
   const user = useSelector((state) => state.user.user);
 
   const [openModal, setOpenModal] = useState(false);
@@ -204,6 +223,22 @@ const InfoBox = ({ toggleDrawer, history }) => {
         </UserInfoBtn>
       </UserTitleBox>
       <UserInfoBox>
+        <UserTextBox>
+          <UserTextWrapper>
+            <UserInfoText>{user.jorang_nickname}</UserInfoText>
+            <UserText>님, 오늘도 행복하세요! </UserText>
+            {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
+          </UserTextWrapper>
+
+          <UserTextWrapper>
+            <UserText>행복코인:</UserText>
+            <UserInfoText>{user.user_coin}</UserInfoText>
+            <UserInfoBtn onClick={setCoinModal}>
+              <ChevronRightInInfo src={require("../../assets/icon/ChevronRight.svg")} alt="chevron-right"/>
+            </UserInfoBtn>
+          </UserTextWrapper>
+        </UserTextBox>
+
         <UserPictureBox>
           {/*TODO: Dynamic color binding*/}
           <SliderJoraeng
@@ -213,20 +248,6 @@ const InfoBox = ({ toggleDrawer, history }) => {
           />
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>
-
-        <UserTextBox>
-          <UserTextWrapper>
-            <UserInfoText>{user.jorang_nickname}</UserInfoText>
-            <UserText>조랭 </UserText>
-            {/* <UserInfoBtn onClick={updateNickname}>[수정]</UserInfoBtn> */}
-          </UserTextWrapper>
-
-          <UserTextWrapper>
-            <UserInfoText>{user.user_coin}</UserInfoText>
-            <UserText>코인</UserText>
-            <UserInfoBtn onClick={setCoinModal}>[충전]</UserInfoBtn>
-          </UserTextWrapper>
-        </UserTextBox>
       </UserInfoBox>
 
       <Modal

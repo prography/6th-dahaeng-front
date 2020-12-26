@@ -12,13 +12,11 @@ import defaultEmotion from '../../assets/joraeng/category-joraeng/no-record.png'
 const DailyRecordBox = styled.div`
   /* background-color: var(--secondary-color); */
   background-color: #ffffff;
-  border: solid 3px var(--secondary-color);
+  border: solid 3px #212121;
   padding: 10px 0;
   flex: 1;
   margin: 1em;
   min-height: 200px;
-  border-radius: 4px;
-
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;

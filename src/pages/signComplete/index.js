@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import congratulateJoraeng from 'assets/joraeng/congratulateJoraeng.png';
+import congratulateJoraeng from 'assets/joraeng/congratulate-joraeng.png';
 
 const Title = styled.div`
   font-size: 32px;
@@ -30,6 +29,7 @@ const CongratulateImg = styled.img`
   justify-content: center;
   @media screen and (max-width: 480px) {
     height: auto;
+    max-height: 180px;
     width: 300px;
   }
 `;
@@ -43,7 +43,7 @@ const ButtonBox = styled.div`
 
 const CreateButton = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;
@@ -56,7 +56,7 @@ const CreateButton = styled.button`
 
 const signComplete = ({ history }) => {
   const createLink = () => {
-    history.push('/create');
+    history.push('/login');
   };
 
   return (

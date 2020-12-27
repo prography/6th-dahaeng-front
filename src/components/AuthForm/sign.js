@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -53,11 +52,11 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid #ff9d73;
+    border: 1px solid var(--primary-color);
     color: #4d4d4d;
   }
   &::placeholder {
-    color: var(--text-second);
+    color: var(--text-third);
   }
   &.error {
     border: 1px solid #fd5660;
@@ -76,7 +75,7 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;
@@ -89,7 +88,7 @@ const Button = styled.button`
 const Checkbox = styled.input`
   &:checked {
     color: #ffffff;
-    background: #ff9d73;
+    background: var(--primary-color);
   }
 `;
 
@@ -111,6 +110,8 @@ const pwConfirmStatusEnum = {
   wrong: '비밀번호가 일치하지 않아요!',
   valid: 'valid',
 };
+
+// const signLoadig = '처리중입니다.';
 
 const SignAuthForm = ({
   type,

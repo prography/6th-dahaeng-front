@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import Room from './Room';
-import Header from '../../components/Header';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Modal from '../../components/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuestion, setRecord } from 'store/box';
-import { reminder } from 'store/user';
+import { getQuestion, getToday } from 'store/box';
+import { reminder, getUser } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
+import FloatingButton from '../../components/MainFloatingButton';
+import Slider from '../../components/Slider';
+
+import ground from 'assets/main/ground.png';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import { useState } from 'react';
 
 const Date = styled.div`
-  font-size: 18px;
+  font-size: 20px;
+  display: inline;
 `;
 
 const QuestionBox = styled.div`
   margin: auto auto;
-  height: 300px;
+  padding-top: 3vh;
+  width: 220px;
+  height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,155 +29,110 @@ const QuestionBox = styled.div`
 `;
 
 const Question = styled.div`
-  font-size: 24px;
   margin-top: 1rem;
   margin-bottom: 1rem;
-  cursor: pointer;
-
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+  text-align: center;
+  line-height: 1.5;
 `;
 
-const ModalTitle = styled.div``;
-
-const ModalQuestion = styled.div`
-  font-size: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, #ffede5 40%);
+const QuestionHighlight = styled.div`
+  font-size: 21px;
+  word-break: keep-all;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 50%,
+    ${(props) => props.thirdColor} 50%
+  );
   display: inline;
 `;
 
-const ModalContent = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ModalCharacter = styled.div`
-  box-sizing: border-box;
-  width: 10rem;
-  height: 10rem;
-  border: 1px solid #e9e9e9;
-  margin: 5% auto;
-  overflow: hidden;
-`;
-
-const ModalCharacterImage = styled.img`
-  object-fit: contain;
-  width: 100%;
-  height: 100%;
-`;
-
-const ModalCharacterDefaultImage = styled.img`
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  margin-left: 3rem;
-`;
-
-const InputLabel = styled.label`
-  cursor: pointer;
-  font-size: 14px;
-  display: inline-block;
-  overflow: hidden;
-  color: var(--text-second);
-  padding: 1rem;
-`;
-
-const ModalInput = styled.textarea`
-  box-sizing: border-box;
-  width: 100%;
+const Wrapper = styled.div`
   margin: 0 auto;
-  border: none;
-  outline: none;
-  resize: none;
-
-  background-attachment: local;
-  background-image: linear-gradient(to right, white 10px, transparent 10px),
-    linear-gradient(to left, white 10px, transparent 10px),
-    repeating-linear-gradient(
-      white,
-      white 30px,
-      #e9e9e9 30px,
-      #e9e9e9 31px,
-      white 31px
-    );
-  line-height: 31px;
-  padding: 8px;
+  min-height: 350px;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+`;
+const Character = styled.div`
+  min-width: 140px;
+  width: 25%;
+  z-index: 2;
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+const Background = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1;
+  width: 100%;
 `;
 
-const ModalButton = styled.button`
-  box-sizing: border-box;
-  float: right;
-  margin-top: 1rem;
-  border: none;
-  color: white;
-  height: 2rem;
-  background: #faa084;
-  border-radius: 4px;
-  outline: none;
-
-  cursor: pointer;
+const BackgroundImg = styled.img`
+  width: 100%;
 `;
 
 const Main = ({ history }) => {
-  const [openModal, setOpenModal] = useState(false);
-  const setModal = () => {
-    setOpenModal(!openModal);
-  };
-
-  const user = useSelector((state) => state.auth.user);
-  const question = useSelector((state) => state.box.question);
-  const reminders = useSelector((state) => state.user.reminders);
-
   const [inputText, setInputText] = useState('');
-  const onTextChange = (e) => {
-    setInputText(e.target.value);
-    console.log(inputText);
-  };
+
+  const id = useSelector((state) => state.auth.profile_id);
+  const user = useSelector((state) => state.user.user);
+  const question = useSelector((state) => state.box.question);
+  const has_jorang = useSelector((state) => state.auth.has_jorang);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (has_jorang === false) {
+      history.push('/create');
+    }
+  }, [dispatch, history, has_jorang]);
+
+  const token = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    console.log(token);
+    console.log(typeof token);
+    if (
+      token === null ||
+      token === 'undefined' ||
+      token === '' ||
+      token.length <= 0
+    ) {
+      //release
+      history.push('/login');
+    }
+  }, [token, history]);
+
+  useEffect(() => {
+    //dispatch(getUser(id));
+    localStorage.getItem('profile') &&
+      dispatch(getUser(localStorage.getItem('profile')));
     dispatch(getQuestion());
     dispatch(reminder());
-  }, [dispatch]);
+    localStorage.getItem('record_id') &&
+      dispatch(getToday(localStorage.getItem('record_id')));
+  }, [dispatch, id]);
 
-  const completeRecord = () => {
-    const form_data = new FormData();
-    form_data.append('detail', inputText);
-    form_data.append('emotion', 'HAPPY');
-    form_data.append('image', img);
+  //today record
+  const record = useSelector((state) => state.box.record);
 
-    dispatch(setRecord(form_data));
-    setModal();
-  };
+  useEffect(() => {
+    record && setInputText(record.detail);
+  }, [record]);
 
-  //사진 업로드 시도!
-  //미리보기 ok, 한 번 업로드 후 수정이 안 됨...
-  //사진 입력 안 하면 기본 조랭이 저장되어야 함..!
-  const [img, setImage] = useState(null);
-  const [imgBase64, setImgBase64] = useState(''); //img src에 들어갈 base64 인코딩 값
-  const [file, setFile] = useState(null);
-
-  const onImageChange = (e) => {
-    let reader = new FileReader();
-
-    reader.onloadend = () => {
-      const base64 = reader.result;
-      if (base64) {
-        setImgBase64(base64.toString());
-      } else {
-        setImgBase64('/images/defaultJoraeng.png');
-      }
-    };
-    if (e.target.files[0]) {
-      reader.readAsDataURL(e.target.files[0]);
-      setImage(e.target.files[0]);
-    }
+  const navigateRecord = () => {
+    history.push('/record');
   };
 
   return (
     <>
-      <Header></Header>
+      <Slider history={history} />
+      <FloatingButton history={history} />
       <Responsive>
         <QuestionBox>
           <Date>
@@ -179,58 +140,27 @@ const Main = ({ history }) => {
               question && question.last_login && question.last_login.dateForm,
             ).format('MM-DD')}
           </Date>
-          <Question onClick={setModal}>
-            {question && question.question}
+          <Question onClick={navigateRecord}>
+            <QuestionHighlight thirdColor={`#${user.third_color}`}>
+              {question && question.question}
+            </QuestionHighlight>
           </Question>
         </QuestionBox>
-        <Modal
-          openModal={openModal}
-          setModal={setModal}
-          title={
-            <ModalTitle>
-              <Date>
-                {Moment(
-                  question &&
-                    question.last_login &&
-                    question.last_login.dateForm,
-                ).format('MM-DD')}
-              </Date>
-              <ModalQuestion>{question && question.question}</ModalQuestion>
-            </ModalTitle>
-          }
-          content={
-            <ModalContent>
-              <ModalCharacter>
-                {img !== null ? (
-                  <ModalCharacterImage src={imgBase64} alt="" />
-                ) : (
-                  <InputLabel htmlFor="upload">
-                    행복사진을 <br /> 함께 기록해요!
-                    <ModalCharacterDefaultImage
-                      src="/images/defaultJoraeng.png"
-                      alt=""
-                    />
-                  </InputLabel>
-                )}
-                <input
-                  type="file"
-                  id="upload"
-                  style={{ display: 'none' }}
-                  onChange={onImageChange}
-                />
-              </ModalCharacter>
-              <ModalInput
-                value={inputText}
-                onChange={onTextChange}
-              ></ModalInput>
-            </ModalContent>
-          }
-          button={
-            <ModalButton onClick={completeRecord}>행복 기록 완료</ModalButton>
-          }
-        ></Modal>
-        <Room reminders={reminders}></Room>
       </Responsive>
+      <Wrapper>
+        <Background>
+          <Character>
+            {/*TODO: Dynamic color binding*/}
+            <MainJoraeng
+              age={user.jorang_status}
+              mainColor={`#${user.main_color}`}
+              thirdColor={`#${user.third_color}`}
+            />
+          </Character>
+
+          <BackgroundImg src={ground} alt="" />
+        </Background>
+      </Wrapper>
     </>
   );
 };

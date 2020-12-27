@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import closeicon from 'assets/icon/closeicon.png';
 
 const ModalOverlay = styled.div`
@@ -14,14 +13,16 @@ const ModalOverlay = styled.div`
 
 const Wrapper = styled.div`
   position: fixed;
-  top: 350px;
+  //top: 350px;
+  top: 35%;
   left: 50%;
   width: calc(100% - 20px);
-  max-width: 768px;
+  max-width: ${(props) => (props.className === 'popup' ? '380px' : '768px')};
   transform: translate(-50%, -50%);
   background-color: white;
-  box-shadow: 0px 0px 0px 500px rgba(0, 0, 0, 0.2);
-  z-index: 4;
+  border-radius: var(--small-border-radius);
+  box-shadow: 0px 0px 0px 800px rgba(0, 0, 0, 0.2);
+  z-index: 10;
   padding: 1.5rem;
 `;
 
@@ -46,16 +47,16 @@ const CloseIcon = styled.img`
   width: 10px;
 `;
 
-const Modal = ({ openModal, setModal, title, content, button }) => {
+const Modal = ({ className, openModal, setModal, title, content, button }) => {
   return (
     <>
       {openModal ? (
         <>
           <ModalOverlay></ModalOverlay>
-          <Wrapper>
-            <CloseButton onClick={setModal}>
+          <Wrapper className={className}>
+            {/* <CloseButton onClick={setModal}>
               <CloseIcon src={closeicon} alt="" />
-            </CloseButton>
+            </CloseButton> */}
             <TitleField>{title}</TitleField>
             <ContentField>{content}</ContentField>
             <ButtonField>{button}</ButtonField>

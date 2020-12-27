@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { create } from 'store/user';
+import { create } from 'store/auth';
 import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
-import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
-import Header from 'components/Header';
+// import MyJoraeng from 'assets/joraeng/egg/purpleegg.png';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 
 const Title = styled.div`
   font-size: 32px;
@@ -29,12 +28,12 @@ const ImageBox = styled.div`
   padding: 1rem;
 `;
 
-const JoraengImg = styled.img`
-  object-fit: cover;
-  height: 160px;
-  align-items: center;
-  justify-content: center;
-`;
+// const JoraengImg = styled.img`
+//   object-fit: cover;
+//   height: 160px;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 const InputBox = styled.div`
   display: flex;
@@ -60,7 +59,7 @@ const ButtonBox = styled.div`
 
 const LoginButton = styled.button`
   outline: none;
-  background: #ff9d73;
+  background: var(--primary-color);
   font-size: 14px;
   color: white;
   border: none;
@@ -76,14 +75,24 @@ const Create = ({ history }) => {
 
   const [name, setName] = useState('');
 
-  const onSubmit = () => {
-    dispatch(create(name, '#ffffff'));
+  const has_jorang = useSelector((state) => state.auth.has_jorang);
+  const jorang_color = useSelector((state) => state.user.user.jorang_color);
 
-    history.push('/');
-  };
+  useEffect(() => {
+    if (has_jorang === true) {
+      history.push('/');
+    }
+  }, [has_jorang, history]);
 
   const onChange = (e) => {
     setName(e.target.value);
+  };
+
+  const onSubmit = () => {
+    console.log('submit');
+    dispatch(create({ nickname: name, color: 'FFFFFF' }));
+    // dispatch(create({ nickname: 'asd', ... }))
+    //history.push('/');
   };
 
   return (
@@ -95,7 +104,12 @@ const Create = ({ history }) => {
           <div>조랭이의 이름을 지어주세요</div>
         </TextBox>
         <ImageBox>
-          <JoraengImg id="joraengImg" src={MyJoraeng} alt="" />
+          {/* <JoraengImg
+            id="joraengImg"
+            src={}
+            alt=""
+          /> */}
+          <MainJoraeng age={'2'} color={jorang_color}></MainJoraeng>
         </ImageBox>
         <InputBox>
           <NicknameInput

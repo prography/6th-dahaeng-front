@@ -7,6 +7,10 @@ const INIT_FORM = 'INIT_FORM';
 
 export const [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL] = createRequestAction('LOGIN');
 export const [SIGN, SIGN_SUCCESS, SIGN_FAIL] = createRequestAction('SIGN');
+export const [CREATE, CREATE_SUCCESS, CREATE_FAIL] = createRequestAction(
+  'CREATE',
+);
+export const LOGOUT = 'LOGOUT';
 
 //form: login/sign, key: email, password, passwordConfirm, value: 값
 export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
@@ -16,15 +20,21 @@ export const changeForm = createAction(CHANGE_FORM, ({ form, key, value }) => ({
 }));
 export const initForm = createAction(INIT_FORM, (form) => form);
 
-export const login = createAction(LOGIN, ({ email, password }) => ({
+export const login = createAction(LOGIN, ({ email, password, sns }) => ({
   email,
   password,
+  sns,
 }));
 
 export const sign = createAction(SIGN, ({ email, password }) => ({
   email,
   password,
 }));
+export const create = createAction(CREATE, ({ nickname, color }) => ({
+  nickname,
+  color,
+}));
+export const logout = createAction(LOGOUT);
 
 export const initialState = {
   sign: {
@@ -36,11 +46,15 @@ export const initialState = {
     email: '',
     password: '',
   },
-  auth: null, //login success -> token, sign success -> true
-  authError: null,
+  token: '',
+  auth: null, //sign success -> true
+  authError: '',
   isFirstLogin: null,
   user: null,
-  hasJorang: null,
+  has_jorang: true,
+
+  profile_id: null,
+  record_id: null,
 };
 
 const auth = handleActions(
@@ -57,15 +71,18 @@ const auth = handleActions(
     [LOGIN_SUCCESS]: (state, { payload: message }) => ({
       ...state,
       authError: null,
-      auth: message.token,
+      auth: message.profile_id,
+      token: message.token,
       isFirstLogin: message.isFirstLogin,
       user: message.jorang,
-      hasJorang: message.hasJorang,
+      has_jorang: message.has_jorang,
+      profile_id: message.profile_id,
+      record_id: message.today_post_id,
     }),
-    [LOGIN_FAIL]: (state, { payload: error }) => ({
+    [LOGIN_FAIL]: (state, { payload: message }) => ({
       ...state,
       auth: null,
-      authError: error,
+      authError: message,
     }),
 
     [SIGN_SUCCESS]: (state, { payload: isSuccess }) => ({
@@ -77,6 +94,20 @@ const auth = handleActions(
       ...state,
       auth: false,
       authError: error,
+    }),
+
+    [CREATE_SUCCESS]: (state, { payload: isSuccess }) => ({
+      ...state,
+      has_jorang: true,
+    }),
+    [CREATE_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      has_jorang: false,
+    }),
+
+    [LOGOUT]: (state, { payload: error }) => ({
+      ...state,
+      token: null,
     }),
   },
   initialState,

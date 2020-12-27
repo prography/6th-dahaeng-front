@@ -1,19 +1,21 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeForm, initForm, login } from 'store/auth';
-import { getUser } from 'store/user';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { withRouter } from 'react-router-dom';
 import Moment from 'moment';
+
+import placeholderImage from '../../assets/joraeng/default-joraeng.png';
+import deleteIcon from '../../assets/icon/deleteicon.png';
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 260px;
   margin: 0 auto;
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: var(--card-shadow);
-  border-radius: var(--border-radius);
+  border-radius: var(--small-border-radius);
   padding: 0.5rem;
+
+  position: relative;
 `;
 
 const TitleBox = styled.div`
@@ -39,7 +41,7 @@ const Question = styled.div`
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0) 60%,
-      #ffede5 40%
+      var(--secondary-color) 40%
     );
   }
 `;
@@ -63,7 +65,7 @@ const CharacterBox = styled.div`
 
 const CharacterImg = styled.img`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   object-fit: cover;
   display: flex;
   align-items: center;
@@ -93,7 +95,78 @@ const Detail = styled.textarea`
   padding: 8px;
 `;
 
-const ThreadBox = ({ record }) => {
+const DropdownWrapper = styled.div`
+  width: 38px;
+  border-radius: 4px;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* max-width: 96px;
+  max-height: 64px; */
+`;
+
+const DropdownOpenWrapper = styled.div`
+  width: 38px;
+  border-radius: 4px;
+  background-color: var(--light-background);
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  /* max-width: 96px;
+  max-height: 64px; */
+`;
+
+const DropdownButton = styled.button`
+  height: 32px;
+  width: 38px;
+  padding: 7px 4px 4px 4px;
+  background: transparent;
+
+  cursor: pointer;
+`;
+
+const DropdownIcon = styled.img`
+  height: 14px;
+`;
+
+const DropdownList = styled.div`
+  position: absolute;
+  bottom: -32px;
+  right: 0;
+
+  z-index: 2;
+
+  box-shadow: var(--card-shadow);
+  border-radius: var(--small-border-radius);
+  background-color: #ffffff;
+`;
+
+const DropdownOption = styled.button`
+  width: 72px;
+  height: 32px;
+  text-align: center;
+
+  line-height: 24px;
+  padding: 4px;
+  border: none;
+  color: var(--text-second);
+  font-size: 14px;
+
+  cursor: pointer;
+`;
+
+const ThreadBox = ({ record, setModal }) => {
+  // todo : 키워드 컬러 바꾸기
+  // const keywordValue = input.value;
+  // console.log(keywordValue);
+  const [openDropdown, setOpenDropdown] = useState(false);
+
+  const toggleDropdown = () => {
+    setOpenDropdown(!openDropdown);
+  };
+
   return (
     <Wrapper>
       <TitleBox>
@@ -104,10 +177,35 @@ const ThreadBox = ({ record }) => {
       </TitleBox>
       <ContentBox>
         <CharacterBox>
-          <CharacterImg src={record.image} alt="" />
+          <CharacterImg
+            src={record.image === null ? placeholderImage : record.image}
+            alt=""
+          />
         </CharacterBox>
         <Detail disabled value={record.detail} />
       </ContentBox>
+      {openDropdown ? (
+        <>
+          <DropdownOpenWrapper status={openDropdown}>
+            <DropdownButton onClick={toggleDropdown}>
+              <DropdownIcon src={deleteIcon} alt="" />
+            </DropdownButton>
+          </DropdownOpenWrapper>
+          <DropdownList>
+            <DropdownOption onClick={() => setModal(record.id)}>
+              삭제하기
+            </DropdownOption>
+          </DropdownList>
+        </>
+      ) : (
+        <>
+          <DropdownWrapper status={openDropdown}>
+            <DropdownButton onClick={toggleDropdown}>
+              <DropdownIcon src={deleteIcon} alt="" />
+            </DropdownButton>
+          </DropdownWrapper>
+        </>
+      )}
     </Wrapper>
   );
 };

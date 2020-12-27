@@ -1,17 +1,12 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
-import { getUser } from 'store/user';
 import styled from 'styled-components';
 import SignAuthForm from '../../components/AuthForm/sign.js';
 import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+import Modal from '../../components/Modal';
 
 const Title = styled.div`
   font-size: 32px;
@@ -29,13 +24,37 @@ const SubTitle = styled.div`
   }
 `;
 
+const ModalTitle = styled.div`
+  font-size: 18px;
+  margin-bottom: 2rem;
+  text-align: center;
+`;
+
+const ModalButton = styled.button`
+  box-sizing: border-box;
+  float: right;
+  margin-top: 1rem;
+  border: none;
+  color: white;
+  height: 2rem;
+  background: var(--primary-color);
+  border-radius: 4px;
+  outline: none;
+`;
+
+const ModalText = styled.div`
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+  color: var(--text-second);
+`;
+
 const Sign = ({ history }) => {
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.sign,
     auth: auth.auth,
     authError: auth.authError,
-    user: user && user.user,
   }));
 
   const [status, setStatus] = useState({
@@ -43,6 +62,8 @@ const Sign = ({ history }) => {
     pwd: 'empty',
     pwd_ok: 'empty',
   });
+
+  const [firstClick, setFirstClick] = useState(true);
 
   // 이메일, 비밀번호, 비밀번호 확인 유효성 검사
   const validateEmail = (value) => {
@@ -134,10 +155,11 @@ const Sign = ({ history }) => {
 
   //제출시 이벤트
   const onSubmit = (e) => {
+    //console.log(firstClick);
     e.preventDefault();
 
     const { email, password, passwordConfirm } = form;
-
+    console.log(passwordConfirm);
     //입력창 모두 valid 아닐 때 alert
     if (
       !(
@@ -147,16 +169,34 @@ const Sign = ({ history }) => {
       )
     ) {
       alert('입력을 확인해주세요!');
+    } else {
+      setFirstClick(false);
+      dispatch(sign({ email, password }));
     }
-    dispatch(sign({ email, password }));
   };
 
   useEffect(() => {
     dispatch(initForm('sign'));
   }, [dispatch]);
 
+  const [openModal, setOpenModal] = useState(false);
+  const setModal = () => {
+    setOpenModal(!openModal);
+    if (openModal) {
+      history.push('/login');
+    }
+  };
+
   useEffect(() => {
     if (authError) {
+      if (authError.includes('already exists')) {
+        console.log('이미 존재하는 회원');
+        setModal();
+        return;
+      }
+      if (!firstClick) {
+        history.push('/emailAuth');
+      }
       console.log('회원가입 실패');
       console.log(authError);
       return;
@@ -164,7 +204,7 @@ const Sign = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      history.push('/signComplete');
+      history.push('/emailAuth');
     }
   }, [auth, authError, dispatch, history]);
 
@@ -189,6 +229,14 @@ const Sign = ({ history }) => {
         onSubmit={onSubmit}
         status={status}
       ></SignAuthForm>
+      <Modal
+        className="popup"
+        openModal={openModal}
+        setModal={setModal}
+        title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
+        content={<ModalText>로그인하러 가볼까요?</ModalText>}
+        button={<ModalButton onClick={setModal}>확인</ModalButton>}
+      />
     </SignResponsive>
   );
 };

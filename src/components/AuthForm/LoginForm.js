@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
@@ -43,11 +43,11 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid #ff9d73;
+    border: 1px solid var(--primary-color);
     color: #4d4d4d;
   }
   &::placeholder {
-    color: var(--text-second);
+    color: var(--text-third);
   }
 `;
 
@@ -76,7 +76,7 @@ const Footer = styled.div`
   display: flex;
   margin-top: 1rem;
   padding-bottom: 1rem;
-  borderbottom: 1px solid #e9e9e9;
+  border-bottom: 1px solid #e9e9e9;
 `;
 
 const FooterContent = styled.span`

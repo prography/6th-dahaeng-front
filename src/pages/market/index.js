@@ -15,7 +15,7 @@ import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding-top: 1rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
@@ -41,8 +41,7 @@ const ModalButtonLeft = styled.button`
   border: none;
   height: 30px;
   border-radius: var(--small-border-radius);
-  background: var(--primary-color);
-  color: #ffffff;
+  border: 2px solid #212121;
 `;
 
 const ModalButtonRight = styled.button`
@@ -52,15 +51,13 @@ const ModalButtonRight = styled.button`
   border: none;
   height: 30px;
   border-radius: 4px;
-  background: var(--light-background);
-  color: var(--primary-color);
+  border: 2px solid #212121;
 `;
 
 const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-  color: var(--text-second);
 `;
 
 const Wrapper = styled.div`
@@ -84,9 +81,17 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
+const CoinBox = styled.div`
+  float: right;
+  padding-right: 1rem;
+  line-height: 34px;
+  color: var(--text-second);
+`;
+
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.color);
   const buy_success = useSelector((state) => state.user.buy_success);
   const buyError = useSelector((state) => state.user.buyError);
   const dispatch = useDispatch();
@@ -169,6 +174,7 @@ const Market = ({ history }) => {
       <Slider history={history} />
       <Responsive>
         <SubTitle title={'조랭 마켓'} />
+        <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
         <Wrapper>
           <Character>
             {/*TODO: Dynamic color binding*/}
@@ -205,6 +211,7 @@ const Market = ({ history }) => {
             button={
               <ModalButtonField>
                 <ModalButtonLeft
+                  style={{ color: colors && colors[0] }}
                   onClick={() => buyItem(wantItem && wantItem.id)}
                 >
                   {'확인'}

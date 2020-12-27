@@ -35,13 +35,6 @@ const Index = styled.div`
   cursor: pointer;
 `;
 
-const CoinBox = styled.div`
-  flex: none;
-  margin-right: 8px;
-  line-height: 34px;
-  color: var(--text-second);
-`;
-
 const ShopBox = styled.button`
   flex: none;
   margin-right: 8px;

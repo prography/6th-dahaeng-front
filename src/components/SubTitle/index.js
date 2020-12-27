@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SubTitleBlock = styled.div`
-  /* position: fixed; */
+  position: fixed;
   width: 100%;
   background: white;
   margin: 0 auto;

@@ -4,7 +4,8 @@ import { getRecords, searchRecords } from 'store/box';
 import styled from 'styled-components';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
-import Header from 'components/Header';
+import Slider from '../../components/Slider';
+import homeIcon from '../../components/MainFloatingButton/floating-home.png';
 import searchIcon from 'assets/icon/search.png';
 import feed from 'assets/icon/feed.png';
 import thread from 'assets/icon/thread.png';
@@ -12,6 +13,17 @@ import Responsive from '../../components/common/Responsive.js';
 
 import Modal from '../../components/Modal';
 import { deleteRecord } from '../../store/box.js';
+
+const HomeIconWrapper = styled.div`
+  position: fixed;
+  right: 12px;
+  top: 19px;
+  width: 22px;
+`;
+
+const HomeIcon = styled.img`
+  width: 100%;
+`;
 
 const SortingBar = styled.div`
   margin: 0 auto;
@@ -28,8 +40,6 @@ const SortingBox = styled.div`
 const ListModeIcon = styled.div`
   width: 1.5rem;
   height: 1rem;
-
-  cursor: pointer;
 `;
 
 const Content = styled.div`
@@ -41,7 +51,7 @@ const Content = styled.div`
     props.sortingType === 'feed' ? 'flex-start' : 'center'};
   padding: 20px;
   padding-top: 0;
-  height: calc(100vh - 10rem - 16px);
+  height: calc(100vh - 5rem);
   overflow-y: auto;
 
   @media screen and (max-width: 480px) {
@@ -58,8 +68,8 @@ const SearchBar = styled.div`
   width: calc(100% - 0.5rem - 20px);
   margin: 0 auto;
   height: 3rem;
+  border: 2px solid #212121;
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.2);
-  border-radius: var(--small-border-radius);
   display: flex;
 `;
 
@@ -78,7 +88,7 @@ const SearchIcon = styled.div`
 
 const SearchText = styled.input.attrs((props) => ({
   type: 'text',
-  placeholder: '키워드로 내 행복을 검색하세요 (ex. 여행, 맛집...)',
+  placeholder: '키워드로 내 행복을 검색하세요.',
 }))`
   width: 80%;
   padding: 1%;
@@ -89,20 +99,16 @@ const SearchText = styled.input.attrs((props) => ({
   }
 `;
 
-// const SearchButton = styled.button`
-//   width: 10%;
-// `;
-
 const SearchResult = styled.div`
   font-size: 14px;
   text-align: center;
   margin-top: 1.5rem;
-  color: var(--text-second);
+  color: #212121;
 `;
 
 const SearchKeyText = styled.span`
   font-size: 14px;
-  color: var(--primary-color);
+  color: ${(props) => props.mainColor};
 `;
 
 const ModalTitle = styled.div`
@@ -124,8 +130,7 @@ const ModalButtonLeft = styled.button`
   margin-right: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: var(--small-border-radius);
-  background: var(--primary-color);
+  background: ${(props) => props.mainColor};
   color: #ffffff;
 `;
 
@@ -136,8 +141,8 @@ const ModalButtonRight = styled.button`
   border: none;
   height: 30px;
   border-radius: 4px;
-  background: var(--light-background);
-  color: var(--primary-color);
+  background: ${(props) => props.thirdColor};
+  color: ${(props) => props.mainColor};
 `;
 
 const ModalButton = styled.button`
@@ -147,7 +152,7 @@ const ModalButton = styled.button`
   border: none;
   height: 30px;
   border-radius: 4px;
-  background: var(--primary-color);
+  background: ${(props) => props.mainColor};
   color: #ffffff;
 `;
 
@@ -163,6 +168,7 @@ const Box = ({ history }) => {
 
   const records = useSelector((state) => state.box.records);
   const searchs = useSelector((state) => state.box.searchs);
+  const colors = useSelector((state) => state.user.colors);
 
   const dispatch = useDispatch();
 
@@ -217,10 +223,17 @@ const Box = ({ history }) => {
     dispatch(getRecords());
   }, [dispatch]);
 
+  const navigateHome = () => {
+    history.push('/');
+  };
+
   return (
     <>
-      <Header></Header>
       <Responsive>
+        <Slider history={history} />
+        <HomeIconWrapper onClick={navigateHome}>
+          <HomeIcon src={homeIcon} alt="" />
+        </HomeIconWrapper>
         <SortingBar>
           <SortingBox>
             <ListModeIcon onClick={() => setSortingType('search')}>
@@ -285,7 +298,9 @@ const Box = ({ history }) => {
               ) : (
                 <SearchResult>
                   {`총 `}
-                  <SearchKeyText>{searchs.length}</SearchKeyText>
+                  <SearchKeyText mainColor={`#${colors && colors[0]}`}>
+                    {searchs.length}
+                  </SearchKeyText>
                   {` 개의 행복을 찾았습니다!`}
                 </SearchResult>
               )
@@ -348,10 +363,19 @@ const Box = ({ history }) => {
           }
           button={
             <ModalButtonField>
-              <ModalButtonLeft onClick={() => Delete(recordId)}>
+              <ModalButtonLeft
+                onClick={() => Delete(recordId)}
+                mainColor={`#${colors && colors[0]}`}
+              >
                 {'확인'}
               </ModalButtonLeft>
-              <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+              <ModalButtonRight
+                onClick={setModal}
+                mainColor={`#${colors && colors[0]}`}
+                thirdColor={`#${colors && colors[2]}`}
+              >
+                {'취소'}
+              </ModalButtonRight>
             </ModalButtonField>
           }
         ></Modal>
@@ -365,12 +389,17 @@ const Box = ({ history }) => {
           content={
             <>
               <ModalText>{`가장 마지막 행복 기록은 삭제할 수 없어요`}</ModalText>
-              <ModalText>{`이 행복까지 아껴주세요`}</ModalText>
+              <ModalText>{`이 행복까지 사랑해주세요`}</ModalText>
             </>
           }
           button={
             <ModalButtonField>
-              <ModalButton onClick={setDeleteFailModal}>{'확인'}</ModalButton>
+              <ModalButton
+                onClick={setDeleteFailModal}
+                mainColor={`#${colors && colors[0]}`}
+              >
+                {'확인'}
+              </ModalButton>
             </ModalButtonField>
           }
         ></Modal>

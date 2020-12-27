@@ -173,7 +173,7 @@ const Market = ({ history }) => {
     <>
       <Slider history={history} />
       <Responsive>
-        <SubTitle title={'조랭 마켓'} history={history} />
+        <SubTitle title={'조랭 마켓'} />
         <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
         <Wrapper>
           <Character>

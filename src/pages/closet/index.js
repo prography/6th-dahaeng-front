@@ -129,7 +129,7 @@ const Closet = ({ history }) => {
       <Header />
 
       <Responsive>
-        <SubTitle title={'조랭 옷장'} history={history} />
+        <SubTitle title={'조랭 옷장'} />
         <SetButton onClick={setModal}>{'착용하기'}</SetButton>
         <RoomWrapper>
           <Room history={history} applyItems={applyItems} />

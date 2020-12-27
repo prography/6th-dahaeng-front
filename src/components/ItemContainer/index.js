@@ -110,8 +110,8 @@ const ItemContainer = ({
                     style={{
                       color:
                         select === index
-                          ? colors && colors[0]
-                          : colors && colors[2],
+                          ? `#${colors && colors[0]}`
+                          : `#${colors && colors[2]}`,
                     }}
                   >
                     {index === 'jorang_color'

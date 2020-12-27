@@ -92,7 +92,7 @@ const CoinBox = styled.div`
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
-  const colors = useSelector((state) => state.user.color);
+  const colors = useSelector((state) => state.user.colors);
   const buy_success = useSelector((state) => state.user.buy_success);
   const buyError = useSelector((state) => state.user.buyError);
   const dispatch = useDispatch();
@@ -181,8 +181,8 @@ const Market = ({ history }) => {
             {/*TODO: Dynamic color binding*/}
             <MainJoraeng
               age={user.jorang_status}
-              mainColor={`#${user.main_color}`}
-              thirdColor={`#${user.third_color}`}
+              mainColor={`#${colors && colors[0]}`}
+              thirdColor={`#${colors && colors[2]}`}
             />
           </Character>
           <Background>
@@ -212,15 +212,15 @@ const Market = ({ history }) => {
             button={
               <ModalButtonField>
                 <ModalButtonLeft
-                  style={{ background: colors && colors[0] }}
+                  style={{ background: `#${colors && colors[0]}` }}
                   onClick={() => buyItem(wantItem && wantItem.id)}
                 >
                   {'확인'}
                 </ModalButtonLeft>
                 <ModalButtonRight
                   style={{
-                    background: colors && colors[2],
-                    color: colors && colors[0],
+                    background: `#${colors && colors[0]}`,
+                    color: `#${colors && colors[2]}`,
                   }}
                   onClick={setModal}
                 >

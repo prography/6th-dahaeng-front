@@ -55,18 +55,6 @@ const initialState = {
     // TODO: SET-UP DEFAULT
     jorang_status: '0',
     jorang_color: '',
-    // colors:
-    //   this.jorang_color === 'A26C8F'
-    //     ? [this.jorang_color, 'C9B4C2', 'D9CFD6']
-    //     : this.jorang_color === 'F8DB5C'
-    //     ? [this.jorang_color, 'ECE1AE', 'E9E3CD']
-    //     : this.jorang_color === '73A38F'
-    //     ? [this.jorang_color, 'EFB6A8', 'EAD0CA']
-    //     : this.jorang_color === 'FF714D'
-    //     ? [this.jorang_color, 'B7CAC2', 'D1D9D6']
-    //     : this.jorang_color === '5CA1D2'
-    //     ? [this.jorang_color, 'AEC8DD', 'CDD9E2']
-    //     : null,
   },
   buy_success: false,
   buyError: '',

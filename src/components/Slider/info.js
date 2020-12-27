@@ -153,6 +153,7 @@ const setCoinModal = (e) => {
 
 const InfoBox = ({ toggleDrawer, history }) => {
   const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.colors);
 
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {
@@ -208,8 +209,8 @@ const InfoBox = ({ toggleDrawer, history }) => {
           {/*TODO: Dynamic color binding*/}
           <SliderJoraeng
             age={user.jorang_status}
-            mainColor={`#${user.main_color}`}
-            thirdColor={`#${user.third_color}`}
+            mainColor={`#${colors && colors[0]}`}
+            thirdColor={`#${colors && colors[2]}`}
           />
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>

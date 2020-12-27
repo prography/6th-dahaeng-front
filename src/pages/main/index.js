@@ -83,6 +83,7 @@ const Main = ({ history }) => {
   const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
+  const colors = useSelector((state) => state.user.colors);
 
   const dispatch = useDispatch();
 
@@ -128,7 +129,6 @@ const Main = ({ history }) => {
   const navigateRecord = () => {
     history.push('/record');
   };
-
   return (
     <>
       <Slider history={history} />
@@ -153,8 +153,8 @@ const Main = ({ history }) => {
             {/*TODO: Dynamic color binding*/}
             <MainJoraeng
               age={user.jorang_status}
-              mainColor={`#${user.main_color}`}
-              thirdColor={`#${user.third_color}`}
+              mainColor={`#${colors && colors[0]}`}
+              thirdColor={`#${colors && colors[2]}`}
             />
           </Character>
 

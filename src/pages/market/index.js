@@ -42,6 +42,7 @@ const ModalButtonLeft = styled.button`
   height: 30px;
   border-radius: var(--small-border-radius);
   border: 2px solid #212121;
+  color: white;
 `;
 
 const ModalButtonRight = styled.button`
@@ -211,12 +212,20 @@ const Market = ({ history }) => {
             button={
               <ModalButtonField>
                 <ModalButtonLeft
-                  style={{ color: colors && colors[0] }}
+                  style={{ background: colors && colors[0] }}
                   onClick={() => buyItem(wantItem && wantItem.id)}
                 >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+                <ModalButtonRight
+                  style={{
+                    background: colors && colors[2],
+                    color: colors && colors[0],
+                  }}
+                  onClick={setModal}
+                >
+                  {'취소'}
+                </ModalButtonRight>
               </ModalButtonField>
             }
           ></Modal>

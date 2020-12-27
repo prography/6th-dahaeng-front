@@ -169,10 +169,10 @@ const Record = ({ history }) => {
   };
 
   const id = useSelector((state) => state.auth.profile_id);
-  const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   // const token = useSelector((state) => state.auth.token);
+  const colors = useSelector((state) => state.user.colors);
 
   const [inputText, setInputText] = useState('');
   const onTextChange = (e) => {
@@ -276,7 +276,7 @@ const Record = ({ history }) => {
         <TitleText>
           오늘의 행복 기록
           <CloseButton>
-            <CloseIcon src={closeicon} />
+            <CloseIcon src={closeicon} onClick={() => history.push('/')} />
           </CloseButton>
         </TitleText>
 
@@ -301,7 +301,7 @@ const Record = ({ history }) => {
               </Category>
             </TitleWrapper>
             <TitleWrapper>
-              <Question thirdColor={`#${user.third_color}`}>
+              <Question thirdColor={`#${colors && colors[2]}`}>
                 {question && question.question}
               </Question>
             </TitleWrapper>
@@ -330,12 +330,15 @@ const Record = ({ history }) => {
           </Wrapper>
 
           {record ? (
-            <RecordButton mainColor={`#${user.main_color}`} onClick={modify}>
+            <RecordButton
+              mainColor={`#${colors && colors[0]}`}
+              onClick={modify}
+            >
               기록 수정하기
             </RecordButton>
           ) : (
             <RecordButton
-              mainColor={`#${user.main_color}`}
+              mainColor={`#${colors && colors[0]}`}
               onClick={completeRecord}
             >
               저장하기
@@ -368,7 +371,7 @@ const Record = ({ history }) => {
         }
         button={
           <RecordButton
-            mainColor={`#${user.main_color}`}
+            mainColor={`#${colors && colors[0]}`}
             onClick={() => {
               setCoinModal();
             }}

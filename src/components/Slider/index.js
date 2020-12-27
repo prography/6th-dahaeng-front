@@ -101,7 +101,7 @@ const Slider = ({ history }) => {
   const anchor = 'left';
   const classes = useStyles();
 
-  const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.colors);
 
   const dispatch = useDispatch();
   //TODO: ??? token vs user
@@ -175,7 +175,7 @@ const Slider = ({ history }) => {
   return (
     <>
       <DrawerIcon onClick={() => setOpen(true)}>
-        <MenuIcon color={`#${user.main_color}`} />
+        <MenuIcon color={`#${colors && colors[0]}`} />
       </DrawerIcon>
       <React.Fragment key={anchor}>
         <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>

@@ -14,17 +14,6 @@ import Responsive from '../../components/common/Responsive.js';
 import Modal from '../../components/Modal';
 import { deleteRecord } from '../../store/box.js';
 
-const HomeIconWrapper = styled.div`
-  position: fixed;
-  right: 12px;
-  top: 19px;
-  width: 22px;
-`;
-
-const HomeIcon = styled.img`
-  width: 100%;
-`;
-
 const SortingBar = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
@@ -223,17 +212,10 @@ const Box = ({ history }) => {
     dispatch(getRecords());
   }, [dispatch]);
 
-  const navigateHome = () => {
-    history.push('/');
-  };
-
   return (
     <>
       <Responsive>
         <Slider history={history} />
-        <HomeIconWrapper onClick={navigateHome}>
-          <HomeIcon src={homeIcon} alt="" />
-        </HomeIconWrapper>
         <SortingBar>
           <SortingBox>
             <ListModeIcon onClick={() => setSortingType('search')}>
@@ -358,7 +340,6 @@ const Box = ({ history }) => {
           content={
             <>
               <ModalText>{`한번 삭제한 행복은 되돌릴 수 없습니다 :( `}</ModalText>
-              <ModalText>{`또한 오늘의 기록도 더이상 작성할 수 없습니다.`}</ModalText>
             </>
           }
           button={

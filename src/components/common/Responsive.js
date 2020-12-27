@@ -4,7 +4,7 @@ const Responsive = styled.div`
   /* padding-left: 1rem;
   padding-right: 1rem; */
   max-width: 768px;
-  padding-top: 4vh;
+  //padding-top: 4vh;
   margin: 0 auto;
 `;
 

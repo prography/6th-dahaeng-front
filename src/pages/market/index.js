@@ -8,6 +8,9 @@ import Modal from '../../components/Modal';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import ItemBox from './ItemBox';
+import Slider from '../../components/Slider';
+import ground from 'assets/main/ground.png';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -58,6 +61,27 @@ const ModalText = styled.div`
   text-align: center;
   padding-bottom: 0.5rem;
   color: var(--text-second);
+`;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1024px;
+`;
+const Character = styled.div`
+  min-width: 114px;
+  width: 30%;
+  z-index: 2;
+  margin: 0 auto;
+  bottom: -20px;
+  position: relative;
+`;
+const Background = styled.div`
+  z-index: 1;
+  width: 40%;
+  margin: 0 auto;
+`;
+const BackgroundImg = styled.img`
+  width: 100%;
 `;
 
 const Market = ({ history }) => {
@@ -141,10 +165,23 @@ const Market = ({ history }) => {
 
   return (
     <>
-      <Header />
-
+      {/* <Header /> */}
+      <Slider history={history} />
       <Responsive>
-        <SubTitle title={'조랭코인샵'} />
+        <SubTitle title={'조랭 마켓'} />
+        <Wrapper>
+          <Character>
+            {/*TODO: Dynamic color binding*/}
+            <MainJoraeng
+              age={user.jorang_status}
+              mainColor={`#${user.main_color}`}
+              thirdColor={`#${user.third_color}`}
+            />
+          </Character>
+          <Background>
+            <BackgroundImg src={ground} alt=""></BackgroundImg>
+          </Background>
+        </Wrapper>
         <ContentBox>
           <Modal
             className="popup"

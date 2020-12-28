@@ -9,6 +9,9 @@ import Room from '../main/Room';
 import ItemBox from './ItemBox';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
+import Slider from '../../components/Slider';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import ground from 'assets/main/ground.png';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -68,9 +71,31 @@ const ModalButtonRight = styled.button`
   color: var(--primary-color);
 `;
 
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1024px;
+`;
+const Character = styled.div`
+  min-width: 114px;
+  width: 30%;
+  z-index: 2;
+  margin: 0 auto;
+  bottom: -20px;
+  position: relative;
+`;
+const Background = styled.div`
+  z-index: 1;
+  width: 40%;
+  margin: 0 auto;
+`;
+const BackgroundImg = styled.img`
+  width: 100%;
+`;
+
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
   const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.colors);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -126,14 +151,23 @@ const Closet = ({ history }) => {
 
   return (
     <>
-      <Header />
-
+      <Slider history={history}></Slider>
       <Responsive>
         <SubTitle title={'조랭 옷장'} />
         <SetButton onClick={setModal}>{'착용하기'}</SetButton>
-        <RoomWrapper>
-          <Room history={history} applyItems={applyItems} />
-        </RoomWrapper>
+        <Wrapper>
+          <Character>
+            {/*TODO: Dynamic color binding*/}
+            <MainJoraeng
+              age={user.jorang_status}
+              mainColor={`#${colors && colors[0]}`}
+              thirdColor={`#${colors && colors[2]}`}
+            />
+          </Character>
+          <Background>
+            <BackgroundImg src={ground} alt=""></BackgroundImg>
+          </Background>
+        </Wrapper>
         <ContentBox>
           <Modal
             className="popup"

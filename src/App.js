@@ -26,36 +26,22 @@ const RNListener = () => {
   /** react native 환경에서만 가능 */
   let token = '';
   const listener = (event) => {
-    //const { data, type } = JSON.parse(event.data);
-    //alert(JSON.parse(event.data));
-    //alert(JSON.stringify(event.data));
-    const { data, type } = event.data;
-
     token = event.data;
     //alert(token);
     localStorage.setItem('firebase', token);
-    alert(token);
-    //alert(localStorage.getItem('firebase'));
-    // if (type === 'TOKEN') {
-    //   // type이 TOKEN이기 때문에 이곳에 콘솔이 찍히게 됩니다.
-    //   alert(data);
-    //   token = data;
-    //   console.log(data); // xxxxx
-    // } else if (type === 'NOTIFICATION') {
-    // }
   };
 
-  if (window.ReactNativeWebView) {
-    /** ios */
-    alert('ios');
-    window.addEventListener('message', listener);
-    localStorage.setItem('firebase', token);
-  }
-  if (document.ReactNativeWebView) {
-    alert('android');
-    document.addEventListener('message', listener);
-    localStorage.setItem('firebase', token);
-  }
+  // if (window.ReactNativeWebView) {
+  //   /** ios */
+  //   alert('ios');
+  //   window.addEventListener('message', listener);
+  //   localStorage.setItem('firebase', token);
+  // }
+  // if (document.ReactNativeWebView) {
+  //   alert('android');
+  //   document.addEventListener('message', listener);
+  //   localStorage.setItem('firebase', token);
+  // }
   if (
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent,
@@ -65,7 +51,6 @@ const RNListener = () => {
     document.addEventListener('message', listener);
     window.addEventListener('message', listener);
   }
-  //console.log('b');
   return token;
 };
 

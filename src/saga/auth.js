@@ -92,16 +92,22 @@ function* signSaga(action) {
     // const res = yield call(authApi.sign, action.payload); //api.login(action.payload)와 같다
 
     // console.log(res);
-
+    //localStorage.setItem('firebase', 'abc');
+    const token = localStorage.getItem('firebase');
+    alert(token);
+    console.log('a');
+    console.log(token);
     const param = {
       profile: {
         email: action.payload.email,
         password: action.payload.password,
+        uid: token ? token : 'ex',
       },
     };
     const res = yield call([axios, 'post'], `${serverURL}/signup/`, param);
 
     console.log('response: ', res);
+    alert(JSON.stringify(res));
     localStorage.setItem('accessToken', res.data.message.token);
     if (res.data.response === 'success') {
       yield put({

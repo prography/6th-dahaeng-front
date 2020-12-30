@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/setting.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, getUser } from '../../store/user';
+import { setUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import SliderJoraeng from '../Joraeng/SliderJoraeng';
 

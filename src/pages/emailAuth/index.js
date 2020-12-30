@@ -33,14 +33,6 @@ const CongratulateImg = styled.img`
     width: 300px;
   }
 `;
-const ButtonBox = styled.div`
-  flex: 1;
-  margin-left: none;
-  width: 100%;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-
 const LoginButton = styled.button`
   outline: none;
   background: var(--primary-color);

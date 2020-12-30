@@ -12,7 +12,6 @@ import {
 } from 'store/auth';
 import axios from 'axios';
 import { serverURL } from './index';
-import { keyframes } from 'styled-components';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);

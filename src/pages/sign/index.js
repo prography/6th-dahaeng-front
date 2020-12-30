@@ -207,7 +207,7 @@ const Sign = ({ history }) => {
       console.log(auth);
       history.push('/emailAuth');
     }
-  }, [auth, authError, dispatch, history]);
+  }, [auth, authError, dispatch, history, firstClick]);
 
   // useEffect(() => {
   //   if (user) {

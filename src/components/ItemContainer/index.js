@@ -89,7 +89,6 @@ const ItemContainer = ({
   selectCategory,
   select,
 }) => {
-  const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
 
   function navigateMarketPage() {

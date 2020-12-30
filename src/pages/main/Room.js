@@ -80,10 +80,6 @@ const Room = ({
     setOpenModal(!openModal);
   };
 
-  const moveCloset = () => {
-    history.push('/closet');
-  };
-
   const moveMain = () => {
     history.push('/');
   };

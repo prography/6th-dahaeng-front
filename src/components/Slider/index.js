@@ -4,32 +4,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import clsx from 'clsx';
-import { logout } from 'store/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoBox from './info.js';
-
 import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
-import { Link } from 'react-router-dom';
 import MenuIcon from '../../assets/icon/MenuIcon.js';
 
 const Spacer = styled.div`
   height: 10rem;
-`;
-
-const DrawerOpenBtn = styled.button`
-  position: fixed;
-  left: 0px;
-  top: 12px;
-  width: 40px;
-  height: 40px;
-  padding: 3px 8px 0 0;
-  border: none;
-  border-radius: 0 50% 50% 0;
-  z-index: 10;
-  background-color: var(--primary-color);
 `;
 
 const DrawerIcon = styled.div`
@@ -50,17 +34,6 @@ const DrawerCloseBtn = styled.button`
   padding: 3px 8px 0 0;
   border: none;
   background-color: var(--primary-color);
-`;
-
-const LogoutBtn = styled.button`
-  font-size: 14px;
-  text-align: center;
-  width: 90%;
-  color: var(--text-second);
-  margin: 1rem;
-  padding-top: 2rem;
-  border: none;
-  text-decoration: none;
 `;
 
 const SliderButton = styled.button`
@@ -113,14 +86,6 @@ const Slider = ({ history }) => {
   }, [open, dispatch]);
 
   // const records = useSelector((state) => state.box.records);
-
-  const Trylogout = () => {
-    dispatch(logout());
-    history.push('/login');
-
-    localStorage.setItem('accessToken', '');
-  };
-
   const toggleDrawer = (open) => (event) => {
     if (
       event.type === 'keydown'

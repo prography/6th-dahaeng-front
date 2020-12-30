@@ -6,7 +6,7 @@ const SubTitleBlock = styled.div`
   width: 100%;
   background: white;
   margin: 0 auto;
-  padding-top: 1rem;
+  //padding-top: 1rem;
 `;
 
 //styled(Responsive) ?

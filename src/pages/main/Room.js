@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ground from 'assets/main/ground.png';
-import NoticeModal from '../../components/NoticeModal';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useSelector } from 'react-redux';
-
-//Modal
-
-const ModalTitle = styled.div``;
-
-const Reminder = styled.div`
-  width: 100%;
-  text-align: center;
-  z-index: 2;
-`;
 
 //Modal
 const Wrapper = styled.div`
@@ -64,43 +52,32 @@ const BackgroundImg = styled.img`
   width: 100%;
 `;
 
+const Etc = styled.div``;
+
+const EtcImg = styled.img`
+  width: 100%;
+`;
+
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
 const Room = ({
-  notice,
-  reminder,
   history,
   hasItems,
   applyItems,
   mainColor,
   thirdColor,
+  closet,
 }) => {
   const user = useSelector((state) => state.user.user);
-  const [openModal, setOpenModal] = useState(false);
-  const setModal = () => {
-    setOpenModal(!openModal);
-  };
-
-  const moveMain = () => {
-    history.push('/');
-  };
-
-  const ReminderDate = reminder && reminder[0] && reminder[0].created_at;
+  const colors = useSelector((state) => state.user.colors);
 
   return (
     <Wrapper>
-      {/* <PostBox>
-        {notice ? (
-          <PostBoxImg onClick={setModal} src={postboxOn} alt="" />
-        ) : (
-          <PostBoxImg onClick={setModal} src={postbox} alt="" />
-        )}
-      </PostBox> */}
-      <Character onClick={moveMain}>
+      <Character>
         {/*TODO: Dynamic color binding*/}
         <MainJoraeng
           age={user.jorang_status}
           mainColor={
-            applyItems !== null ? applyItems.color : mainColor
+            closet && applyItems ? applyItems.color.detail : colors[0]
             // //`#${
             //   hasItems &&
             //   hasItems
@@ -108,36 +85,45 @@ const Room = ({
             //     .filter((item) => item.is_worn === true)[0].item.item_detail
             // }`
           }
-          thirdColor={applyItems !== null ? applyItems.color : thirdColor}
+          thirdColor={
+            closet && applyItems ? applyItems.color.detail : colors[2]
+          }
         />
       </Character>
-      
       <Background>
-        <BackgroundImg src={ground} alt="" />
+        {closet && applyItems ? (
+          <BackgroundImg
+            src={require(`../../assets/item/background/${
+              applyItems && applyItems.background.detail
+            }.png`)}
+            alt=""
+          />
+        ) : (
+          <BackgroundImg
+            src={require(`../../assets/item/background/${
+              hasItems && hasItems.background.detail
+            }.png`)}
+            alt=""
+          />
+        )}
       </Background>
-
-      <NoticeModal
-        history={history}
-        openModal={openModal}
-        setModal={setModal}
-        reminderInfo={reminder}
-        notices={notice}
-        title={<ModalTitle>{'공지사항'}</ModalTitle>}
-        // notice={notice.map((notice) => {
-        //   return <Notice>{notice.title}</Notice>;
-        // })
-        reminderContent={
-          ReminderDate ? (
-            <Reminder>{`${ReminderDate.slice(0, 4)}년 ${ReminderDate.slice(
-              5,
-              7,
-            )}월 ${ReminderDate.slice(
-              8,
-              10,
-            )}일, 나는 이렇게 많이 행복했었네요! 함께 볼까요?`}</Reminder>
-          ) : null
-        }
-      ></NoticeModal>
+      <Etc>
+        {closet && applyItems ? (
+          <EtcImg
+            src={require(`../../assets/item/etc/${
+              applyItems && applyItems.etc.detail
+            }.png`)}
+            alt=""
+          />
+        ) : (
+          <EtcImg
+            src={require(`../../assets/item/etc/${
+              hasItems && hasItems.etc.detail
+            }.png`)}
+            alt=""
+          />
+        )}
+      </Etc>
     </Wrapper>
   );
 };

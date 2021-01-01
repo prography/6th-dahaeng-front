@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { getItems, buyItems, getUser } from '../../store/user';
 import Modal from '../../components/Modal';

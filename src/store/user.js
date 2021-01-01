@@ -234,7 +234,7 @@ const user = handleActions(
       //   hasItems: error,
     }),
 
-    [FEEDBACK_SUCCESS]: (state, { payload: payload }) => ({
+    [FEEDBACK_SUCCESS]: (state, { payload: feedback }) => ({
       ...state,
     }),
     [FEEDBACK_FAIL]: (state, { payload: error }) => ({

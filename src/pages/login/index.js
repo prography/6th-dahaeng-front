@@ -227,7 +227,7 @@ const Login = ({ history }) => {
     //   console.log(user);
     //   history.push('/');
     // }
-  }, [auth, authError, dispatch, history, user, has_jorang, token]);
+  }, [auth, authError, dispatch, history, user, has_jorang, token, setModal]);
 
   const [openModal, setOpenModal] = useState(false);
   const setModal = () => {

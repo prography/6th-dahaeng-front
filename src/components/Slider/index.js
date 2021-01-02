@@ -2,17 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoBox from './info.js';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import clsx from 'clsx';
-import { useDispatch, useSelector } from 'react-redux';
-import InfoBox from './info.js';
-import menuIcon from '../../assets/icon/menu_icon.png';
 import './slider.css';
 import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
 import MenuIcon from '../../assets/icon/MenuIcon.js';
+
 const Spacer = styled.div`
   height: 10rem;
 `;
@@ -53,7 +47,7 @@ const SliderWrapper = styled.div`
   top: 0;
   width: 100vw;
   height: 100vh;
-`
+`;
 
 const SliderCloseButton = styled.button`
   border: none;
@@ -63,7 +57,7 @@ const SliderCloseButton = styled.button`
   right: 20px;
   top: 20px;
   font-size: 24px;
-`
+`;
 
 const SliderListElement = styled.div`
   display: flex;
@@ -72,8 +66,7 @@ const SliderListElement = styled.div`
   justify-content: space-between;
   padding: 6px 24px;
   text-align: left;
-`
-
+`;
 
 const Slider = ({ history }) => {
   const [sliderOpenState, setSliderOpenState] = useState(false);
@@ -116,9 +109,14 @@ const Slider = ({ history }) => {
   const SliderList = () => (
     <SliderWrapper id="sliderWrapper">
       <SliderCloseButton
-        onClick={ () => { setSliderOpenState(false) } }
+        onClick={() => {
+          setSliderOpenState(false);
+        }}
       >
-        <img src={require("../../assets/icon/CloseButton.svg")} alt="chevron-right"/>
+        <img
+          src={require('../../assets/icon/CloseButton.svg')}
+          alt="chevron-right"
+        />
       </SliderCloseButton>
 
       <InfoBox toggleDrawer={toggleDrawer} history={history} />
@@ -129,25 +127,37 @@ const Slider = ({ history }) => {
         <SliderListElement onClick={navigateToBoxPage}>
           <SliderButton>행복보관함</SliderButton>
           <span>
-            <img src={require("../../assets/icon/ChevronRight.svg")} alt="chevron-right"/>
+            <img
+              src={require('../../assets/icon/ChevronRight.svg')}
+              alt="chevron-right"
+            />
           </span>
         </SliderListElement>
         <SliderListElement onClick={navigateToMarketPage}>
           <SliderButton>조랭마켓</SliderButton>
           <span>
-            <img src={require("../../assets/icon/ChevronRight.svg")} alt="chevron-right"/>
+            <img
+              src={require('../../assets/icon/ChevronRight.svg')}
+              alt="chevron-right"
+            />
           </span>
         </SliderListElement>
         <SliderListElement onClick={navigateToDonationPage}>
           <SliderButton>소액기부</SliderButton>
           <span>
-            <img src={require("../../assets/icon/ChevronRight.svg")} alt="chevron-right"/>
+            <img
+              src={require('../../assets/icon/ChevronRight.svg')}
+              alt="chevron-right"
+            />
           </span>
         </SliderListElement>
         <SliderListElement onClick={navigateToReportPage}>
           <SliderButton>의견 보내기</SliderButton>
           <span>
-            <img src={require("../../assets/icon/ChevronRight.svg")} alt="chevron-right"/>
+            <img
+              src={require('../../assets/icon/ChevronRight.svg')}
+              alt="chevron-right"
+            />
           </span>
         </SliderListElement>
         {/* <LogoutBtn onClick={() => Trylogout()}>로그아웃</LogoutBtn> */}
@@ -161,7 +171,7 @@ const Slider = ({ history }) => {
         <MenuIcon color={`#${user.main_color}`} />
       </DrawerIcon>
       <div>
-        { sliderOpenState && <SliderList/> }
+        {sliderOpenState && <SliderList />}
         <Spacer />
       </div>
     </>

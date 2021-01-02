@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { getItems, buyItems, getUser } from '../../store/user';
 import Modal from '../../components/Modal';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import ItemBox from './ItemBox';
+import Slider from '../../components/Slider';
+import ground from 'assets/main/ground.png';
+import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding-top: 1rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
@@ -38,8 +40,8 @@ const ModalButtonLeft = styled.button`
   border: none;
   height: 30px;
   border-radius: var(--small-border-radius);
-  background: var(--primary-color);
-  color: #ffffff;
+  border: 2px solid #212121;
+  color: white;
 `;
 
 const ModalButtonRight = styled.button`
@@ -49,20 +51,47 @@ const ModalButtonRight = styled.button`
   border: none;
   height: 30px;
   border-radius: 4px;
-  background: var(--light-background);
-  color: var(--primary-color);
+  border: 2px solid #212121;
 `;
 
 const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
+`;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  max-width: 1024px;
+`;
+const Character = styled.div`
+  min-width: 114px;
+  width: 30%;
+  z-index: 2;
+  margin: 0 auto;
+  bottom: -20px;
+  position: relative;
+`;
+const Background = styled.div`
+  z-index: 1;
+  width: 40%;
+  margin: 0 auto;
+`;
+const BackgroundImg = styled.img`
+  width: 100%;
+`;
+
+const CoinBox = styled.div`
+  float: right;
+  padding-right: 1rem;
+  line-height: 34px;
   color: var(--text-second);
 `;
 
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
   const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.color);
   const buy_success = useSelector((state) => state.user.buy_success);
   const buyError = useSelector((state) => state.user.buyError);
   const dispatch = useDispatch();
@@ -141,10 +170,24 @@ const Market = ({ history }) => {
 
   return (
     <>
-      <Header />
-
+      {/* <Header /> */}
+      <Slider history={history} />
       <Responsive>
-        <SubTitle title={'조랭코인샵'} />
+        <SubTitle title={'조랭 마켓'} />
+        <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
+        <Wrapper>
+          <Character>
+            {/*TODO: Dynamic color binding*/}
+            <MainJoraeng
+              age={user.jorang_status}
+              mainColor={`#${user.main_color}`}
+              thirdColor={`#${user.third_color}`}
+            />
+          </Character>
+          <Background>
+            <BackgroundImg src={ground} alt=""></BackgroundImg>
+          </Background>
+        </Wrapper>
         <ContentBox>
           <Modal
             className="popup"
@@ -168,11 +211,20 @@ const Market = ({ history }) => {
             button={
               <ModalButtonField>
                 <ModalButtonLeft
+                  style={{ background: colors && colors[0] }}
                   onClick={() => buyItem(wantItem && wantItem.id)}
                 >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+                <ModalButtonRight
+                  style={{
+                    background: colors && colors[2],
+                    color: colors && colors[0],
+                  }}
+                  onClick={setModal}
+                >
+                  {'취소'}
+                </ModalButtonRight>
               </ModalButtonField>
             }
           ></Modal>

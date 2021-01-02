@@ -30,15 +30,9 @@ const Index = styled.div`
   border-radius: 4px 4px 0 0;
   margin-left: 8px;
   text-align: center;
-
+  border: 2px solid #212121;
+  border-bottom: none;
   cursor: pointer;
-`;
-
-const CoinBox = styled.div`
-  flex: none;
-  margin-right: 8px;
-  line-height: 34px;
-  color: var(--text-second);
 `;
 
 const ShopBox = styled.button`
@@ -51,10 +45,9 @@ const ShopBox = styled.button`
 const ItemPage = styled.div`
   width: 100%;
   height: ${(props) => (props.status === 'market' ? '640px' : '340px')};
-  /* height: 640px; */
-  background: var(--light-background);
+  /* height: 640px; */ /* background: var(--light-background); */
   border-radius: 4px;
-
+  border: 2px solid #212121;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -96,7 +89,7 @@ const ItemContainer = ({
   selectCategory,
   select,
 }) => {
-  const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.colors);
 
   function navigateMarketPage() {
     history.push('/market');
@@ -114,12 +107,10 @@ const ItemContainer = ({
                     key={index}
                     onClick={() => selectCategory(index)}
                     style={{
-                      background:
-                        select === index
-                          ? 'var(--primary-color)'
-                          : 'var(--light-background)',
                       color:
-                        select === index ? '#ffffff' : 'var(--primary-color)',
+                        select === index
+                          ? colors && colors[0]
+                          : colors && colors[2],
                     }}
                   >
                     {index === 'jorang_color'
@@ -133,9 +124,7 @@ const ItemContainer = ({
                 );
               })}
           </IndexList>
-          {status === 'market' ? (
-            <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
-          ) : (
+          {status === 'market' ? null : (
             <ShopBox onClick={navigateMarketPage}>{`조랭마켓 >`}</ShopBox>
           )}
         </ButtonWrapper>

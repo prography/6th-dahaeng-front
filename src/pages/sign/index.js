@@ -189,11 +189,12 @@ const Sign = ({ history }) => {
 
   useEffect(() => {
     if (authError) {
-      if (authError.includes('already exists')) {
-        console.log('이미 존재하는 회원');
-        setModal();
-        return;
-      }
+      // if (authError.includes('already exists')) {
+      //   console.log('이미 존재하는 회원');
+      //   setModal();
+      //   return;
+      // }
+      console.log(authError);
       if (!firstClick) {
         history.push('/emailAuth');
       }
@@ -206,7 +207,7 @@ const Sign = ({ history }) => {
       console.log(auth);
       history.push('/emailAuth');
     }
-  }, [auth, authError, dispatch, history]);
+  }, [auth, authError, dispatch, history, firstClick]);
 
   // useEffect(() => {
   //   if (user) {

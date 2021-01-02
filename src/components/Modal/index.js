@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import closeicon from 'assets/icon/closeicon.png';
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -31,21 +30,6 @@ const TitleField = styled.div``;
 const ContentField = styled.div``;
 
 const ButtonField = styled.div``;
-
-const CloseButton = styled.button`
-  float: right;
-  z-index: 5;
-  border: none;
-  outline: none;
-  background: none;
-
-  cursor: pointer;
-  /* padding: 1rem 1rem 0 0; */
-`;
-
-const CloseIcon = styled.img`
-  width: 10px;
-`;
 
 const Modal = ({ className, openModal, setModal, title, content, button }) => {
   return (

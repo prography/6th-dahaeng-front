@@ -7,8 +7,6 @@ import Responsive from '../../components/common/Responsive';
 
 const Wrapper = styled.div``;
 
-const BackButton = styled.div``;
-
 const SettingBox = styled.div`
   padding: 0 1rem 1rem 1rem;
   display: flex;
@@ -45,9 +43,9 @@ const Setting = ({ history }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
 
-  //TODO : 개인정보 수정
   const [inputTitle, setInputTitle] = useState('');
   const [inputNickname, setInputNickname] = useState('');
+  const [isTyping, setTyping] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -67,6 +65,7 @@ const Setting = ({ history }) => {
     dispatch(
       setUser(inputNickname, inputTitle, localStorage.getItem('profile')),
     );
+    setTyping(false);
   };
 
   const movePage = (page) => {
@@ -86,15 +85,29 @@ const Setting = ({ history }) => {
             개인 정보 설정
           </SettingTitle>
           <SettingInput
-            value={user.jorang_nickname}
+            value={inputNickname}
             placeholder="조랭 이름"
+            onChange={(e) => {
+              setInputNickname(e.target.value);
+              setTyping(true);
+            }}
           ></SettingInput>
           <SettingInput
-            value={user.title}
+            value={inputTitle}
             placeholder="서비스 이름"
+            onChange={(e) => {
+              setInputTitle(e.target.value);
+              setTyping(true);
+            }}
           ></SettingInput>
           <ButtonBox>
-            <SettingButton style={{ background: `#${colors && colors[0]}` }}>
+            <SettingButton
+              style={{
+                background: `#${colors && colors[0]}`,
+                opacity: isTyping ? 1 : 0.5,
+              }}
+              onClick={() => completeUpdate()}
+            >
               변경
             </SettingButton>
           </ButtonBox>

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import updateicon from '../../assets/icon/setting.png';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../../store/user';
-import Modal from '../../components/Modal';
 import SliderJoraeng from '../Joraeng/SliderJoraeng';
 
 const UserTitleBox = styled.div`
@@ -100,67 +98,6 @@ const UserText = styled.div`
   display: inline;
 `;
 
-// 수정 모달 디자인
-const ModalTitle = styled.div`
-  font-size: 18px;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
-const ModalButton = styled.button`
-  box-sizing: border-box;
-  float: right;
-  margin-top: 1rem;
-  border: none;
-  color: white;
-  height: 2rem;
-  background: var(--primary-color);
-  border-radius: 4px;
-  outline: none;
-`;
-
-const ModalInput = styled.input`
-  box-sizing: border-box;
-  flex: 2;
-  border: none;
-  border-bottom: 1px solid var(--text-fourth);
-  outline: none;
-  resize: none;
-  text-align: center;
-
-  line-height: 20px;
-  padding: 6px;
-
-  &::placeholder {
-    font-size: 12px;
-    color: var(--text-third);
-  }
-`;
-
-const ModalTextBox = styled.div`
-  display: flex;
-  flex: 3;
-  flex-wrap: wrap;
-  width: 80%;
-  margin-left: 10%;
-  align-items: center;
-`;
-
-const ModalText = styled.div`
-  font-size: 14px;
-  text-align: center;
-  padding-bottom: 0.5rem;
-  color: var(--text-second);
-`;
-
-const ModalBox = styled.div`
-  flex: 3;
-  height: 4rem;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-`;
-
 const ChevronRightInInfo = styled.img`
   height: 12px;
 `;
@@ -173,45 +110,11 @@ const InfoBox = ({ history }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
 
-  const [openModal, setOpenModal] = useState(false);
-  const setModal = () => {
-    setOpenModal(!openModal);
-  };
-
-  const [openUpdateModal, setOpenUpdateModal] = useState(false);
-  const setUpdateModal = () => {
-    if (openModal) {
-      setOpenModal(!openModal);
-      setOpenUpdateModal(!openUpdateModal);
-    }
-  };
-
-  //TODO : 개인정보 수정
-  const [inputTitle, setInputTitle] = useState('');
-  const [inputNickname, setInputNickname] = useState('');
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setInputTitle(user ? user.title : '');
-  }, [user]);
-
-  useEffect(() => {
-    setInputNickname(user ? user.jorang_nickname : '');
-  }, [user]);
 
   useEffect(() => {
     // dispatch(getUser(localStorage.getItem('profile')));
   }, [dispatch, user]);
-
-  const completeUpdate = () => {
-    //console.log(inputTitle, inputNickname);
-    dispatch(
-      setUser(inputNickname, inputTitle, localStorage.getItem('profile')),
-    );
-    setOpenUpdateModal(false);
-    //window.location.reload(false);
-  };
 
   const movePage = (page) => {
     history.push(`/${page}`);
@@ -260,44 +163,6 @@ const InfoBox = ({ history }) => {
           {/*<UserPicture alt="joraeng-egg" src={egg} />*/}
         </UserPictureBox>
       </UserInfoBox>
-
-      <Modal
-        className="popup"
-        openModal={openModal}
-        setModal={setModal}
-        title={<ModalTitle>조랭 정보 수정</ModalTitle>}
-        content={
-          <ModalBox>
-            <ModalTextBox>
-              <ModalInput
-                placeholder="나만의 다행 서비스 이름"
-                value={inputTitle}
-                onChange={(e) => setInputTitle(e.target.value)}
-              />
-            </ModalTextBox>
-            <ModalTextBox>
-              <ModalInput
-                placeholder="나만의 조랭닉네임"
-                value={inputNickname}
-                onChange={(e) => setInputNickname(e.target.value)}
-              />
-              <UserText>조랭</UserText>
-            </ModalTextBox>
-          </ModalBox>
-        }
-        button={<ModalButton onClick={setUpdateModal}>수정 완료</ModalButton>}
-      />
-
-      <Modal
-        className="popup"
-        openModal={openUpdateModal}
-        setModal={setUpdateModal}
-        title={<ModalTitle>정보 수정이 완료되었습니다!</ModalTitle>}
-        content={
-          <ModalText>{`'${inputTitle}', '${inputNickname}'(으)로 변경했어요!`}</ModalText>
-        }
-        button={<ModalButton onClick={completeUpdate}>확인</ModalButton>}
-      />
     </>
   );
 };

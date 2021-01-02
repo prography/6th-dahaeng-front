@@ -9,6 +9,12 @@ const SubTitleBlock = styled.div`
   //padding-top: 1rem;
 `;
 
+const BackButton = styled.div`
+  position: fixed;
+  top: 1.5rem;
+  left: 0.5rem;
+`;
+
 //styled(Responsive) ?
 const Wrapper = styled.div`
   height: 4rem;
@@ -23,9 +29,10 @@ const Wrapper = styled.div`
   }
 `;
 
-const SubTitle = ({ title }) => {
+const SubTitle = ({ title, back, backPage }) => {
   return (
     <SubTitleBlock>
+      {back ? <BackButton onClick={backPage}>뒤로가라</BackButton> : null}
       <Wrapper>{title}</Wrapper>
     </SubTitleBlock>
   );

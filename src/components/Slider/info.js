@@ -169,7 +169,7 @@ const setCoinModal = (e) => {
   alert('조랭이가 열심히 준비 중입니다!\n그 전까진 열심히 행복을 기록해주세요');
 };
 
-const InfoBox = ({}) => {
+const InfoBox = ({ history }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
 
@@ -213,12 +213,20 @@ const InfoBox = ({}) => {
     //window.location.reload(false);
   };
 
+  const movePage = (page) => {
+    history.push(`/${page}`);
+  };
+
   return (
     <>
       <UserTitleBox>
         {/* title 글자수 제한 있어야 함! 8글자 이내쯤 */}
         <UserTitle>{user.title}</UserTitle>
-        <UserInfoBtn onClick={setModal}>
+        <UserInfoBtn
+          onClick={() => {
+            movePage('setting');
+          }}
+        >
           <UpdateIcon src={updateicon} alt="" />
         </UserInfoBtn>
       </UserTitleBox>

@@ -132,7 +132,11 @@ const Main = ({ history }) => {
     <>
       <Slider history={history} />
       <FloatingButton history={history} />
-      <Responsive>
+      <Responsive
+        style={{
+          paddingTop: '4vh',
+        }}
+      >
         <QuestionBox>
           <Date>
             {Moment(

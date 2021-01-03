@@ -172,7 +172,7 @@ const Slider = ({ history }) => {
       </DrawerIcon>
       <div>
         {sliderOpenState && <SliderList />}
-        <Spacer />
+        {/* <Spacer /> */}
       </div>
     </>
   );

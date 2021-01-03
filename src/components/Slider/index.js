@@ -91,19 +91,23 @@ const Slider = ({ history }) => {
   };
 
   function navigateToBoxPage() {
+    setSliderOpenState(false);
     history.push('/box');
   }
 
   function navigateToMarketPage() {
+    setSliderOpenState(false);
     history.push('/market');
   }
 
   function navigateToDonationPage() {
+    setSliderOpenState(false);
     history.push('/donation');
   }
 
-  function navigateToReportPage() {
-    history.push('/feedback');
+  function navigateToMainPage() {
+    setSliderOpenState(false);
+    history.push('/');
   }
 
   const SliderList = () => (
@@ -124,6 +128,15 @@ const Slider = ({ history }) => {
       행복 기록 안 한 날 표시 어떻게 할지*/}
       <DailyRecord />
       <ListBox>
+        <SliderListElement onClick={navigateToMainPage}>
+          <SliderButton>홈</SliderButton>
+          <span>
+            <img
+              src={require('../../assets/icon/ChevronRight.svg')}
+              alt="chevron-right"
+            />
+          </span>
+        </SliderListElement>
         <SliderListElement onClick={navigateToBoxPage}>
           <SliderButton>행복보관함</SliderButton>
           <span>
@@ -151,15 +164,6 @@ const Slider = ({ history }) => {
             />
           </span>
         </SliderListElement>
-        <SliderListElement onClick={navigateToReportPage}>
-          <SliderButton>의견 보내기</SliderButton>
-          <span>
-            <img
-              src={require('../../assets/icon/ChevronRight.svg')}
-              alt="chevron-right"
-            />
-          </span>
-        </SliderListElement>
         {/* <LogoutBtn onClick={() => Trylogout()}>로그아웃</LogoutBtn> */}
       </ListBox>
     </SliderWrapper>
@@ -172,7 +176,7 @@ const Slider = ({ history }) => {
       </DrawerIcon>
       <div>
         {sliderOpenState && <SliderList />}
-        <Spacer />
+        {/* <Spacer /> */}
       </div>
     </>
   );

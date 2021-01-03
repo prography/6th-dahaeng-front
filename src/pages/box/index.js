@@ -214,7 +214,7 @@ const Box = ({ history }) => {
 
   return (
     <>
-      <Responsive>
+      <Responsive style={{ paddingTop: '4vh' }}>
         <Slider history={history} />
         <SortingBar>
           <SortingBox>

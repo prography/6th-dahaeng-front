@@ -58,7 +58,7 @@ const ContentBox = styled.div`
 
 const Date = styled.div`
   font-size: 18px;
-  padding: 0.5rem 1rem 0;
+  padding: 1rem 1rem 0;
   flex: none;
 `;
 

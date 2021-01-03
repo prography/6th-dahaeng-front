@@ -18,35 +18,47 @@ const Donation = lazy(() => import('./pages/donation'));
 const ServiceInfo = lazy(() => import('./pages/serviceInfo'));
 const Feedback = lazy(() => import('./pages/feedback'));
 const SnsLogin = lazy(() => import('./components/SnsLogin.js'));
+const Setting = lazy(() => import('./pages/setting'));
 
 ReactGA.initialize('UA-17294375-01');
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 const RNListener = () => {
   /** react native 환경에서만 가능 */
-  // const listener = (event) => {
-  //   const { data, type } = JSON.parse(event.data);
-  //   if (type === 'TOKEN') {
-  //     // type이 TOKEN이기 때문에 이곳에 콘솔이 찍히게 됩니다.
-  //     console.log(data); // xxxxx
-  //   } else if (type === 'NOTIFICATION') {
-  //   }
-  // };
+  let token = '';
+  const listener = (event) => {
+    token = event.data;
+    //alert(token);
+    localStorage.setItem('firebase', token);
+  };
+
   // if (window.ReactNativeWebView) {
-  //   /** android */
-  //   document.addEventListener('message', listener);
   //   /** ios */
+  //   alert('ios');
   //   window.addEventListener('message', listener);
-  // } else {
-  //   // 모바일이 아니라면 모바일 아님을 alert로 띄웁니다.
-  //   alert({ message: 'not mobile' });
+  //   localStorage.setItem('firebase', token);
   // }
+  // if (document.ReactNativeWebView) {
+  //   alert('android');
+  //   document.addEventListener('message', listener);
+  //   localStorage.setItem('firebase', token);
+  // }
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent,
+    )
+  ) {
+    //alert('mobile');
+    document.addEventListener('message', listener);
+    window.addEventListener('message', listener);
+  }
+  return token;
 };
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <RNListener></RNListener> */}
+      <RNListener></RNListener>
       {/* <Header></Header> */}
       <Suspense fallback={<Loading />}>
         <Switch>
@@ -63,6 +75,7 @@ function App() {
           <Route path="/closet" component={Closet} exact></Route>
           <Route path="/serviceInfo" component={ServiceInfo} exact></Route>
           <Route path="/feedback" component={Feedback} exact></Route>
+          <Route path="/setting" component={Setting} exact></Route>
           <Route
             path="/social/kakao_login_callback"
             component={SnsLogin}

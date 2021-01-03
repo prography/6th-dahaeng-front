@@ -12,7 +12,6 @@ import {
 } from 'store/auth';
 import axios from 'axios';
 import { serverURL } from './index';
-import { keyframes } from 'styled-components';
 
 // const loginSaga = createRequestSaga(LOGIN, authApi.login);
 // const signSaga = createRequestSaga(SIGN, authApi.sign);
@@ -91,17 +90,19 @@ function* signSaga(action) {
 
     // const res = yield call(authApi.sign, action.payload); //api.login(action.payload)와 같다
 
-    // console.log(res);
-
+    const token = localStorage.getItem('firebase');
+    //alert(token);
     const param = {
       profile: {
         email: action.payload.email,
         password: action.payload.password,
+        uid: token ? token : 'ex',
       },
     };
     const res = yield call([axios, 'post'], `${serverURL}/signup/`, param);
 
     console.log('response: ', res);
+    alert(JSON.stringify(res));
     localStorage.setItem('accessToken', res.data.message.token);
     if (res.data.response === 'success') {
       yield put({

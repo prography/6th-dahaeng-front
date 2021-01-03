@@ -7,7 +7,6 @@ import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 import FloatingButton from '../../components/MainFloatingButton';
 import Slider from '../../components/Slider';
-
 import ground from 'assets/main/ground.png';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useState } from 'react';
@@ -133,7 +132,11 @@ const Main = ({ history }) => {
     <>
       <Slider history={history} />
       <FloatingButton history={history} />
-      <Responsive>
+      <Responsive
+        style={{
+          paddingTop: '4vh',
+        }}
+      >
         <QuestionBox>
           <Date>
             {Moment(

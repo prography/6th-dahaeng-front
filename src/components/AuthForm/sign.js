@@ -65,8 +65,8 @@ const Input = styled.input`
 
 const ButtonBox = styled.div`
   flex: 1;
-  margin-left: 'none';
-  width: '100%';
+  margin-left: 0;
+  width: 100%;
 
   display: flex;
   flex-direction: column;

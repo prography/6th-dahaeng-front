@@ -272,7 +272,11 @@ const Record = ({ history }) => {
   };
   return (
     <>
-      <Responsive>
+      <Responsive
+        style={{
+          paddingTop: '4vh',
+        }}
+      >
         <TitleText>
           오늘의 행복 기록
           <CloseButton>

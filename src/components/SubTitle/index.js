@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import backIcon from '../../assets/icon/backicon.png';
 
 const SubTitleBlock = styled.div`
-  /* position: fixed; */
+  position: fixed;
   width: 100%;
   background: white;
   margin: 0 auto;

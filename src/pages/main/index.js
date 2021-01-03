@@ -144,7 +144,7 @@ const Main = ({ history }) => {
             ).format('MM-DD')}
           </Date>
           <Question onClick={navigateRecord}>
-            <QuestionHighlight thirdColor={`#${user.third_color}`}>
+            <QuestionHighlight thirdColor={`#${colors && colors[2]}`}>
               {question && question.question}
             </QuestionHighlight>
           </Question>

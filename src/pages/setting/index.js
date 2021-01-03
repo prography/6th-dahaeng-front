@@ -23,6 +23,7 @@ const SettingInput = styled.input`
   border: none;
   padding-bottom: 1rem;
   padding-left: 0;
+  color: #212121;
 `;
 
 const ButtonBox = styled.div`
@@ -37,7 +38,9 @@ const SettingButton = styled.button`
   float: right;
 `;
 
-const SettingService = styled.div``;
+const SettingService = styled.div`
+  color: #212121;
+`;
 
 const Setting = ({ history }) => {
   const user = useSelector((state) => state.user.user);

@@ -202,6 +202,10 @@ const Login = ({ history }) => {
     dispatch(initForm('login'));
   }, [dispatch]);
 
+  const setModal = () => {
+    setOpenModal(!openModal);
+  };
+
   useEffect(() => {
     if (authError === '유효하지않은 계정입니다.') {
       console.log('회원가입 필요');
@@ -230,9 +234,6 @@ const Login = ({ history }) => {
   }, [auth, authError, dispatch, history, user, has_jorang, token, setModal]);
 
   const [openModal, setOpenModal] = useState(false);
-  const setModal = () => {
-    setOpenModal(!openModal);
-  };
 
   const moveServiceInfo = () => {
     history.push('/serviceInfo');

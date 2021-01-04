@@ -18,6 +18,7 @@ const Donation = lazy(() => import('./pages/donation'));
 const ServiceInfo = lazy(() => import('./pages/serviceInfo'));
 const Feedback = lazy(() => import('./pages/feedback'));
 const SnsLogin = lazy(() => import('./components/SnsLogin.js'));
+const Setting = lazy(() => import('./pages/setting'));
 
 ReactGA.initialize('UA-17294375-01');
 ReactGA.pageview(window.location.pathname + window.location.search);
@@ -74,6 +75,7 @@ function App() {
           <Route path="/closet" component={Closet} exact></Route>
           <Route path="/serviceInfo" component={ServiceInfo} exact></Route>
           <Route path="/feedback" component={Feedback} exact></Route>
+          <Route path="/setting" component={Setting} exact></Route>
           <Route
             path="/social/kakao_login_callback"
             component={SnsLogin}

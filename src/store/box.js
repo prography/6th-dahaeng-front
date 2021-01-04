@@ -55,40 +55,11 @@ export const getToday = createAction(GET_TODAY, (id) => ({ id }));
 
 const initialState = {
   question: {
-    // last_login: null,
-    // question: null,
-    last_login: '00',
-    question: '쫌 더 긴 문장으로 테스트를 해봐야겠는데용',
+    last_login: null,
+    question: null,
   },
   record: null,
-  // records: null,
-
-  records: [
-    {
-      created_at: 2020 - 8 - 14,
-      question: '주히 바보',
-      detail: '다스 몽총',
-    },
-
-    {
-      created_at: 2020 - 8 - 14,
-      question: '주히 바보',
-      detail: '다스 몽총',
-    },
-
-    {
-      created_at: 2020 - 8 - 14,
-      question: '주히 바보',
-      detail: '다스 몽총',
-    },
-
-    {
-      created_at: 2020 - 8 - 14,
-      question: '주히 바보',
-      detail: '다스 몽총',
-    },
-  ],
-
+  records: null,
   searchs: null,
 
   // searchs: [

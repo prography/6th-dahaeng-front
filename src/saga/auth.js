@@ -102,7 +102,7 @@ function* signSaga(action) {
     const res = yield call([axios, 'post'], `${serverURL}/signup/`, param);
 
     console.log('response: ', res);
-    alert(JSON.stringify(res));
+    // alert(JSON.stringify(res));
     localStorage.setItem('accessToken', res.data.message.token);
     if (res.data.response === 'success') {
       yield put({

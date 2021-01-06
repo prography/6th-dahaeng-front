@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "animate.css": "^4.1.0",
     "animejs": "^3.2.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "firebase": "^7.21.0",
     "immer": "^6.0.5",
     "moment": "^2.26.0",

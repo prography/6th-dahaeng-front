@@ -72,7 +72,12 @@ function* getUserSaga(action) {
     if (res.data.response === 'success') {
       yield put({
         type: GETUSER_SUCCESS,
-        payload: res.data.message,
+        payload: {
+          user: res.data.message,
+          jorang_color: res.data.message.jorang_items.filter(
+            (item) => item.item.item_type === 'jorang_color',
+          )[0].item.item_detail,
+        },
       });
     } else {
       yield put({

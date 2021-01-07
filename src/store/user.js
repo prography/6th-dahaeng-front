@@ -47,6 +47,7 @@ export const feedback = createAction(FEEDBACK, (content) => ({ content }));
 
 const initialState = {
   colors: [],
+  jorang_color: '',
   user: {
     id: null,
     jorang_nickname: null,
@@ -55,18 +56,6 @@ const initialState = {
     // TODO: SET-UP DEFAULT
     jorang_status: '0',
     jorang_color: '',
-    // colors:
-    //   this.jorang_color === 'A26C8F'
-    //     ? [this.jorang_color, 'C9B4C2', 'D9CFD6']
-    //     : this.jorang_color === 'F8DB5C'
-    //     ? [this.jorang_color, 'ECE1AE', 'E9E3CD']
-    //     : this.jorang_color === '73A38F'
-    //     ? [this.jorang_color, 'EFB6A8', 'EAD0CA']
-    //     : this.jorang_color === 'FF714D'
-    //     ? [this.jorang_color, 'B7CAC2', 'D1D9D6']
-    //     : this.jorang_color === '5CA1D2'
-    //     ? [this.jorang_color, 'AEC8DD', 'CDD9E2']
-    //     : null,
   },
   buy_success: false,
   buyError: '',
@@ -170,18 +159,18 @@ const user = handleActions(
 
     [GETUSER_SUCCESS]: (state, { payload: user }) => ({
       ...state,
-      user: user,
+      user: user.user,
       colors:
-        user.jorang_color === 'A26C8F'
-          ? [user.jorang_color, 'C9B4C2', 'D9CFD6']
-          : user.jorang_color === 'F8DB5C'
-          ? [user.jorang_color, 'ECE1AE', 'E9E3CD']
-          : user.jorang_color === '73A38F'
-          ? [user.jorang_color, 'EFB6A8', 'EAD0CA']
-          : user.jorang_color === 'FF714D'
-          ? [user.jorang_color, 'B7CAC2', 'D1D9D6']
-          : user.jorang_color === '5CA1D2'
-          ? [user.jorang_color, 'AEC8DD', 'CDD9E2']
+        user.jorang_color === 'A26C8F' //PURPLE
+          ? [user.jorang_color, 'D9C4D2', 'EDE3EB']
+          : user.jorang_color === 'F8DB5C' //YELLOW
+          ? [user.jorang_color, 'FDF0BC', 'FEF8E1']
+          : user.jorang_color === 'FF714D' //RED
+          ? [user.jorang_color, 'F5C2B2', 'FAE3DC']
+          : user.jorang_color === '73A38F' //GREEN
+          ? [user.jorang_color, 'C6DAD2', 'E5EEEB']
+          : user.jorang_color === '5CA1D2' //BLUE
+          ? [user.jorang_color, 'BDD8EC', 'E1EEF7']
           : null,
     }),
     [GETUSER_FAIL]: (state, { payload: error }) => ({

@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import Moment from 'moment';
 
 import deleteIcon from '../../assets/icon/deleteicon.png';
+import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
   box-shadow: var(--card-shadow);
-  border-radius: var(--small-border-radius);
+  border: 3px solid #212121;
   background-color: #ffffff;
 
   position: relative;
@@ -31,10 +32,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  cursor: pointer;
   transition: 0.125s ease-in-out;
   &:hover {
-    background-color: var(--light-background);
+    background-color: ${(props) => props.thirdColor};
   }
 `;
 
@@ -58,7 +58,7 @@ const ContentBox = styled.div`
 
 const Date = styled.div`
   font-size: 18px;
-  padding: 0.5rem 1rem 0;
+  padding: 1rem 1rem 0;
   flex: none;
 `;
 
@@ -69,8 +69,8 @@ const Question = styled.div`
   & > span {
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0) 60%,
-      var(--secondary-color) 40%
+      rgba(255, 255, 255, 0) 50%,
+      ${(props) => props.thirdColor} 50%
     );
   }
 
@@ -101,7 +101,7 @@ const DropdownWrapper = styled.div`
 const DropdownOpenWrapper = styled.div`
   width: 38px;
   border-radius: 4px;
-  background-color: var(--light-background);
+  background-color: #ffffff;
 
   position: absolute;
   right: 0;
@@ -115,8 +115,6 @@ const DropdownButton = styled.button`
   width: 38px;
   padding: 7px 4px 4px 4px;
   background: transparent;
-
-  cursor: pointer;
 `;
 
 const DropdownIcon = styled.img`
@@ -125,13 +123,12 @@ const DropdownIcon = styled.img`
 
 const DropdownList = styled.div`
   position: absolute;
-  bottom: -32px;
+  bottom: -28px;
   right: 0;
 
   z-index: 2;
 
   box-shadow: var(--card-shadow);
-  border-radius: var(--small-border-radius);
   background-color: #ffffff;
 `;
 
@@ -143,10 +140,8 @@ const DropdownOption = styled.button`
   line-height: 24px;
   padding: 4px;
   border: none;
-  color: var(--text-second);
+  color: #212121;
   font-size: 14px;
-
-  cursor: pointer;
 `;
 
 const checkTitleLength = (text) => {
@@ -168,13 +163,15 @@ const checkDetailLength = (text) => {
 const FeedBox = ({ record, setModal }) => {
   const [openDropdown, setOpenDropdown] = useState(false);
 
+  const colors = useSelector((state) => state.user.colors);
+
   const toggleDropdown = () => {
     setOpenDropdown(!openDropdown);
   };
 
   return (
     <>
-      <Wrapper>
+      <Wrapper thirdColor={`#${colors && colors[2]}`}>
         <CharacterBox>
           <CharacterImg
             alt=""
@@ -183,7 +180,11 @@ const FeedBox = ({ record, setModal }) => {
         </CharacterBox>
         <ContentBox>
           <Date>{Moment(record.created_at).format('MM-DD')}</Date>
-          <Question>{checkTitleLength(record.question)}</Question>
+          <Question>
+            <span thirdColor={`#${colors && colors[2]}`}>
+              {checkTitleLength(record.question)}
+            </span>
+          </Question>
           <Detail>{checkDetailLength(record.detail)}</Detail>
         </ContentBox>
         {openDropdown ? (

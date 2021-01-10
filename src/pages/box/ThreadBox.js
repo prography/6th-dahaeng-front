@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Moment from 'moment';
 
-import placeholderImage from '../../assets/joraeng/default-joraeng.png';
+import placeholderImage from '../../assets/joraeng/thread-placeholder.png';
 import deleteIcon from '../../assets/icon/deleteicon.png';
+import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 260px;
   margin: 0 auto;
   margin-top: 1.5rem;
   background-color: white;
   box-shadow: var(--card-shadow);
-  border-radius: var(--small-border-radius);
+  border: 3px solid #212121;
   padding: 0.5rem;
 
   position: relative;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 const TitleBox = styled.div`
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
 `;
 
 const Date = styled.div`
@@ -30,7 +30,7 @@ const Date = styled.div`
 `;
 
 const Question = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   display: inline-block;
   width: 100%;
   overflow: hidden;
@@ -40,27 +40,26 @@ const Question = styled.div`
   & > span {
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0) 60%,
-      var(--secondary-color) 40%
+      rgba(255, 255, 255, 0) 50%,
+      ${(props) => props.thirdColor} 50%
     );
   }
 `;
 
 const ContentBox = styled.div`
   display: flex;
-  flex-direction: row;
-  /* border: 1px solid; */
+  flex-direction: column;
   padding: 0 1rem 1rem 1rem;
 `;
 
 const CharacterBox = styled.div`
-  flex: none;
   box-sizing: border-box;
+  text-align: center;
+  margin: 5% auto;
+  border: 2px solid #212121;
   width: 7rem;
   height: 7rem;
-  border: 1px solid #e9e9e9;
   overflow: hidden;
-  border-radius: var(--small-border-radius);
 `;
 
 const CharacterImg = styled.img`
@@ -75,11 +74,9 @@ const CharacterImg = styled.img`
 const Detail = styled.textarea`
   box-sizing: border-box;
   height: 7rem;
-  margin-left: 1rem;
   outline: none;
   border: none;
   resize: none;
-  flex: 1;
 
   background-attachment: local;
   background-image: linear-gradient(to right, white 10px, transparent 10px),
@@ -87,12 +84,12 @@ const Detail = styled.textarea`
     repeating-linear-gradient(
       white,
       white 30px,
-      #e9e9e9 30px,
-      #e9e9e9 31px,
-      white 31px
+      #212121 31px,
+      #212121 31px,
+      white 32px
     );
   line-height: 31px;
-  padding: 8px;
+  padding: 8px 10px;
 `;
 
 const DropdownWrapper = styled.div`
@@ -109,13 +106,11 @@ const DropdownWrapper = styled.div`
 const DropdownOpenWrapper = styled.div`
   width: 38px;
   border-radius: 4px;
-  background-color: var(--light-background);
+  background-color: #ffffff;
 
   position: absolute;
   right: 0;
   bottom: 0;
-  /* max-width: 96px;
-  max-height: 64px; */
 `;
 
 const DropdownButton = styled.button`
@@ -123,8 +118,6 @@ const DropdownButton = styled.button`
   width: 38px;
   padding: 7px 4px 4px 4px;
   background: transparent;
-
-  cursor: pointer;
 `;
 
 const DropdownIcon = styled.img`
@@ -133,13 +126,12 @@ const DropdownIcon = styled.img`
 
 const DropdownList = styled.div`
   position: absolute;
-  bottom: -32px;
+  bottom: -28px;
   right: 0;
 
   z-index: 2;
 
   box-shadow: var(--card-shadow);
-  border-radius: var(--small-border-radius);
   background-color: #ffffff;
 `;
 
@@ -151,10 +143,8 @@ const DropdownOption = styled.button`
   line-height: 24px;
   padding: 4px;
   border: none;
-  color: var(--text-second);
+  color: #212121;
   font-size: 14px;
-
-  cursor: pointer;
 `;
 
 const ThreadBox = ({ record, setModal }) => {
@@ -162,6 +152,8 @@ const ThreadBox = ({ record, setModal }) => {
   // const keywordValue = input.value;
   // console.log(keywordValue);
   const [openDropdown, setOpenDropdown] = useState(false);
+
+  const colors = useSelector((state) => state.user.colors);
 
   const toggleDropdown = () => {
     setOpenDropdown(!openDropdown);
@@ -172,7 +164,7 @@ const ThreadBox = ({ record, setModal }) => {
       <TitleBox>
         <Date>{Moment(record.created_at).format('MM-DD')}</Date>
         <Question>
-          <span>{record.question}</span>
+          <span thirdColor={`#${colors && colors[2]}`}>{record.question}</span>
         </Question>
       </TitleBox>
       <ContentBox>

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
 import noItemJoraeng from 'assets/joraeng/no-item.png';
 import { useSelector } from 'react-redux';
 
@@ -60,16 +59,6 @@ const ItemPage = styled.div`
   }
 `;
 
-const ImgBox = styled.div`
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-`;
-
 const JoraengImg = styled.img`
   width: 150px;
   margin: 0 auto;
@@ -89,7 +78,6 @@ const ItemContainer = ({
   selectCategory,
   select,
 }) => {
-  const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
 
   function navigateMarketPage() {
@@ -118,8 +106,8 @@ const ItemContainer = ({
                       ? '컬러'
                       : index === 'background'
                       ? '배경'
-                      : index === 'item'
-                      ? '아이템'
+                      : index === 'etc'
+                      ? '기타'
                       : null}
                   </Index>
                 );
@@ -132,22 +120,13 @@ const ItemContainer = ({
 
         {/* item 없을 때 화면 수정해야 함 */}
         <ItemPage status={status}>
-          {select === 'jorang_color' ? (
+          {itemBoxs ? (
             itemBoxs
           ) : (
-            <ImgBox>
-              {status === 'market' ? (
-                <>
-                  <WaitComment>아직 준비 중입니다!</WaitComment>
-                  <JoraengImg src={waitJoraeng} alt="" />
-                </>
-              ) : (
-                <>
-                  <WaitComment>아이템이 하나도 없어요...</WaitComment>
-                  <JoraengImg src={noItemJoraeng} alt="" />
-                </>
-              )}
-            </ImgBox>
+            <>
+              <WaitComment>아이템이 하나도 없어요...</WaitComment>
+              <JoraengImg src={noItemJoraeng} alt="" />
+            </>
           )}
         </ItemPage>
       </Wrapper>

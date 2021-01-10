@@ -14,14 +14,6 @@ const WaitTitle = styled.div`
   font-size: 18px;
   margin: 3rem;
 `;
-const ImgWrapper = styled.div`
-  flex: none;
-  flex-direction: row;
-`;
-
-const JoraengImg = styled.img`
-  width: 200px;
-`;
 //todo)튜토리얼 넣을 부분
 const ServiceInfo = () => {
   return (

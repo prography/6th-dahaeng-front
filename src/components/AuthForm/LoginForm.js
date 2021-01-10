@@ -2,17 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const Wrapper = styled.div`
+const LoginFormWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
-  border: 1px;
+  padding: 10px;
 `;
 
-const InputWrapper = styled.div`
-  flex: 1;
-`;
-
-const InputBox = styled.div`
-  flex: 3;
+const InputButtonWrapper = styled.div`
+width: 100%;
 `;
 
 const LabelWrapper = styled.div`
@@ -43,7 +40,7 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid var(--primary-color);
+    border: 1px solid #A26C8F;
     color: #4d4d4d;
   }
   &::placeholder {
@@ -51,110 +48,72 @@ const Input = styled.input`
   }
 `;
 
-const ButtonBox = styled.div`
-  margin-left: 1rem;
-  width: 120px;
-  flex: none;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-`;
-
-const Button = styled.button`
+const LoginButton = styled.button`
   outline: none;
-  background: var(--primary-color);
-  font-size: 14px;
+  background: #A26C8F;
+  font-size: 16px;
   color: white;
   border: none;
   border-radius: 4px;
-  height: 108px;
+  margin-top: 15px;
   width: 100%;
+  padding: 14px 0 13px;
 `;
 
-const Footer = styled.div`
-  display: flex;
+const LoginFooter = styled.div`
   margin-top: 1rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #e9e9e9;
+  text-align: center;
 `;
 
 const FooterContent = styled.span`
   font-size: 14px;
-  color: #4d4d4d;
-  text-decoration: none;
-  margin-right: 1rem;
+  color: #9F9F9F;
 `;
 
-const LoginForm = ({
-  form,
-  onChange,
-  onSubmit,
-  status,
-}) => {
+const LoginForm = ({ form, onChange, onSubmit, status, }) => {
   return (
-    <Wrapper>
-      <form
-        onSubmit={onSubmit}
-        style={{
-          width: '100%',
-          display: 'flex',
-        }}
-      >
-        <InputWrapper>
-        <InputBox>
+    <LoginFormWrapper>
+      <form onSubmit={onSubmit}>
+        <InputButtonWrapper>
           <LabelWrapper>
             <KeyText>이메일</KeyText>
             {status.email === 'empty' ? null : (
               <ErrorMessage>{status.email}</ErrorMessage>
             )}
           </LabelWrapper>
-            <>
-              <Input
-                name="email"
-                placeholder="이메일을 입력해주세요"
-                onChange={onChange}
-                value={form.email}
-              ></Input>
-            </>
+          <Input
+            name="email"
+            placeholder="이메일을 입력해주세요"
+            onChange={onChange}
+            value={form.email}/>
           <LabelWrapper>
             <KeyText>비밀번호</KeyText>
             {status.pwd === 'empty' ? null : (
               <ErrorMessage>{status.pwd}</ErrorMessage>
             )}
           </LabelWrapper>
-            <>
-              <Input
-                name="password"
-                placeholder="비밀번호를 입력해주세요"
-                type="password"
-                onChange={onChange}
-                value={form.password}
-              ></Input>
-            </>
-        </InputBox>
-      </InputWrapper>
-
-        <ButtonBox>
-            <Button onClick={onSubmit}>
-              내 행복에
-              <br /> 로그인
-            </Button>
-        </ButtonBox>
+          <Input
+            name="password"
+            placeholder="비밀번호를 입력해주세요"
+            type="password"
+            onChange={onChange}
+            value={form.password}/>
+          <LoginButton onClick={onSubmit}>
+            내 행복에 로그인
+          </LoginButton>
+        </InputButtonWrapper>
       </form>
 
-        <Footer>
-          <FooterContent>아이디/비밀번호찾기</FooterContent>
-          <FooterContent>
-            <Link
-              to="/sign"
-              style={{ textDecoration: 'none', color: '4D4D4D' }}
-            >
-              회원가입
-            </Link>
-          </FooterContent>
-        </Footer>
-    </Wrapper>
+      <LoginFooter>
+        {/*<FooterContent>아이디/비밀번호찾기</FooterContent>*/}
+        <FooterContent>
+          <Link to="/sign">
+            다행에 가입해서 함께 행복을 찾아보세요!
+          </Link>
+        </FooterContent>
+      </LoginFooter>
+    </LoginFormWrapper>
   );
 };
 

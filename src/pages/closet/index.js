@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { setItems, getCloset } from '../../store/user';
 import Modal from '../../components/Modal';
@@ -10,8 +9,6 @@ import ItemBox from './ItemBox';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import Slider from '../../components/Slider';
-import MainJoraeng from '../../components/Joraeng/MainJoraeng';
-import ground from 'assets/main/ground.png';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -22,13 +19,12 @@ const ContentBox = styled.div`
   text-align: center;
 `;
 
-const SetButton = styled.button`
-  width: 64px;
-  height: 30px;
+const ApplyBox = styled.div`
   float: right;
-  background: var(--primary-color);
-  border-radius: 4px;
-  color: #ffffff;
+  padding-right: 1rem;
+  line-height: 34px;
+  color: var(--text-second);
+  padding-top: 4rem;
 `;
 
 const RoomWrapper = styled.div`
@@ -71,31 +67,8 @@ const ModalButtonRight = styled.button`
   color: var(--primary-color);
 `;
 
-const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: 1024px;
-`;
-const Character = styled.div`
-  min-width: 114px;
-  width: 30%;
-  z-index: 2;
-  margin: 0 auto;
-  bottom: -20px;
-  position: relative;
-`;
-const Background = styled.div`
-  z-index: 1;
-  width: 40%;
-  margin: 0 auto;
-`;
-const BackgroundImg = styled.img`
-  width: 100%;
-`;
-
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
-  const user = useSelector((state) => state.user.user);
-  const colors = useSelector((state) => state.user.colors);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -103,29 +76,15 @@ const Closet = ({ history }) => {
   const setModal = (id) => {
     setOpenModal(!openModal);
   };
-
-  const [applyItems, setApplyItems] = useState({
-    // color: `#${
-    //   hasItems &&
-    //   hasItems.filter(
-    //     (item) =>
-    //       item.item.item_type === 'jorang_color' && item.is_worn === true,
-    //   )[0].item.item_detail
-    // }`,
-    color: `#${user.jorang_color}`,
-    id: -1,
-
-    // background: hasItems.filter(
-    //   (item) => item.category === 'color' && item.apply === true,
-    // ),
-    // item: hasItems.filter(
-    //   (item) => item.category === 'color' && item.apply === true,
-    // ),
-  });
+  // {
+  //   color: `#${user.jorang_color}`,
+  //   id: -1,
+  // }
+  const [applyItems, setApplyItems] = useState([]);
   const applyItem = (applyItem) => {
     if (applyItem.item.item_type === 'jorang_color') {
       setApplyItems({
-        color: `#${applyItem.item.item_detail}`,
+        color: applyItem.item.item_detail,
         id: applyItem.item.id,
       });
     } else {
@@ -140,7 +99,7 @@ const Closet = ({ history }) => {
     //refresh item list and coin and jorang view
   };
 
-  const indexs = ['jorang_color', 'background', 'item'];
+  const indexs = ['jorang_color', 'background', 'etc'];
   const [select, setSelect] = useState('jorang_color');
   const selectCategory = (index) => {
     setSelect(index);
@@ -151,23 +110,17 @@ const Closet = ({ history }) => {
 
   return (
     <>
-      <Slider history={history}></Slider>
       <Responsive>
         <SubTitle title={'조랭 옷장'} />
-        <SetButton onClick={setModal}>{'착용하기'}</SetButton>
-        <Wrapper>
-          <Character>
-            {/*TODO: Dynamic color binding*/}
-            <MainJoraeng
-              age={user.jorang_status}
-              mainColor={`#${colors && colors[0]}`}
-              thirdColor={`#${colors && colors[2]}`}
-            />
-          </Character>
-          <Background>
-            <BackgroundImg src={ground} alt=""></BackgroundImg>
-          </Background>
-        </Wrapper>
+        <Slider history={history} />
+        <ApplyBox onClick={setModal}>{'착용하기'}</ApplyBox>
+        <RoomWrapper>
+          <Room
+            closet={true}
+            hasItems={hasItems}
+            applyItems={applyItems}
+          ></Room>
+        </RoomWrapper>
         <ContentBox>
           <Modal
             className="popup"

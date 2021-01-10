@@ -6,6 +6,8 @@ const Responsive = styled.div`
   max-width: 768px;
   //padding-top: 4vh;
   margin: 0 auto;
+  max-height: 100%;
+  overflow-y: hidden;
 `;
 
 // const Responsive = ({ children, ...rest }) => {

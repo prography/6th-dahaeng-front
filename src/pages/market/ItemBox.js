@@ -75,7 +75,7 @@ const ItemPrice = styled.div`
   text-align: left;
 `;
 
-const ItemBox = ({ item, item_has, setModal }) => {
+const ItemBox = ({ item, item_has, setModal, item_type }) => {
   return (
     <>
       {item_has ? (

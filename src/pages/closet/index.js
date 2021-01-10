@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import ItemContainer from '../../components/ItemContainer';
 import { setItems, getCloset } from '../../store/user';
 import Modal from '../../components/Modal';
@@ -10,7 +9,6 @@ import ItemBox from './ItemBox';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import Slider from '../../components/Slider';
-import { app } from 'firebase';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -72,7 +70,6 @@ const ModalButtonRight = styled.button`
 
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
-  const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Responsive from '../../components/common/Responsive';
 import styled from 'styled-components';
-import Header from '../../components/Header';
 import SubTitle from '../../components/SubTitle';
 import { feedback } from '../../store/user';
 import { useDispatch, useSelector } from 'react-redux';

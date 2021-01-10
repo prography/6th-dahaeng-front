@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
 import noItemJoraeng from 'assets/joraeng/no-item.png';
 import { useSelector } from 'react-redux';
 
@@ -58,16 +57,6 @@ const ItemPage = styled.div`
   @media screen and (max-width: 480px) {
     padding: 10px;
   }
-`;
-
-const ImgBox = styled.div`
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
 `;
 
 const JoraengImg = styled.img`

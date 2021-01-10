@@ -8,7 +8,6 @@ import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import ItemBox from './ItemBox';
 import Slider from '../../components/Slider';
-import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import Room from '../main/Room';
 
 const ContentBox = styled.div`
@@ -58,28 +57,6 @@ const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-`;
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: 1024px;
-  padding-top: 4rem;
-`;
-const Character = styled.div`
-  min-width: 114px;
-  width: 30%;
-  z-index: 2;
-  margin: 0 auto;
-  bottom: -20px;
-  position: relative;
-`;
-const Background = styled.div`
-  z-index: 1;
-  width: 40%;
-  margin: 0 auto;
-`;
-const BackgroundImg = styled.img`
-  width: 100%;
 `;
 
 const CoinBox = styled.div`

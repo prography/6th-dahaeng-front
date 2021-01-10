@@ -70,10 +70,6 @@ const Background = styled.div`
   width: 100%;
 `;
 
-const BackgroundImg = styled.img`
-  width: 100%;
-`;
-
 const Main = ({ history }) => {
   const [inputText, setInputText] = useState('');
 

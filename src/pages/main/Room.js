@@ -24,7 +24,14 @@ const Background = styled.div`
 const BackgroundImg = styled.img`
   width: 100%;
 `;
-const Etc = styled.div``;
+const Etc = styled.div`
+  z-index: 3;
+  width: 17%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 130px;
+  left: 50px;
+`;
 const EtcImg = styled.img`
   width: 100%;
 `;
@@ -40,22 +47,34 @@ const Room = ({ hasItems, applyItems, closet }) => {
         <MainJoraeng
           age={user.jorang_status}
           mainColor={
-            closet && applyItems.length > 0
-              ? `#${applyItems.color.detail}`
+            closet && applyItems && applyItems.item_type === 'jorang_color'
+              ? `#${applyItems.item_detail}`
               : `#${colors[0]}`
           }
           thirdColor={
-            closet && applyItems.length > 0
-              ? `#${applyItems.color.detail}`
+            closet && applyItems && applyItems.item_type === 'jorang_color'
+              ? `#${
+                  applyItems.item_detail === 'A26C8F'
+                    ? 'EDE3EB'
+                    : applyItems.item_detail === 'F8DB5C'
+                    ? 'FEF8E1'
+                    : applyItems.item_detail === 'FF714D'
+                    ? 'FAE3DC'
+                    : applyItems.item_detail === '73A38F'
+                    ? 'E5EEEB'
+                    : applyItems.item_detail === '5CA1D2'
+                    ? 'E1EEF7'
+                    : ''
+                }`
               : `#${colors[2]}`
           }
         />
       </Character>
       <Background>
-        {closet && applyItems.length > 0 ? (
+        {closet && applyItems && applyItems.item_type === 'background' ? (
           <BackgroundImg
             src={require(`../../assets/item/background/${
-              applyItems && applyItems.background.detail
+              applyItems && applyItems.item_detail
             }.png`)}
             alt=""
           />
@@ -72,11 +91,9 @@ const Room = ({ hasItems, applyItems, closet }) => {
         )}
       </Background>
       <Etc>
-        {closet && applyItems.length > 0 && applyItems.etc ? (
+        {closet && applyItems && applyItems.item_type === 'etc' ? (
           <EtcImg
-            src={require(`../../assets/item/etc/${
-              applyItems && applyItems.etc.detail
-            }.png`)}
+            src={require(`../../assets/item/etc/${applyItems.item_detail}.png`)}
             alt=""
           />
         ) : hasItems && hasItems.etc ? (

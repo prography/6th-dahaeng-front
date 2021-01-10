@@ -81,15 +81,11 @@ const Closet = ({ history }) => {
   // }
   const [applyItems, setApplyItems] = useState([]);
   const applyItem = (applyItem) => {
-    if (applyItem.item.item_type === 'jorang_color') {
-      setApplyItems({
-        color: applyItem.item.item_detail,
-        id: applyItem.item.id,
-      });
-    } else {
-      // applyItems.append(applyItem);
-      // setApplyItems(applyItems);
-    }
+    setApplyItems({
+      item_type: applyItem.item.item_type,
+      item_detail: applyItem.item.item_detail,
+      id: applyItem.item.id,
+    });
   };
 
   const setItem = (item) => {

@@ -254,9 +254,7 @@ function* setItemSaga(action) {
     };
 
     const param = {
-      color: {
-        item: action.payload.id,
-      },
+      item: action.payload.id,
     };
 
     const res = yield call(

@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import SignResponsive from '../../components/common/SignResponsive';
 import authJoraeng from 'assets/joraeng/auth-joraeng.png';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
-const SignContentWrapper = styled.div`
+const EmailAuthContentWrapper = styled.div`
   height: calc(100vh - 75px);
   width: calc(100vw - 20px);
   display: flex;
@@ -39,7 +37,7 @@ const ImageBox = styled.div`
   width: 300px;
 `;
 
-const CongratulateImg = styled.img`
+const EmailJoraengImg = styled.img`
   object-fit: contain;
   align-items: center;
   justify-content: center;
@@ -69,10 +67,10 @@ const EmailAuth = ({ history }) => {
   return (
     <>
       <SignResponsive>
-        <SignContentWrapper>
+        <EmailAuthContentWrapper>
           <Title>Da:haeng</Title>
           <ImageBox>
-            <CongratulateImg src={authJoraeng} alt="" />
+            <EmailJoraengImg src={authJoraeng} alt="" />
           </ImageBox>
           <Content>
             <div>인증 메일이 전송되었습니다 !</div>
@@ -85,7 +83,7 @@ const EmailAuth = ({ history }) => {
           >
             로그인하러 가기
           </LoginButton>
-        </SignContentWrapper>
+        </EmailAuthContentWrapper>
       </SignResponsive>
     </>
   );

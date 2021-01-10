@@ -9,6 +9,8 @@ import Room from '../main/Room';
 import ItemBox from './ItemBox';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
+import Slider from '../../components/Slider';
+import { app } from 'firebase';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -78,29 +80,15 @@ const Closet = ({ history }) => {
   const setModal = (id) => {
     setOpenModal(!openModal);
   };
-
-  const [applyItems, setApplyItems] = useState({
-    // color: `#${
-    //   hasItems &&
-    //   hasItems.filter(
-    //     (item) =>
-    //       item.item.item_type === 'jorang_color' && item.is_worn === true,
-    //   )[0].item.item_detail
-    // }`,
-    color: `#${user.jorang_color}`,
-    id: -1,
-
-    // background: hasItems.filter(
-    //   (item) => item.category === 'color' && item.apply === true,
-    // ),
-    // item: hasItems.filter(
-    //   (item) => item.category === 'color' && item.apply === true,
-    // ),
-  });
+  // {
+  //   color: `#${user.jorang_color}`,
+  //   id: -1,
+  // }
+  const [applyItems, setApplyItems] = useState([]);
   const applyItem = (applyItem) => {
     if (applyItem.item.item_type === 'jorang_color') {
       setApplyItems({
-        color: `#${applyItem.item.item_detail}`,
+        color: applyItem.item.item_detail,
         id: applyItem.item.id,
       });
     } else {
@@ -115,7 +103,7 @@ const Closet = ({ history }) => {
     //refresh item list and coin and jorang view
   };
 
-  const indexs = ['jorang_color', 'background', 'item'];
+  const indexs = ['jorang_color', 'background', 'etc'];
   const [select, setSelect] = useState('jorang_color');
   const selectCategory = (index) => {
     setSelect(index);
@@ -126,13 +114,16 @@ const Closet = ({ history }) => {
 
   return (
     <>
-      <Header />
-
       <Responsive>
         <SubTitle title={'조랭 옷장'} />
+        <Slider history={history} />
         <SetButton onClick={setModal}>{'착용하기'}</SetButton>
         <RoomWrapper>
-          <Room history={history} applyItems={applyItems} />
+          <Room
+            closet={true}
+            hasItems={hasItems}
+            applyItems={applyItems}
+          ></Room>
         </RoomWrapper>
         <ContentBox>
           <Modal

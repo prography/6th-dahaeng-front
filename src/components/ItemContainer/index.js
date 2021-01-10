@@ -90,6 +90,7 @@ const ItemContainer = ({
   select,
 }) => {
   const colors = useSelector((state) => state.user.colors);
+  console.log(itemBoxs);
 
   function navigateMarketPage() {
     history.push('/market');
@@ -117,8 +118,8 @@ const ItemContainer = ({
                       ? '컬러'
                       : index === 'background'
                       ? '배경'
-                      : index === 'item'
-                      ? '아이템'
+                      : index === 'etc'
+                      ? '기타'
                       : null}
                   </Index>
                 );
@@ -131,22 +132,13 @@ const ItemContainer = ({
 
         {/* item 없을 때 화면 수정해야 함 */}
         <ItemPage status={status}>
-          {select === 'jorang_color' ? (
+          {itemBoxs ? (
             itemBoxs
           ) : (
-            <ImgBox>
-              {status === 'market' ? (
-                <>
-                  <WaitComment>아직 준비 중입니다!</WaitComment>
-                  <JoraengImg src={waitJoraeng} alt="" />
-                </>
-              ) : (
-                <>
-                  <WaitComment>아이템이 하나도 없어요...</WaitComment>
-                  <JoraengImg src={noItemJoraeng} alt="" />
-                </>
-              )}
-            </ImgBox>
+            <>
+              <WaitComment>아이템이 하나도 없어요...</WaitComment>
+              <JoraengImg src={noItemJoraeng} alt="" />
+            </>
           )}
         </ItemPage>
       </Wrapper>

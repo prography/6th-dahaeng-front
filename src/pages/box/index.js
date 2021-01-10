@@ -129,7 +129,6 @@ const ModalButtonRight = styled.button`
   margin-left: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: 4px;
   background: ${(props) => props.thirdColor};
   color: ${(props) => props.mainColor};
 `;
@@ -140,7 +139,6 @@ const ModalButton = styled.button`
   margin: 0 auto;
   border: none;
   height: 30px;
-  border-radius: 4px;
   background: ${(props) => props.mainColor};
   color: #ffffff;
 `;

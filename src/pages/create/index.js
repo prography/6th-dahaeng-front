@@ -102,7 +102,7 @@ const Create = ({ history }) => {
 
   useEffect(() => {
     if (has_jorang === true) {
-      // history.push('/');
+      history.push('/');
     }
   }, [has_jorang, history]);
 

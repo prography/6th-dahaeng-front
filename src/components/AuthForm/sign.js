@@ -48,12 +48,11 @@ const Input = styled.input`
   width: 100%;
   font-size: 12px;
   border: 1px solid #e9e9e9;
-  border-radius: 4px;
   padding: 0.5rem;
   outline: none;
 
   &:focus {
-    border: 1px solid var(--primary-color);
+    border: 1px solid ${(props) => props.color};
     color: #4d4d4d;
   }
   &::placeholder {
@@ -147,6 +146,7 @@ const SignAuthForm = ({
               onChange={onEmailChange}
               value={form.email}
               className={status.email === 'wrong' ? 'error' : ''}
+              color={color}
               // boolean값으로 받아올 때 왜 안되는지 생각해보기
             ></Input>
 
@@ -163,6 +163,7 @@ const SignAuthForm = ({
               onChange={onPwChange}
               value={form.password}
               className={status.pwd === 'wrong' ? 'error' : ''}
+              color={color}
             ></Input>
 
             <LabelWrapper>
@@ -180,6 +181,7 @@ const SignAuthForm = ({
               onChange={onPwConfirmChange}
               value={form.passwordConfirm}
               className={status.pwd_ok === 'wrong' ? 'error' : ''}
+              color={color}
             ></Input>
           </InputBox>
 

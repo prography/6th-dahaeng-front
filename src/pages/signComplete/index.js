@@ -47,7 +47,6 @@ const CreateButton = styled.button`
   font-size: 14px;
   color: white;
   border: none;
-  border-radius: 4px;
   height: 3rem;
   width: 100%;
   margin-top: 1em;

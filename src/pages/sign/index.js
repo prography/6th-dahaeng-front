@@ -56,7 +56,7 @@ const ModalText = styled.div`
   line-height: 1.5rem;
 `;
 
-const Sign = ({ history }, props) => {
+const Sign = ({ history }) => {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.sign,
@@ -203,7 +203,7 @@ const Sign = ({ history }, props) => {
       // }
       console.log(authError);
       if (!firstClick) {
-        history.push('/emailAuth');
+        history.push({ pathname: '/emailAuth', state: { color: color } });
       }
       console.log('회원가입 실패');
       console.log(authError);
@@ -212,7 +212,7 @@ const Sign = ({ history }, props) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      history.push('/emailAuth');
+      history.push({ pathname: '/emailAuth', state: { color: color } });
     }
   }, [auth, authError, dispatch, history, firstClick]);
 

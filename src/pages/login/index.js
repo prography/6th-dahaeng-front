@@ -183,7 +183,7 @@ const Login = ({ history }) => {
       '활성화 되지 않은 계정입니다. 메일을 확인하고, 본인인증을 해주세요.'
     ) {
       console.log('이메일 인증 필요');
-      history.push('/emailAuth');
+      history.push({ pathname: '/emailAuth', state: { color: color } });
       //setModal();
       return;
     } else if (authError === 'JWT token 생성에 실패하였습니다.') {

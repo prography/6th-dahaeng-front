@@ -39,8 +39,8 @@ const SnsBox = styled.div`
 `;
 
 const KakaoLogin = styled.button`
-flex: 1;
-text-align: center;
+  flex: 1;
+  text-align: center;
   border: none;
   border-radius: 63px;
 `;
@@ -70,8 +70,8 @@ const SNSLabel = styled.div`
 `;
 
 const NaverLogin = styled.button`
-flex: 1;
-text-align: center;
+  flex: 1;
+  text-align: center;
   border: none;
   border-radius: 63px;
 `;
@@ -201,6 +201,16 @@ const Login = ({ history }) => {
 
   const [openModal, setOpenModal] = useState(false);
 
+  const [color, setColor] = useState('');
+  const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
+  const randomItem = () => {
+    return colorArray[Math.floor(Math.random() * colorArray.length)];
+  };
+
+  useEffect(() => {
+    setColor(randomItem());
+  }, []);
+
   return (
     <SignResponsive>
       <LoginContentWrapper>
@@ -220,19 +230,28 @@ const Login = ({ history }) => {
           onChange={onChange}
           onSubmit={onSubmit}
           status={status}
+          color={color}
         />
         <SnsBox>
           <KakaoLogin onClick={() => snsLogin('kakao')}>
             <KakaoLogoImgWrapper>
-              <KakaoLogoImg src={KakaoLogo} alt=""/>
+              <KakaoLogoImg src={KakaoLogo} alt="" />
             </KakaoLogoImgWrapper>
-            <SNSLabel>카카오로<br/>로그인하기</SNSLabel>
+            <SNSLabel>
+              카카오로
+              <br />
+              로그인하기
+            </SNSLabel>
           </KakaoLogin>
           <NaverLogin onClick={() => snsLogin('naver')}>
             <NaverLogoImgWrapper>
-              <NaverLogoImg src={NaverLogo} alt=""/>
+              <NaverLogoImg src={NaverLogo} alt="" />
             </NaverLogoImgWrapper>
-            <SNSLabel>네이버로<br/>로그인하기</SNSLabel>
+            <SNSLabel>
+              네이버로
+              <br />
+              로그인하기
+            </SNSLabel>
           </NaverLogin>
         </SnsBox>
 

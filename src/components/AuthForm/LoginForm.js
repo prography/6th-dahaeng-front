@@ -9,7 +9,7 @@ const LoginFormWrapper = styled.div`
 `;
 
 const InputButtonWrapper = styled.div`
-width: 100%;
+  width: 100%;
 `;
 
 const LabelWrapper = styled.div`
@@ -40,7 +40,7 @@ const Input = styled.input`
   outline: none;
 
   &:focus {
-    border: 1px solid #A26C8F;
+    border: 1px solid ${(props) => props.color};
     color: #4d4d4d;
   }
   &::placeholder {
@@ -50,7 +50,7 @@ const Input = styled.input`
 
 const LoginButton = styled.button`
   outline: none;
-  background: #A26C8F;
+  background: ${(props) => props.color};
   font-size: 16px;
   color: white;
   border: none;
@@ -68,10 +68,10 @@ const LoginFooter = styled.div`
 
 const FooterContent = styled.span`
   font-size: 14px;
-  color: #9F9F9F;
+  color: #9f9f9f;
 `;
 
-const LoginForm = ({ form, onChange, onSubmit, status, }) => {
+const LoginForm = ({ form, onChange, onSubmit, status, color }) => {
   return (
     <LoginFormWrapper>
       <form onSubmit={onSubmit}>
@@ -86,7 +86,9 @@ const LoginForm = ({ form, onChange, onSubmit, status, }) => {
             name="email"
             placeholder="이메일을 입력해주세요"
             onChange={onChange}
-            value={form.email}/>
+            value={form.email}
+            color={color}
+          />
           <LabelWrapper>
             <KeyText>비밀번호</KeyText>
             {status.pwd === 'empty' ? null : (
@@ -98,8 +100,10 @@ const LoginForm = ({ form, onChange, onSubmit, status, }) => {
             placeholder="비밀번호를 입력해주세요"
             type="password"
             onChange={onChange}
-            value={form.password}/>
-          <LoginButton onClick={onSubmit}>
+            value={form.password}
+            color={color}
+          />
+          <LoginButton onClick={onSubmit} color={color}>
             내 행복에 로그인
           </LoginButton>
         </InputButtonWrapper>
@@ -108,9 +112,7 @@ const LoginForm = ({ form, onChange, onSubmit, status, }) => {
       <LoginFooter>
         {/*<FooterContent>아이디/비밀번호찾기</FooterContent>*/}
         <FooterContent>
-          <Link to="/sign">
-            다행에 가입해서 함께 행복을 찾아보세요!
-          </Link>
+          <Link to="/sign">다행에 가입해서 함께 행복을 찾아보세요!</Link>
         </FooterContent>
       </LoginFooter>
     </LoginFormWrapper>

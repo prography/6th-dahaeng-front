@@ -21,14 +21,14 @@ const LoginContentWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
 `;
 
 const Content = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 `;
 
@@ -104,9 +104,8 @@ const ModalButton = styled.button`
   margin-top: 1rem;
   border: none;
   color: white;
-  height: 2rem;
-  background: var(--primary-color);
-  border-radius: 4px;
+  height: 1.5rem;
+  background: ${(props) => props.color};
   outline: none;
 `;
 
@@ -115,6 +114,7 @@ const ModalText = styled.div`
   text-align: center;
   padding-bottom: 0.5rem;
   color: var(--text-second);
+  line-height: 1.5rem;
 `;
 
 const Login = ({ history }) => {
@@ -168,6 +168,8 @@ const Login = ({ history }) => {
     dispatch(initForm('login'));
   }, [dispatch]);
 
+  const [openModal, setOpenModal] = useState(false);
+
   const setModal = useCallback(() => {
     setOpenModal(!openModal);
   }, []);
@@ -198,8 +200,6 @@ const Login = ({ history }) => {
     //   history.push('/');
     // }
   }, [auth, authError, dispatch, history, user, has_jorang, token, setModal]);
-
-  const [openModal, setOpenModal] = useState(false);
 
   // 로그인, 회원가입 랜덤 컬러
   const [color, setColor] = useState('');
@@ -274,7 +274,11 @@ const Login = ({ history }) => {
                 : '다시 입력해주세요'}
             </ModalText>
           }
-          button={<ModalButton onClick={setModal}>확인</ModalButton>}
+          button={
+            <ModalButton onClick={setModal} color={color}>
+              확인
+            </ModalButton>
+          }
         />
       </LoginContentWrapper>
     </SignResponsive>

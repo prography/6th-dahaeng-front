@@ -9,7 +9,7 @@ import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
 
 const SignContentWrapper = styled.div`
-  height: calc(100vh - 20px);
+  height: calc(100vh - 75px);
   width: calc(100vw - 20px);
   display: flex;
   flex-direction: column;
@@ -20,14 +20,14 @@ const SignContentWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
 `;
 
 const Content = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 `;
 
@@ -44,8 +44,7 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
-  background: var(--primary-color);
-  border-radius: 4px;
+  background: ${(props) => props.color};
   outline: none;
 `;
 
@@ -53,7 +52,8 @@ const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-  color: var(--text-second);
+  color: #212121;
+  line-height: 1.5rem;
 `;
 
 const Sign = ({ history }, props) => {
@@ -224,6 +224,8 @@ const Sign = ({ history }, props) => {
   //   }
   // }, [history, user]);
 
+  const color = useLocation().state.color;
+
   return (
     <SignResponsive>
       <SignContentWrapper>
@@ -237,7 +239,7 @@ const Sign = ({ history }, props) => {
           onPwConfirmChange={onPwConfirmChange}
           onSubmit={onSubmit}
           status={status}
-          color={useLocation().state.color}
+          color={color}
         ></SignAuthForm>
         <Modal
           className="popup"
@@ -245,7 +247,11 @@ const Sign = ({ history }, props) => {
           setModal={setModal}
           title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
           content={<ModalText>로그인하러 가볼까요?</ModalText>}
-          button={<ModalButton onClick={setModal}>확인</ModalButton>}
+          button={
+            <ModalButton onClick={setModal} color={color}>
+              확인
+            </ModalButton>
+          }
         />
       </SignContentWrapper>
     </SignResponsive>

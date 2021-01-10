@@ -20,20 +20,20 @@ const LabelWrapper = styled.div`
 `;
 
 const KeyText = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   flex: 1;
   color: #4d4d4d;
 `;
 
 const ErrorMessage = styled.div`
   flex: none;
-  font-size: 12px;
+  font-size: 10px;
   color: #fd5660;
 `;
 
 const Input = styled.input`
   width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   border: 1px solid #e9e9e9;
   border-radius: 4px;
   padding: 0.5rem;
@@ -51,10 +51,9 @@ const Input = styled.input`
 const LoginButton = styled.button`
   outline: none;
   background: ${(props) => props.color};
-  font-size: 16px;
+  font-size: 15px;
   color: white;
   border: none;
-  border-radius: 4px;
   margin-top: 15px;
   width: 100%;
   padding: 12px 0 13px;

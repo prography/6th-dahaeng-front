@@ -20,16 +20,14 @@ const ContentBox = styled.div`
 `;
 
 const ApplyBox = styled.div`
-  float: right;
   padding-right: 1rem;
   line-height: 34px;
   color: var(--text-second);
   padding-top: 4rem;
 `;
-
-const RoomWrapper = styled.div`
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+const ApplyImg = styled.img`
+  width: 5%;
+  float: right;
 `;
 
 const ModalTitle = styled.div`
@@ -69,6 +67,7 @@ const ModalButtonRight = styled.button`
 
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
+  const colors = useSelector((state) => state.user.colors);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -113,14 +112,10 @@ const Closet = ({ history }) => {
       <Responsive>
         <SubTitle title={'조랭 옷장'} />
         <Slider history={history} />
-        <ApplyBox onClick={setModal}>{'착용하기'}</ApplyBox>
-        <RoomWrapper>
-          <Room
-            closet={true}
-            hasItems={hasItems}
-            applyItems={applyItems}
-          ></Room>
-        </RoomWrapper>
+        <ApplyBox onClick={setModal}>
+          <ApplyImg src={require(`../../assets/icon/save-icon.png`)} alt="" />
+        </ApplyBox>
+        <Room closet={true} hasItems={hasItems} applyItems={applyItems}></Room>
         <ContentBox>
           <Modal
             className="popup"
@@ -129,10 +124,21 @@ const Closet = ({ history }) => {
             title={<ModalTitle>{'현재 모습을 적용하시겠어요?'}</ModalTitle>}
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={() => setItem(applyItems.id)}>
+                <ModalButtonLeft
+                  onClick={() => setItem(applyItems.id)}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+                <ModalButtonRight
+                  onClick={setModal}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
+                  {'취소'}
+                </ModalButtonRight>
               </ModalButtonField>
             }
           ></Modal>

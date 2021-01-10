@@ -39,7 +39,6 @@ const ModalButtonLeft = styled.button`
   border: none;
   height: 30px;
   border-radius: var(--small-border-radius);
-  border: 2px solid #212121;
   color: white;
 `;
 
@@ -50,7 +49,6 @@ const ModalButtonRight = styled.button`
   border: none;
   height: 30px;
   border-radius: 4px;
-  border: 2px solid #212121;
 `;
 
 const ModalText = styled.div`
@@ -185,8 +183,8 @@ const Market = ({ history }) => {
                 </ModalButtonLeft>
                 <ModalButtonRight
                   style={{
-                    background: `#${colors && colors[0]}`,
-                    color: `#${colors && colors[2]}`,
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
                   }}
                   onClick={setModal}
                 >
@@ -211,10 +209,19 @@ const Market = ({ history }) => {
             }
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={setBuySuccessModal}>
+                <ModalButtonLeft
+                  onClick={setBuySuccessModal}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={navigateMarketPage}>
+                <ModalButtonRight
+                  onClick={navigateMarketPage}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
                   {'적용하러가기'}
                 </ModalButtonRight>
               </ModalButtonField>
@@ -234,10 +241,19 @@ const Market = ({ history }) => {
             }
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={setBuyFailModal}>
+                <ModalButtonLeft
+                  onClick={setBuyFailModal}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setCoinChargeModal}>
+                <ModalButtonRight
+                  onClick={setCoinChargeModal}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
                   {'충전하기'}
                 </ModalButtonRight>
               </ModalButtonField>

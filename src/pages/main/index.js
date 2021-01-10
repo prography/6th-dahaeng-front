@@ -9,6 +9,7 @@ import FloatingButton from '../../components/MainFloatingButton';
 import Slider from '../../components/Slider';
 import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useState } from 'react';
+import Room from '../main/Room';
 
 const Date = styled.div`
   font-size: 20px;
@@ -78,6 +79,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const colors = useSelector((state) => state.user.colors);
+  const hasItems = useSelector((state) => state.user.user.jorang_items);
 
   const dispatch = useDispatch();
 
@@ -145,20 +147,7 @@ const Main = ({ history }) => {
           </Question>
         </QuestionBox>
       </Responsive>
-      <Wrapper>
-        <Background>
-          <Character>
-            {/*TODO: Dynamic color binding*/}
-            <MainJoraeng
-              age={user.jorang_status}
-              mainColor={`#${colors && colors[0]}`}
-              thirdColor={`#${colors && colors[2]}`}
-            />
-          </Character>
-
-          {/* <BackgroundImg src={ground} alt="" /> */}
-        </Background>
-      </Wrapper>
+      <Room closet={false} hasItems={hasItems}></Room>
     </>
   );
 };

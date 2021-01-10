@@ -201,6 +201,7 @@ const Login = ({ history }) => {
 
   const [openModal, setOpenModal] = useState(false);
 
+  // 로그인, 회원가입 랜덤 컬러
   const [color, setColor] = useState('');
   const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
   const randomItem = () => {

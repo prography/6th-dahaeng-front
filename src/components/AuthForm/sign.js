@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const SignFormWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
-  border: 1px;
+  padding: 10px;
 `;
 
 const InputWrapper = styled.div`
-  padding: 30px 0;
   flex: 1;
 `;
 
@@ -25,6 +25,7 @@ const CheckboxWrapper = styled.div`
   padding-top: 12px;
   height: 36px;
   text-align: right;
+  font-size: 12px;
 
   label {
     cursor: pointer;
@@ -75,12 +76,12 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   outline: none;
-  background: var(--primary-color);
+  background: ${(props) => props.color};
   font-size: 14px;
   color: white;
   border: none;
   border-radius: 4px;
-  height: 3rem;
+  height: 2.5rem;
   width: 100%;
   margin-top: 1em;
 `;
@@ -88,20 +89,20 @@ const Button = styled.button`
 const Checkbox = styled.input`
   &:checked {
     color: #ffffff;
-    background: var(--primary-color);
+    background: ${(props) => props.color};
   }
 `;
 
 //상황별 에러 메시지
 const emailStatusEnum = {
   empty: '이메일은 필수 입력 사항입니다!',
-  wrong: '이메일을 확인 해 주세요 🤫',
+  wrong: '이메일을 확인 해 주세요 ',
   valid: 'valid',
 };
 
 const pwStatusEnum = {
   empty: '비밀번호는 필수 입력 사항입니다!',
-  wrong: '숫자와 영어로 8자 이상 입력해주세요🤫',
+  wrong: '숫자와 영어로 8자 이상 입력해주세요',
   valid: 'valid',
 };
 
@@ -121,9 +122,10 @@ const SignAuthForm = ({
   onPwConfirmChange,
   onSubmit,
   status,
+  color,
 }) => {
   return (
-    <Wrapper>
+    <SignFormWrapper>
       <form
         onSubmit={onSubmit}
         style={{
@@ -185,7 +187,7 @@ const SignAuthForm = ({
           {/* 체크박스를 만들어보자 */}
           <CheckboxWrapper>
             <KeyText>
-              <Checkbox id="agreeCheck" type="checkbox" />
+              <Checkbox id="agreeCheck" type="checkbox" color={color} />
               <label htmlFor="agreeCheck">
                 개인정보 수집 및 이용에 동의합니다.
               </label>
@@ -194,10 +196,10 @@ const SignAuthForm = ({
         </InputWrapper>
 
         <ButtonBox>
-          <Button>회원가입</Button>
+          <Button color={color}>회원가입 완료</Button>
         </ButtonBox>
       </form>
-    </Wrapper>
+    </SignFormWrapper>
   );
 };
 

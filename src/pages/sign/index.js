@@ -3,25 +3,32 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import styled from 'styled-components';
 import SignAuthForm from '../../components/AuthForm/sign.js';
-import { withRouter } from 'react-router-dom';
+import { useLocation, withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
 
+const SignContentWrapper = styled.div`
+  height: calc(100vh - 20px);
+  width: calc(100vw - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  word-break: keep-all;
+`;
+
 const Title = styled.div`
-  font-size: 32px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  font-size: 24px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
-const SubTitle = styled.div`
-  font-size: 24px;
-  margin-top: 2rem;
+const Content = styled.div`
+  font-size: 18px;
   text-align: center;
-  @media screen and (max-width: 480px) {
-    font-size: 18px;
-  }
 `;
 
 const ModalTitle = styled.div`
@@ -49,7 +56,7 @@ const ModalText = styled.div`
   color: var(--text-second);
 `;
 
-const Sign = ({ history }) => {
+const Sign = ({ history }, props) => {
   const dispatch = useDispatch();
   const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.sign,
@@ -219,25 +226,28 @@ const Sign = ({ history }) => {
 
   return (
     <SignResponsive>
-      <Title>Da:haeng</Title>
-      <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
-      <SignAuthForm
-        type="sign"
-        form={form}
-        onEmailChange={onEmailChange}
-        onPwChange={onPwChange}
-        onPwConfirmChange={onPwConfirmChange}
-        onSubmit={onSubmit}
-        status={status}
-      ></SignAuthForm>
-      <Modal
-        className="popup"
-        openModal={openModal}
-        setModal={setModal}
-        title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
-        content={<ModalText>로그인하러 가볼까요?</ModalText>}
-        button={<ModalButton onClick={setModal}>확인</ModalButton>}
-      />
+      <SignContentWrapper>
+        <Title>Da:haeng</Title>
+        <Content>간단한 회원가입 후 다행과 함께해요!</Content>
+        <SignAuthForm
+          type="sign"
+          form={form}
+          onEmailChange={onEmailChange}
+          onPwChange={onPwChange}
+          onPwConfirmChange={onPwConfirmChange}
+          onSubmit={onSubmit}
+          status={status}
+          color={useLocation().state.color}
+        ></SignAuthForm>
+        <Modal
+          className="popup"
+          openModal={openModal}
+          setModal={setModal}
+          title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
+          content={<ModalText>로그인하러 가볼까요?</ModalText>}
+          button={<ModalButton onClick={setModal}>확인</ModalButton>}
+        />
+      </SignContentWrapper>
     </SignResponsive>
   );
 };

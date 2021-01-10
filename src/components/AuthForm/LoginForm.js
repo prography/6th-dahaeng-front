@@ -57,7 +57,8 @@ const LoginButton = styled.button`
   border-radius: 4px;
   margin-top: 15px;
   width: 100%;
-  padding: 14px 0 13px;
+  padding: 12px 0 13px;
+  max-height: 2.5rem;
 `;
 
 const LoginFooter = styled.div`
@@ -112,7 +113,14 @@ const LoginForm = ({ form, onChange, onSubmit, status, color }) => {
       <LoginFooter>
         {/*<FooterContent>아이디/비밀번호찾기</FooterContent>*/}
         <FooterContent>
-          <Link to="/sign">다행에 가입해서 함께 행복을 찾아보세요!</Link>
+          <Link
+            to={{
+              pathname: '/sign',
+              state: { color: color },
+            }}
+          >
+            다행에 가입해서 함께 행복을 찾아보세요!
+          </Link>
         </FooterContent>
       </LoginFooter>
     </LoginFormWrapper>

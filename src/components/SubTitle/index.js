@@ -28,8 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.125rem;
-  font-weight: 800;
+  font-size: 16px;
   letter-spacing: 2px;
   color: #212121;
 `;

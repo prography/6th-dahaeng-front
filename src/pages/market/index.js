@@ -13,7 +13,7 @@ import Room from '../main/Room';
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding: 1rem;
+  padding: 0rem 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
@@ -38,8 +38,6 @@ const ModalButtonLeft = styled.button`
   margin-right: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: var(--small-border-radius);
-  border: 2px solid #212121;
   color: white;
 `;
 
@@ -49,8 +47,6 @@ const ModalButtonRight = styled.button`
   margin-left: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: 4px;
-  border: 2px solid #212121;
 `;
 
 const ModalText = styled.div`
@@ -61,10 +57,9 @@ const ModalText = styled.div`
 
 const CoinBox = styled.div`
   float: right;
-  padding-right: 1rem;
   line-height: 34px;
-  color: var(--text-second);
-  padding-top: 4rem;
+  color: #212121;
+  padding: 4rem 1rem 1rem 1rem;
 `;
 
 const Market = ({ history }) => {
@@ -150,7 +145,7 @@ const Market = ({ history }) => {
 
   return (
     <>
-      <Responsive>
+      <Responsive style={{ paddingTop: '4vh' }}>
         <SubTitle title={'조랭 마켓'} />
         <Slider history={history} />
         <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
@@ -185,8 +180,8 @@ const Market = ({ history }) => {
                 </ModalButtonLeft>
                 <ModalButtonRight
                   style={{
-                    background: `#${colors && colors[0]}`,
-                    color: `#${colors && colors[2]}`,
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
                   }}
                   onClick={setModal}
                 >

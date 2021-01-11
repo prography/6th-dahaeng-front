@@ -31,21 +31,39 @@ const Index = styled.div`
   text-align: center;
   border: 2px solid #212121;
   border-bottom: none;
-  cursor: pointer;
+  z-index: 3;
+  position: relative;
+`;
+
+const SelectIndex = styled.div`
+  /* width: 78px; */
+  width: 54px;
+  height: 39px;
+  margin-left: ${(props) => {
+    if (props.index === 'jorang_color') {
+      return '10px';
+    } else if (props.index === 'background') {
+      return '76px';
+    } else {
+      return '142px';
+    }
+  }};
+  position: fixed;
+  background-color: #ffffff;
+  z-index: 1;
 `;
 
 const ShopBox = styled.button`
   flex: none;
   margin-right: 8px;
   line-height: 34px;
-  color: var(--text-second);
+  color: #212121;
 `;
 
 const ItemPage = styled.div`
   width: 100%;
   height: ${(props) => (props.status === 'market' ? '640px' : '340px')};
   /* height: 640px; */ /* background: var(--light-background); */
-  border-radius: 4px;
   border: 2px solid #212121;
   display: flex;
   flex-direction: row;
@@ -66,7 +84,7 @@ const JoraengImg = styled.img`
 
 const WaitComment = styled.div`
   font-size: 14px;
-  color: var(--text-second);
+  color: #212121;
   padding: 1rem;
 `;
 
@@ -93,24 +111,27 @@ const ItemContainer = ({
             {indexs &&
               indexs.map((index) => {
                 return (
-                  <Index
-                    key={index}
-                    onClick={() => selectCategory(index)}
-                    style={{
-                      color:
-                        select === index
-                          ? `#${colors && colors[0]}`
-                          : `#${colors && colors[2]}`,
-                    }}
-                  >
-                    {index === 'jorang_color'
-                      ? '컬러'
-                      : index === 'background'
-                      ? '배경'
-                      : index === 'etc'
-                      ? '기타'
-                      : null}
-                  </Index>
+                  <>
+                    <Index
+                      key={index}
+                      onClick={() => selectCategory(index)}
+                      style={{
+                        color:
+                          select === index
+                            ? `#${colors && colors[0]}`
+                            : `#${colors && colors[2]}`,
+                      }}
+                    >
+                      {index === 'jorang_color'
+                        ? '컬러'
+                        : index === 'background'
+                        ? '배경'
+                        : index === 'etc'
+                        ? '기타'
+                        : null}
+                    </Index>
+                    {select === index ? <SelectIndex index={index} /> : null}
+                  </>
                 );
               })}
           </IndexList>

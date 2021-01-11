@@ -61,7 +61,7 @@ const CoinBox = styled.div`
   float: right;
   padding-right: 1rem;
   line-height: 34px;
-  color: var(--text-second);
+  color: #212121;
   padding-top: 4rem;
 `;
 

@@ -119,7 +119,7 @@ const Main = ({ history }) => {
           </Question>
         </QuestionBox>
       </Responsive>
-      <Room closet={false} hasItems={hasItems}></Room>
+      <Room market={false} closet={false} hasItems={hasItems}></Room>
     </>
   );
 };

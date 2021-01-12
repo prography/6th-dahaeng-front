@@ -67,6 +67,8 @@ const SliderListElement = styled.div`
 const Slider = ({ history }) => {
   const [sliderOpenState, setSliderOpenState] = useState(false);
   const user = useSelector((state) => state.user.user);
+  const colors = useSelector((state) => state.user.colors);
+
   const dispatch = useDispatch();
   //TODO: ??? token vs user
 
@@ -168,7 +170,7 @@ const Slider = ({ history }) => {
   return (
     <>
       <DrawerIcon onClick={() => setSliderOpenState(true)}>
-        <MenuIcon color={`#${user.main_color}`} />
+        <MenuIcon color={`#${colors[0]}`} />
       </DrawerIcon>
       <div>
         {sliderOpenState && <SliderList />}

@@ -21,12 +21,13 @@ const UserTitle = styled.div`
 
   &:after {
     width: 100%;
+    z-index: -1;
     position: absolute;
     left: 0;
     bottom: 10px;
     height: 12px;
     content: ' ';
-    background-color: #a26c8f;
+    background-color: ${(props) => props.thirdColor};
     opacity: 0.3;
   }
 `;
@@ -124,7 +125,9 @@ const InfoBox = ({ history }) => {
     <>
       <UserTitleBox>
         {/* title 글자수 제한 있어야 함! 8글자 이내쯤 */}
-        <UserTitle>{user.title}</UserTitle>
+        <UserTitle thirdColor={`#${colors && colors[2]}`}>
+          {user.title}
+        </UserTitle>
         <UserInfoBtn
           onClick={() => {
             movePage('setting');

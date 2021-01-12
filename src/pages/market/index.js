@@ -59,7 +59,7 @@ const CoinBox = styled.div`
   float: right;
   line-height: 34px;
   color: #212121;
-  padding-top: 4rem;
+  padding: 4rem 1rem 0 0;
 `;
 
 const Market = ({ history }) => {
@@ -149,7 +149,7 @@ const Market = ({ history }) => {
         <SubTitle title={'조랭 마켓'} />
         <Slider history={history} />
         <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
-        <Room closet={false} hasItems={hasItems}></Room>
+        <Room market={true} closet={false} hasItems={hasItems}></Room>
         <ContentBox>
           <Modal
             className="popup"

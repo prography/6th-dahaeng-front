@@ -7,14 +7,27 @@ const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 1024px;
   padding-top: 5rem;
+  max-height: 340px;
+
+  @media (max-width: 360px) {
+    max-height: 300px;
+  }
 `;
 const Character = styled.div`
   min-width: 95px;
   width: 30%;
   z-index: 2;
   margin: 0 auto;
-  bottom: -20px;
+  bottom: -14px;
   position: relative;
+
+  @media (max-width: 360px) {
+    bottom: 10px;
+  }
+
+  @media (max-width: 280px) {
+    bottom: -12px;
+  }
 `;
 const Background = styled.div`
   z-index: 1;
@@ -23,27 +36,43 @@ const Background = styled.div`
 `;
 const BackgroundImg = styled.img`
   width: 100%;
+  height: ${(props) => {
+    if (props.type === 'true' && !props.cloud) return '100px';
+    if (props.type === 'true' && props.cloud) return '110px';
+  }};
+  position: relative;
+  bottom: ${(props) =>
+    props.type === 'true' && props.cloud ? '20px' : '50px'};
 `;
 const Etc = styled.div`
   z-index: 3;
-  width: 17%;
+  width: 52px;
   margin: 0 auto;
   position: relative;
-  bottom: 130px;
-  left: 50px;
+  bottom: ${(props) => (props.type === 'true' ? '145px' : '255px')};
+  left: ${(props) => (props.type === 'true' ? '66px' : '72px')};
+
+  @media (max-width: 360px) {
+    bottom: ${(props) => (props.type === 'true' ? '175px' : '255px')};
+  }
+  @media (max-width: 280px) {
+    bottom: ${(props) => (props.type === 'true' ? '162px' : '227px')};
+  }
 `;
 const EtcImg = styled.img`
   width: 100%;
 `;
 
 //hasItems: 서버에서 받아온 실제 착용한 아이템, applyItems: 옷장에서 테스팅해볼 아이템
-const Room = ({ hasItems, applyItems, closet }) => {
+const Room = ({ hasItems, applyItems, closet, market }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
   const wornItems = useSelector((state) => state.user.jorang_items);
   console.log(hasItems);
   console.log(applyItems);
   console.log(wornItems);
+
+  console.log((market || closet).toString());
   return (
     <Wrapper>
       <Character>
@@ -83,6 +112,8 @@ const Room = ({ hasItems, applyItems, closet }) => {
               wornItems && wornItems.background
             }.png`)}
             alt=""
+            type={(market || closet).toString()}
+            cloud={wornItems?.background === 'background-cloud'}
           />
         ) : closet && applyItems && applyItems.item_type === 'background' ? (
           <BackgroundImg
@@ -90,25 +121,31 @@ const Room = ({ hasItems, applyItems, closet }) => {
               applyItems && applyItems.item_detail
             }.png`)}
             alt=""
+            type={(market || closet).toString()}
+            cloud={applyItems?.item_detail === 'background-cloud'}
           />
         ) : hasItems && hasItems.background ? (
           <BackgroundImg
             src={require(`../../assets/item/background/${hasItems.background}.png`)}
             alt=""
+            type={(market || closet).toString()}
+            cloud={hasItems?.background === 'background-cloud'}
           />
         ) : (
           <BackgroundImg
             src={require(`../../assets/item/background/background-ground.png`)}
             alt=""
+            type={(market || closet).toString()}
+            cloud={false}
           />
         )}
       </Background>
-      <Etc>
+      <Etc type={(market || closet).toString()}>
         {closet &&
-        (applyItems.length === 0 || applyItems.item_type !== 'background') &&
+        (applyItems.length === 0 || applyItems.item_type !== 'etc') &&
         wornItems &&
         wornItems.etc ? (
-          <BackgroundImg
+          <EtcImg
             src={require(`../../assets/item/etc/${
               wornItems && wornItems.etc
             }.png`)}

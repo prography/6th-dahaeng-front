@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SubTitle from '../../components/SubTitle';
+import Responsive from '../../components/common/Responsive';
 import { feedback } from '../../store/user';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '../../components/Modal';
 
 const ContentBox = styled.div`
   margin: 0 auto;
-  padding: 0 1.5rem 1.5rem 1.5rem;
-  height: 350px;
+  padding: 4rem 1.5rem 1.5rem 1.5rem;
+  height: 400px;
   max-width: 480px;
   display: flex;
   flex-direction: column;
@@ -52,10 +53,11 @@ const ReportButton = styled.button`
   color: white;
   border: none;
   border-radius: 4px;
-  height: 40px;
-  width: 6rem;
+  height: 30px;
+  width: 90px;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 1rem;
+  background-color: ${(props) => props.mainColor};
 `;
 
 const ModalTitle = styled.div`
@@ -71,7 +73,7 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
-  background: var(--primary-color);
+  background: ${(props) => props.mainColor};
   border-radius: 4px;
   outline: none;
 `;
@@ -108,39 +110,53 @@ const Feedback = ({ history }) => {
     history.push(`/${page}`);
   };
 
+  console.log(`#${colors && colors[0]}`);
+
   return (
     <>
-      <SubTitle
-        title={'의견 보내기'}
-        back={true}
-        backPage={() => movePage('setting')}
-      />
-      <ContentBox>
-        <InfoBox>
-          <Info>
-            다행 서비스를 사용하면서 부족하거나 아쉬운 점을 발견하셨다면,
-            망설이지 말고 의견을 보내주세요!
-          </Info>
-          <Info>소중한 의견으로 더욱 행복한 다행이 됩니다 :)</Info>
-        </InfoBox>
-        <ReportInputBox>
-          <ReportInput onChange={onTextChange} value={inputText}></ReportInput>
-        </ReportInputBox>
-        <ReportButton
-          onClick={sendFeedback}
-          style={{ backgroundColor: `#${colors && colors[0]}` }}
-        >
-          의견 보내기
-        </ReportButton>
-      </ContentBox>
-      <Modal
-        className="popup"
-        openModal={openModal}
-        setModal={setModal}
-        title={<ModalTitle>의견이 잘 전달되었어요!</ModalTitle>}
-        content={<ModalText>앞으로도 많은 이용부탁드립니다 :)</ModalText>}
-        button={<ModalButton onClick={setModal}>확인</ModalButton>}
-      />
+      <Responsive>
+        <SubTitle
+          title={'의견 보내기'}
+          back={true}
+          backPage={() => movePage('setting')}
+        />
+        <ContentBox>
+          <InfoBox>
+            <Info>
+              다행 서비스를 사용하면서 부족하거나 아쉬운 점을 발견하셨다면,
+              망설이지 말고 의견을 보내주세요!
+            </Info>
+            <Info>소중한 의견으로 더욱 행복한 다행이 됩니다 :)</Info>
+          </InfoBox>
+          <ReportInputBox>
+            <ReportInput
+              onChange={onTextChange}
+              value={inputText}
+            ></ReportInput>
+          </ReportInputBox>
+          <ReportButton
+            onClick={sendFeedback}
+            mainColor={`#${colors && colors[0]}`}
+          >
+            의견 보내기
+          </ReportButton>
+        </ContentBox>
+        <Modal
+          className="popup"
+          openModal={openModal}
+          setModal={setModal}
+          title={<ModalTitle>의견이 잘 전달되었어요!</ModalTitle>}
+          content={<ModalText>앞으로도 많은 이용부탁드립니다 :)</ModalText>}
+          button={
+            <ModalButton
+              onClick={setModal}
+              mainColor={`#${colors && colors[0]}`}
+            >
+              확인
+            </ModalButton>
+          }
+        />
+      </Responsive>
     </>
   );
 };

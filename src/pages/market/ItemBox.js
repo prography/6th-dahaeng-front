@@ -42,7 +42,7 @@ const ItemImageBox = styled.div`
 `;
 
 const BackgroundImageBox = styled.img`
-  max-height: 120px;
+  max-height: 110px;
 `;
 
 const PetImageBox = styled.img`

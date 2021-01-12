@@ -59,12 +59,12 @@ const CoinBox = styled.div`
   float: right;
   line-height: 34px;
   color: #212121;
-  padding: 4rem 1rem 1rem 1rem;
+  padding-top: 4rem;
 `;
 
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
-  const hasItems = useSelector((state) => state.user.user.jorang_items);
+  const hasItems = useSelector((state) => state.user.jorang_items);
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
   const buy_success = useSelector((state) => state.user.buy_success);
@@ -206,10 +206,19 @@ const Market = ({ history }) => {
             }
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={setBuySuccessModal}>
+                <ModalButtonLeft
+                  onClick={setBuySuccessModal}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={navigateMarketPage}>
+                <ModalButtonRight
+                  onClick={navigateMarketPage}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
                   {'적용하러가기'}
                 </ModalButtonRight>
               </ModalButtonField>
@@ -229,10 +238,19 @@ const Market = ({ history }) => {
             }
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={setBuyFailModal}>
+                <ModalButtonLeft
+                  onClick={setBuyFailModal}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setCoinChargeModal}>
+                <ModalButtonRight
+                  onClick={setCoinChargeModal}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
                   {'충전하기'}
                 </ModalButtonRight>
               </ModalButtonField>

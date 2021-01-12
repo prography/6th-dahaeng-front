@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   padding-top: 5rem;
 `;
 const Character = styled.div`
-  min-width: 114px;
+  min-width: 95px;
   width: 30%;
   z-index: 2;
   margin: 0 auto;
@@ -24,7 +24,14 @@ const Background = styled.div`
 const BackgroundImg = styled.img`
   width: 100%;
 `;
-const Etc = styled.div``;
+const Etc = styled.div`
+  z-index: 3;
+  width: 17%;
+  margin: 0 auto;
+  position: relative;
+  bottom: 130px;
+  left: 50px;
+`;
 const EtcImg = styled.img`
   width: 100%;
 `;
@@ -33,35 +40,60 @@ const EtcImg = styled.img`
 const Room = ({ hasItems, applyItems, closet }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
-
+  const wornItems = useSelector((state) => state.user.jorang_items);
+  console.log(hasItems);
+  console.log(applyItems);
+  console.log(wornItems);
   return (
     <Wrapper>
       <Character>
         <MainJoraeng
           age={user.jorang_status}
           mainColor={
-            closet && applyItems.length > 0
-              ? `#${applyItems.color.detail}`
+            closet && applyItems && applyItems.item_type === 'jorang_color'
+              ? `#${applyItems.item_detail}`
               : `#${colors[0]}`
           }
           thirdColor={
-            closet && applyItems.length > 0
-              ? `#${applyItems.color.detail}`
+            closet && applyItems && applyItems.item_type === 'jorang_color'
+              ? `#${
+                  applyItems.item_detail === 'A26C8F'
+                    ? 'EDE3EB'
+                    : applyItems.item_detail === 'F8DB5C'
+                    ? 'FEF8E1'
+                    : applyItems.item_detail === 'FF714D'
+                    ? 'FAE3DC'
+                    : applyItems.item_detail === '73A38F'
+                    ? 'E5EEEB'
+                    : applyItems.item_detail === '5CA1D2'
+                    ? 'E1EEF7'
+                    : ''
+                }`
               : `#${colors[2]}`
           }
         />
       </Character>
       <Background>
-        {closet && applyItems.length > 0 ? (
+        {closet &&
+        (applyItems.length === 0 || applyItems.item_type !== 'background') &&
+        wornItems &&
+        wornItems.background ? (
           <BackgroundImg
             src={require(`../../assets/item/background/${
-              applyItems && applyItems.background.detail
+              wornItems && wornItems.background
+            }.png`)}
+            alt=""
+          />
+        ) : closet && applyItems && applyItems.item_type === 'background' ? (
+          <BackgroundImg
+            src={require(`../../assets/item/background/${
+              applyItems && applyItems.item_detail
             }.png`)}
             alt=""
           />
         ) : hasItems && hasItems.background ? (
           <BackgroundImg
-            src={require(`../../assets/item/background/${hasItems.background.detail}.png`)}
+            src={require(`../../assets/item/background/${hasItems.background}.png`)}
             alt=""
           />
         ) : (
@@ -72,16 +104,24 @@ const Room = ({ hasItems, applyItems, closet }) => {
         )}
       </Background>
       <Etc>
-        {closet && applyItems.length > 0 && applyItems.etc ? (
-          <EtcImg
+        {closet &&
+        (applyItems.length === 0 || applyItems.item_type !== 'background') &&
+        wornItems &&
+        wornItems.etc ? (
+          <BackgroundImg
             src={require(`../../assets/item/etc/${
-              applyItems && applyItems.etc.detail
+              wornItems && wornItems.etc
             }.png`)}
+            alt=""
+          />
+        ) : closet && applyItems && applyItems.item_type === 'etc' ? (
+          <EtcImg
+            src={require(`../../assets/item/etc/${applyItems.item_detail}.png`)}
             alt=""
           />
         ) : hasItems && hasItems.etc ? (
           <EtcImg
-            src={require(`../../assets/item/etc/${hasItems.etc.detail}.png`)}
+            src={require(`../../assets/item/etc/${hasItems.etc}.png`)}
             alt=""
           />
         ) : null}

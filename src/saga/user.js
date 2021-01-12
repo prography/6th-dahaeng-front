@@ -41,7 +41,7 @@ function* getUserSaga(action) {
           backgroundItems.length !== 0
             ? backgroundItems[0].item.item_detail
             : null,
-        etcItems: etcItems.length !== 0 ? etcItems[0].item.item_detail : null,
+        etc: etcItems.length !== 0 ? etcItems[0].item.item_detail : null,
       };
       yield put({
         type: GETUSER_SUCCESS,
@@ -184,8 +184,6 @@ function* buyItemSaga(action) {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
 
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
-
-    console.log('getItmes');
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
@@ -214,6 +212,7 @@ function* buyItemSaga(action) {
       });
     }
   } catch (e) {
+    console.log(e);
     yield put({
       type: BUYITEMS_FAIL,
       payload: e,
@@ -245,7 +244,7 @@ function* setItemSaga(action) {
     );
 
     console.log('response: ', res);
-    if (res.response === 'success') {
+    if (res.data.response === 'success') {
       yield put({
         type: SETITEMS_SUCCESS,
         payload: res.data.message,
@@ -258,6 +257,7 @@ function* setItemSaga(action) {
       });
     }
   } catch (e) {
+    console.log(e);
     yield put({
       type: SETITEMS_FAIL,
       payload: e,
@@ -346,7 +346,6 @@ export function* userSaga() {
   yield takeLatest(REMINDER, reminderSaga);
   yield takeLatest(GETITEMS, getItemSaga);
   yield takeLatest(BUYITEMS, buyItemSaga);
-  yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(GETCLOSET, getClosetSaga);
   yield takeLatest(SETUSER, setUserSaga);

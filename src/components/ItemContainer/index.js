@@ -62,8 +62,10 @@ const ShopBox = styled.button`
 
 const ItemPage = styled.div`
   width: 100%;
-  height: ${(props) => (props.status === 'market' ? '640px' : '340px')};
-  /* height: 640px; */ /* background: var(--light-background); */
+  /* height: ${(props) => (props.status === 'market' ? '640px' : '340px')}; */
+  height: calc(100vh - 265px - 128px);
+  /* background: var(--light-background); */
+  border-radius: 4px;
   border: 2px solid #212121;
   display: flex;
   flex-direction: row;
@@ -72,20 +74,15 @@ const ItemPage = styled.div`
   padding: 20px;
   overflow-y: auto;
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 360px) {
     padding: 10px;
   }
 `;
 
 const JoraengImg = styled.img`
-  width: 150px;
+  height: 110px;
   margin: 0 auto;
-`;
-
-const WaitComment = styled.div`
-  font-size: 14px;
-  color: #212121;
-  padding: 1rem;
+  margin-top: 6vh;
 `;
 
 const ItemContainer = ({
@@ -97,7 +94,6 @@ const ItemContainer = ({
   select,
 }) => {
   const colors = useSelector((state) => state.user.colors);
-  console.log(itemBoxs);
 
   function navigateMarketPage() {
     history.push('/market');
@@ -142,13 +138,10 @@ const ItemContainer = ({
 
         {/* item 없을 때 화면 수정해야 함 */}
         <ItemPage status={status}>
-          {itemBoxs ? (
+          {!(itemBoxs?.length === 0) ? (
             itemBoxs
           ) : (
-            <>
-              <WaitComment>아이템이 하나도 없어요...</WaitComment>
-              <JoraengImg src={noItemJoraeng} alt="" />
-            </>
+            <JoraengImg src={noItemJoraeng} alt="" />
           )}
         </ItemPage>
       </Wrapper>

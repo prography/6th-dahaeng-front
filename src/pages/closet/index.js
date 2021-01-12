@@ -13,24 +13,21 @@ import Slider from '../../components/Slider';
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding-top: 1rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
 `;
 
-const SetButton = styled.button`
-  width: 64px;
-  height: 30px;
+const ApplyBox = styled.div`
   float: right;
-  background: var(--primary-color);
-  border-radius: 4px;
-  color: #ffffff;
+  line-height: 34px;
+  color: #212121;
+  padding: 4rem 1.5rem 0.5rem 0;
 `;
 
-const RoomWrapper = styled.div`
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+const ApplyImg = styled.img`
+  width: 20px;
 `;
 
 const ModalTitle = styled.div`
@@ -52,8 +49,6 @@ const ModalButtonLeft = styled.button`
   margin-right: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: var(--small-border-radius);
-  background: var(--primary-color);
   color: #ffffff;
 `;
 
@@ -63,13 +58,11 @@ const ModalButtonRight = styled.button`
   margin-left: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: 4px;
-  background: var(--light-background);
-  color: var(--primary-color);
 `;
 
 const Closet = ({ history }) => {
   const hasItems = useSelector((state) => state.user.hasItems);
+  const colors = useSelector((state) => state.user.colors);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -83,18 +76,15 @@ const Closet = ({ history }) => {
   // }
   const [applyItems, setApplyItems] = useState([]);
   const applyItem = (applyItem) => {
-    if (applyItem.item.item_type === 'jorang_color') {
-      setApplyItems({
-        color: applyItem.item.item_detail,
-        id: applyItem.item.id,
-      });
-    } else {
-      // applyItems.append(applyItem);
-      // setApplyItems(applyItems);
-    }
+    setApplyItems({
+      item_type: applyItem.item.item_type,
+      item_detail: applyItem.item.item_detail,
+      id: applyItem.item.id,
+    });
   };
 
   const setItem = (item) => {
+    console.log(item);
     dispatch(setItems(item));
     setModal();
     //refresh item list and coin and jorang view
@@ -114,14 +104,10 @@ const Closet = ({ history }) => {
       <Responsive style={{ paddingTop: '4vh' }}>
         <SubTitle title={'조랭 옷장'} />
         <Slider history={history} />
-        <SetButton onClick={setModal}>{'착용하기'}</SetButton>
-        <RoomWrapper>
-          <Room
-            closet={true}
-            hasItems={hasItems}
-            applyItems={applyItems}
-          ></Room>
-        </RoomWrapper>
+        <ApplyBox onClick={setModal}>
+          <ApplyImg src={require(`../../assets/icon/save-icon.png`)} alt="" />
+        </ApplyBox>
+        <Room closet={true} hasItems={hasItems} applyItems={applyItems}></Room>
         <ContentBox>
           <Modal
             className="popup"
@@ -130,10 +116,21 @@ const Closet = ({ history }) => {
             title={<ModalTitle>{'현재 모습을 적용하시겠어요?'}</ModalTitle>}
             button={
               <ModalButtonField>
-                <ModalButtonLeft onClick={() => setItem(applyItems.id)}>
+                <ModalButtonLeft
+                  onClick={() => setItem(applyItems.id)}
+                  style={{ background: `#${colors && colors[0]}` }}
+                >
                   {'확인'}
                 </ModalButtonLeft>
-                <ModalButtonRight onClick={setModal}>{'취소'}</ModalButtonRight>
+                <ModalButtonRight
+                  onClick={setModal}
+                  style={{
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
+                  }}
+                >
+                  {'취소'}
+                </ModalButtonRight>
               </ModalButtonField>
             }
           ></Modal>

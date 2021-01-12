@@ -84,6 +84,8 @@ const MainJoraeng = ({ age, mainColor, thirdColor }) => {
         </g>
       </svg>
     );
+  } else {
+    return null;
   }
 };
 

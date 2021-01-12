@@ -7,7 +7,6 @@ import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 import FloatingButton from '../../components/MainFloatingButton';
 import Slider from '../../components/Slider';
-import MainJoraeng from '../../components/Joraeng/MainJoraeng';
 import { useState } from 'react';
 import Room from '../main/Room';
 
@@ -45,41 +44,14 @@ const QuestionHighlight = styled.div`
   display: inline;
 `;
 
-const Wrapper = styled.div`
-  margin: 0 auto;
-  min-height: 350px;
-  width: 100%;
-  bottom: 0;
-  position: fixed;
-`;
-const Character = styled.div`
-  min-width: 140px;
-  width: 25%;
-  z-index: 2;
-  position: absolute;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-`;
-const Background = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  z-index: 1;
-  width: 100%;
-`;
-
 const Main = ({ history }) => {
   const [inputText, setInputText] = useState('');
 
   const id = useSelector((state) => state.auth.profile_id);
-  const user = useSelector((state) => state.user.user);
   const question = useSelector((state) => state.box.question);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const colors = useSelector((state) => state.user.colors);
-  const hasItems = useSelector((state) => state.user.user.jorang_items);
+  const hasItems = useSelector((state) => state.user.jorang_items);
 
   const dispatch = useDispatch();
 

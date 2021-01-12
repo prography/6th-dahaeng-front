@@ -5,7 +5,9 @@ import { setUser, getUser } from '../../store/user';
 import SubTitle from '../../components/SubTitle';
 import Responsive from '../../components/common/Responsive';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding-top: 4rem;
+`;
 
 const SettingBox = styled.div`
   padding: 0 1rem 1rem 1rem;
@@ -24,6 +26,7 @@ const SettingInput = styled.input`
   padding-bottom: 1rem;
   padding-left: 0;
   color: #212121;
+  height: 36px;
 `;
 
 const ButtonBox = styled.div`

@@ -8,13 +8,12 @@ import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import ItemBox from './ItemBox';
 import Slider from '../../components/Slider';
-import ground from 'assets/main/ground.png';
-import MainJoraeng from '../../components/Joraeng/MainJoraeng';
+import Room from '../main/Room';
 
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding: 1rem;
+  padding: 0rem 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
@@ -39,8 +38,6 @@ const ModalButtonLeft = styled.button`
   margin-right: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: var(--small-border-radius);
-  border: 2px solid #212121;
   color: white;
 `;
 
@@ -50,8 +47,6 @@ const ModalButtonRight = styled.button`
   margin-left: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: 4px;
-  border: 2px solid #212121;
 `;
 
 const ModalText = styled.div`
@@ -60,38 +55,18 @@ const ModalText = styled.div`
   padding-bottom: 0.5rem;
 `;
 
-const Wrapper = styled.div`
-  margin: 0 auto;
-  max-width: 1024px;
-`;
-const Character = styled.div`
-  min-width: 114px;
-  width: 30%;
-  z-index: 2;
-  margin: 0 auto;
-  bottom: -20px;
-  position: relative;
-`;
-const Background = styled.div`
-  z-index: 1;
-  width: 40%;
-  margin: 0 auto;
-`;
-const BackgroundImg = styled.img`
-  width: 100%;
-`;
-
 const CoinBox = styled.div`
   float: right;
-  padding-right: 1rem;
   line-height: 34px;
-  color: var(--text-second);
+  color: #212121;
+  padding: 4rem 1rem 1rem 1rem;
 `;
 
 const Market = ({ history }) => {
   const allItems = useSelector((state) => state.user.allItems);
+  const hasItems = useSelector((state) => state.user.user.jorang_items);
   const user = useSelector((state) => state.user.user);
-  const colors = useSelector((state) => state.user.color);
+  const colors = useSelector((state) => state.user.colors);
   const buy_success = useSelector((state) => state.user.buy_success);
   const buyError = useSelector((state) => state.user.buyError);
   const dispatch = useDispatch();
@@ -153,7 +128,7 @@ const Market = ({ history }) => {
     }
   }, [buy_success, buyError]);
 
-  const indexs = ['jorang_color', 'background', 'item'];
+  const indexs = ['jorang_color', 'background', 'etc'];
   const [select, setSelect] = useState('jorang_color');
   const selectCategory = (index) => {
     setSelect(index);
@@ -170,24 +145,11 @@ const Market = ({ history }) => {
 
   return (
     <>
-      {/* <Header /> */}
-      <Slider history={history} />
-      <Responsive>
+      <Responsive style={{ paddingTop: '4vh' }}>
         <SubTitle title={'조랭 마켓'} />
+        <Slider history={history} />
         <CoinBox>{`${user.user_coin} 코인`}</CoinBox>
-        <Wrapper>
-          <Character>
-            {/*TODO: Dynamic color binding*/}
-            <MainJoraeng
-              age={user.jorang_status}
-              mainColor={`#${user.main_color}`}
-              thirdColor={`#${user.third_color}`}
-            />
-          </Character>
-          <Background>
-            <BackgroundImg src={ground} alt=""></BackgroundImg>
-          </Background>
-        </Wrapper>
+        <Room closet={false} hasItems={hasItems}></Room>
         <ContentBox>
           <Modal
             className="popup"
@@ -211,15 +173,15 @@ const Market = ({ history }) => {
             button={
               <ModalButtonField>
                 <ModalButtonLeft
-                  style={{ background: colors && colors[0] }}
+                  style={{ background: `#${colors && colors[0]}` }}
                   onClick={() => buyItem(wantItem && wantItem.id)}
                 >
                   {'확인'}
                 </ModalButtonLeft>
                 <ModalButtonRight
                   style={{
-                    background: colors && colors[2],
-                    color: colors && colors[0],
+                    background: `#${colors && colors[2]}`,
+                    color: `#${colors && colors[0]}`,
                   }}
                   onClick={setModal}
                 >

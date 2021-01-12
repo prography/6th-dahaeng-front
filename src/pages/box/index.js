@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import FeedBox from './FeedBox.js';
 import ThreadBox from './ThreadBox.js';
 import Slider from '../../components/Slider';
-import homeIcon from '../../components/MainFloatingButton/floating-home.png';
 import searchIcon from 'assets/icon/search.png';
 import feed from 'assets/icon/feed.png';
 import thread from 'assets/icon/thread.png';

@@ -4,7 +4,6 @@ import JoraengColor from '../../components/ItemContainer/Joraengcolor';
 
 const Wrapper = styled.div`
   background-color: #ffffff;
-  border-radius: var(--small-border-radius);
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
   /* width: 228px; */
   flex: 1 1 calc(33.3333% - 40px);
@@ -42,6 +41,14 @@ const ItemImageBox = styled.div`
   justify-content: center;
 `;
 
+const BackgroundImageBox = styled.img`
+  max-height: 120px;
+`;
+
+const PetImageBox = styled.img`
+  max-height: 80px;
+`;
+
 const ItemInfoBox = styled.div`
   display: block;
   width: 100%;
@@ -75,13 +82,25 @@ const ItemPrice = styled.div`
   text-align: left;
 `;
 
-const ItemBox = ({ item, item_has, setModal }) => {
+const ItemBox = ({ item, item_has, setModal, item_type }) => {
   return (
     <>
       {item_has ? (
         <Wrapper className="hasItem">
           <ItemImageBox>
-            <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
+            {item.item_type === 'jorang_color' ? (
+              <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
+            ) : null}
+            {item.item_type === 'background' ? (
+              <BackgroundImageBox
+                src={require(`../../assets/item/background/${item.item_detail}.png`)}
+              ></BackgroundImageBox>
+            ) : null}
+            {item.item_type === 'etc' ? (
+              <PetImageBox
+                src={require(`../../assets/item/etc/${item.item_detail}.png`)}
+              ></PetImageBox>
+            ) : null}
           </ItemImageBox>
 
           <ItemInfoBox>
@@ -95,7 +114,19 @@ const ItemBox = ({ item, item_has, setModal }) => {
       ) : (
         <Wrapper onClick={() => setModal(item)}>
           <ItemImageBox>
-            <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
+            {item.item_type === 'jorang_color' ? (
+              <JoraengColor color={`#${item.item_detail}`}></JoraengColor>
+            ) : null}
+            {item.item_type === 'background' ? (
+              <BackgroundImageBox
+                src={require(`../../assets/item/background/${item.item_detail}.png`)}
+              ></BackgroundImageBox>
+            ) : null}
+            {item.item_type === 'etc' ? (
+              <PetImageBox
+                src={require(`../../assets/item/etc/${item.item_detail}.png`)}
+              ></PetImageBox>
+            ) : null}
           </ItemImageBox>
           <ItemInfoBox>
             <ItemName>{item.item_name}</ItemName>

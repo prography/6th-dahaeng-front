@@ -7,10 +7,6 @@ import { getRecords } from '../../store/box.js';
 import DailyRecord from './dailyrecord.js';
 import MenuIcon from '../../assets/icon/MenuIcon.js';
 
-const Spacer = styled.div`
-  height: 10rem;
-`;
-
 const DrawerIcon = styled.div`
   position: fixed;
   left: 12px;

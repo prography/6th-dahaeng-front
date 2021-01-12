@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import waitJoraeng from 'assets/joraeng/wait-joraeng.png';
 import noItemJoraeng from 'assets/joraeng/no-item.png';
 import { useSelector } from 'react-redux';
 
@@ -32,21 +31,39 @@ const Index = styled.div`
   text-align: center;
   border: 2px solid #212121;
   border-bottom: none;
-  cursor: pointer;
+  z-index: 3;
+  position: relative;
+`;
+
+const SelectIndex = styled.div`
+  /* width: 78px; */
+  width: 54px;
+  height: 39px;
+  margin-left: ${(props) => {
+    if (props.index === 'jorang_color') {
+      return '10px';
+    } else if (props.index === 'background') {
+      return '76px';
+    } else {
+      return '142px';
+    }
+  }};
+  position: fixed;
+  background-color: #ffffff;
+  z-index: 1;
 `;
 
 const ShopBox = styled.button`
   flex: none;
   margin-right: 8px;
   line-height: 34px;
-  color: var(--text-second);
+  color: #212121;
 `;
 
 const ItemPage = styled.div`
   width: 100%;
   height: ${(props) => (props.status === 'market' ? '640px' : '340px')};
   /* height: 640px; */ /* background: var(--light-background); */
-  border-radius: 4px;
   border: 2px solid #212121;
   display: flex;
   flex-direction: row;
@@ -60,16 +77,6 @@ const ItemPage = styled.div`
   }
 `;
 
-const ImgBox = styled.div`
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-  padding: 20px;
-`;
-
 const JoraengImg = styled.img`
   width: 150px;
   margin: 0 auto;
@@ -77,7 +84,7 @@ const JoraengImg = styled.img`
 
 const WaitComment = styled.div`
   font-size: 14px;
-  color: var(--text-second);
+  color: #212121;
   padding: 1rem;
 `;
 
@@ -90,6 +97,7 @@ const ItemContainer = ({
   select,
 }) => {
   const colors = useSelector((state) => state.user.colors);
+  console.log(itemBoxs);
 
   function navigateMarketPage() {
     history.push('/market');
@@ -103,24 +111,27 @@ const ItemContainer = ({
             {indexs &&
               indexs.map((index) => {
                 return (
-                  <Index
-                    key={index}
-                    onClick={() => selectCategory(index)}
-                    style={{
-                      color:
-                        select === index
-                          ? colors && colors[0]
-                          : colors && colors[2],
-                    }}
-                  >
-                    {index === 'jorang_color'
-                      ? '컬러'
-                      : index === 'background'
-                      ? '배경'
-                      : index === 'item'
-                      ? '아이템'
-                      : null}
-                  </Index>
+                  <>
+                    <Index
+                      key={index}
+                      onClick={() => selectCategory(index)}
+                      style={{
+                        color:
+                          select === index
+                            ? `#${colors && colors[0]}`
+                            : `#${colors && colors[2]}`,
+                      }}
+                    >
+                      {index === 'jorang_color'
+                        ? '컬러'
+                        : index === 'background'
+                        ? '배경'
+                        : index === 'etc'
+                        ? '기타'
+                        : null}
+                    </Index>
+                    {select === index ? <SelectIndex index={index} /> : null}
+                  </>
                 );
               })}
           </IndexList>
@@ -131,22 +142,13 @@ const ItemContainer = ({
 
         {/* item 없을 때 화면 수정해야 함 */}
         <ItemPage status={status}>
-          {select === 'jorang_color' ? (
+          {itemBoxs ? (
             itemBoxs
           ) : (
-            <ImgBox>
-              {status === 'market' ? (
-                <>
-                  <WaitComment>아직 준비 중입니다!</WaitComment>
-                  <JoraengImg src={waitJoraeng} alt="" />
-                </>
-              ) : (
-                <>
-                  <WaitComment>아이템이 하나도 없어요...</WaitComment>
-                  <JoraengImg src={noItemJoraeng} alt="" />
-                </>
-              )}
-            </ImgBox>
+            <>
+              <WaitComment>아이템이 하나도 없어요...</WaitComment>
+              <JoraengImg src={noItemJoraeng} alt="" />
+            </>
           )}
         </ItemPage>
       </Wrapper>

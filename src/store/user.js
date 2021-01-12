@@ -48,6 +48,7 @@ export const feedback = createAction(FEEDBACK, (content) => ({ content }));
 const initialState = {
   colors: [],
   jorang_color: '',
+  jorang_items: [],
   user: {
     id: null,
     jorang_nickname: null,
@@ -60,94 +61,9 @@ const initialState = {
   buy_success: false,
   buyError: '',
   getUserError: null,
-  notices: {
-    notice: [
-      {
-        id: 1,
-        title: '다행에 가입하신걸 환영합니다!',
-        content: '보다 나은 서비스로 제공하겠습니다.\r\n\r\n감사합니다 :)',
-        created_at: '2020-07-10',
-      },
-    ],
-    reminder: [
-      {
-        post: 1,
-        interval: 2,
-        created_at: '2020-06-03',
-        posts: {
-          emotion: 'WARM',
-          detail: '오늘은 날씨가 참 좋았어요!',
-          question: '테스트 질문입니다.',
-          image: '/media/default_image_sample.jpg',
-        },
-      },
-    ],
-  },
-  // items: null,
-  allItems: {
-    had_items: [
-      {
-        id: 0,
-        item_name: '보라조랭',
-        item_type: 'jorang_color',
-        item_detail: 'BD97B4',
-        item_price: 5,
-      },
-      {
-        id: 1,
-        item_name: '하양조랭',
-        item_type: 'jorang_color',
-        item_detail: 'F4E9DC',
-        item_price: 5,
-      },
-      {
-        id: 2,
-        item_name: '하늘조랭',
-        item_type: 'jorang_color',
-        item_detail: '8BAAD8',
-        item_price: 5,
-      },
-    ],
-    not_had_items: [
-      {
-        id: 3,
-        item_name: '빨강조랭',
-        item_type: 'jorang_color',
-        item_detail: 'FC9285',
-        item_price: 5,
-      },
-      {
-        id: 4,
-        item_name: '노랑조랭',
-        item_type: 'jorang_color',
-        item_detail: 'FFE884',
-        item_price: 5,
-      },
-    ],
-  },
-
-  hasItems: [
-    {
-      id: 1,
-      is_worn: true,
-      item: {
-        item_name: '하양조랭',
-        item_type: 'jorang_color',
-        item_detail: 'F4E9DC',
-        item_price: 5,
-      },
-    },
-    {
-      id: 3,
-      is_worn: false,
-      item: {
-        item_name: '빨강조랭',
-        item_type: 'jorang_color',
-        item_detail: 'FC9285',
-        item_price: 5,
-      },
-    },
-  ],
+  hasItems: [],
+  allItems: [],
+  items: [],
 };
 
 const user = handleActions(
@@ -172,6 +88,7 @@ const user = handleActions(
           : user.jorang_color === '5CA1D2' //BLUE
           ? [user.jorang_color, 'BDD8EC', 'E1EEF7']
           : null,
+      jorang_items: user.jorang_items,
     }),
     [GETUSER_FAIL]: (state, { payload: error }) => ({
       ...state,

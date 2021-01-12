@@ -50,7 +50,7 @@ const FloatingButton = ({ history }) => {
         <img
           alt="floating button icon"
           className="buttonImage"
-          src={require('./floating-icon.png')}
+          src={require('../../assets/floating/floating-icon.png')}
         />
       </div>
       <div
@@ -61,7 +61,7 @@ const FloatingButton = ({ history }) => {
         <img
           alt="floating button icon"
           className="buttonImage"
-          src={require('./floating-home.png')}
+          src={require('../../assets/floating/floating-home.png')}
         />
       </div>
       <div
@@ -72,14 +72,14 @@ const FloatingButton = ({ history }) => {
         <img
           alt="floating button icon"
           className="buttonImage"
-          src={require('./floating-closet.png')}
+          src={require('../../assets/floating/floating-closet.png')}
         />
       </div>
       <div className="floatingButton__subButton" id="floatingButton3">
         <img
           alt="floating button icon"
           className="buttonImage"
-          src={require('./floating-notice.png')}
+          src={require('../../assets/floating/floating-notice.png')}
         />
       </div>
     </React.Fragment>

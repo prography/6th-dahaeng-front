@@ -28,13 +28,9 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .title {
-    font-size: 1.125rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    color: #212121;
-  }
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #212121;
 `;
 
 const SubTitle = ({ title, back, backPage }) => {

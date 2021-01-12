@@ -6,6 +6,7 @@ import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
+import useLocalStorage from '../../util/useLocalStorage';
 
 import KakaoLogo from 'assets/logo/kakao-logo.png';
 import NaverLogo from 'assets/logo/naver.svg';
@@ -183,7 +184,7 @@ const Login = ({ history }) => {
       '활성화 되지 않은 계정입니다. 메일을 확인하고, 본인인증을 해주세요.'
     ) {
       console.log('이메일 인증 필요');
-      history.push({ pathname: '/emailAuth', state: { color: color } });
+      history.push('/emailAuth');
       //setModal();
       return;
     } else if (authError === 'JWT token 생성에 실패하였습니다.') {
@@ -202,14 +203,14 @@ const Login = ({ history }) => {
   }, [auth, authError, dispatch, history, user, has_jorang, token, setModal]);
 
   // 로그인, 회원가입 랜덤 컬러
-  const [color, setColor] = useState('');
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
   const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
   const randomItem = () => {
     return colorArray[Math.floor(Math.random() * colorArray.length)];
   };
 
   useEffect(() => {
-    setColor(randomItem());
+    setRandomColor(() => [randomItem()]);
   }, []);
 
   return (
@@ -231,7 +232,7 @@ const Login = ({ history }) => {
           onChange={onChange}
           onSubmit={onSubmit}
           status={status}
-          color={color}
+          color={randomColor[0]}
         />
         <SnsBox>
           <KakaoLogin onClick={() => snsLogin('kakao')}>
@@ -275,7 +276,7 @@ const Login = ({ history }) => {
             </ModalText>
           }
           button={
-            <ModalButton onClick={setModal} color={color}>
+            <ModalButton onClick={setModal} color={randomColor[0]}>
               확인
             </ModalButton>
           }

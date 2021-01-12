@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import SignResponsive from '../../components/common/SignResponsive';
 import authJoraeng from 'assets/joraeng/auth-joraeng.png';
 
+import useLocalStorage from '../../util/useLocalStorage';
+
 const EmailAuthContentWrapper = styled.div`
   height: calc(100vh - 75px);
   width: calc(100vw - 20px);
@@ -60,9 +62,7 @@ const EmailAuth = ({ history }) => {
     history.push('/login');
   };
 
-  // Todo : useLocation.state.color 받아오기
-  // console.log(useLocation().state);
-  const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   return (
     <>
@@ -77,10 +77,7 @@ const EmailAuth = ({ history }) => {
             <div>도착한 메일을 확인하고 인증을 완료해주세요</div>
             <div> 인증은 가입 후 딱 한 번만 해주시면 됩니다</div>
           </Content>
-          <LoginButton
-            onClick={moveLogin}
-            color={colorArray[Math.floor(Math.random() * colorArray.length)]}
-          >
+          <LoginButton onClick={moveLogin} color={randomColor}>
             로그인하러 가기
           </LoginButton>
         </EmailAuthContentWrapper>

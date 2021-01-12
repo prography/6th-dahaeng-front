@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeForm, initForm, sign } from 'store/auth';
 import styled from 'styled-components';
 import SignAuthForm from '../../components/AuthForm/sign.js';
-import { useLocation, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
+
+import useLocalStorage from '../../util/useLocalStorage';
 
 const SignContentWrapper = styled.div`
   height: calc(100vh - 75px);
@@ -203,7 +205,7 @@ const Sign = ({ history }) => {
       // }
       console.log(authError);
       if (!firstClick) {
-        history.push({ pathname: '/emailAuth', state: { color: color } });
+        history.push('/emailAuth');
       }
       console.log('회원가입 실패');
       console.log(authError);
@@ -212,7 +214,7 @@ const Sign = ({ history }) => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      history.push({ pathname: '/emailAuth', state: { color: color } });
+      history.push('/emailAuth');
     }
   }, [auth, authError, dispatch, history, firstClick]);
 
@@ -224,7 +226,7 @@ const Sign = ({ history }) => {
   //   }
   // }, [history, user]);
 
-  const color = useLocation().state.color;
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   return (
     <SignResponsive>
@@ -239,7 +241,7 @@ const Sign = ({ history }) => {
           onPwConfirmChange={onPwConfirmChange}
           onSubmit={onSubmit}
           status={status}
-          color={color}
+          color={randomColor}
         ></SignAuthForm>
         <Modal
           className="popup"
@@ -248,7 +250,7 @@ const Sign = ({ history }) => {
           title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
           content={<ModalText>로그인하러 가볼까요?</ModalText>}
           button={
-            <ModalButton onClick={setModal} color={color}>
+            <ModalButton onClick={setModal} color={randomColor}>
               확인
             </ModalButton>
           }

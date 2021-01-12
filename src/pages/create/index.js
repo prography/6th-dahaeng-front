@@ -5,6 +5,8 @@ import styled, { keyframes } from 'styled-components';
 import SignResponsive from '../../components/common/SignResponsive';
 import createJoraeng from '../../assets/joraeng/create-joraeng.png';
 
+import useLocalStorage from '../../util/useLocalStorage';
+
 const CreateJoraengContentWrapper = styled.div`
   height: calc(100vh - 75px);
   width: calc(100vw - 20px);
@@ -95,20 +97,13 @@ const Create = ({ history }) => {
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const jorang_color = useSelector((state) => state.user.user.jorang_color);
 
-  // Todo : useLocation.state.color 받아오기
-  // console.log(useLocation().state);
-  const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
-  const [color, setColor] = useState('');
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   useEffect(() => {
     if (has_jorang === true) {
       history.push('/');
     }
   }, [has_jorang, history]);
-
-  useEffect(() => {
-    setColor(colorArray[Math.floor(Math.random() * colorArray.length)]);
-  }, []);
 
   const onChange = (e) => {
     setName(e.target.value);
@@ -148,7 +143,7 @@ const Create = ({ history }) => {
             <div>매일 매일 행복을 기록하면, </div>
             <div>반려조랭이가 무럭무럭 자랍니다</div>
           </Content>
-          <LoginButton onClick={onSubmit} color={color}>
+          <LoginButton onClick={onSubmit} color={randomColor}>
             조랭이 만나러 가기
           </LoginButton>
         </CreateJoraengContentWrapper>

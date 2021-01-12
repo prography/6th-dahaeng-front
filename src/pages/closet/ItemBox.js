@@ -4,8 +4,7 @@ import JoraengColor from '../../components/ItemContainer/Joraengcolor';
 
 const Wrapper = styled.div`
   background-color: #ffffff;
-  border-radius: var(--small-border-radius);
-
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
   /* width: 228px; */
   flex: 1 1 calc(33.3333% - 40px);
   min-width: 210px;
@@ -26,10 +25,11 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  cursor: ${(props) => (props.className === 'hasItem' ? '' : 'pointer')};
   transition: 0.125s ease-in-out;
   &:hover {
     background-color: ${(props) =>
-      props.className === 'setItem' ? '' : 'rgba(0, 0, 0, 0.2)'};
+      props.className === 'hasItem' ? '' : 'rgba(0, 0, 0, 0.2)'};
   }
 `;
 

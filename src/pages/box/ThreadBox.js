@@ -8,8 +8,10 @@ import { useSelector } from 'react-redux';
 
 const Wrapper = styled.div`
   width: 100%;
+  max-height: 360px;
   margin: 0 auto;
   margin-top: 1.5rem;
+  margin-bottom: 10px;
   background-color: white;
   box-shadow: var(--card-shadow);
   border: 3px solid #212121;

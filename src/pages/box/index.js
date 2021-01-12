@@ -37,9 +37,10 @@ const Content = styled.div`
   flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'inherit')};
   justify-content: ${(props) =>
     props.sortingType === 'feed' ? 'flex-start' : 'center'};
-  padding: 20px;
-  padding-top: 0;
-  height: calc(100vh - 5rem);
+  height: ${(props) =>
+    props.sortingType === 'feed'
+      ? 'calc(100vh - 5rem)'
+      : 'calc(100vh - 12rem);'};
   overflow-y: auto;
 
   @media screen and (max-width: 480px) {
@@ -91,6 +92,7 @@ const SearchResult = styled.div`
   font-size: 14px;
   text-align: center;
   margin-top: 1.5rem;
+  margin-bottom: 1rem;
   color: #212121;
 `;
 
@@ -148,7 +150,7 @@ const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-  color: var(--text-second);
+  color: #212121;
 `;
 
 const Box = ({ history }) => {
@@ -210,6 +212,8 @@ const Box = ({ history }) => {
   useEffect(() => {
     dispatch(getRecords());
   }, [dispatch]);
+
+  console.log(sortingType);
 
   return (
     <>
@@ -289,7 +293,7 @@ const Box = ({ history }) => {
           </SearchWrapper>
         ) : null}
 
-        <Content sortingType={'feed'}>
+        <Content sortingType={sortingType === 'search' ? 'search' : 'feed'}>
           {sortingType === 'thread' ? (
             records &&
             records.map((record, index) => {
@@ -316,13 +320,11 @@ const Box = ({ history }) => {
             searchs &&
             searchs.map((record, index) => {
               return (
-                <>
-                  <ThreadBox
-                    record={record}
-                    key={index}
-                    // input={input}
-                  ></ThreadBox>
-                </>
+                <ThreadBox
+                  record={record}
+                  key={index}
+                  // input={input}
+                ></ThreadBox>
               );
             })
           ) : (

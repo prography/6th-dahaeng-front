@@ -63,7 +63,7 @@ const ShopBox = styled.button`
 const ItemPage = styled.div`
   width: 100%;
   /* height: ${(props) => (props.status === 'market' ? '640px' : '340px')}; */
-  height: calc(100vh - 265px - 128px);
+  height: calc(100vh - 334px - 63px);
   /* background: var(--light-background); */
   border-radius: 4px;
   border: 2px solid #212121;
@@ -76,6 +76,7 @@ const ItemPage = styled.div`
 
   @media screen and (max-width: 360px) {
     padding: 10px;
+    height: calc(100vh - 334px - 58px);
   }
 `;
 

@@ -13,7 +13,7 @@ import Slider from '../../components/Slider';
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding: 1rem;
+  padding: 0rem 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
@@ -107,7 +107,12 @@ const Closet = ({ history }) => {
         <ApplyBox onClick={setModal}>
           <ApplyImg src={require(`../../assets/icon/save-icon.png`)} alt="" />
         </ApplyBox>
-        <Room closet={true} hasItems={hasItems} applyItems={applyItems}></Room>
+        <Room
+          market={false}
+          closet={true}
+          hasItems={hasItems}
+          applyItems={applyItems}
+        ></Room>
         <ContentBox>
           <Modal
             className="popup"

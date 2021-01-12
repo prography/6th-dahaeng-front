@@ -106,8 +106,6 @@ const DropdownOpenWrapper = styled.div`
   position: absolute;
   right: 0;
   bottom: 0;
-  /* max-width: 96px;
-  max-height: 64px; */
 `;
 
 const DropdownButton = styled.button`

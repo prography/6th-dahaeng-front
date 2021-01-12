@@ -13,21 +13,21 @@ import Slider from '../../components/Slider';
 const ContentBox = styled.div`
   max-width: 1024px;
   max-height: 709px;
-  padding-top: 1rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 2rem;
   text-align: center;
 `;
 
 const ApplyBox = styled.div`
-  padding-right: 1rem;
-  line-height: 34px;
-  color: var(--text-second);
-  padding-top: 4rem;
-`;
-const ApplyImg = styled.img`
-  width: 5%;
   float: right;
+  line-height: 34px;
+  color: #212121;
+  padding: 4rem 1.5rem 0.5rem 0;
+`;
+
+const ApplyImg = styled.img`
+  width: 20px;
 `;
 
 const ModalTitle = styled.div`
@@ -49,8 +49,6 @@ const ModalButtonLeft = styled.button`
   margin-right: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: var(--small-border-radius);
-  background: var(--primary-color);
   color: #ffffff;
 `;
 
@@ -60,9 +58,6 @@ const ModalButtonRight = styled.button`
   margin-left: 0.5rem;
   border: none;
   height: 30px;
-  border-radius: 4px;
-  background: var(--light-background);
-  color: var(--primary-color);
 `;
 
 const Closet = ({ history }) => {

@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   padding-top: 5rem;
 `;
 const Character = styled.div`
-  min-width: 114px;
+  min-width: 95px;
   width: 30%;
   z-index: 2;
   margin: 0 auto;

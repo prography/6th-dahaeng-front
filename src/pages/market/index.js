@@ -59,7 +59,11 @@ const CoinBox = styled.div`
   float: right;
   line-height: 34px;
   color: #212121;
+<<<<<<< HEAD
   padding: 4rem 1rem 1rem 1rem;
+=======
+  padding-top: 4rem;
+>>>>>>> a133b9dd0adaa0b5dae7e508659cd944653762e4
 `;
 
 const Market = ({ history }) => {

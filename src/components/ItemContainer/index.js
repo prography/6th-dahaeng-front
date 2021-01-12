@@ -27,6 +27,7 @@ const Index = styled.div`
   min-width: 58px;
   line-height: 34px;
   border-radius: 4px 4px 0 0;
+  background-color: #ffffff;
   margin-left: 8px;
   text-align: center;
   border: 2px solid #212121;
@@ -38,7 +39,7 @@ const Index = styled.div`
 const SelectIndex = styled.div`
   /* width: 78px; */
   width: 54px;
-  height: 39px;
+  height: 37px;
   margin-left: ${(props) => {
     if (props.index === 'jorang_color') {
       return '10px';
@@ -62,10 +63,8 @@ const ShopBox = styled.button`
 
 const ItemPage = styled.div`
   width: 100%;
-  /* height: ${(props) => (props.status === 'market' ? '640px' : '340px')}; */
-  height: calc(100vh - 334px - 63px);
+  height: calc(100vh - 334px - 50px);
   /* background: var(--light-background); */
-  border-radius: 4px;
   border: 2px solid #212121;
   display: flex;
   flex-direction: row;
@@ -74,9 +73,9 @@ const ItemPage = styled.div`
   padding: 20px;
   overflow-y: auto;
 
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 350px) {
     padding: 10px;
-    height: calc(100vh - 334px - 58px);
+    height: calc(100vh - 334px - 36px);
   }
 `;
 

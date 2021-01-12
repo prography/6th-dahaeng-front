@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   flex: 1 1 calc(33.3333% - 20px);
   min-width: 256px;
   max-width: calc(33.3333% - 20px);
-  height: 392px;
+  height: 360px;
   margin: 10px;
   justify-content: flex-start;
   align-items: flex-start;
@@ -83,7 +83,7 @@ const Detail = styled.div`
   padding: 0.5rem 1rem;
   align-items: center;
 
-  word-break: break-all;
+  word-break: keep-all;
   flex: 1;
 `;
 

@@ -32,20 +32,21 @@ const ListModeIcon = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: ${(props) =>
-    props.sortingType === 'feed' ? 'row' : 'column'};
-  flex-wrap: ${(props) => (props.sortingType === 'feed' ? 'wrap' : 'inherit')};
-  justify-content: ${(props) =>
-    props.sortingType === 'feed' ? 'flex-start' : 'center'};
-  height: ${(props) =>
-    props.sortingType === 'feed'
-      ? 'calc(100vh - 5rem)'
-      : 'calc(100vh - 12rem);'};
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: calc(100vh - 5rem);
   overflow-y: auto;
 
   @media screen and (max-width: 480px) {
     padding: 10px;
   }
+`;
+
+const SearchContent = styled.div`
+  height: calc(100vh - 12rem);
+  overflow-y: auto;
+  padding: 10px;
 `;
 
 const SearchWrapper = styled.div`
@@ -293,44 +294,49 @@ const Box = ({ history }) => {
           </SearchWrapper>
         ) : null}
 
-        <Content sortingType={sortingType === 'search' ? 'search' : 'feed'}>
-          {sortingType === 'thread' ? (
-            records &&
-            records.map((record, index) => {
-              return (
-                <ThreadBox
-                  record={record}
-                  key={index}
-                  setModal={setModal}
-                ></ThreadBox>
-              );
-            })
-          ) : sortingType === 'feed' ? (
-            records &&
-            records.map((record, index) => {
-              return (
-                <FeedBox
-                  record={record}
-                  key={index}
-                  setModal={setModal}
-                ></FeedBox>
-              );
-            })
-          ) : sortingType === 'search' ? (
-            searchs &&
-            searchs.map((record, index) => {
-              return (
-                <ThreadBox
-                  record={record}
-                  key={index}
-                  // input={input}
-                ></ThreadBox>
-              );
-            })
-          ) : (
-            <ListModeIcon></ListModeIcon>
-          )}
-        </Content>
+        {/* 기록 결과 나오는 부분 */}
+        {sortingType === 'thread' ? (
+          <Content>
+            {records &&
+              records.map((record, index) => {
+                return (
+                  <ThreadBox
+                    record={record}
+                    key={index}
+                    setModal={setModal}
+                  ></ThreadBox>
+                );
+              })}{' '}
+          </Content>
+        ) : sortingType === 'feed' ? (
+          <Content>
+            {records &&
+              records.map((record, index) => {
+                return (
+                  <FeedBox
+                    record={record}
+                    key={index}
+                    setModal={setModal}
+                  ></FeedBox>
+                );
+              })}
+          </Content>
+        ) : sortingType === 'search' ? (
+          <SearchContent>
+            {searchs &&
+              searchs.map((record, index) => {
+                return (
+                  <ThreadBox
+                    record={record}
+                    key={index}
+                    // input={input}
+                  ></ThreadBox>
+                );
+              })}
+          </SearchContent>
+        ) : (
+          <ListModeIcon></ListModeIcon>
+        )}
 
         {/* 삭제 팝업 */}
         <Modal

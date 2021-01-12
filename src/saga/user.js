@@ -184,8 +184,6 @@ function* buyItemSaga(action) {
     //call: Promise를 반환하는 함수 호출하고 기다림 (함수, 해당 함수에 넣을 인수)
 
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
-
-    console.log('getItmes');
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
@@ -214,6 +212,7 @@ function* buyItemSaga(action) {
       });
     }
   } catch (e) {
+    console.log(e);
     yield put({
       type: BUYITEMS_FAIL,
       payload: e,

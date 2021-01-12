@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const Wrapper = styled.div`
   margin: 0 auto;
   max-width: 1024px;
-  padding-top: 4rem;
+  padding-top: 5rem;
 `;
 const Character = styled.div`
   min-width: 114px;
@@ -18,7 +18,7 @@ const Character = styled.div`
 `;
 const Background = styled.div`
   z-index: 1;
-  width: 40%;
+  width: 100%;
   margin: 0 auto;
 `;
 const BackgroundImg = styled.img`

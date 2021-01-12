@@ -105,7 +105,7 @@ const Closet = ({ history }) => {
 
   return (
     <>
-      <Responsive>
+      <Responsive style={{ paddingTop: '4vh' }}>
         <SubTitle title={'조랭 옷장'} />
         <Slider history={history} />
         <ApplyBox onClick={setModal}>

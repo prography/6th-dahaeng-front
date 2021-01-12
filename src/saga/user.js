@@ -41,7 +41,7 @@ function* getUserSaga(action) {
           backgroundItems.length !== 0
             ? backgroundItems[0].item.item_detail
             : null,
-        etcItems: etcItems.length !== 0 ? etcItems[0].item.item_detail : null,
+        etc: etcItems.length !== 0 ? etcItems[0].item.item_detail : null,
       };
       yield put({
         type: GETUSER_SUCCESS,
@@ -244,7 +244,7 @@ function* setItemSaga(action) {
     );
 
     console.log('response: ', res);
-    if (res.response === 'success') {
+    if (res.data.response === 'success') {
       yield put({
         type: SETITEMS_SUCCESS,
         payload: res.data.message,
@@ -257,6 +257,7 @@ function* setItemSaga(action) {
       });
     }
   } catch (e) {
+    console.log(e);
     yield put({
       type: SETITEMS_FAIL,
       payload: e,
@@ -345,7 +346,6 @@ export function* userSaga() {
   yield takeLatest(REMINDER, reminderSaga);
   yield takeLatest(GETITEMS, getItemSaga);
   yield takeLatest(BUYITEMS, buyItemSaga);
-  yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(SETITEMS, setItemSaga);
   yield takeLatest(GETCLOSET, getClosetSaga);
   yield takeLatest(SETUSER, setUserSaga);

@@ -51,7 +51,7 @@ const Main = ({ history }) => {
   const question = useSelector((state) => state.box.question);
   const has_jorang = useSelector((state) => state.auth.has_jorang);
   const colors = useSelector((state) => state.user.colors);
-  const hasItems = useSelector((state) => state.user.user.jorang_items);
+  const hasItems = useSelector((state) => state.user.jorang_items);
 
   const dispatch = useDispatch();
 

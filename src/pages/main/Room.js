@@ -40,7 +40,10 @@ const EtcImg = styled.img`
 const Room = ({ hasItems, applyItems, closet }) => {
   const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
-
+  const wornItems = useSelector((state) => state.user.jorang_items);
+  console.log(hasItems);
+  console.log(applyItems);
+  console.log(wornItems);
   return (
     <Wrapper>
       <Character>
@@ -71,7 +74,17 @@ const Room = ({ hasItems, applyItems, closet }) => {
         />
       </Character>
       <Background>
-        {closet && applyItems && applyItems.item_type === 'background' ? (
+        {closet &&
+        (applyItems.length === 0 || applyItems.item_type !== 'background') &&
+        wornItems &&
+        wornItems.background ? (
+          <BackgroundImg
+            src={require(`../../assets/item/background/${
+              wornItems && wornItems.background
+            }.png`)}
+            alt=""
+          />
+        ) : closet && applyItems && applyItems.item_type === 'background' ? (
           <BackgroundImg
             src={require(`../../assets/item/background/${
               applyItems && applyItems.item_detail
@@ -80,7 +93,7 @@ const Room = ({ hasItems, applyItems, closet }) => {
           />
         ) : hasItems && hasItems.background ? (
           <BackgroundImg
-            src={require(`../../assets/item/background/${hasItems.background.detail}.png`)}
+            src={require(`../../assets/item/background/${hasItems.background}.png`)}
             alt=""
           />
         ) : (
@@ -91,14 +104,24 @@ const Room = ({ hasItems, applyItems, closet }) => {
         )}
       </Background>
       <Etc>
-        {closet && applyItems && applyItems.item_type === 'etc' ? (
+        {closet &&
+        (applyItems.length === 0 || applyItems.item_type !== 'background') &&
+        wornItems &&
+        wornItems.etc ? (
+          <BackgroundImg
+            src={require(`../../assets/item/etc/${
+              wornItems && wornItems.etc
+            }.png`)}
+            alt=""
+          />
+        ) : closet && applyItems && applyItems.item_type === 'etc' ? (
           <EtcImg
             src={require(`../../assets/item/etc/${applyItems.item_detail}.png`)}
             alt=""
           />
         ) : hasItems && hasItems.etc ? (
           <EtcImg
-            src={require(`../../assets/item/etc/${hasItems.etc.detail}.png`)}
+            src={require(`../../assets/item/etc/${hasItems.etc}.png`)}
             alt=""
           />
         ) : null}

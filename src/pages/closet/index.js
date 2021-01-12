@@ -84,6 +84,7 @@ const Closet = ({ history }) => {
   };
 
   const setItem = (item) => {
+    console.log(item);
     dispatch(setItems(item));
     setModal();
     //refresh item list and coin and jorang view

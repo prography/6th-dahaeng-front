@@ -9,6 +9,7 @@ import ItemBox from './ItemBox';
 import Responsive from '../../components/common/Responsive';
 import SubTitle from '../../components/SubTitle';
 import Slider from '../../components/Slider';
+import FloatingButton from '../../components/MainFloatingButton';
 
 const ContentBox = styled.div`
   max-width: 1024px;
@@ -101,6 +102,7 @@ const Closet = ({ history }) => {
 
   return (
     <>
+      <FloatingButton history={history} />
       <Responsive style={{ paddingTop: '4vh' }}>
         <SubTitle title={'조랭 옷장'} />
         <Slider history={history} />

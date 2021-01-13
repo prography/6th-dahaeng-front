@@ -31,9 +31,9 @@ const FloatingButton = ({ history }) => {
     history.push('/closet');
   }
 
-  // function navigateNoticePage() {
-  //   history.push('/notice');
-  // }
+  function navigateNoticePage() {
+    history.push('/notice');
+  }
 
   function navigateMainPage() {
     history.push('/');
@@ -75,7 +75,11 @@ const FloatingButton = ({ history }) => {
           src={require('../../assets/floating/floating-closet.png')}
         />
       </div>
-      <div className="floatingButton__subButton" id="floatingButton3">
+      <div
+        className="floatingButton__subButton"
+        id="floatingButton3"
+        onClick={navigateNoticePage}
+      >
         <img
           alt="floating button icon"
           className="buttonImage"

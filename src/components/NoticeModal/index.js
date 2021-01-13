@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import closeicon from 'assets/icon/closeicon.png';
 import backIcon from 'assets/icon/backicon.png';
 import reminderJoraeng from 'assets/joraeng/login-joraeng.png';
-import Notice from './Notice';
+import Notice from '../../pages/notice/NoticeContent';
 
 const ModalOverlay = styled.div`
   position: fixed;

@@ -57,6 +57,8 @@ const initialState = {
     // TODO: SET-UP DEFAULT
     jorang_status: '0',
     jorang_color: '',
+    // TODO: add notices
+    notices: [],
   },
   buy_success: false,
   buyError: '',

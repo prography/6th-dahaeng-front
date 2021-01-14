@@ -13,14 +13,13 @@ const Wrapper = styled.div`
 `;
 
 const Notice = ({ history }) => {
-  // const notices = useSelector((state) => state.user.notices);
-  // notices 데이터
+  // const notices = useSelector((state) => state.notices.notice);
   const notices = [
     {
       id: 1,
       title: '첫 공지사항',
       created_at: '2020-01-14',
-      content: '다행을 이용해주셔 감사합니다!',
+      content: '다행을 이용해주셔서 감사합니다!',
     },
     {
       id: 2,

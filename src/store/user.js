@@ -57,9 +57,12 @@ const initialState = {
     // TODO: SET-UP DEFAULT
     jorang_status: '0',
     jorang_color: '',
-    // TODO: add notices
-    notices: [],
   },
+  // TODO: add notices 깃헙 보니까 이거인듯..
+  // notices: {
+  //   notice: [],
+  //   reminder: [],
+  // },
   buy_success: false,
   buyError: '',
   getUserError: null,

@@ -13,6 +13,9 @@ export const [GETUSER, GETUSER_SUCCESS, GETUSER_FAIL] = createRequestAction(
 export const [REMINDER, REMINDER_SUCCESS, REMINDER_FAIL] = createRequestAction(
   'REMINDER',
 );
+export const [NOTICE, NOTICE_SUCCESS, NOTICE_FAIL] = createRequestAction(
+  'NOTICE',
+);
 export const [GETITEMS, GETITEMS_SUCCESS, GETITEMS_FAIL] = createRequestAction(
   'GETITEMS',
 );
@@ -39,6 +42,7 @@ export const setUser = createAction(SETUSER, (nickname, title, id) => ({
 }));
 export const getUser = createAction(GETUSER, (id) => ({ id }));
 export const reminder = createAction(REMINDER);
+export const notice = createAction(NOTICE);
 export const getItems = createAction(GETITEMS);
 export const buyItems = createAction(BUYITEMS, (id) => ({ id }));
 export const setItems = createAction(SETITEMS, (id) => ({ id }));
@@ -64,6 +68,7 @@ const initialState = {
   hasItems: [],
   allItems: [],
   items: [],
+  notice: null,
 };
 
 const user = handleActions(
@@ -107,6 +112,15 @@ const user = handleActions(
       notices: notices,
     }),
     [REMINDER_FAIL]: (state, { payload: error }) => ({
+      ...state,
+      // notices: error,
+    }),
+
+    [NOTICE_SUCCESS]: (state, { payload: notices }) => ({
+      ...state,
+      notice: notices,
+    }),
+    [NOTICE_FAIL]: (state, { payload: error }) => ({
       ...state,
       // notices: error,
     }),

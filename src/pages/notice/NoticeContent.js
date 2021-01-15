@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import backIcon from 'assets/icon/backicon.png';
 
 const NoticeField = styled.div`
-  height: 54px;
+  height: 48px;
   max-width: calc(768px - 2rem);
   padding: 0.5rem;
   border-bottom: 1px solid #e9e9e9;
@@ -17,6 +17,7 @@ const NoticeField = styled.div`
 
 const NoticeTitle = styled.div`
   /* width: 100%; */
+  font-size: 15px;
   padding-left: 1rem;
   padding-right: 1rem;
   flex: 1;
@@ -33,11 +34,12 @@ const NoticeDate = styled.div`
 const NoticeButton = styled.button`
   position: absolute;
   right: 5px;
+  bottom: 14px;
   padding-top: 6px;
 `;
 
 const NoticeIcon = styled.img`
-  width: 8px;
+  width: 5px;
 
   transform: ${(props) =>
     props.className === 'open-content' ? 'rotate(270deg)' : 'rotate(90deg)'};
@@ -49,12 +51,14 @@ const NoticeContentField = styled.div`
   max-width: calc(768px - 2rem - 70px);
 `;
 
-const NoticeContent = styled.div`
-  font-size: 14px;
+const Content = styled.div`
+  font-size: 12px;
+  word-break: keep-all;
+  line-height: 1.2;
   margin: 1.5rem 2rem;
 `;
 
-const Notice = ({ key, notice }) => {
+const NoticeContent = ({ key, notice }) => {
   const [openNotice, setOpenNotice] = useState(false);
   const setNotice = () => {
     setOpenNotice(!openNotice);
@@ -75,11 +79,11 @@ const Notice = ({ key, notice }) => {
       </NoticeField>
       {openNotice ? (
         <NoticeContentField>
-          <NoticeContent>{notice.content}</NoticeContent>
+          <Content>{notice.content}</Content>
         </NoticeContentField>
       ) : null}
     </>
   );
 };
 
-export default Notice;
+export default NoticeContent;

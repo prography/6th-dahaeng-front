@@ -47,7 +47,7 @@ const Notice = ({ history }) => {
       <Responsive>
         <SubTitle
           title={'공지사항'}
-          back={true}
+          back={false}
           backPage={() => movePage('')}
         ></SubTitle>
         <Wrapper>

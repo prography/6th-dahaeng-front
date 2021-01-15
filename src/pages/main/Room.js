@@ -22,7 +22,7 @@ const Character = styled.div`
   position: relative;
 
   @media (max-width: 360px) {
-    bottom: 10px;
+    bottom: -10px;
   }
 
   @media (max-width: 280px) {
@@ -34,15 +34,20 @@ const Background = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
+
 const BackgroundImg = styled.img`
   width: 100%;
   height: ${(props) => {
     if (props.type === 'true' && !props.cloud) return '100px';
-    if (props.type === 'true' && props.cloud) return '110px';
+    if (props.type === 'true' && props.cloud) return '160px';
   }};
   position: relative;
   bottom: ${(props) =>
-    props.type === 'true' && props.cloud ? '20px' : '50px'};
+    props.type === 'true' && props.cloud ? '40px' : '50px'};
+
+  @media (max-width: 360px) {
+    height: ${(props) => (props.type === 'true' ? '125px' : '255px')};
+  } ;
 `;
 const Etc = styled.div`
   z-index: 3;
@@ -53,10 +58,10 @@ const Etc = styled.div`
   left: ${(props) => (props.type === 'true' ? '66px' : '72px')};
 
   @media (max-width: 360px) {
-    bottom: ${(props) => (props.type === 'true' ? '175px' : '255px')};
+    bottom: ${(props) => (props.type === 'true' ? '175px' : '305px')};
   }
   @media (max-width: 280px) {
-    bottom: ${(props) => (props.type === 'true' ? '162px' : '227px')};
+    bottom: ${(props) => (props.type === 'true' ? '162px' : '300px')};
   }
 `;
 const EtcImg = styled.img`

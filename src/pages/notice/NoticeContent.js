@@ -54,7 +54,8 @@ const NoticeContentField = styled.div`
 const Content = styled.div`
   font-size: 12px;
   word-break: keep-all;
-  line-height: 1.2;
+  white-space: pre-line;
+  line-height: 1.3;
   margin: 1.5rem 2rem;
 `;
 

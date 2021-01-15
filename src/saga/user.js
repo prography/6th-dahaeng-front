@@ -353,7 +353,7 @@ function* noticeSaga(action) {
     });
 
     console.log('response: ', res);
-    if (res.response === 'success') {
+    if (res.data.response === 'success') {
       yield put({
         type: NOTICE_SUCCESS,
         payload: res.data.message,

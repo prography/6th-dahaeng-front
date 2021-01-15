@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
+import SignJoraeng from '../../assets/joraeng/sign-joraeng.png';
 
 import useLocalStorage from '../../util/useLocalStorage';
 
@@ -56,6 +57,17 @@ const ModalText = styled.div`
   padding-bottom: 0.5rem;
   color: #212121;
   line-height: 1.5rem;
+`;
+
+const JoraengImgBox = styled.div`
+  position: fixed;
+  bottom: -24px;
+  right: -17px;
+  width: 60px;
+`;
+
+const JoraengImg = styled.img`
+  width: 100%;
 `;
 
 const Sign = ({ history }) => {
@@ -229,34 +241,39 @@ const Sign = ({ history }) => {
   const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   return (
-    <SignResponsive>
-      <SignContentWrapper>
-        <Title>Da:haeng</Title>
-        <Content>간단한 회원가입 후 다행과 함께해요!</Content>
-        <SignAuthForm
-          type="sign"
-          form={form}
-          onEmailChange={onEmailChange}
-          onPwChange={onPwChange}
-          onPwConfirmChange={onPwConfirmChange}
-          onSubmit={onSubmit}
-          status={status}
-          color={randomColor}
-        ></SignAuthForm>
-        <Modal
-          className="popup"
-          openModal={openModal}
-          setModal={setModal}
-          title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
-          content={<ModalText>로그인하러 가볼까요?</ModalText>}
-          button={
-            <ModalButton onClick={setModal} color={randomColor}>
-              확인
-            </ModalButton>
-          }
-        />
-      </SignContentWrapper>
-    </SignResponsive>
+    <>
+      <SignResponsive>
+        <SignContentWrapper>
+          <Title>Da:haeng</Title>
+          <Content>간단한 회원가입 후 다행과 함께해요!</Content>
+          <SignAuthForm
+            type="sign"
+            form={form}
+            onEmailChange={onEmailChange}
+            onPwChange={onPwChange}
+            onPwConfirmChange={onPwConfirmChange}
+            onSubmit={onSubmit}
+            status={status}
+            color={randomColor}
+          ></SignAuthForm>
+          <Modal
+            className="popup"
+            openModal={openModal}
+            setModal={setModal}
+            title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
+            content={<ModalText>로그인하러 가볼까요?</ModalText>}
+            button={
+              <ModalButton onClick={setModal} color={randomColor}>
+                확인
+              </ModalButton>
+            }
+          />
+        </SignContentWrapper>
+        <JoraengImgBox>
+          <JoraengImg src={SignJoraeng} alt="" />
+        </JoraengImgBox>
+      </SignResponsive>
+    </>
   );
 };
 

@@ -122,7 +122,6 @@ function* reminderSaga(action) {
 
     // const res = yield call(authApi.create, action.payload); //api.login(action.payload)와 같다
 
-    console.log('rminder');
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
@@ -349,8 +348,7 @@ function* noticeSaga(action) {
     const headers = {
       Authorization: `jwt ${localStorage.getItem('accessToken')}`,
     };
-
-    const res = yield call([axios, 'post'], `${serverURL}/notice/`, {
+    const res = yield call([axios, 'get'], `${serverURL}/notice/`, {
       headers: headers,
     });
 

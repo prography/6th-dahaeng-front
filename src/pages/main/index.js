@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuestion, getToday } from 'store/box';
-import { reminder, getUser } from 'store/user';
+import { reminder, getUser, notice } from 'store/user';
 import Responsive from '../../components/common/Responsive';
 import Moment from 'moment';
 import FloatingButton from '../../components/MainFloatingButton';
@@ -83,6 +83,7 @@ const Main = ({ history }) => {
       dispatch(getUser(localStorage.getItem('profile')));
     dispatch(getQuestion());
     dispatch(reminder());
+    dispatch(notice());
     localStorage.getItem('record_id') &&
       dispatch(getToday(localStorage.getItem('record_id')));
   }, [dispatch, id]);

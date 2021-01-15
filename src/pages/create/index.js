@@ -95,8 +95,6 @@ const Create = ({ history }) => {
   const [name, setName] = useState('');
 
   const has_jorang = useSelector((state) => state.auth.has_jorang);
-  const jorang_color = useSelector((state) => state.user.user.jorang_color);
-
   const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   useEffect(() => {

@@ -66,9 +66,7 @@ const SliderListElement = styled.div`
 
 const Slider = ({ history }) => {
   const [sliderOpenState, setSliderOpenState] = useState(false);
-  const user = useSelector((state) => state.user.user);
   const colors = useSelector((state) => state.user.colors);
-
   const dispatch = useDispatch();
   //TODO: ??? token vs user
 

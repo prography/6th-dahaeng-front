@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const SignFormWrapper = styled.div`
+  width: 100%;
   margin: 0 auto;
-  border: 1px;
+  padding: 10px;
 `;
 
 const InputWrapper = styled.div`
-  padding: 30px 0;
   flex: 1;
 `;
 
@@ -25,6 +25,7 @@ const CheckboxWrapper = styled.div`
   padding-top: 12px;
   height: 36px;
   text-align: right;
+  font-size: 10px;
 
   label {
     cursor: pointer;
@@ -32,27 +33,26 @@ const CheckboxWrapper = styled.div`
 `;
 
 const KeyText = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   flex: 1;
   color: #4d4d4d;
 `;
 
 const ErrorMessage = styled.div`
   flex: none;
-  font-size: 12px;
+  font-size: 10px;
   color: #fd5660;
 `;
 
 const Input = styled.input`
   width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   border: 1px solid #e9e9e9;
-  border-radius: 4px;
   padding: 0.5rem;
   outline: none;
 
   &:focus {
-    border: 1px solid var(--primary-color);
+    border: 1px solid ${(props) => props.color};
     color: #4d4d4d;
   }
   &::placeholder {
@@ -75,12 +75,11 @@ const ButtonBox = styled.div`
 
 const Button = styled.button`
   outline: none;
-  background: var(--primary-color);
+  background: ${(props) => props.color};
   font-size: 14px;
   color: white;
   border: none;
-  border-radius: 4px;
-  height: 3rem;
+  height: 2.5rem;
   width: 100%;
   margin-top: 1em;
 `;
@@ -88,20 +87,20 @@ const Button = styled.button`
 const Checkbox = styled.input`
   &:checked {
     color: #ffffff;
-    background: var(--primary-color);
+    background: ${(props) => props.color};
   }
 `;
 
 //상황별 에러 메시지
 const emailStatusEnum = {
   empty: '이메일은 필수 입력 사항입니다!',
-  wrong: '이메일을 확인 해 주세요 🤫',
+  wrong: '이메일을 확인 해 주세요 ',
   valid: 'valid',
 };
 
 const pwStatusEnum = {
   empty: '비밀번호는 필수 입력 사항입니다!',
-  wrong: '숫자와 영어로 8자 이상 입력해주세요🤫',
+  wrong: '숫자와 영어로 8자 이상 입력해주세요',
   valid: 'valid',
 };
 
@@ -121,9 +120,10 @@ const SignAuthForm = ({
   onPwConfirmChange,
   onSubmit,
   status,
+  color,
 }) => {
   return (
-    <Wrapper>
+    <SignFormWrapper>
       <form
         onSubmit={onSubmit}
         style={{
@@ -146,6 +146,7 @@ const SignAuthForm = ({
               onChange={onEmailChange}
               value={form.email}
               className={status.email === 'wrong' ? 'error' : ''}
+              color={color}
               // boolean값으로 받아올 때 왜 안되는지 생각해보기
             ></Input>
 
@@ -162,6 +163,7 @@ const SignAuthForm = ({
               onChange={onPwChange}
               value={form.password}
               className={status.pwd === 'wrong' ? 'error' : ''}
+              color={color}
             ></Input>
 
             <LabelWrapper>
@@ -179,13 +181,14 @@ const SignAuthForm = ({
               onChange={onPwConfirmChange}
               value={form.passwordConfirm}
               className={status.pwd_ok === 'wrong' ? 'error' : ''}
+              color={color}
             ></Input>
           </InputBox>
 
           {/* 체크박스를 만들어보자 */}
           <CheckboxWrapper>
             <KeyText>
-              <Checkbox id="agreeCheck" type="checkbox" />
+              <Checkbox id="agreeCheck" type="checkbox" color={color} />
               <label htmlFor="agreeCheck">
                 개인정보 수집 및 이용에 동의합니다.
               </label>
@@ -194,10 +197,10 @@ const SignAuthForm = ({
         </InputWrapper>
 
         <ButtonBox>
-          <Button>회원가입</Button>
+          <Button color={color}>회원가입 완료</Button>
         </ButtonBox>
       </form>
-    </Wrapper>
+    </SignFormWrapper>
   );
 };
 

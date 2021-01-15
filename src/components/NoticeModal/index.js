@@ -23,7 +23,6 @@ const Wrapper = styled.div`
   max-width: 768px;
   transform: translate(-50%, -50%);
   background-color: white;
-  border-radius: var(--small-border-radius);
   box-shadow: 0px 0px 0px 800px rgba(0, 0, 0, 0.2);
   z-index: 10;
   padding: 2rem;
@@ -113,7 +112,6 @@ const ModalButton = styled.button`
   height: 2rem;
   padding: 4px 12px;
   background: var(--primary-color);
-  border-radius: 4px;
   outline: none;
 `;
 

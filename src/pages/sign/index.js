@@ -7,21 +7,31 @@ import { withRouter } from 'react-router-dom';
 import { isEmail, isLength, isAlphanumeric } from 'validator';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
+import SignJoraeng from '../../assets/joraeng/sign-joraeng.png';
+
+import useLocalStorage from '../../util/useLocalStorage';
+
+const SignContentWrapper = styled.div`
+  height: calc(100vh - 75px);
+  width: calc(100vw - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  word-break: keep-all;
+`;
 
 const Title = styled.div`
-  font-size: 32px;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  font-size: 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   text-align: center;
 `;
 
-const SubTitle = styled.div`
-  font-size: 24px;
-  margin-top: 2rem;
+const Content = styled.div`
+  font-size: 16px;
   text-align: center;
-  @media screen and (max-width: 480px) {
-    font-size: 18px;
-  }
 `;
 
 const ModalTitle = styled.div`
@@ -37,8 +47,7 @@ const ModalButton = styled.button`
   border: none;
   color: white;
   height: 2rem;
-  background: var(--primary-color);
-  border-radius: 4px;
+  background: ${(props) => props.color};
   outline: none;
 `;
 
@@ -46,7 +55,19 @@ const ModalText = styled.div`
   font-size: 14px;
   text-align: center;
   padding-bottom: 0.5rem;
-  color: var(--text-second);
+  color: #212121;
+  line-height: 1.5rem;
+`;
+
+const JoraengImgBox = styled.div`
+  position: fixed;
+  bottom: -24px;
+  right: -17px;
+  width: 60px;
+`;
+
+const JoraengImg = styled.img`
+  width: 100%;
 `;
 
 const Sign = ({ history }) => {
@@ -217,28 +238,42 @@ const Sign = ({ history }) => {
   //   }
   // }, [history, user]);
 
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
+
   return (
-    <SignResponsive>
-      <Title>Da:haeng</Title>
-      <SubTitle>간단한 회원가입 후 다행과 함께해요!</SubTitle>
-      <SignAuthForm
-        type="sign"
-        form={form}
-        onEmailChange={onEmailChange}
-        onPwChange={onPwChange}
-        onPwConfirmChange={onPwConfirmChange}
-        onSubmit={onSubmit}
-        status={status}
-      ></SignAuthForm>
-      <Modal
-        className="popup"
-        openModal={openModal}
-        setModal={setModal}
-        title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
-        content={<ModalText>로그인하러 가볼까요?</ModalText>}
-        button={<ModalButton onClick={setModal}>확인</ModalButton>}
-      />
-    </SignResponsive>
+    <>
+      <SignResponsive>
+        <SignContentWrapper>
+          <Title>Da:haeng</Title>
+          <Content>간단한 회원가입 후 다행과 함께해요!</Content>
+          <SignAuthForm
+            type="sign"
+            form={form}
+            onEmailChange={onEmailChange}
+            onPwChange={onPwChange}
+            onPwConfirmChange={onPwConfirmChange}
+            onSubmit={onSubmit}
+            status={status}
+            color={randomColor}
+          ></SignAuthForm>
+          <Modal
+            className="popup"
+            openModal={openModal}
+            setModal={setModal}
+            title={<ModalTitle>이미 존재하는 회원입니다.</ModalTitle>}
+            content={<ModalText>로그인하러 가볼까요?</ModalText>}
+            button={
+              <ModalButton onClick={setModal} color={randomColor}>
+                확인
+              </ModalButton>
+            }
+          />
+        </SignContentWrapper>
+        <JoraengImgBox>
+          <JoraengImg src={SignJoraeng} alt="" />
+        </JoraengImgBox>
+      </SignResponsive>
+    </>
   );
 };
 

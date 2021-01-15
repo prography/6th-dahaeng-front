@@ -6,6 +6,7 @@ import LoginForm from '../../components/AuthForm/LoginForm';
 import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
+import useLocalStorage from '../../util/useLocalStorage';
 
 import KakaoLogo from 'assets/logo/kakao-logo.png';
 import NaverLogo from 'assets/logo/naver.svg';
@@ -21,14 +22,14 @@ const LoginContentWrapper = styled.div`
 `;
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 1rem;
   margin-bottom: 1rem;
   text-align: center;
 `;
 
 const Content = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   text-align: center;
 `;
 
@@ -39,8 +40,8 @@ const SnsBox = styled.div`
 `;
 
 const KakaoLogin = styled.button`
-flex: 1;
-text-align: center;
+  flex: 1;
+  text-align: center;
   border: none;
   border-radius: 63px;
 `;
@@ -70,8 +71,8 @@ const SNSLabel = styled.div`
 `;
 
 const NaverLogin = styled.button`
-flex: 1;
-text-align: center;
+  flex: 1;
+  text-align: center;
   border: none;
   border-radius: 63px;
 `;
@@ -104,9 +105,8 @@ const ModalButton = styled.button`
   margin-top: 1rem;
   border: none;
   color: white;
-  height: 2rem;
-  background: var(--primary-color);
-  border-radius: 4px;
+  height: 1.5rem;
+  background: ${(props) => props.color};
   outline: none;
 `;
 
@@ -115,6 +115,7 @@ const ModalText = styled.div`
   text-align: center;
   padding-bottom: 0.5rem;
   color: var(--text-second);
+  line-height: 1.5rem;
 `;
 
 const Login = ({ history }) => {
@@ -168,6 +169,8 @@ const Login = ({ history }) => {
     dispatch(initForm('login'));
   }, [dispatch]);
 
+  const [openModal, setOpenModal] = useState(false);
+
   const setModal = useCallback(() => {
     setOpenModal(!openModal);
   }, []);
@@ -199,7 +202,16 @@ const Login = ({ history }) => {
     // }
   }, [auth, authError, dispatch, history, user, has_jorang, token, setModal]);
 
-  const [openModal, setOpenModal] = useState(false);
+  // 로그인, 회원가입 랜덤 컬러
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
+  const colorArray = ['#A26C8F', '#F8DB5C', '#FF714D', '#73A38F', '#5CA1D2'];
+  const randomItem = () => {
+    return colorArray[Math.floor(Math.random() * colorArray.length)];
+  };
+
+  useEffect(() => {
+    setRandomColor(() => [randomItem()]);
+  }, []);
 
   return (
     <SignResponsive>
@@ -220,19 +232,28 @@ const Login = ({ history }) => {
           onChange={onChange}
           onSubmit={onSubmit}
           status={status}
+          color={randomColor[0]}
         />
         <SnsBox>
           <KakaoLogin onClick={() => snsLogin('kakao')}>
             <KakaoLogoImgWrapper>
-              <KakaoLogoImg src={KakaoLogo} alt=""/>
+              <KakaoLogoImg src={KakaoLogo} alt="" />
             </KakaoLogoImgWrapper>
-            <SNSLabel>카카오로<br/>로그인하기</SNSLabel>
+            <SNSLabel>
+              카카오로
+              <br />
+              로그인하기
+            </SNSLabel>
           </KakaoLogin>
           <NaverLogin onClick={() => snsLogin('naver')}>
             <NaverLogoImgWrapper>
-              <NaverLogoImg src={NaverLogo} alt=""/>
+              <NaverLogoImg src={NaverLogo} alt="" />
             </NaverLogoImgWrapper>
-            <SNSLabel>네이버로<br/>로그인하기</SNSLabel>
+            <SNSLabel>
+              네이버로
+              <br />
+              로그인하기
+            </SNSLabel>
           </NaverLogin>
         </SnsBox>
 
@@ -254,7 +275,11 @@ const Login = ({ history }) => {
                 : '다시 입력해주세요'}
             </ModalText>
           }
-          button={<ModalButton onClick={setModal}>확인</ModalButton>}
+          button={
+            <ModalButton onClick={setModal} color={randomColor[0]}>
+              확인
+            </ModalButton>
+          }
         />
       </LoginContentWrapper>
     </SignResponsive>

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import SignResponsive from '../../components/common/SignResponsive';
 import congratulateJoraeng from 'assets/joraeng/congratulate-joraeng.png';
 
+import useLocalStorage from '../../util/useLocalStorage';
+
 const Title = styled.div`
   font-size: 32px;
   margin-top: 2rem;
@@ -43,21 +45,22 @@ const ButtonBox = styled.div`
 
 const CreateButton = styled.button`
   outline: none;
-  background: var(--primary-color);
+  background: ${(props) => props.color};
   font-size: 14px;
   color: white;
   border: none;
-  border-radius: 4px;
   height: 3rem;
   width: 100%;
   margin-top: 1em;
   margin-bottom: 2rem;
 `;
 
-const signComplete = ({ history }) => {
+const SignComplete = ({ history }) => {
   const createLink = () => {
     history.push('/login');
   };
+
+  const [randomColor, setRandomColor] = useLocalStorage('randomColor', []);
 
   return (
     <>
@@ -71,11 +74,13 @@ const signComplete = ({ history }) => {
           <CongratulateImg src={congratulateJoraeng} alt="" />
         </ImageBox>
         <ButtonBox>
-          <CreateButton onClick={createLink}>행복 기록하러 가기</CreateButton>
+          <CreateButton onClick={createLink} color={randomColor}>
+            행복 기록하러 가기
+          </CreateButton>
         </ButtonBox>
       </SignResponsive>
     </>
   );
 };
 
-export default signComplete;
+export default SignComplete;

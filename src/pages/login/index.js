@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import SignResponsive from '../../components/common/SignResponsive';
 import Modal from '../../components/Modal';
 import useLocalStorage from '../../util/useLocalStorage';
-
 import KakaoLogo from 'assets/logo/kakao-logo.png';
 import NaverLogo from 'assets/logo/naver.svg';
 
